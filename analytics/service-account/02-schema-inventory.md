@@ -47,3 +47,10 @@ For each table, confirm:
 | Activity CSAT | To confirm | To validate |
 | Support CSAT | `vwsupport_enriched` | To validate |
 | Support by channel | `vwsupport_enriched` | To validate |
+## Validation summary
+
+Detailed schema validation findings are captured in:
+
+`09-schema-validation-summary.md`
+
+Use this file to record which fields were found, which metrics are supported, and which definition questions need to be resolved before final YoY analysis.
