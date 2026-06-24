@@ -25,8 +25,8 @@ Databricks SQL will translate this logic after the fields and rules are confirme
 | All accounts | All Accounts | Captured |
 | Activity | Digital Self-Service Activity | Captured, Databricks translation pending |
 | Support | Self-Service Support Rate | Captured, numerator logic pending |
-| Activity CSAT | To capture | Pending |
-| Support CSAT | To capture | Pending |
+| Activity CSAT | CSAT on Self-Service Activity | Captured, Databricks source mapping pending |
+| Support CSAT | CSAT on Self-Service Support | Captured, Databricks source mapping pending |
 | Real-time support CSAT | To capture | Pending |
 | Async support CSAT | To capture | Pending |
 
@@ -625,7 +625,5 @@ The Power BI measures confirm the CSAT business logic, but the Databricks source
 
 Next measures to capture from Power BI:
 
-1. Activity CSAT
-2. Support CSAT
-3. Real-time support CSAT
-4. Async support CSAT
+1. Real-time support CSAT
+2. Async support CSAT
