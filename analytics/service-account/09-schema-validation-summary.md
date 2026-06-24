@@ -181,7 +181,22 @@ To complete after field mapping.
 
 
 ## Power BI to Databricks mapping gaps
+### Activity validation update
 
+Genie identified that `vwpermit` does not use `transaction_date` for the validation query.
+
+The available Databricks field used for the activity status profile is:
+
+    period_start
+
+This affects `sql/07_activity_status_validation.sql`.
+
+The Power BI measure refers to `vwpermit[transaction_date]`, but the Databricks equivalent currently appears to be `vwpermit.period_start`.
+
+This mapping should be validated before final Activity SQL is produced:
+
+    Power BI: vwpermit[transaction_date]
+    Databricks: vwpermit.period_start
 The Power BI measure logic for the EOFY celebration slide has now been captured in `11-powerbi-measures.md`.
 
 The remaining validation work is to confirm which Databricks tables and fields can reproduce the Power BI logic.
