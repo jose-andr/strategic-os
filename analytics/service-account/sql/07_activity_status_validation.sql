@@ -11,7 +11,7 @@
 WITH base AS (
     SELECT
         application_id,
-        transaction_date,
+        period_start,
         TRIM(LOWER(application_status)) AS application_status_norm,
         TRIM(LOWER(case_status)) AS case_status_norm,
         TRIM(LOWER(category)) AS category_norm,
@@ -29,8 +29,8 @@ status_profile AS (
         permit_type_norm,
         COUNT(*) AS row_count,
         COUNT(DISTINCT application_id) AS distinct_applications,
-        MIN(transaction_date) AS first_transaction_date,
-        MAX(transaction_date) AS latest_transaction_date
+        MIN(period_start) AS first_transaction_date,
+        MAX(period_start) AS latest_transaction_date
     FROM base
     GROUP BY
         application_status_norm,
