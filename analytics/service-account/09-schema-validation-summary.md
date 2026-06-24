@@ -26,26 +26,26 @@ For the EOFY celebration analysis:
 | Slide term | Internal definition | Source of truth priority |
 |---|---|---|
 | Customers | Service Account / portal sign-ups | Existing Power BI measure, then SQL translation |
-| Activity | Portal transactions or digital self-service activity | Existing Power BI measure, then SQL translation |
-| Support | Portal support demand | Existing Power BI measure, then SQL translation |
-| CSAT on Activity | Satisfaction related to portal-enabled activity | Existing Power BI measure / survey logic |
+| Activity | Application workflow activity through the portal | Existing Power BI measure, then SQL translation |
+| Support | Portal support demand relative to activity | Existing Power BI measure, then SQL translation |
+| CSAT on Activity | Satisfaction related to portal-enabled application activity | Existing Power BI measure / survey logic |
 | CSAT on Support | Satisfaction related to support interactions | Existing Power BI measure / survey logic |
 | All accounts | Total CRM account base | Context metric only |
 
 Existing Power BI measures should be treated as the first source of truth for business logic. Databricks SQL should translate that logic once the required fields and eligibility rules are confirmed.
+
 ## Validation matrix
 
 | Celebration metric | Recommended table | Required fields found? | Support status | Notes |
 |---|---|---|---|---|
-| New service accounts YoY | To confirm | To confirm | To validate |  |
-| Active service accounts YoY | To confirm | To confirm | To validate |  |
-| Self-service activity YoY | To confirm | To confirm | To validate |  |
-| Activity by category | To confirm | To confirm | To validate |  |
-| Support cases YoY | To confirm | To confirm | To validate |  |
-| Support per 100 transactions | To confirm | To confirm | To validate |  |
-| Activity CSAT | To confirm | To confirm | To validate |  |
-| Support CSAT | To confirm | To confirm | To validate |  |
-| Support by channel | To confirm | To confirm | To validate |  |
+| Customers | `vwaccount` | Yes | Confirmed | Uses `account_id`, `customer_portal`, and `first_account_portal_on_date` |
+| All accounts | `vwaccount` | Yes | Confirmed | Context metric only |
+| Activity | `vwpermit` plus status mapping logic | Partially | Mapping pending | Activity should be based on application workflow, not permit lifecycle workflow |
+| Support | `vwsupport` or `vwsupport_enriched` | Partially | Mapping pending | Need to reproduce `[Self-Service Support]` numerator |
+| Support per 100 activities | Support numerator plus Activity denominator | Partially | Mapping pending | Power BI logic captured as `Self-Service Support Rate` |
+| Activity CSAT | To confirm | Pending | Mapping pending | Need Databricks equivalent of `vwcase_survey` and portal-enabled service logic |
+| Support CSAT | To confirm | Pending | Mapping pending | Need Databricks equivalent of `vwcase_survey` and `Support_logic` |
+| Support CSAT by channel type | To confirm | Pending | Mapping pending | Need support channel field for real-time vs async segmentation |
 
 ## Field mapping notes
 
@@ -96,107 +96,139 @@ Logic summary:
 
 - Should the EOFY slide label this metric as `Service Account sign-ups`, `new Service Accounts`, or `customers`?
 - Should YoY use the same Power BI window logic or explicit financial year logic?
-- What values exist in `account_record_type`, `onboarding_type`, and `new_or_existing`?## vwcase
-|col_name|data_type|comment|
+- What values exist in `account_record_type`, `onboarding_type`, and `new_or_existing`?
+
+## `vwcase`
+
+| Column name | Data type | Comment |
 |---|---|---|
-|case_id|string|A unique identifier assigned to each case for tracking and reference purposes.|
-|case_number|string|The number associated with the case, which may be used for easier identification in communications.|
-|date_time_opened|timestamp|The timestamp indicating when the case was initially opened, providing context for the case duration.|
-|date_time_closed|timestamp|The timestamp marking when the case was resolved or closed, useful for analyzing case resolution times.|
-|record_type|string|Indicates the type of record associated with the case, which can help categorize the nature of the case.|
-|channel|string|The communication channel through which the case was initiated, such as email, phone, or chat.|
-|account_id|string|The unique identifier for the record, essential for referencing and managing individual entries in the dataset.|
-|service_group|string|The group responsible for handling the service related to the case, aiding in understanding organizational structure.|
-|service_name|string|The specific service that the case pertains to, providing clarity on the subject matter of the case.|
-|first_portal_enable_date|date|The date when the customer first gained access to the portal, which can be relevant for understanding customer engagement.|
-|is_after_enablement|int|A flag indicating whether the case occurred after the customer was enabled for portal access, useful for analyzing the impact of enablement on case handling.|
+| `case_id` | string | A unique identifier assigned to each case for tracking and reference purposes |
+| `case_number` | string | The number associated with the case, which may be used for easier identification in communications |
+| `date_time_opened` | timestamp | The timestamp indicating when the case was initially opened |
+| `date_time_closed` | timestamp | The timestamp marking when the case was resolved or closed |
+| `record_type` | string | Indicates the type of record associated with the case |
+| `channel` | string | The communication channel through which the case was initiated |
+| `account_id` | string | The unique identifier for the account |
+| `service_group` | string | The service group responsible for the case |
+| `service_name` | string | The specific service that the case relates to |
+| `first_portal_enable_date` | date | The date when the customer first gained access to the portal |
+| `is_after_enablement` | int | Flag indicating whether the case occurred after portal enablement |
 
-## vwpermit
-|col_name|data_type|comment|
+### Possible uses
+
+`vwcase` may support:
+
+- Support demand validation
+- Case-to-service mapping
+- Channel analysis
+- Portal enablement filtering
+- Support CSAT service matching, if survey data can be linked to cases
+
+## `vwpermit`
+
+| Column name | Data type | Comment |
 |---|---|---|
-|application_id|string|Identifies the specific application submitted, allowing for tracking and reference throughout the process.|
-|case_id|string|Represents the unique identifier for the case associated with the application, facilitating case management and follow-up.|
-|case_status|string|Indicates the current status of the case, providing insight into its progress and any actions required.|
-|permit_type|string|Describes the type of permit being applied for, which helps in categorizing and processing applications appropriately.|
-|application_status|string|Reflects the current status of the application itself, indicating whether it is pending, approved, or denied.|
-|period_end|timestamp|Marks the end date of the relevant period for the application or case, which is important for tracking timelines.|
-|period_start|timestamp|Indicates the start date of the relevant period for the application or case, providing context for the duration of the process.|
-|category|string|Categorizes the application or case, which can assist in sorting and analyzing data based on different criteria.|
+| `application_id` | string | Identifies the specific application submitted |
+| `case_id` | string | Represents the unique identifier for the case associated with the application |
+| `case_status` | string | Indicates the current status of the case |
+| `permit_type` | string | Describes the type of permit being applied for |
+| `application_status` | string | Reflects the current status of the application itself |
+| `period_end` | timestamp | Marks the end date of the relevant period for the application or case |
+| `period_start` | timestamp | Indicates the start date of the relevant period for the application or case |
+| `category` | string | Categorises the application or case |
 
-## vwservice_enablement
-|col_name|data_type|comment|
+### Possible uses
+
+`vwpermit` is the confirmed Databricks base table for portal activity.
+
+It contains the raw fields needed to begin recreating the Power BI `vwpermit_statused` logic, including:
+
+- `application_id`
+- `case_id`
+- `application_status`
+- `case_status`
+- `category`
+- `permit_type`
+- `period_start`
+- `period_end`
+
+## `vwservice_enablement`
+
+| Column name | Data type | Comment |
 |---|---|---|
-|service_key|string|A unique identifier for each service, which can be used to reference specific services in the system.|
-|service_group|string|Categorizes services into broader groups, helping to organize and manage related services effectively.|
-|service_name|string|The specific name of the service, providing a clear description of what the service entails.|
-|first_portal_enable_date|date|Indicates the date when the service was first made available on the portal, useful for tracking service launch timelines.|
+| `service_key` | string | A unique identifier for each service |
+| `service_group` | string | Categorises services into broader groups |
+| `service_name` | string | The specific name of the service |
+| `first_portal_enable_date` | date | Date when the service was first made available on the portal |
 
-## vwsupport
-|col_name|data_type|comment|
+### Possible uses
+
+`vwservice_enablement` may replace or support Power BI `DimService`.
+
+It is likely needed for:
+
+- Portal-enabled service filtering
+- Activity eligibility
+- Activity CSAT service filtering
+- Support eligibility after service enablement
+
+## `vwsupport`
+
+| Column name | Data type | Comment |
 |---|---|---|
-|case_id|string|A unique identifier for each case, allowing for easy tracking and reference throughout the case management process.|
-|case_number|string|The official number assigned to the case, which may be used for reporting and communication purposes.|
-|date_time_opened|timestamp|The timestamp indicating when the case was initially opened, providing context for the duration and urgency of the case.|
-|date_time_closed|timestamp|The timestamp marking when the case was resolved and closed, useful for analyzing case resolution times.|
-|channel|string|The method through which the case was initiated, such as phone, email, or online portal, which can help in understanding customer preferences.|
-|account_id|string|The identifier for the account associated with the case, linking the case to a specific customer or organization.|
-|service_group|string|The category of services related to the case, which can assist in identifying trends and areas for improvement.|
-|ask_service_name|string|The specific service requested by the customer, providing insight into customer needs and service demand.|
-|portal_service_name|string|The name of the service as it appears in the customer portal, which can help in aligning customer expectations with service offerings.|
-|portal_enable_date|date|The date when the service became available on the customer portal, relevant for understanding service rollout timelines.|
-|is_after_service_enablement|boolean|A boolean value indicating whether the case occurred after the service was enabled, which can be useful for analyzing service adoption.|
+| `case_id` | string | A unique identifier for each case |
+| `case_number` | string | The official number assigned to the case |
+| `date_time_opened` | timestamp | The timestamp indicating when the case was initially opened |
+| `date_time_closed` | timestamp | The timestamp marking when the case was resolved and closed |
+| `channel` | string | The method through which the case was initiated |
+| `account_id` | string | The identifier for the account associated with the case |
+| `service_group` | string | The category of services related to the case |
+| `ask_service_name` | string | The specific service requested by the customer |
+| `portal_service_name` | string | The name of the service as it appears in the customer portal |
+| `portal_enable_date` | date | The date when the service became available on the customer portal |
+| `is_after_service_enablement` | boolean | Indicates whether the case occurred after the service was enabled |
 
-## vwsupport_enriched
-|col_name|data_type|comment|
+### Possible uses
+
+`vwsupport` is a candidate source for reproducing `[Self-Service Support]`.
+
+It may support:
+
+- Support numerator logic
+- Support by service
+- Support by channel
+- Support after portal service enablement
+- Real-time vs async support segmentation
+
+## `vwsupport_enriched`
+
+| Column name | Data type | Comment |
 |---|---|---|
-|source_system|string|Indicates the system from which the data was sourced, providing context for the origin of the information.|
-|source_id|string|Represents the unique identifier assigned by the source system, allowing for traceability back to the original data entry.|
-|account_id|string|The unique identifier for the record, essential for referencing and managing individual entries in the dataset.|
-|event_date|date|Denotes the date when the event occurred, which is crucial for time-based analysis and reporting.|
-|channel_primary|string|Specifies the primary channel through which the interaction or event took place, helping to categorize the source of the data.|
-|theme|string|Describes the overarching topic or subject matter related to the data entry, aiding in thematic analysis.|
-|sub_theme|string|Provides additional granularity by identifying a more specific aspect of the theme, useful for detailed categorization.|
-|ai_confidence|decimal(2,2)|Represents the confidence level of the AI model in its predictions or classifications, indicating the reliability of the data.|
-|top_terms|string|Lists the most significant terms associated with the data entry, which can be useful for keyword analysis and search optimization.|
-|sentence|string|Contains the actual text or sentence related to the data entry, providing context and detail for qualitative analysis.|
-|handle_seconds|decimal(9,2)|Tracks the duration in seconds taken to handle the event, which can be useful for performance metrics and efficiency analysis.|
-|portal_label|int|Serves as a numerical label for categorizing the record within a specific portal, aiding in organization and retrieval.|
+| `source_system` | string | Indicates the system from which the data was sourced |
+| `source_id` | string | Source-system identifier |
+| `account_id` | string | Account identifier |
+| `event_date` | date | Date when the event occurred |
+| `channel_primary` | string | Primary channel through which the interaction or event took place |
+| `theme` | string | Overarching topic or subject matter |
+| `sub_theme` | string | More specific aspect of the theme |
+| `ai_confidence` | decimal(2,2) | Confidence level of the AI model classification |
+| `top_terms` | string | Significant terms associated with the record |
+| `sentence` | string | Text or sentence related to the record |
+| `handle_seconds` | decimal(9,2) | Duration in seconds taken to handle the event |
+| `portal_label` | int | Label for categorising the record within a portal context |
 
+### Possible uses
 
-## Key definition questions
+`vwsupport_enriched` may support:
 
-- What is the preferred definition of a Service Account customer?
-- What is the preferred source of truth for self-service activity?
-- What is the correct date field for activity financial year reporting?
-- What is the correct date field for support financial year reporting?
-- What is the correct definition of support demand?
-- Where is Activity CSAT stored?
-- Where is Support CSAT stored?
-- What is the positive CSAT response logic?
-- Should support per 100 transactions use all support, Service Account support only, or CX-managed support only?
-
-## Initial conclusion
-
-To complete after field mapping.
-
+- AI-classified support themes
+- Channel-level support demand
+- Qualitative support drivers
+- Support effort analysis
+- Potential channel mapping if `channel_primary` aligns to Power BI channel values
 
 ## Power BI to Databricks mapping gaps
-### Activity validation update
 
-Genie identified that `vwpermit` does not use `transaction_date` for the validation query.
-
-The available Databricks field used for the activity status profile is:
-
-    period_start
-
-This affects `sql/07_activity_status_validation.sql`.
-
-The Power BI measure refers to `vwpermit[transaction_date]`, but the Databricks equivalent currently appears to be `vwpermit.period_start`.
-
-This mapping should be validated before final Activity SQL is produced:
-
-    Power BI: vwpermit[transaction_date]
-    Databricks: vwpermit.period_start
 The Power BI measure logic for the EOFY celebration slide has now been captured in `11-powerbi-measures.md`.
 
 The remaining validation work is to confirm which Databricks tables and fields can reproduce the Power BI logic.
@@ -222,16 +254,137 @@ Confirmed visible tables/views:
 |---|---|---|
 | Customers | `vwaccount` | Base fields confirmed |
 | All accounts | `vwaccount` | Base fields confirmed |
-| Activity | `vwpermit` plus `vwpermit_statused` logic | Base table confirmed; statused logic not yet native in Databricks |
+| Activity | `vwpermit` plus `vwpermit_statused` logic | Base table confirmed; application workflow mapping pending |
 | Support | `Self-Service Support Rate` | Numerator logic still needs Databricks mapping |
 | Activity CSAT | `vwcase_survey`, `DimService` | Databricks source mapping pending |
 | Support CSAT | `vwcase_survey`, `Support_logic` | Databricks source mapping pending |
 | Real-time support CSAT | Support CSAT filtered by channel type | Databricks channel field mapping pending |
 | Async support CSAT | Support CSAT filtered by channel type | Databricks channel field mapping pending |
 
-### Remaining Databricks mapping questions
+## Activity validation update
 
-1. Can `vwpermit_statused` logic be recreated from `vwpermit`, `vwcase`, and mapping rules?
+Genie identified that `vwpermit` does not use `transaction_date` for the validation query.
+
+The available Databricks field used for the activity status profile is:
+
+    period_start
+
+This affects `sql/07_activity_status_validation.sql`.
+
+The Power BI measure refers to `vwpermit[transaction_date]`, but the Databricks equivalent currently appears to be `vwpermit.period_start`.
+
+This mapping should be validated before final Activity SQL is produced:
+
+    Power BI: vwpermit[transaction_date]
+    Databricks: vwpermit.period_start
+
+## Activity workflow distinction
+
+The key metric for portal activity is application activity.
+
+This means the headline Activity KPI should focus on the application workflow, not the permit lifecycle workflow.
+
+The Power BI dashboard separates portal transactions by status into two related but different workflows:
+
+| Workflow | Example statuses | Relevance to headline Activity KPI |
+|---|---|---|
+| Application workflow | Draft, Submitted, Further information requested, In Progress, Pending Payment, Withdrawn, Declined | Primary basis for portal activity |
+| Permit workflow | Issued, Extended, Renewed, Lapsed | Useful for outcomes / permit lifecycle analysis, but not the primary Activity KPI |
+
+### Application workflow
+
+Application workflow statuses represent customer or assessment activity before a permit outcome is finalised.
+
+Observed or dashboard-aligned statuses include:
+
+- Draft
+- Submitted
+- Further information requested
+- In Progress
+- Pending Payment
+- Withdrawn
+- Declined
+
+For the EOFY celebration slide, Activity should be based on application workflow records.
+
+The likely core Activity candidates are:
+
+- Draft
+- Submitted
+- Further information requested
+- In Progress
+- Pending Payment
+
+Statuses such as Withdrawn and Declined may represent application outcomes, but should not automatically be included in the headline Activity KPI unless the Status Map or business owner confirms they belong.
+
+### Permit workflow
+
+Permit workflow statuses represent the permit lifecycle after an application has progressed to a permit state.
+
+Observed or dashboard-aligned statuses include:
+
+- Issued
+- Extended
+- Renewed
+- Lapsed
+
+These statuses are useful for understanding permit outcomes and lifecycle state, but they should not be mixed into the headline portal Activity KPI without a clear rule.
+
+For the celebration slide, permit workflow statuses should be treated as contextual or secondary unless the Power BI `include_in_activity_kpi` flag confirms otherwise.
+
+### Activity status profile results
+
+The first run of `sql/07_activity_status_validation.sql` returned valid status combinations from `vwpermit`.
+
+The largest observed combinations included:
+
+| Application status | Case status | Category | Interpretation |
+|---|---|---|---|
+| `issued` | `closed` | `permit` | Permit lifecycle / issued outcome; not primary Activity KPI |
+| `draft` | `draft` | `permit` | Application workflow; likely core activity candidate |
+| `draft` | `null` | `permit` | Application workflow; likely core activity candidate, but null case status should be reviewed |
+| `pending payment` | `approved` | `permit` | Application workflow; likely requires business confirmation |
+| `lapsed` | `closed` | `permit` | Permit lifecycle / inactive state; not primary Activity KPI |
+| `withdrawn` | `closed` | `permit` | Application outcome; include only if business rules confirm |
+| `declined` | `closed` | `permit` | Application outcome; include only if business rules confirm |
+
+### Activity mapping implication
+
+The current `vwpermit` status fields are useful but not sufficient on their own.
+
+The Activity KPI needs a status mapping layer that classifies each record into workflow and KPI flags.
+
+Required derived fields include:
+
+| Derived field | Purpose |
+|---|---|
+| `workflow_type` | Distinguishes Application workflow from Permit workflow |
+| `status_group` | Groups statuses into business-readable status categories |
+| `is_draft_application` | Identifies draft application activity |
+| `is_submitted_application` | Identifies submitted application activity |
+| `is_application_outcome` | Identifies application outcome statuses |
+| `is_active_permit` | Identifies active permit lifecycle statuses |
+| `is_inactive_permit` | Identifies inactive permit lifecycle statuses |
+| `include_in_activity_kpi` | Determines whether the record contributes to the headline Activity KPI |
+| `requires_business_confirmation` | Flags ambiguous statuses requiring business decision |
+
+### Current Activity validation decision
+
+For the EOFY celebration slide:
+
+    Activity = application workflow activity
+
+not:
+
+    Activity = permit lifecycle activity
+
+`vwpermit` appears to contain enough raw status fields to recreate the Power BI `vwpermit_statused` concept, but the final KPI logic should be recreated through an explicit status mapping table rather than inferred directly from status names.
+
+The Activity KPI remains pending until the Power BI `Status Map` or equivalent business rules confirm which application workflow statuses are included.
+
+## Remaining Databricks mapping questions
+
+1. Can `vwpermit_statused[include_in_activity_kpi]` be recreated from `vwpermit` using an explicit status mapping where the headline Activity KPI is based on application workflow activity rather than permit lifecycle status?
 2. Which Databricks table contains the equivalent of `Self-Service Support`?
 3. Which Databricks table contains case survey responses equivalent to `vwcase_survey`?
 4. Which Databricks fields correspond to:
@@ -249,7 +402,7 @@ Confirmed visible tables/views:
    - Web
    - Others
 
-### Channel segmentation rule to validate
+## Channel segmentation rule to validate
 
 Support CSAT should be segmented by channel type using this rule:
 
@@ -259,7 +412,7 @@ Support CSAT should be segmented by channel type using this rule:
         ELSE 'Async'
     END AS channel_type
 
-### Priority validation order
+## Priority validation order
 
 Validate Databricks mapping in this order:
 
@@ -277,3 +430,45 @@ This order keeps the EOFY celebration slide focused on the five headline story p
 - Less support demand relative to activity
 - Better activity CSAT
 - Better support CSAT
+
+## Key definition questions
+
+- What is the preferred definition of a Service Account customer?
+- What is the preferred source of truth for self-service activity?
+- What is the correct date field for activity financial year reporting?
+- What is the correct date field for support financial year reporting?
+- What is the correct definition of support demand?
+- Where is Activity CSAT stored?
+- Where is Support CSAT stored?
+- What is the positive CSAT response logic?
+- Should support per 100 activities use all support, Service Account support only, or CX-managed support only?
+- Which application workflow statuses should be included in the headline Activity KPI?
+- Should Withdrawn and Declined be counted as activity, outcomes, or exclusions?
+- Should Pending Payment be counted as activity without further business confirmation?
+
+## Initial conclusion
+
+The Databricks schema contains the core base objects needed to begin reproducing the EOFY celebration analysis, but several Power BI-derived logic layers still need to be mapped or recreated.
+
+Confirmed:
+
+- Customers can be reproduced from `vwaccount`.
+- All accounts can be reproduced from `vwaccount`.
+- Activity can start from `vwpermit`.
+- Support can likely start from `vwsupport` or `vwsupport_enriched`.
+- Portal service enablement can likely use `vwservice_enablement`.
+
+Still pending:
+
+- Recreating the Power BI `vwpermit_statused` logic.
+- Confirming the final Activity KPI inclusion rules.
+- Mapping the `[Self-Service Support]` numerator.
+- Finding the Databricks equivalent for `vwcase_survey`.
+- Recreating `DimService` and `Support_logic` logic in Databricks.
+- Confirming the support channel field for real-time vs async CSAT segmentation.
+
+Current Activity direction:
+
+    Activity should be application workflow activity.
+
+This should be treated as the working definition until confirmed against the Power BI Status Map or business owner decision.
