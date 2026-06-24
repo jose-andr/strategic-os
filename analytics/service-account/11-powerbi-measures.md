@@ -24,8 +24,7 @@ Databricks SQL will translate this logic after the fields and rules are confirme
 | Customers | Account Sign-Ups | Captured |
 | All accounts | All Accounts | Captured |
 | Activity | Digital Self-Service Activity | Captured, Databricks translation pending |
-| Support cases | To capture | Pending |
-| Support per 100 transactions | To capture | Pending |
+| Support | Self-Service Support Rate | Captured, numerator logic pending |
 | Activity CSAT | To capture | Pending |
 | Support CSAT | To capture | Pending |
 | Real-time support CSAT | To capture | Pending |
@@ -43,23 +42,21 @@ Customers
 
 ### DAX
 
-```DAX
-Account Sign-Ups =
-VAR StartDate = [Window Start]
-VAR EndDate = [Window End]
-RETURN
-CALCULATE (
-    DISTINCTCOUNT ( vwaccount[account_id] ),
-    KEEPFILTERS (
-        FILTER (
-            vwaccount,
-            vwaccount[customer_portal] = TRUE ()
-                && vwaccount[first_account_portal_on_date] >= StartDate
-                && vwaccount[first_account_portal_on_date] < EndDate
+    Account Sign-Ups =
+    VAR StartDate = [Window Start]
+    VAR EndDate = [Window End]
+    RETURN
+    CALCULATE (
+        DISTINCTCOUNT ( vwaccount[account_id] ),
+        KEEPFILTERS (
+            FILTER (
+                vwaccount,
+                vwaccount[customer_portal] = TRUE ()
+                    && vwaccount[first_account_portal_on_date] >= StartDate
+                    && vwaccount[first_account_portal_on_date] < EndDate
+            )
         )
     )
-)
-```
 
 ### DAX logic summary
 
@@ -94,17 +91,15 @@ This is a context metric only.
 
 ### DAX
 
-```DAX
-All Accounts =
-CALCULATE (
-    DISTINCTCOUNT ( vwaccount[account_id] ),
-    REMOVEFILTERS ( 'Date Basis' ),
-    REMOVEFILTERS ( 'Calendar Year' ),
-    REMOVEFILTERS ( 'Calendar Month' ),
-    REMOVEFILTERS ( 'Fiscal Year' ),
-    REMOVEFILTERS ( 'Financial Quarter' )
-)
-```
+    All Accounts =
+    CALCULATE (
+        DISTINCTCOUNT ( vwaccount[account_id] ),
+        REMOVEFILTERS ( 'Date Basis' ),
+        REMOVEFILTERS ( 'Calendar Year' ),
+        REMOVEFILTERS ( 'Calendar Month' ),
+        REMOVEFILTERS ( 'Fiscal Year' ),
+        REMOVEFILTERS ( 'Financial Quarter' )
+    )
 
 ### DAX logic summary
 
@@ -146,33 +141,29 @@ This should not be treated as a raw count of all permit applications unless the 
 
 The base application count is:
 
-```DAX
-Applications =
-DISTINCTCOUNT ( vwpermit[application_id] )
-```
+    Applications =
+    DISTINCTCOUNT ( vwpermit[application_id] )
 
 ### Initial self-service activity measure
 
 The initial Power BI measure was:
 
-```DAX
-Self-Service Activity =
-VAR StartDate = [Window Start]
-VAR EndDate = [Window End]
-RETURN
-CALCULATE (
-    DISTINCTCOUNT ( vwpermit[application_id] ),
-    KEEPFILTERS (
-        FILTER (
-            vwpermit,
-            vwpermit[transaction_date] >= StartDate
-                && vwpermit[transaction_date] < EndDate
-                && NOT ISBLANK ( RELATED ( DimService[first_portal_enable_date] ) )
-                && vwpermit[transaction_date] >= RELATED ( DimService[first_portal_enable_date] )
+    Self-Service Activity =
+    VAR StartDate = [Window Start]
+    VAR EndDate = [Window End]
+    RETURN
+    CALCULATE (
+        DISTINCTCOUNT ( vwpermit[application_id] ),
+        KEEPFILTERS (
+            FILTER (
+                vwpermit,
+                vwpermit[transaction_date] >= StartDate
+                    && vwpermit[transaction_date] < EndDate
+                    && NOT ISBLANK ( RELATED ( DimService[first_portal_enable_date] ) )
+                    && vwpermit[transaction_date] >= RELATED ( DimService[first_portal_enable_date] )
+            )
         )
     )
-)
-```
 
 ### Initial DAX logic summary
 
@@ -193,44 +184,40 @@ The refined Power BI logic uses `vwpermit_statused`.
 
 Base measure:
 
-```DAX
-Applications =
-DISTINCTCOUNT ( vwpermit[application_id] )
-```
+    Applications =
+    DISTINCTCOUNT ( vwpermit[application_id] )
 
 Statused measures:
 
-```DAX
-Submitted Applications =
-CALCULATE (
-    [Applications],
-    vwpermit_statused[is_submitted_application] = 1
-)
+    Submitted Applications =
+    CALCULATE (
+        [Applications],
+        vwpermit_statused[is_submitted_application] = 1
+    )
 
-Draft Applications =
-CALCULATE (
-    [Applications],
-    vwpermit_statused[is_draft_application] = 1
-)
+    Draft Applications =
+    CALCULATE (
+        [Applications],
+        vwpermit_statused[is_draft_application] = 1
+    )
 
-Digital Self-Service Activity =
-CALCULATE (
-    [Applications],
-    vwpermit_statused[include_in_activity_kpi] = 1
-)
+    Digital Self-Service Activity =
+    CALCULATE (
+        [Applications],
+        vwpermit_statused[include_in_activity_kpi] = 1
+    )
 
-Application Outcomes =
-CALCULATE (
-    [Applications],
-    vwpermit_statused[is_application_outcome] = 1
-)
+    Application Outcomes =
+    CALCULATE (
+        [Applications],
+        vwpermit_statused[is_application_outcome] = 1
+    )
 
-Active Permits =
-CALCULATE (
-    [Applications],
-    vwpermit_statused[is_active_permit] = 1
-)
-```
+    Active Permits =
+    CALCULATE (
+        [Applications],
+        vwpermit_statused[is_active_permit] = 1
+    )
 
 ### Refined DAX logic summary
 
@@ -264,10 +251,8 @@ Activity = Digital Self-Service Activity
 
 This means:
 
-```text
-Activity = DISTINCTCOUNT(vwpermit[application_id])
-where vwpermit_statused[include_in_activity_kpi] = 1
-```
+    Activity = DISTINCTCOUNT(vwpermit[application_id])
+    where vwpermit_statused[include_in_activity_kpi] = 1
 
 Activity should not be presented as raw Applications unless the status inclusion rules are unavailable and the result is clearly caveated.
 
@@ -275,9 +260,7 @@ Activity should not be presented as raw Applications unless the status inclusion
 
 The base records come from Databricks:
 
-```text
-datahub_datamart.customer_account_management.vwpermit
-```
+    datahub_datamart.customer_account_management.vwpermit
 
 Power BI imports `vwpermit` from Databricks, then creates `vwpermit_statused` as a derived Power Query layer.
 
@@ -340,13 +323,98 @@ Recommended caveat:
 
 > Activity uses the Power BI-defined Digital Self-Service Activity logic where available. Where analysis is reproduced in Databricks, the `include_in_activity_kpi` status mapping must be recreated before final figures are used.
 
+## Support / Self-Service Support Rate
+
+### Business meaning
+
+Support represents portal support demand relative to self-service activity.
+
+For the EOFY celebration slide, the preferred slide label is:
+
+Support
+
+The intended business meaning is:
+
+Support interactions per 100 self-service activities
+
+This is a rate-based KPI, not a raw support case count.
+
+### Power BI measure
+
+    Self-Service Support Rate =
+    DIVIDE (
+        [Self-Service Support],
+        [Self-Service Activity]
+    ) * 100
+
+### DAX logic summary
+
+- Divides `[Self-Service Support]` by `[Self-Service Activity]`
+- Multiplies the result by 100
+- Expresses support demand as interactions per 100 self-service activities
+- Lower values indicate less support demand relative to activity
+
+### Slide interpretation
+
+For the celebration slide:
+
+Support = Self-Service Support Rate
+
+This can be described as:
+
+Interactions per 100 applications
+
+or, if aligning to the broader slide language:
+
+Interactions per 100 activities
+
+### Source measures
+
+| Measure | Use |
+|---|---|
+| `[Self-Service Support]` | Numerator: support interactions related to self-service / portal activity |
+| `[Self-Service Activity]` | Denominator: self-service activity / portal transactions |
+| `[Self-Service Support Rate]` | Rate of support interactions per 100 activities |
+
+### Definition decision
+
+For the EOFY celebration slide, Support should be shown as a rate rather than a raw volume.
+
+This better supports the story:
+
+More self-service activity with less support demand relative to activity.
+
+### Current caveat
+
+The exact numerator logic for `[Self-Service Support]` still needs to be captured from Power BI.
+
+Until that measure is documented, the support rate can be treated as the confirmed slide KPI, but the underlying support inclusion rules remain pending.
+
+### Databricks SQL implication
+
+To reproduce this measure in Databricks SQL, both components must be translated:
+
+1. Self-Service Support
+2. Self-Service Activity
+
+The SQL pattern will be:
+
+    support_rate_per_100_activities =
+        self_service_support / self_service_activity * 100
+
+Where:
+
+    self_service_activity = Digital Self-Service Activity
+
+And:
+
+    self_service_support = support interactions included by the Power BI support eligibility logic
+
 ## Pending measures to capture
 
 Next measures to capture from Power BI:
 
-1. Support cases
-2. Support per 100 transactions
-3. Activity CSAT
-4. Support CSAT
-5. Real-time support CSAT
-6. Async support CSAT
+1. Activity CSAT
+2. Support CSAT
+3. Real-time support CSAT
+4. Async support CSAT
