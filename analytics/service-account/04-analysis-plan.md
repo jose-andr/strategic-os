@@ -12,6 +12,20 @@ Use only the curated Databricks schema:
 
 `datahub_datamart.customer_account_management`
 
+## Source of truth approach
+
+For this first pass, existing Power BI measures are treated as the first source of truth for business logic.
+
+Databricks SQL will be used to translate and test that logic against the curated schema.
+
+This means the workflow is:
+
+1. Identify the relevant Power BI measure.
+2. Understand the DAX logic.
+3. Map the DAX fields to Databricks schema fields.
+4. Translate the logic into reusable SQL.
+5. Validate results against the Power BI dashboard.
+6. Document caveats and definition questions.
 ## Target output
 
 A one-slide EOFY celebration summary with five headline tiles:
