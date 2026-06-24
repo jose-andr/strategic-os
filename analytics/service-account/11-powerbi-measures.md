@@ -409,7 +409,218 @@ Where:
 And:
 
     self_service_support = support interactions included by the Power BI support eligibility logic
+## CSAT / Customer Feedback
 
+### Business meaning
+
+CSAT represents customer satisfaction for portal-related cases and support interactions.
+
+For the EOFY celebration slide, there are two CSAT metrics:
+
+| Celebration metric | Power BI measure | Slide meaning |
+|---|---|---|
+| Activity CSAT | CSAT on Self-Service Activity | Satisfaction for portal-enabled services / permit applications |
+| Support CSAT | CSAT on Self-Service Support | Satisfaction for support-related interactions |
+
+Both measures calculate the share of positive survey responses, where a positive response is a satisfaction score of 4 or 5.
+
+## Activity CSAT / CSAT on Self-Service Activity
+
+### Business meaning
+
+Activity CSAT represents satisfaction for portal-enabled services.
+
+On the Power BI dashboard this appears as:
+
+CSAT for portal-enabled services
+
+The dashboard context describes this as:
+
+permit applications
+
+### Power BI measure
+
+    CSAT on Self-Service Activity =
+    VAR StartDate = [Window Start]
+    VAR EndDate = [Window End]
+    VAR PortalServices =
+        CALCULATETABLE (
+            VALUES ( DimService[service_name] ),
+            NOT ISBLANK ( DimService[first_portal_enable_date] )
+        )
+    VAR TotalResponses =
+        CALCULATE (
+            COUNTROWS ( vwcase_survey ),
+            FILTER (
+                vwcase_survey,
+                vwcase_survey[Survey_Completion_Date] >= StartDate
+                    && vwcase_survey[Survey_Completion_Date] < EndDate
+                    && NOT ISBLANK ( vwcase_survey[Satisfaction_Score_5] )
+            ),
+            TREATAS ( PortalServices, vwcase_survey[Service_Name] )
+        )
+    VAR PositiveResponses =
+        CALCULATE (
+            COUNTROWS ( vwcase_survey ),
+            FILTER (
+                vwcase_survey,
+                vwcase_survey[Survey_Completion_Date] >= StartDate
+                    && vwcase_survey[Survey_Completion_Date] < EndDate
+                    && vwcase_survey[Satisfaction_Score_5] IN { 4, 5 }
+            ),
+            TREATAS ( PortalServices, vwcase_survey[Service_Name] )
+        )
+    RETURN
+    IF (
+        TotalResponses = 0,
+        BLANK (),
+        DIVIDE ( PositiveResponses, TotalResponses )
+    )
+
+### DAX logic summary
+
+- Uses `[Window Start]` and `[Window End]` for the reporting period
+- Identifies portal-enabled services from `DimService`
+- Includes services where `DimService[first_portal_enable_date]` is not blank
+- Counts survey responses from `vwcase_survey`
+- Uses `vwcase_survey[Survey_Completion_Date]` as the CSAT reporting date
+- Excludes responses where `vwcase_survey[Satisfaction_Score_5]` is blank
+- Counts positive responses where `Satisfaction_Score_5` is 4 or 5
+- Uses `TREATAS` to match portal-enabled services to `vwcase_survey[Service_Name]`
+- Returns blank where there are no survey responses
+- Otherwise returns positive responses divided by total responses
+
+### Source fields
+
+| Field | Use |
+|---|---|
+| `DimService[service_name]` | Portal-enabled service list |
+| `DimService[first_portal_enable_date]` | Portal service enablement filter |
+| `vwcase_survey[Survey_Completion_Date]` | CSAT reporting date |
+| `vwcase_survey[Satisfaction_Score_5]` | 5-point satisfaction score |
+| `vwcase_survey[Service_Name]` | Survey service name used to match portal-enabled services |
+
+### Definition decision
+
+For the EOFY celebration slide:
+
+Activity CSAT = CSAT on Self-Service Activity
+
+This represents satisfaction for portal-enabled service activity.
+
+## Support CSAT / CSAT on Self-Service Support
+
+### Business meaning
+
+Support CSAT represents satisfaction for support-related interactions.
+
+On the Power BI dashboard this appears as:
+
+CSAT for support related interactions
+
+The dashboard context describes this as:
+
+account access and permit applications assistance
+
+### Power BI measure
+
+    CSAT on Self-Service Support =
+    VAR StartDate = [Window Start]
+    VAR EndDate = [Window End]
+    VAR SupportServices =
+        CALCULATETABLE (
+            VALUES ( Support_logic[Ask Service Name Norm] ),
+            Support_logic[is_after_service_enablement] = TRUE (),
+            NOT ISBLANK ( Support_logic[Ask Service Name Norm] )
+        )
+    VAR TotalResponses =
+        CALCULATE (
+            COUNTROWS ( vwcase_survey ),
+            FILTER (
+                vwcase_survey,
+                vwcase_survey[Survey_Completion_Date] >= StartDate
+                    && vwcase_survey[Survey_Completion_Date] < EndDate
+                    && NOT ISBLANK ( vwcase_survey[Satisfaction_Score_5] )
+            ),
+            TREATAS ( SupportServices, vwcase_survey[Service Name Norm] )
+        )
+    VAR PositiveResponses =
+        CALCULATE (
+            COUNTROWS ( vwcase_survey ),
+            FILTER (
+                vwcase_survey,
+                vwcase_survey[Survey_Completion_Date] >= StartDate
+                    && vwcase_survey[Survey_Completion_Date] < EndDate
+                    && vwcase_survey[Satisfaction_Score_5] IN { 4, 5 }
+            ),
+            TREATAS ( SupportServices, vwcase_survey[Service Name Norm] )
+        )
+    RETURN
+    IF (
+        TotalResponses = 0,
+        BLANK (),
+        DIVIDE ( PositiveResponses, TotalResponses )
+    )
+
+### DAX logic summary
+
+- Uses `[Window Start]` and `[Window End]` for the reporting period
+- Identifies support-related services from `Support_logic`
+- Includes support services where `Support_logic[is_after_service_enablement] = TRUE()`
+- Excludes blank `Support_logic[Ask Service Name Norm]` values
+- Counts survey responses from `vwcase_survey`
+- Uses `vwcase_survey[Survey_Completion_Date]` as the CSAT reporting date
+- Excludes responses where `vwcase_survey[Satisfaction_Score_5]` is blank
+- Counts positive responses where `Satisfaction_Score_5` is 4 or 5
+- Uses `TREATAS` to match support service names to `vwcase_survey[Service Name Norm]`
+- Returns blank where there are no survey responses
+- Otherwise returns positive responses divided by total responses
+
+### Source fields
+
+| Field | Use |
+|---|---|
+| `Support_logic[Ask Service Name Norm]` | Normalised support service name |
+| `Support_logic[is_after_service_enablement]` | Filter for support after portal service enablement |
+| `vwcase_survey[Survey_Completion_Date]` | CSAT reporting date |
+| `vwcase_survey[Satisfaction_Score_5]` | 5-point satisfaction score |
+| `vwcase_survey[Service Name Norm]` | Normalised survey service name used to match support services |
+
+### Definition decision
+
+For the EOFY celebration slide:
+
+Support CSAT = CSAT on Self-Service Support
+
+This represents satisfaction for support interactions related to portal-enabled services.
+
+### Databricks SQL implication
+
+To reproduce these CSAT measures in Databricks SQL, the analysis needs access to:
+
+1. Survey response records
+2. Survey completion date
+3. 5-point satisfaction score
+4. Service name fields
+5. Portal-enabled service logic
+6. Support service eligibility logic
+
+The SQL pattern for both CSAT measures will be:
+
+    csat =
+        positive_responses / total_responses
+
+Where:
+
+    positive_responses = responses with Satisfaction_Score_5 in 4 or 5
+
+And:
+
+    total_responses = responses with non-blank Satisfaction_Score_5
+
+### Caveat for EOFY analysis
+
+The Power BI measures confirm the CSAT business logic, but the Databricks source table for `vwcase_survey`, `DimService`, and `Support_logic` still needs to be confirmed before these measures can be fully reproduced in SQL.
 ## Pending measures to capture
 
 Next measures to capture from Power BI:
