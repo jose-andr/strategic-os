@@ -27,3 +27,30 @@ The SQL files are used to validate the curated Databricks schema and calculate y
 Query outputs and organisational data should remain in Databricks or approved organisational systems.
 
 This folder should store reusable SQL logic only.
+
+## Validation SQL sequence
+
+These SQL files support the EOFY Service Account / Portal CX celebration analysis.
+
+Run the validation files before treating the final summary output as production-ready.
+
+| File | Purpose | Status |
+|---|---|---|
+| `00_schema_validation.sql` | Confirms available tables and fields in the curated Databricks schema | Created |
+| `01_customer_growth_yoy.sql` | Calculates Service Account sign-up growth | Created |
+| `02_activity_yoy.sql` | Calculates self-service activity growth | Created |
+| `03_support_yoy.sql` | Calculates support demand | Created |
+| `04_csat_yoy.sql` | Calculates CSAT movement | Created |
+| `05_category_drivers_yoy.sql` | Identifies service/category drivers | Created |
+| `06_eofy_summary_output.sql` | Produces final one-slide summary output | Created |
+| `07_activity_status_validation.sql` | Profiles `vwpermit` status combinations to recreate `vwpermit_statused` logic | Created |
+| `08_support_logic_validation.sql` | Profiles `vwsupport` and `vwsupport_enriched` to map `[Self-Service Support]` | Created |
+| `09_csat_source_validation.sql` | Inspects `vwcase` and `vwsupport_enriched` for survey / CSAT fields | Created |
+
+### Current validation priorities
+
+1. Confirm whether `vwpermit_statused[include_in_activity_kpi]` can be recreated in Databricks.
+2. Confirm the Databricks equivalent of `[Self-Service Support]`.
+3. Confirm the Databricks source for CSAT survey responses.
+4. Confirm the Databricks support channel field for real-time vs async segmentation.
+5. Update final SQL files once field mappings are confirmed.
