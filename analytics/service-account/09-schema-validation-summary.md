@@ -178,3 +178,87 @@ Logic summary:
 ## Initial conclusion
 
 To complete after field mapping.
+
+
+## Power BI to Databricks mapping gaps
+
+The Power BI measure logic for the EOFY celebration slide has now been captured in `11-powerbi-measures.md`.
+
+The remaining validation work is to confirm which Databricks tables and fields can reproduce the Power BI logic.
+
+### Confirmed Databricks base objects
+
+The curated schema is:
+
+    datahub_datamart.customer_account_management
+
+Confirmed visible tables/views:
+
+- `vwaccount`
+- `vwcase`
+- `vwpermit`
+- `vwservice_enablement`
+- `vwsupport`
+- `vwsupport_enriched`
+
+### Metrics with confirmed or partial Databricks lineage
+
+| Celebration metric | Power BI source | Databricks status |
+|---|---|---|
+| Customers | `vwaccount` | Base fields confirmed |
+| All accounts | `vwaccount` | Base fields confirmed |
+| Activity | `vwpermit` plus `vwpermit_statused` logic | Base table confirmed; statused logic not yet native in Databricks |
+| Support | `Self-Service Support Rate` | Numerator logic still needs Databricks mapping |
+| Activity CSAT | `vwcase_survey`, `DimService` | Databricks source mapping pending |
+| Support CSAT | `vwcase_survey`, `Support_logic` | Databricks source mapping pending |
+| Real-time support CSAT | Support CSAT filtered by channel type | Databricks channel field mapping pending |
+| Async support CSAT | Support CSAT filtered by channel type | Databricks channel field mapping pending |
+
+### Remaining Databricks mapping questions
+
+1. Can `vwpermit_statused` logic be recreated from `vwpermit`, `vwcase`, and mapping rules?
+2. Which Databricks table contains the equivalent of `Self-Service Support`?
+3. Which Databricks table contains case survey responses equivalent to `vwcase_survey`?
+4. Which Databricks fields correspond to:
+   - `Survey_Completion_Date`
+   - `Satisfaction_Score_5`
+   - `Service_Name`
+   - `Service Name Norm`
+5. Which Databricks table or logic replaces `DimService[first_portal_enable_date]`?
+6. Which Databricks table or logic replaces `Support_logic`?
+7. Which Databricks field contains support channel values such as:
+   - Phone
+   - Live Chat
+   - Face-to-Face
+   - Email
+   - Web
+   - Others
+
+### Channel segmentation rule to validate
+
+Support CSAT should be segmented by channel type using this rule:
+
+    CASE
+        WHEN channel IN ('Phone', 'Live Chat', 'Face-to-Face')
+            THEN 'In Real-time'
+        ELSE 'Async'
+    END AS channel_type
+
+### Priority validation order
+
+Validate Databricks mapping in this order:
+
+1. Customers
+2. Activity
+3. Support rate numerator
+4. Activity CSAT
+5. Support CSAT
+6. Support CSAT by channel type
+
+This order keeps the EOFY celebration slide focused on the five headline story points:
+
+- More customers
+- More self-service activity
+- Less support demand relative to activity
+- Better activity CSAT
+- Better support CSAT
