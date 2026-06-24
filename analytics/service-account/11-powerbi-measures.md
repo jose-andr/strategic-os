@@ -27,8 +27,8 @@ Databricks SQL will translate this logic after the fields and rules are confirme
 | Support | Self-Service Support Rate | Captured, numerator logic pending |
 | Activity CSAT | CSAT on Self-Service Activity | Captured, Databricks source mapping pending |
 | Support CSAT | CSAT on Self-Service Support | Captured, Databricks source mapping pending |
-| Real-time support CSAT | To capture | Pending |
-| Async support CSAT | To capture | Pending |
+| Real-time support CSAT | Support CSAT filtered by channel_type = In Real-time | Databricks segmentation rule captured |
+| Async support CSAT | Support CSAT filtered by channel_type = Async | Databricks segmentation rule captured |
 
 ## Account Sign-Ups
 
@@ -621,9 +621,83 @@ And:
 ### Caveat for EOFY analysis
 
 The Power BI measures confirm the CSAT business logic, but the Databricks source table for `vwcase_survey`, `DimService`, and `Support_logic` still needs to be confirmed before these measures can be fully reproduced in SQL.
+
+## Support CSAT channel segmentation
+
+### Business meaning
+
+Real-time and async support CSAT are no longer treated as separate Power BI measures.
+
+Instead, Support CSAT should be segmented by support channel type.
+
+The intended segmentation is:
+
+| Channel type | Channels |
+|---|---|
+| In Real-time | Phone, Live Chat, Face-to-Face |
+| Async | Email, Web, Others |
+
+### Current channel classification logic
+
+The Power BI-style classification logic is:
+
+    channel_type =
+    IF (
+        Support_logic[channel] IN { "Phone", "Live Chat", "Face-to-Face" },
+        "In Real-time",
+        "Async"
+    )
+
+### Definition decision
+
+For future analysis:
+
+Real-time support CSAT = Support CSAT where channel_type = "In Real-time"
+
+Async support CSAT = Support CSAT where channel_type = "Async"
+
+These should be calculated by filtering or grouping Support CSAT by channel type, rather than relying on separate Power BI measures.
+
+### Databricks SQL implication
+
+In Databricks, create a channel classification field using the same logic:
+
+    CASE
+        WHEN channel IN ('Phone', 'Live Chat', 'Face-to-Face')
+            THEN 'In Real-time'
+        ELSE 'Async'
+    END AS channel_type
+
+Then calculate Support CSAT by `channel_type`:
+
+    support_csat_by_channel_type =
+        positive_support_survey_responses / total_support_survey_responses
+
+Where:
+
+    positive_support_survey_responses = support survey responses with Satisfaction_Score_5 in 4 or 5
+
+And:
+
+    total_support_survey_responses = support survey responses with non-blank Satisfaction_Score_5
+
+### Caveat for EOFY analysis
+
+The channel field should be confirmed in Databricks before final CSAT by channel type is used.
+
+The current Power BI field reference is:
+
+    Support_logic[channel]
+
+The equivalent Databricks field still needs to be mapped.
 ## Pending measures to capture
 
-Next measures to capture from Power BI:
+No further Power BI measures are currently required for the EOFY celebration slide.
 
-1. Real-time support CSAT
-2. Async support CSAT
+Remaining work is Databricks mapping and validation:
+
+1. Map `Self-Service Support` numerator logic
+2. Map `vwcase_survey` source fields
+3. Map `DimService` portal-enabled service logic
+4. Map `Support_logic` support eligibility logic
+5. Map support `channel` field for CSAT channel segmentation
