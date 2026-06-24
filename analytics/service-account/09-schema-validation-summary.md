@@ -45,32 +45,40 @@ Likely one row per account.
 
 | Field | Possible use | Confidence |
 |---|---|---|
-| `account_id` | Account identifier | High |
-| `created_date` | Account created date for new account YoY analysis | High |
+| `account_id` | Account identifier used for Service Account sign-up count | High |
+| `first_account_portal_on_date` | Confirmed date field for Service Account sign-up reporting | High |
+| `customer_portal` | Confirmed Service Account / customer portal inclusion filter | High |
+| `created_date` | General account creation date, but not preferred for Service Account sign-ups | Medium |
 | `account_created_month` | Monthly account creation trend analysis | Medium |
-| `first_account_portal_on_da...` | Possible first portal onboarding / first portal access date | Medium |
 | `account_record_type` | Account type / classification | Medium |
 | `onboarding_type` | Onboarding pathway or account onboarding type | Medium |
 | `new_or_existing` | New vs existing account classification | High |
-| `customer_portal` | Indicates whether the account is linked to the customer portal | High |
+
+#### Confirmed Power BI measure logic
+
+Power BI measure: `Account Sign-Ups`
+
+Business meaning: Service Account sign-ups.
+
+Logic summary:
+
+- Counts distinct `vwaccount[account_id]`
+- Filters to `vwaccount[customer_portal] = TRUE()`
+- Uses `vwaccount[first_account_portal_on_date]`
+- Applies the reporting window using `[Window Start]` and `[Window End]`
 
 #### Metrics this table may support
 
-- New service accounts YoY
-- Active service accounts YoY
+- Service Account sign-ups YoY
 - New vs existing account mix
 - Customer portal linked account count
 - Account onboarding trend
 
 #### Definition questions
 
-- Does this table include all CRM accounts or only customer portal / Service Account relevant accounts?
-- Should Service Account customers be filtered using `customer_portal = true`?
-- Should new service accounts use `created_date`, `account_created_month`, or `first_account_portal_on_da...`?
-- What is the full field name for `first_account_portal_on_da...`?
-- What values exist in `account_record_type`, `onboarding_type`, and `new_or_existing`?.
-
-## vwcase
+- Should the EOFY slide label this metric as `Service Account sign-ups`, `new Service Accounts`, or `customers`?
+- Should YoY use the same Power BI window logic or explicit financial year logic?
+- What values exist in `account_record_type`, `onboarding_type`, and `new_or_existing`?## vwcase
 |col_name|data_type|comment|
 |---|---|---|
 |case_id|string|A unique identifier assigned to each case for tracking and reference purposes.|
