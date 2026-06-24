@@ -15,6 +15,24 @@ This file summarises what we learned from validating the curated Databricks sche
 - `vwsupport`
 - `vwsupport_enriched`
 
+## Glossary and Power BI alignment
+
+This schema validation should align to the glossary in:
+
+`10-glossary.md`
+
+For the EOFY celebration analysis:
+
+| Slide term | Internal definition | Source of truth priority |
+|---|---|---|
+| Customers | Service Account / portal sign-ups | Existing Power BI measure, then SQL translation |
+| Activity | Portal transactions or digital self-service activity | Existing Power BI measure, then SQL translation |
+| Support | Portal support demand | Existing Power BI measure, then SQL translation |
+| CSAT on Activity | Satisfaction related to portal-enabled activity | Existing Power BI measure / survey logic |
+| CSAT on Support | Satisfaction related to support interactions | Existing Power BI measure / survey logic |
+| All accounts | Total CRM account base | Context metric only |
+
+Existing Power BI measures should be treated as the first source of truth for business logic. Databricks SQL should translate that logic once the required fields and eligibility rules are confirmed.
 ## Validation matrix
 
 | Celebration metric | Recommended table | Required fields found? | Support status | Notes |
