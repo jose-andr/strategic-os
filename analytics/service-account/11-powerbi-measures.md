@@ -21,14 +21,15 @@ Databricks SQL will translate this logic after the fields and rules are confirme
 
 | Celebration metric | Power BI measure | Status |
 |---|---|---|
-| Customers | `Account Sign-Ups` | Captured |
-| All accounts | `All Accounts` | Captured |
+| Customers | Account Sign-Ups | Captured |
+| All accounts | All Accounts | Captured |
 | Activity | To capture | Pending |
+| Support cases | To capture | Pending |
 | Support per 100 transactions | To capture | Pending |
 | Activity CSAT | To capture | Pending |
 | Support CSAT | To capture | Pending |
 
-## `Account Sign-Ups`
+## Account Sign-Ups
 
 ### Business meaning
 
@@ -36,7 +37,25 @@ Service Account sign-ups.
 
 This is the metric used for the celebration slide label:
 
-`Customers`
+Customers
+
+### DAX
+
+    Account Sign-Ups =
+    VAR StartDate = [Window Start]
+    VAR EndDate = [Window End]
+    RETURN
+    CALCULATE (
+        DISTINCTCOUNT ( vwaccount[account_id] ),
+        KEEPFILTERS (
+            FILTER (
+                vwaccount,
+                vwaccount[customer_portal] = TRUE ()
+                    && vwaccount[first_account_portal_on_date] >= StartDate
+                    && vwaccount[first_account_portal_on_date] < EndDate
+            )
+        )
+    )
 
 ### DAX logic summary
 
@@ -57,11 +76,11 @@ This is the metric used for the celebration slide label:
 
 For this analysis:
 
-`Customers = Service Account sign-ups`
+Customers = Service Account sign-ups
 
 Customers does not mean all CRM accounts.
 
-## `All Accounts`
+## All Accounts
 
 ### Business meaning
 
@@ -71,13 +90,44 @@ This is a context metric only.
 
 ### DAX
 
-```DAX
-All Accounts =
-CALCULATE (
-    DISTINCTCOUNT ( vwaccount[account_id] ),
-    REMOVEFILTERS ( 'Date Basis' ),
-    REMOVEFILTERS ( 'Calendar Year' ),
-    REMOVEFILTERS ( 'Calendar Month' ),
-    REMOVEFILTERS ( 'Fiscal Year' ),
-    REMOVEFILTERS ( 'Financial Quarter' )
-)
+    All Accounts =
+    CALCULATE (
+        DISTINCTCOUNT ( vwaccount[account_id] ),
+        REMOVEFILTERS ( 'Date Basis' ),
+        REMOVEFILTERS ( 'Calendar Year' ),
+        REMOVEFILTERS ( 'Calendar Month' ),
+        REMOVEFILTERS ( 'Fiscal Year' ),
+        REMOVEFILTERS ( 'Financial Quarter' )
+    )
+
+### DAX logic summary
+
+- Counts distinct `vwaccount[account_id]`
+- Removes reporting date filters
+- Represents all CRM accounts, not Service Account sign-ups
+
+### Source fields
+
+| Field | Use |
+|---|---|
+| `vwaccount[account_id]` | Account identifier |
+
+### Definition decision
+
+All Accounts should not be used as the headline Customers tile.
+
+It may be used as context, for example:
+
+Service Account sign-ups represent approximately 5% of all CRM accounts to date.
+
+## Pending measures to capture
+
+Next measures to capture from Power BI:
+
+1. Activity / transactions
+2. Support cases
+3. Support per 100 transactions
+4. Activity CSAT
+5. Support CSAT
+6. Real-time support CSAT
+7. Async support CSAT
