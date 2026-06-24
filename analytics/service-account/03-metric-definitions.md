@@ -23,6 +23,24 @@ Example:
 | 2025-06-30 | FY2025 |
 | 2025-07-01 | FY2026 |
 
+## Glossary alignment
+
+This file should be read alongside:
+
+`10-glossary.md`
+
+For this EOFY celebration analysis, the slide language is intentionally simple:
+
+| Slide term | Internal definition |
+|---|---|
+| Customers | Service Account / portal sign-ups |
+| Activity | Portal transactions or digital self-service activity |
+| Support | Portal support demand |
+| CSAT on Activity | Customer satisfaction related to portal-enabled activity |
+| CSAT on Support | Customer satisfaction related to support interactions |
+| All accounts | Total CRM account base, used as context only |
+
+Existing Power BI measures should be treated as the first source of truth for business logic, then translated into reusable SQL templates where appropriate.
 ## Celebration metric frame
 
 The one-slide EOFY celebration analysis will use this frame:
