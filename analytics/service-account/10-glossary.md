@@ -1,6 +1,3 @@
-Here is a refined full replacement for `analytics/service-account/10-glossary.md`.
-
-```markdown
 # Service Account / Portal CX Glossary
 
 This glossary documents the working language for the Service Account EOFY celebration analysis.
@@ -671,4 +668,3 @@ Current known warnings:
 - Service name joins use normalised text matching and should be checked for unmatched services.
 - Capability milestones may explain major changes in activity, support, and CSAT volumes.
 - No raw organisational data or customer-level data should be stored in the repository.
-```
