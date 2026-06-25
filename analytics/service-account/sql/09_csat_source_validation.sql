@@ -1,25 +1,24 @@
 -- 09_csat_source_validation.sql
 -- Purpose:
--- Validate which Databricks table and fields can reproduce the Power BI CSAT measures.
+-- Validate the Databricks sources for CSAT survey logic.
 --
--- Power BI CSAT measures use:
--- - vwcase_survey[Survey_Completion_Date]
--- - vwcase_survey[Satisfaction_Score_5]
--- - vwcase_survey[Service_Name]
--- - vwcase_survey[Service Name Norm]
+-- Current finding:
+-- CSAT survey data comes from the customer_intelligence schema, not customer_account_management.
 --
--- Databricks source still needs to be confirmed.
+-- Power BI source lineage includes:
+-- - datahub_datamart.customer_intelligence.vwcase
+-- - datahub_datamart.customer_intelligence.vwsurvey_feedback
+--
+-- Do not use vwsupport_enriched for CSAT source validation.
 
--- Start with vwcase because survey fields may be embedded there.
-
+-- Inspect customer intelligence case fields.
 SELECT
     *
-FROM datahub_datamart.customer_account_management.vwcase
+FROM datahub_datamart.customer_intelligence.vwcase
 LIMIT 100;
 
--- Then inspect whether vwsupport_enriched includes CSAT or survey fields.
-
+-- Inspect survey feedback fields.
 SELECT
     *
-FROM datahub_datamart.customer_account_management.vwsupport_enriched
+FROM datahub_datamart.customer_intelligence.vwsurvey_feedback
 LIMIT 100;
