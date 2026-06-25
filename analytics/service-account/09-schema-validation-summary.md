@@ -447,9 +447,44 @@ The longer-term validation questions are tracked in:
     13-business-validation-backlog.md
 
 ## Support validation update
+### Draft Support Rate YoY result
 
-Genie checked the schemas for `vwsupport` and `vwsupport_enriched` and confirmed that the two views represent different support data shapes.
+The first run of `sql/13_support_rate_yoy_draft.sql` calculated support demand relative to Activity.
 
+| Comparison period | Activity applications | Self-service support cases | Support per 100 activities |
+|---|---:|---:|---:|
+| Previous FY | 2,209 | 10,976 | 496.9 |
+| Current FY | 3,766 | 15,413 | 409.3 |
+
+Draft movement:
+
+    Activity increased from 2,209 to 3,766 applications.
+
+    Support cases increased from 10,976 to 15,413.
+
+    Support per 100 activities decreased from 496.9 to 409.3.
+
+    Relative improvement = 17.6% fewer support cases per 100 activities.
+
+### Interpretation
+
+The support numerator increased in raw volume, but activity grew faster.
+
+This supports the EOFY celebration storyline:
+
+    Less support demand relative to activity
+
+### Current Support Rate decision
+
+For the EOFY celebration analysis, the current support rate logic is good enough to proceed:
+
+    Support Rate =
+        distinct support cases from vwsupport
+        where is_after_service_enablement = true
+        divided by application workflow Activity
+        multiplied by 100
+
+This should be treated as accepted for the celebration slide, while the exact reusable `[Self-Service Support]` numerator remains a business validation item.
 ### Support table distinction
 
 | View | Best use | Notes |
