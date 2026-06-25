@@ -1,12 +1,32 @@
 -- 11_activity_yoy_application_workflow_draft.sql
 -- Purpose:
--- Calculate draft YoY portal Activity using the application workflow definition.
+-- Calculate YoY portal Activity using the application workflow definition.
 --
--- Working definition:
+-- Current EOFY celebration analysis decision:
 -- Activity = application workflow activity
 -- not permit lifecycle activity.
 --
--- This is provisional until validated against the Power BI Status Map or business owner decision.
+-- For the current celebration analysis, include:
+-- - draft
+-- - submitted
+-- - further information requested
+-- - in progress
+-- - pending payment
+--
+-- For the current celebration analysis, exclude:
+-- - withdrawn
+-- - declined
+-- - issued
+-- - extended
+-- - renewed
+-- - lapsed
+--
+-- Status:
+-- Accepted for the EOFY celebration analysis.
+-- Still requires later validation before becoming a reusable reporting standard.
+--
+-- Longer-term validation questions are tracked in:
+-- analytics/service-account/13-business-validation-backlog.md
 
 WITH base AS (
     SELECT
