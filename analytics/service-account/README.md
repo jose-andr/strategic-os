@@ -51,6 +51,7 @@ The EOFY celebration slide logic has been captured from Power BI and is being tr
 | `11-powerbi-measures.md` | Captures the Power BI measure logic used as the business source of truth |
 | `12-databricks-mapping-backlog.md` | Tracks unresolved Databricks mapping gaps |
 | `09-schema-validation-summary.md` | Summarises confirmed schema validation and outstanding mapping questions |
+| `13-business-validation-backlog.md` | Tracks assumptions and business rules to validate after the celebration analysis |
 
 ### Current metric status
 
