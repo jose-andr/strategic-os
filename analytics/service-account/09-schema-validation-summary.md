@@ -334,53 +334,53 @@ For the celebration slide, permit workflow statuses should be treated as context
 
 ### Activity status profile results
 
-The first run of `sql/07_activity_status_validation.sql` returned valid status combinations from `vwpermit`.
+### Activity status mapping draft results
 
-The largest observed combinations included:
+The first run of `sql/10_activity_status_mapping_draft.sql` successfully separated application workflow statuses from permit lifecycle statuses.
 
-| Application status | Case status | Category | Interpretation |
-|---|---|---|---|
-| `issued` | `closed` | `permit` | Permit lifecycle / issued outcome; not primary Activity KPI |
-| `draft` | `draft` | `permit` | Application workflow; likely core activity candidate |
-| `draft` | `null` | `permit` | Application workflow; likely core activity candidate, but null case status should be reviewed |
-| `pending payment` | `approved` | `permit` | Application workflow; likely requires business confirmation |
-| `lapsed` | `closed` | `permit` | Permit lifecycle / inactive state; not primary Activity KPI |
-| `withdrawn` | `closed` | `permit` | Application outcome; include only if business rules confirm |
-| `declined` | `closed` | `permit` | Application outcome; include only if business rules confirm |
+The draft mapping confirmed that the main application workflow activity records are concentrated in:
 
-### Activity mapping implication
+| Status group | Example status combinations | Draft KPI treatment |
+|---|---|---|
+| Draft | `draft / draft`, `draft / null`, `draft / new`, `draft / closed` | Included |
+| Submitted | `submitted / closed`, `submitted / draft`, `submitted / new`, `submitted / null` | Included |
+| Further information requested | `further information requested / further information requested`, `further information requested / closed` | Included |
+| In Progress | `in progress / in progress`, `in progress / closed`, `in progress / new` | Included |
+| Pending Payment | `pending payment / approved`, `pending payment / closed`, `pending payment / null` | Included in draft, requires confirmation |
 
-The current `vwpermit` status fields are useful but not sufficient on their own.
+### Activity draft mapping observations
 
-The Activity KPI needs a status mapping layer that classifies each record into workflow and KPI flags.
-
-Required derived fields include:
-
-| Derived field | Purpose |
-|---|---|
-| `workflow_type` | Distinguishes Application workflow from Permit workflow |
-| `status_group` | Groups statuses into business-readable status categories |
-| `is_draft_application` | Identifies draft application activity |
-| `is_submitted_application` | Identifies submitted application activity |
-| `is_application_outcome` | Identifies application outcome statuses |
-| `is_active_permit` | Identifies active permit lifecycle statuses |
-| `is_inactive_permit` | Identifies inactive permit lifecycle statuses |
-| `include_in_activity_kpi` | Determines whether the record contributes to the headline Activity KPI |
-| `requires_business_confirmation` | Flags ambiguous statuses requiring business decision |
-
-### Current Activity validation decision
-
-For the EOFY celebration slide:
+The draft mapping supports the current working definition:
 
     Activity = application workflow activity
 
-not:
+The largest application workflow groups were draft application records, followed by pending payment, submitted, further information requested, and in-progress records.
 
-    Activity = permit lifecycle activity
+This suggests the Activity KPI can be structured around application workflow statuses rather than permit lifecycle statuses.
 
-`vwpermit` appears to contain enough raw status fields to recreate the Power BI `vwpermit_statused` concept, but the final KPI logic should be recreated through an explicit status mapping table rather than inferred directly from status names.
+However, the draft mapping is not final. It still needs validation against the Power BI Status Map or business owner decision.
 
-The Activity KPI remains pending until the Power BI `Status Map` or equivalent business rules confirm which application workflow statuses are included.
+### Activity validation flags
+
+The following issues need confirmation before finalising the Activity KPI:
+
+1. Should `pending payment` be included in the headline Activity KPI?
+2. Should `withdrawn` and `declined` be excluded from the headline Activity KPI or counted as application outcomes only?
+3. How should records with `period_start = null` be handled?
+4. Should `case_status` modify inclusion where application status is already mapped?
+5. Should any specific categories be excluded from the headline Activity KPI?
+
+### Current Activity SQL direction
+
+The next SQL version should keep the explicit workflow split and use a derived field such as:
+
+    include_in_activity_kpi_draft
+
+until confirmed rules are available.
+
+The final production version should rename this field only after validation:
+
+    include_in_activity_kpi
 
 ## Remaining Databricks mapping questions
 
