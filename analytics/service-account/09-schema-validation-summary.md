@@ -467,6 +467,44 @@ Still pending:
 - Recreating `DimService` and `Support_logic` logic in Databricks.
 - Confirming the support channel field for real-time vs async CSAT segmentation.
 
+
+### Accepted Activity assumption for EOFY celebration analysis
+
+For the current EOFY celebration analysis, the application workflow Activity definition is accepted as good enough to proceed.
+
+The current Activity KPI includes:
+
+- Draft
+- Submitted
+- Further information requested
+- In Progress
+- Pending Payment
+
+The current Activity KPI excludes unless later confirmed:
+
+- Withdrawn
+- Declined
+- Issued
+- Extended
+- Renewed
+- Lapsed
+
+This means the current working Activity logic is:
+
+    Activity =
+        distinct applications
+        where application_status is one of:
+            draft
+            submitted
+            further information requested
+            in progress
+            pending payment
+
+This assumption should be documented as accepted for the celebration slide, but not yet treated as the final reusable reporting standard.
+
+The longer-term validation questions are tracked in:
+
+    13-business-validation-backlog.md
 Current Activity direction:
 
     Activity should be application workflow activity.
