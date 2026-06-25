@@ -600,7 +600,95 @@ Source and CSAT formula validated.
 Comparison method revised: use service-name cohort as the main comparison and pre/post enablement as diagnostic analysis.
 
 ## 9. Support CSAT
+### RPP Support CSAT proxy
 
+Because direct portal-service CSAT does not provide a reliable pre-enable baseline for many portal-enabled services, a proxy has been developed for Residential Parking Permit support.
+
+This proxy uses enquiry/support services in the CRM that relate to the RPP customer support pathway.
+
+It is intended to support pre/post impact analysis, not to replace the core Activity CSAT metric.
+
+### Proxy purpose
+
+The proxy helps answer:
+
+> Did satisfaction with Residential Parking Permit support change after portal migration, and is it stabilising in the current ELT period?
+
+### Proxy service labels
+
+Current proxy service labels include:
+
+| Service label |
+|---|
+| Residential parking enquiry - expert |
+| Residential parking enquiry - resolved |
+| Disabled or medical parking enquiry - expert |
+| Disabled or medical parking enquiry - resolved |
+
+### Proxy periods
+
+| Period | Meaning |
+|---|---|
+| Pre-portal baseline | Support experience before the relevant portal migration / impact period. |
+| Post-portal impact | Early post-portal support experience after migration. |
+| Current ELT period | Current reporting period used for executive / ELT interpretation. |
+
+### Power BI proxy support case measure
+
+    RPP Proxy Support Cases =
+    VAR StartDate =
+        [RPP Analysis Start Date]
+    VAR EndDate =
+        [RPP Analysis End Date]
+    VAR SelectedAskServices =
+        VALUES ( 'RPP Proxy Support Service'[Ask Service Name Norm] )
+    RETURN
+    CALCULATE (
+        DISTINCTCOUNT ( Support_logic[case_number] ),
+        FILTER (
+            Support_logic,
+            Support_logic[case_created_date] >= StartDate
+                && Support_logic[case_created_date] < EndDate
+        ),
+        TREATAS (
+            SelectedAskServices,
+            Support_logic[Ask Service Name Norm]
+        )
+    )
+
+### Proxy interpretation
+
+The proxy analysis indicates that the early post-portal CSAT decline was concentrated in Residential Parking support, particularly expert or escalated enquiries.
+
+The current ELT period shows recovery for Residential parking enquiry - expert, improving from 69% in the post-portal impact period to 78% in the current ELT period.
+
+This suggests service stabilisation:
+
+> The most complex RPP support pathway is improving, although overall permit-support CSAT remains below the pre-portal baseline.
+
+### Current proxy result notes
+
+| Service label | Period | Proxy support cases | Survey responses | Low CSAT responses | Proxy support CSAT |
+|---|---|---:|---:|---:|---:|
+| Residential parking enquiry - expert | Pre-portal baseline | 3,159 | 212 | 42 | 74% |
+| Residential parking enquiry - expert | Post-portal impact | 3,032 | 206 | 51 | 69% |
+| Residential parking enquiry - expert | Current ELT period | 452 | 18 | 3 | 78% |
+| Residential parking enquiry - resolved | Pre-portal baseline | 8,982 | 724 | 54 | 90% |
+| Residential parking enquiry - resolved | Post-portal impact | 4,982 | 308 | 54 | 77% |
+| Residential parking enquiry - resolved | Current ELT period | 712 | 37 | 6 | 78% |
+| Disabled or medical parking enquiry - expert | Pre-portal baseline | 166 | 21 | 3 | 86% |
+| Disabled or medical parking enquiry - expert | Post-portal impact | 267 | 36 | 3 | 89% |
+| Disabled or medical parking enquiry - expert | Current ELT period | 62 | 3 | 1 | 67% |
+| Disabled or medical parking enquiry - resolved | Pre-portal baseline | 1,199 | 82 | 6 | 91% |
+| Disabled or medical parking enquiry - resolved | Post-portal impact | 1,043 | 81 | 6 | 85% |
+| Disabled or medical parking enquiry - resolved | Current ELT period | 161 | 7 | 1 | 86% |
+
+### Caveats
+
+- This is a proxy, not a direct portal transaction CSAT measure.
+- It depends on the selected RPP ask-service mapping.
+- Current ELT period response counts are smaller, especially for Disabled or medical parking enquiry services.
+- Use this for explanatory analysis and support-pathway stabilisation, not as the sole headline CSAT metric.
 ### Business question
 
 How satisfied were customers with support interactions related to portal-relevant services?
