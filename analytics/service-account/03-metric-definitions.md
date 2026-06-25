@@ -436,7 +436,7 @@ Accepted for the EOFY celebration pilot.
 
 ### Business question
 
-How satisfied were customers with portal-enabled activity and support?
+How satisfied were customers with portal-relevant services?
 
 ### Business definition
 
@@ -445,6 +445,10 @@ Percentage of valid survey responses with a satisfaction score of 4 or 5.
 ### Pilot source
 
 `datahub_datamart.customer_intelligence.vwcase`
+
+### Canonical descriptor source
+
+Use `datahub_refined.customer.vwcase` as the canonical descriptor source for CRM case fields.
 
 ### Required fields
 
@@ -477,7 +481,7 @@ Express as a percentage.
 
 ### Raw all-service CSAT baseline
 
-This baseline is used only as a sanity check. It includes all surveyed services, not only Service Account / portal-enabled services.
+This baseline is used only as a sanity check. It includes all surveyed services, not only Service Account / portal-relevant services.
 
 | Metric | Previous FY | Current FY |
 |---|---:|---:|
@@ -501,7 +505,7 @@ Pilot CSAT source validated.
 
 ### Business question
 
-Did satisfaction with portal-enabled activity improve year on year?
+How satisfied were customers with portal-relevant application services?
 
 ### Slide label
 
@@ -513,27 +517,63 @@ Customer satisfaction related to portal-enabled application activity.
 
 ### Working definition
 
-CSAT for survey responses in `customer_intelligence.vwcase` where the service is a portal-enabled service.
+CSAT for survey responses in `customer_intelligence.vwcase` where:
+
+- the service belongs to the Service Account / portal-relevant service-name cohort
+- the CRM `Record_Type` is `Apply`, where this field is available and validated
 
 ### Sources
 
 | Purpose | Source |
 |---|---|
 | CSAT responses | `datahub_datamart.customer_intelligence.vwcase` |
-| Portal service enablement | `datahub_datamart.customer_account_management.vwservice_enablement` |
+| Portal service cohort | `datahub_datamart.customer_account_management.vwservice_enablement` |
+| Canonical CRM case descriptors | `datahub_refined.customer.vwcase` |
 
-### Portal-enabled service logic
+### Portal-relevant service cohort logic
+
+Identify portal-relevant services from:
+
+`datahub_datamart.customer_account_management.vwservice_enablement`
+
+using:
+
+- `service_name`
+- `service_group`
+- `first_portal_enable_date`
+
+For the main EOFY comparison, use the service-name cohort to compare CSAT across reporting windows.
+
+Do not rely only on:
+
+    Survey_Completion_Date >= first_portal_enable_date
+
+as the main comparison rule.
+
+Instead, use the enablement date as a diagnostic dimension for pre/post analysis.
+
+### Service-name match
 
 Join `customer_intelligence.vwcase` to `vwservice_enablement` using normalised service name:
 
     LOWER(TRIM(vwcase.Service_Name)) =
     LOWER(TRIM(vwservice_enablement.service_name))
 
-Then filter to survey responses where:
+This text match should be checked for unmatched services.
 
-    vwcase.Survey_Completion_Date >= vwservice_enablement.first_portal_enable_date
+### Pre/post enablement diagnostic
+
+Use pre/post enablement analysis to answer a separate diagnostic question:
+
+> Did CSAT change after a service became portal-enabled?
+
+This is different from the main EOFY comparison question:
+
+> How satisfied were customers with the relevant service cohort this year compared with last year?
 
 ### Current draft result
+
+The earlier post-enablement-only query returned:
 
 | Metric | Previous FY | Current FY | Note |
 |---|---:|---:|---|
@@ -547,21 +587,23 @@ Current FY Activity CSAT:
 
 The Previous FY base is very small, with only 18 valid responses.
 
-Avoid direct YoY improvement framing for the celebration slide unless a more stable comparison baseline is agreed.
+Avoid direct YoY improvement framing for the celebration slide unless a more stable service-cohort comparison is agreed.
 
-Recommended slide wording:
+Recommended interim slide wording:
 
 > Strong satisfaction on portal-enabled activity: 76.5% CSAT from 888 current-year responses.
 
 ### Status
 
-Accepted as the pilot Activity CSAT logic, with caveat.
+Source and CSAT formula validated.
+
+Comparison method revised: use service-name cohort as the main comparison and pre/post enablement as diagnostic analysis.
 
 ## 9. Support CSAT
 
 ### Business question
 
-Did satisfaction with Service Account support improve year on year?
+How satisfied were customers with support interactions related to portal-relevant services?
 
 ### Slide label
 
@@ -569,41 +611,49 @@ CSAT on Support
 
 ### Business definition
 
-Customer satisfaction related to support interactions for portal-enabled services.
+Customer satisfaction related to support interactions.
 
 ### Working definition
 
-CSAT for support-style survey responses in `customer_intelligence.vwcase` where:
-
-- the service is portal-enabled
-- the survey completion date is on or after the service portal enablement date
-- the case is classified as a support interaction using an agreed support filter
+CSAT for survey responses in `customer_intelligence.vwcase` that can be confidently interpreted as support interactions for the Service Account / portal context.
 
 ### Sources
 
 | Purpose | Source |
 |---|---|
 | CSAT responses | `datahub_datamart.customer_intelligence.vwcase` |
-| Portal service enablement | `datahub_datamart.customer_account_management.vwservice_enablement` |
+| Portal service cohort | `datahub_datamart.customer_account_management.vwservice_enablement` |
+| Support case logic | `datahub_datamart.customer_account_management.vwsupport` |
+| Canonical CRM case descriptors | `datahub_refined.customer.vwcase` |
+
+### Record Type caution
+
+`Record_Type` is a CRM classification field.
+
+The silver-layer descriptor defines `Record_Type` as:
+
+    Defines the type of record associated with the service case, which can help in understanding the nature of the case.
+
+For analysis:
+
+| Record_Type | Working interpretation | Caution |
+|---|---|---|
+| `Ask` | Enquiry or request for information. | May indicate support-style demand, but should not be assumed to represent all Service Account support without validation. |
+| `Apply` | Application-related case. | Closest fit for portal-enabled application activity CSAT. |
+| `Report` | Customer lets Council know something needs attention. | Generally outside current Service Account headline scope unless linked to portal services. |
+| `Object` | Customer contests or objects to a decision. | Generally outside current Service Account headline scope unless explicitly included later. |
 
 ### Current support filter candidate
 
-For the pilot, the current support filter candidate is:
+`Record_Type = 'Ask'` is only a candidate support filter.
 
-    Record_Type = 'Ask'
+It should not be used as the final Support CSAT definition until validated against:
 
-This is a working assumption and requires validation.
-
-### Portal-enabled service logic
-
-Join `customer_intelligence.vwcase` to `vwservice_enablement` using normalised service name:
-
-    LOWER(TRIM(vwcase.Service_Name)) =
-    LOWER(TRIM(vwservice_enablement.service_name))
-
-Then filter to survey responses where:
-
-    vwcase.Survey_Completion_Date >= vwservice_enablement.first_portal_enable_date
+- service names
+- channels
+- `vwsupport` logic
+- support case patterns
+- business interpretation
 
 ### Channel segmentation
 
@@ -623,8 +673,7 @@ This classification requires validation against the actual `Channel` values in `
 
 Source confirmed.
 
-Support filter and results still require validation.
-
+Support CSAT filter and results still require validation.
 ## 10. Portal service enablement
 
 ### Business question
