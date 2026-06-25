@@ -40,12 +40,12 @@ Existing Power BI measures should be treated as the first source of truth for bu
 |---|---|---|---|---|
 | Customers | `vwaccount` | Yes | Confirmed | Uses `account_id`, `customer_portal`, and `first_account_portal_on_date` |
 | All accounts | `vwaccount` | Yes | Confirmed | Context metric only |
-| Activity | `vwpermit` plus status mapping logic | Partially | Mapping pending | Activity should be based on application workflow, not permit lifecycle workflow |
-| Support | `vwsupport` or `vwsupport_enriched` | Partially | Mapping pending | Need to reproduce `[Self-Service Support]` numerator |
-| Support per 100 activities | Support numerator plus Activity denominator | Partially | Mapping pending | Power BI logic captured as `Self-Service Support Rate` |
+| Activity | `vwpermit` plus status mapping logic | Partially | Accepted for celebration analysis | Activity is based on application workflow, not permit lifecycle workflow |
+| Support | `vwsupport` | Partially | Mapping pending | Preferred source for `[Self-Service Support]` numerator |
+| Support per 100 activities | `vwsupport` plus Activity denominator | Partially | Mapping pending | Power BI logic captured as `Self-Service Support Rate` |
 | Activity CSAT | To confirm | Pending | Mapping pending | Need Databricks equivalent of `vwcase_survey` and portal-enabled service logic |
 | Support CSAT | To confirm | Pending | Mapping pending | Need Databricks equivalent of `vwcase_survey` and `Support_logic` |
-| Support CSAT by channel type | To confirm | Pending | Mapping pending | Need support channel field for real-time vs async segmentation |
+| Support CSAT by channel type | `vwsupport` or survey-linked support source | Pending | Mapping pending | Need support channel field for real-time vs async segmentation |
 
 ## Field mapping notes
 
@@ -190,7 +190,7 @@ It is likely needed for:
 
 ### Possible uses
 
-`vwsupport` is a candidate source for reproducing `[Self-Service Support]`.
+`vwsupport` is the preferred Databricks source for reproducing the Power BI `[Self-Service Support]` numerator.
 
 It may support:
 
@@ -199,6 +199,29 @@ It may support:
 - Support by channel
 - Support after portal service enablement
 - Real-time vs async support segmentation
+
+### Current support mapping direction
+
+For the current support rate mapping, use this working direction:
+
+    Self-Service Support numerator =
+        distinct support cases from vwsupport
+        where support is related to portal-enabled services
+        and support occurred after service enablement
+
+The exact inclusion rules still need validation, but `vwsupport` is the preferred starting point because it contains:
+
+- `case_id`
+- `case_number`
+- `date_time_opened`
+- `date_time_closed`
+- `channel`
+- `account_id`
+- `service_group`
+- `ask_service_name`
+- `portal_service_name`
+- `portal_enable_date`
+- `is_after_service_enablement`
 
 ## `vwsupport_enriched`
 
@@ -216,8 +239,6 @@ It may support:
 | `sentence` | string | Text or sentence related to the record |
 | `handle_seconds` | decimal(9,2) | Duration in seconds taken to handle the event |
 | `portal_label` | int | Label for categorising the record within a portal context |
-
-### Possible uses
 
 ### Decision for EOFY celebration analysis
 
@@ -266,8 +287,8 @@ Confirmed visible tables/views:
 |---|---|---|
 | Customers | `vwaccount` | Base fields confirmed |
 | All accounts | `vwaccount` | Base fields confirmed |
-| Activity | `vwpermit` plus `vwpermit_statused` logic | Base table confirmed; application workflow mapping pending |
-| Support | `Self-Service Support Rate` | Numerator logic still needs Databricks mapping |
+| Activity | `vwpermit` plus `vwpermit_statused` logic | Base table confirmed; application workflow accepted for celebration analysis |
+| Support | `Self-Service Support Rate` | Use `vwsupport` as preferred numerator source; `vwsupport_enriched` excluded from KPI production |
 | Activity CSAT | `vwcase_survey`, `DimService` | Databricks source mapping pending |
 | Support CSAT | `vwcase_survey`, `Support_logic` | Databricks source mapping pending |
 | Real-time support CSAT | Support CSAT filtered by channel type | Databricks channel field mapping pending |
@@ -319,7 +340,7 @@ Observed or dashboard-aligned statuses include:
 
 For the EOFY celebration slide, Activity should be based on application workflow records.
 
-The likely core Activity candidates are:
+The accepted Activity statuses for the current celebration analysis are:
 
 - Draft
 - Submitted
@@ -327,7 +348,7 @@ The likely core Activity candidates are:
 - In Progress
 - Pending Payment
 
-Statuses such as Withdrawn and Declined may represent application outcomes, but should not automatically be included in the headline Activity KPI unless the Status Map or business owner confirms they belong.
+Statuses such as Withdrawn and Declined may represent application outcomes, but they are not included in the headline Activity KPI for the current celebration analysis.
 
 ### Permit workflow
 
@@ -342,9 +363,7 @@ Observed or dashboard-aligned statuses include:
 
 These statuses are useful for understanding permit outcomes and lifecycle state, but they should not be mixed into the headline portal Activity KPI without a clear rule.
 
-For the celebration slide, permit workflow statuses should be treated as contextual or secondary unless the Power BI `include_in_activity_kpi` flag confirms otherwise.
-
-### Activity status profile results
+For the celebration slide, permit workflow statuses are treated as contextual or secondary.
 
 ### Activity status mapping draft results
 
@@ -358,7 +377,7 @@ The draft mapping confirmed that the main application workflow activity records 
 | Submitted | `submitted / closed`, `submitted / draft`, `submitted / new`, `submitted / null` | Included |
 | Further information requested | `further information requested / further information requested`, `further information requested / closed` | Included |
 | In Progress | `in progress / in progress`, `in progress / closed`, `in progress / new` | Included |
-| Pending Payment | `pending payment / approved`, `pending payment / closed`, `pending payment / null` | Included in draft, requires confirmation |
+| Pending Payment | `pending payment / approved`, `pending payment / closed`, `pending payment / null` | Included |
 
 ### Activity draft mapping observations
 
@@ -370,34 +389,109 @@ The largest application workflow groups were draft application records, followed
 
 This suggests the Activity KPI can be structured around application workflow statuses rather than permit lifecycle statuses.
 
-However, the draft mapping is not final. It still needs validation against the Power BI Status Map or business owner decision.
+For the EOFY celebration analysis, Pending Payment is included because it represents an application that has progressed through the portal workflow.
 
-### Activity validation flags
+### Draft Activity YoY result
 
-The following issues need confirmation before finalising the Activity KPI:
+The first run of `sql/11_activity_yoy_application_workflow_draft.sql` produced a provisional YoY Activity result using the application workflow definition.
 
-1. Should `pending payment` be included in the headline Activity KPI?
-2. Should `withdrawn` and `declined` be excluded from the headline Activity KPI or counted as application outcomes only?
-3. How should records with `period_start = null` be handled?
-4. Should `case_status` modify inclusion where application status is already mapped?
-5. Should any specific categories be excluded from the headline Activity KPI?
+| Comparison period | Activity applications | Applications requiring confirmation |
+|---|---:|---:|
+| Previous FY | 2,209 | 13 |
+| Current FY | 3,766 | 636 |
 
-### Current Activity SQL direction
+Draft movement:
 
-The next SQL version should keep the explicit workflow split and use a derived field such as:
+    Activity applications increased from 2,209 to 3,766.
 
-    include_in_activity_kpi_draft
+    Increase = 1,557 applications
 
-until confirmed rules are available.
+    Growth = 70.5%
 
-The final production version should rename this field only after validation:
+### Accepted Activity assumption for EOFY celebration analysis
 
-    include_in_activity_kpi
+For the current EOFY celebration analysis, the application workflow Activity definition is accepted as good enough to proceed.
+
+The current Activity KPI includes:
+
+- Draft
+- Submitted
+- Further information requested
+- In Progress
+- Pending Payment
+
+The current Activity KPI excludes unless later confirmed:
+
+- Withdrawn
+- Declined
+- Issued
+- Extended
+- Renewed
+- Lapsed
+
+This means the current working Activity logic is:
+
+    Activity =
+        distinct applications
+        where application_status is one of:
+            draft
+            submitted
+            further information requested
+            in progress
+            pending payment
+
+This assumption should be documented as accepted for the celebration slide, but not yet treated as the final reusable reporting standard.
+
+The longer-term validation questions are tracked in:
+
+    13-business-validation-backlog.md
+
+## Support validation update
+
+Genie checked the schemas for `vwsupport` and `vwsupport_enriched` and confirmed that the two views represent different support data shapes.
+
+### Support table distinction
+
+| View | Best use | Notes |
+|---|---|---|
+| `vwsupport` | Candidate source for `[Self-Service Support]` numerator | Contains CRM-style support case fields, service fields, account fields, support channel, and service enablement logic |
+| `vwsupport_enriched` | Optional exploratory context only | Contains AI themes, source-system events, handle time, channel primary, and text enrichment fields |
+
+### Field mapping corrections
+
+The support validation SQL required these field corrections.
+
+| View | Original assumed field | Actual field / treatment |
+|---|---|---|
+| `vwsupport_enriched` | `channel` | `channel_primary` |
+| `vwsupport_enriched` | `service_name` | Not present; use `NULL AS service_name` if profiling only |
+| `vwsupport_enriched` | `service_group` | Not present; use `NULL AS service_group` if profiling only |
+| `vwsupport_enriched` | `case_id` | `source_id` |
+| `vwsupport_enriched` | `created_date` | `event_date` |
+| `vwsupport` | `service_name` | `ask_service_name` |
+| `vwsupport` | `created_date` | `date_time_opened` |
+
+### Support mapping implication
+
+For the EOFY celebration analysis, `vwsupport` is the source to use for reproducing the Power BI `[Self-Service Support]` numerator because it contains the case, service, account, channel, and portal enablement fields required for KPI logic.
+
+`vwsupport_enriched` should not be treated as the primary support numerator source because it does not preserve the same CRM case and service structure.
+
+### Current support validation decision
+
+For the current support rate mapping, use this working direction:
+
+    Self-Service Support numerator =
+        distinct support cases from vwsupport
+        where support is related to portal-enabled services
+        and support occurred after service enablement
+
+`vwsupport_enriched` has been reviewed and excluded from EOFY headline KPI production. It may still be useful for exploratory theme analysis, but support KPI mapping should proceed from `vwsupport`.
 
 ## Remaining Databricks mapping questions
 
 1. Can `vwpermit_statused[include_in_activity_kpi]` be recreated from `vwpermit` using an explicit status mapping where the headline Activity KPI is based on application workflow activity rather than permit lifecycle status?
-2. Which Databricks table contains the equivalent of `Self-Service Support`?
+2. What exact `vwsupport` logic reproduces `[Self-Service Support]`?
 3. Which Databricks table contains case survey responses equivalent to `vwcase_survey`?
 4. Which Databricks fields correspond to:
    - `Survey_Completion_Date`
@@ -413,6 +507,8 @@ The final production version should rename this field only after validation:
    - Email
    - Web
    - Others
+
+Note: `vwsupport_enriched` has been reviewed and excluded from EOFY headline KPI production. It may still be useful for exploratory theme analysis, but support KPI mapping should proceed from `vwsupport`.
 
 ## Channel segmentation rule to validate
 
@@ -454,9 +550,12 @@ This order keeps the EOFY celebration slide focused on the five headline story p
 - Where is Support CSAT stored?
 - What is the positive CSAT response logic?
 - Should support per 100 activities use all support, Service Account support only, or CX-managed support only?
-- Which application workflow statuses should be included in the headline Activity KPI?
+- Which application workflow statuses should be included in the formal reusable Activity KPI?
 - Should Withdrawn and Declined be counted as activity, outcomes, or exclusions?
-- Should Pending Payment be counted as activity without further business confirmation?
+- Should Pending Payment remain included in the formal reusable Activity KPI?
+- What exact `vwsupport` logic reproduces `[Self-Service Support]`?
+- What Databricks table reproduces `vwcase_survey`?
+- Which Databricks field should be used for support channel segmentation?
 
 ## Initial conclusion
 
@@ -467,58 +566,27 @@ Confirmed:
 - Customers can be reproduced from `vwaccount`.
 - All accounts can be reproduced from `vwaccount`.
 - Activity can start from `vwpermit`.
-- Support can likely start from `vwsupport` or `vwsupport_enriched`.
+- For the current EOFY celebration analysis, Activity is accepted as application workflow activity.
+- Support should use `vwsupport` as the preferred numerator source.
+- `vwsupport_enriched` is excluded from EOFY headline KPI production.
 - Portal service enablement can likely use `vwservice_enablement`.
 
 Still pending:
 
-- Recreating the Power BI `vwpermit_statused` logic.
-- Confirming the final Activity KPI inclusion rules.
-- Mapping the `[Self-Service Support]` numerator.
+- Recreating the Power BI `vwpermit_statused` logic as a reusable reporting standard.
+- Mapping the exact `[Self-Service Support]` numerator logic from `vwsupport`.
 - Finding the Databricks equivalent for `vwcase_survey`.
 - Recreating `DimService` and `Support_logic` logic in Databricks.
 - Confirming the support channel field for real-time vs async CSAT segmentation.
 
-
-### Accepted Activity assumption for EOFY celebration analysis
-
-For the current EOFY celebration analysis, the application workflow Activity definition is accepted as good enough to proceed.
-
-The current Activity KPI includes:
-
-- Draft
-- Submitted
-- Further information requested
-- In Progress
-- Pending Payment
-
-The current Activity KPI excludes unless later confirmed:
-
-- Withdrawn
-- Declined
-- Issued
-- Extended
-- Renewed
-- Lapsed
-
-This means the current working Activity logic is:
-
-    Activity =
-        distinct applications
-        where application_status is one of:
-            draft
-            submitted
-            further information requested
-            in progress
-            pending payment
-
-This assumption should be documented as accepted for the celebration slide, but not yet treated as the final reusable reporting standard.
-
-The longer-term validation questions are tracked in:
-
-    13-business-validation-backlog.md
 Current Activity direction:
 
     Activity should be application workflow activity.
 
-This should be treated as the working definition until confirmed against the Power BI Status Map or business owner decision.
+This is accepted for the EOFY celebration analysis.
+
+Current Support direction:
+
+    Support should use vwsupport.
+
+`vwsupport_enriched` should be treated as optional exploratory context only, not a source for headline KPI production.
