@@ -219,13 +219,25 @@ It may support:
 
 ### Possible uses
 
-`vwsupport_enriched` may support:
+### Decision for EOFY celebration analysis
 
-- AI-classified support themes
-- Channel-level support demand
-- Qualitative support drivers
-- Support effort analysis
-- Potential channel mapping if `channel_primary` aligns to Power BI channel values
+`vwsupport_enriched` was reviewed during schema validation but is not used in the EOFY celebration metric calculations.
+
+It appears to represent an enriched interaction / event layer designed for qualitative or AI-assisted analysis, rather than a governed source for support case counting.
+
+For the current analysis, support metrics should use `vwsupport` as the preferred Databricks source because it contains the case, service, account, channel, and portal enablement fields required for KPI logic.
+
+`vwsupport_enriched` should be treated as optional exploratory context only.
+
+It should not be used as a denominator or numerator for headline metrics unless a future business rule explicitly requires event-level enriched interactions.
+
+### Role going forward
+
+| View | Role going forward | Use in EOFY celebration metrics |
+|---|---|---|
+| `vwsupport` | Source of truth candidate for support cases / support demand | Yes |
+| `vwsupport_enriched` | Legacy exploratory enrichment / qualitative driver analysis | No |
+| Agentic analysis over source tables | Preferred future direction for insight generation | Yes, for synthesis and investigation, not base KPI counts |
 
 ## Power BI to Databricks mapping gaps
 
