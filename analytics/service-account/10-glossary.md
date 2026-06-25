@@ -1,34 +1,63 @@
+Here is a refined full replacement for `analytics/service-account/10-glossary.md`.
+
+```markdown
 # Service Account / Portal CX Glossary
 
 This glossary documents the working language for the Service Account EOFY celebration analysis.
 
 It is adapted from the broader Portal CX Dashboard glossary and refined for the one-slide celebration use case.
 
+The glossary has two purposes:
+
+1. Keep slide language simple and audience-friendly.
+2. Keep internal metric language precise enough to support SQL, Power BI, Databricks validation, and future reuse.
+
 ## Dashboard context
 
-The Service Account celebration analysis is part of the broader Portal CX Dashboard analytics domain.
+The Service Account celebration analysis sits within the broader Portal CX Dashboard analytics domain.
 
 The broader dashboard helps understand customer experience across:
 
 - portal adoption
-- portal accounts
-- portal transactions and activity
+- Service Account / portal accounts
+- portal-enabled application activity
 - support demand
-- feedback
-- web behaviour
+- feedback and CSAT
+- channel behaviour
+- service migration and capability milestones
 - comparison across reporting periods
-- data quality and definitions
+- data quality and metric definitions
 
 ## Celebration slide language
 
-| Slide term | Working meaning |
+For the EOFY celebration slide, use simple language.
+
+| Slide term | Internal definition |
 |---|---|
 | Customers | Service Account / portal sign-ups |
-| Activity | Portal transactions or digital self-service activity |
-| Support | Portal support demand |
-| CSAT on Activity | Customer satisfaction related to portal-enabled activity |
-| CSAT on Support | Customer satisfaction related to support provided by CX |
+| Activity | Application workflow activity through the portal |
+| Support | Portal support demand relative to Activity |
+| CSAT on Activity | Customer satisfaction related to portal-enabled application activity |
+| CSAT on Support | Customer satisfaction related to support interactions |
 | All accounts | Total CRM account base, used as a context metric only |
+
+Important distinction:
+
+- `Customers` does not mean all CRM accounts.
+- `Customers` means Service Account / portal sign-ups.
+- `All accounts` means the total CRM account base and is used only for context.
+- `Activity` means application workflow activity, not permit lifecycle activity.
+- `Support` should be shown as a rate, not as raw support volume.
+
+## Celebration story frame
+
+The one-slide EOFY celebration analysis uses this story frame:
+
+1. More customers
+2. More self-service activity
+3. Less support demand relative to activity
+4. Better activity CSAT
+5. Better support CSAT
 
 ## Customers
 
@@ -38,7 +67,7 @@ Customers
 
 ### Internal definition
 
-Customers means Service Account sign-ups.
+Customers means Service Account / portal sign-ups.
 
 This is a subset of all CRM accounts.
 
@@ -49,11 +78,21 @@ The Power BI measure `Account Sign-Ups` counts distinct `vwaccount[account_id]` 
 - `vwaccount[customer_portal] = TRUE()`
 - `vwaccount[first_account_portal_on_date]` is within the selected reporting window
 
+### Databricks source
+
+`datahub_datamart.customer_account_management.vwaccount`
+
+### Key fields
+
+| Concept | Field |
+|---|---|
+| Account identifier | `account_id` |
+| Portal sign-up indicator | `customer_portal` |
+| Portal sign-up date | `first_account_portal_on_date` |
+
 ### Important distinction
 
-`Customers` on the celebration slide is not the same as `All Accounts`.
-
-`All Accounts` means all CRM accounts and should be used only as a context metric.
+`Customers` on the celebration slide is not the same as `All accounts`.
 
 ## All accounts
 
@@ -67,7 +106,11 @@ Total distinct CRM accounts.
 
 ### Confirmed Power BI logic
 
-The Power BI measure `All Accounts` counts distinct `vwaccount[account_id]` and removes date filters.
+The Power BI measure `All Accounts` counts distinct `vwaccount[account_id]` and removes reporting date filters.
+
+### Databricks source
+
+`datahub_datamart.customer_account_management.vwaccount`
 
 ### Use in celebration analysis
 
@@ -77,119 +120,555 @@ Example:
 
 Service Account sign-ups represent approximately 5% of all CRM accounts to date.
 
+Do not use `All accounts` as the headline customer metric.
+
 ## Portal account
 
 An account that has been onboarded or enabled for portal use.
 
-For the celebration analysis, this is represented by the customer portal / Service Account sign-up logic.
+For the celebration analysis, portal account adoption is represented by the Service Account / portal sign-up logic.
+
+Primary date field:
+
+`vwaccount[first_account_portal_on_date]`
 
 ## New onboarded account
 
 An account newly onboarded during the selected reporting period.
 
-For this analysis, this likely aligns to `first_account_portal_on_date` within the selected reporting window.
+For this analysis, this aligns to:
+
+`first_account_portal_on_date` within the selected reporting window.
 
 ## Existing onboarded account
 
 An account that was already onboarded before the selected reporting period.
 
-This may be used to split the Customers tile into:
+This may be useful for customer segmentation, but it is not currently the headline definition of `Customers`.
 
-- New accounts
-- Existing accounts onboarded
+## Activity
 
-## Portal transaction / activity
+### Slide label
 
-A customer application, permit, or related activity completed or progressed through the portal, subject to eligibility rules.
+Activity
 
-For the celebration analysis, this supports the Activity tile.
+### Internal definition
+
+Application workflow activity through the portal.
+
+Activity is not permit lifecycle activity.
+
+### Included application workflow statuses
+
+For the EOFY celebration pilot, Activity includes applications with these statuses:
+
+| Included status |
+|---|
+| Draft |
+| Submitted |
+| Further information requested |
+| In Progress |
+| Pending Payment |
+
+### Excluded statuses unless later confirmed
+
+| Excluded status |
+|---|
+| Withdrawn |
+| Declined |
+| Issued |
+| Extended |
+| Renewed |
+| Lapsed |
+
+### Databricks source
+
+`datahub_datamart.customer_account_management.vwpermit`
+
+### Key fields
+
+| Concept | Field |
+|---|---|
+| Application identifier | `application_id` |
+| Activity date | `period_start` |
+| Application workflow status | `application_status` |
+
+### Current pilot meaning
+
+For the EOFY celebration slide:
+
+`Activity = Digital Self-Service Activity`
+
+In Databricks, this is currently reproduced using accepted application workflow statuses because `vwpermit_statused` appears to be a Power BI-derived layer rather than a native Databricks view.
+
+## Portal transaction
+
+A broad phrase that may refer to customer activity through the portal.
+
+For this pilot, prefer the more precise term `Activity` and define it as application workflow activity.
+
+Avoid using `portal transaction` as a standalone metric unless the transaction grain and status rules are confirmed.
 
 ## Digital self-service activity
 
 Digital activity completed or progressed by customers through the portal.
 
-The exact inclusion rule needs to be validated against the Power BI measures and the Databricks tables.
+For this pilot, this means distinct application workflow records using the accepted Activity status logic.
 
-Likely source tables:
+Likely source:
 
-- `vwpermit`
-- `vwservice_enablement`
+`datahub_datamart.customer_account_management.vwpermit`
+
+## Application workflow activity
+
+Application workflow activity refers to customer progress through the application process before final permit lifecycle outcomes.
+
+For this pilot, application workflow activity includes:
+
+- Draft
+- Submitted
+- Further information requested
+- In Progress
+- Pending Payment
+
+This is the preferred internal definition for the slide term `Activity`.
+
+## Permit lifecycle activity
+
+Permit lifecycle activity refers to downstream permit outcomes or lifecycle states.
+
+Examples include:
+
+- Issued
+- Extended
+- Renewed
+- Lapsed
+
+These are excluded from the current Activity KPI unless later business validation confirms they should be included.
 
 ## Service group
 
-High-level grouping used to explain what is driving activity.
+A high-level grouping used to explain what is driving activity, support, or CSAT.
 
-Examples from the celebration slide include:
+Examples include:
 
-- Parking permits
-- Construction permits
-- Business permits
-- Community permits
+- Business
+- Construction
+- Community
+- Parking
+
+Service group labels may vary by source table and should be checked before joining or grouping across schemas.
+
+## Service name
+
+The specific service associated with an account, case, support interaction, survey response, or permit activity.
+
+Service name is important because it is currently used to connect CSAT responses to portal-relevant services.
+
+For CSAT analysis, service names should be matched using normalised text logic unless a stronger key is available:
+
+    LOWER(TRIM(service_name))
+
+## Portal service enablement
+
+The service-level record of when a service became available through the portal.
+
+### Databricks source
+
+`datahub_datamart.customer_account_management.vwservice_enablement`
+
+### Key fields
+
+| Field | Meaning |
+|---|---|
+| `service_key` | Unique identifier for each service. |
+| `service_group` | Broader group for the service. |
+| `service_name` | Specific service name. |
+| `first_portal_enable_date` | Date when the service was first made available on the portal. |
+
+### Use in analysis
+
+Use `vwservice_enablement` to:
+
+- identify portal-enabled services
+- define the portal-relevant service cohort
+- filter or segment CSAT by service
+- support pre/post enablement diagnostics
+- avoid manually guessing which services belong in the portal scope
+
+## Support
+
+### Slide label
+
+Support
+
+### Internal definition
+
+Portal support demand relative to Activity.
+
+Support should be shown as a rate rather than raw volume.
+
+### Preferred KPI
+
+Support per 100 activities.
+
+### Formula
+
+    Support per 100 activities =
+      distinct support cases / distinct activity applications * 100
 
 ## Support case
 
-A customer support interaction or case related to portal usage.
+A support case is a customer support interaction or case related to portal use, service access, service understanding, or getting unstuck.
 
-For the celebration analysis, support demand should be measured relative to activity using support cases per 100 transactions.
+For headline support counting in this pilot, use `vwsupport`.
+
+### Databricks source
+
+`datahub_datamart.customer_account_management.vwsupport`
+
+### Key fields
+
+| Concept | Field |
+|---|---|
+| Support case identifier | `case_id` |
+| Case number | `case_number` |
+| Opened date/time | `date_time_opened` |
+| Closed date/time | `date_time_closed` |
+| Channel | `channel` |
+| Account identifier | `account_id` |
+| Service group | `service_group` |
+| Ask service name | `ask_service_name` |
+| Portal service name | `portal_service_name` |
+| Portal enablement date | `portal_enable_date` |
+| After service enablement flag | `is_after_service_enablement` |
+
+### Pilot support numerator
+
+Distinct `case_id` where:
+
+    is_after_service_enablement = TRUE
 
 ## Portal support
 
-Support case considered relevant to portal activity based on service, theme, enablement, or account linkage.
+Support considered relevant to portal activity based on service, enablement, or account linkage.
 
-The exact eligibility rule needs to be validated against Power BI measures.
+For the pilot, the preferred support source is:
 
-Likely source tables:
+`datahub_datamart.customer_account_management.vwsupport`
 
-- `vwsupport`
-- `vwsupport_enriched`
+Do not use `customer_account_management.vwsupport_enriched` for headline support KPI production.
+
+## Support enriched view
+
+`customer_account_management.vwsupport_enriched` is an enriched interaction or event-style layer.
+
+For the EOFY celebration pilot:
+
+- do not use it for headline KPI production
+- do not use it as the support numerator
+- do not use it for CSAT calculation
+- treat it as optional exploratory context only
+
+## Channel
+
+Channel describes the source or channel through which a case, support interaction, or customer contact was initiated.
+
+The canonical silver-layer descriptor for `Channel` is:
+
+> Identifies the communication channel through which the service case was initiated, such as phone, email, or online portal.
+
+Use Channel for:
+
+- channel mix analysis
+- support segmentation
+- real-time vs async classification
+- CSAT by channel diagnostics
+
+Canonical CRM case descriptors should align to `datahub_refined.customer.vwcase`. :contentReference[oaicite:0]{index=0}
 
 ## Channel type
 
-Grouping of support channels into real-time or asynchronous support.
+A derived grouping of channels into real-time or asynchronous support.
 
 ### Real-time support
 
-Real-time or near-real-time support, such as phone, chat, or counter.
+Real-time or near-real-time support, such as:
+
+- Phone
+- Live Chat
+- Face-to-Face
 
 ### Async support
 
-Non-real-time support, such as email or web form.
+Non-real-time support, such as:
+
+- Email
+- Web
+- Web Messaging, if treated asynchronously
+- other non-real-time channels
+
+### Current working classification
+
+    CASE
+      WHEN Channel IN ('Phone', 'Live Chat', 'Face-to-Face')
+        THEN 'In Real-time'
+      ELSE 'Async'
+    END AS channel_type
+
+This classification should be validated against actual channel values before using in final reporting.
 
 ## CSAT
 
 Customer Satisfaction score.
 
-For the celebration analysis, CSAT appears in two forms:
+For this pilot, CSAT is based on `Satisfaction_Score_5`.
 
-- CSAT on Activity
-- CSAT on Support
+### Pilot CSAT source
 
-The exact source and positive-response logic need to be confirmed from the Power BI measures and feedback tables.
+`datahub_datamart.customer_intelligence.vwcase`
+
+### Canonical field descriptor
+
+The silver-layer descriptor for `Satisfaction_Score_5` is:
+
+> Captures the overall satisfaction score from the customer, which is vital for evaluating service performance.
+
+### CSAT formula
+
+    CSAT =
+      positive valid responses / total valid responses
+
+Where:
+
+    positive valid responses =
+      Satisfaction_Score_5 IN (4, 5)
+
+And:
+
+    total valid responses =
+      Satisfaction_Score_5 IS NOT NULL
+
+Express CSAT as a percentage.
+
+## CSAT on Activity
+
+### Slide label
+
+CSAT on Activity
+
+### Internal definition
+
+Customer satisfaction related to portal-enabled application activity.
+
+For the pilot, this is best represented by survey responses for the portal-relevant service-name cohort, especially where `Record_Type = 'Apply'`.
+
+### Current validated result
+
+Current FY portal-enabled Activity CSAT:
+
+    76.5% from 888 valid responses
+
+### Interpretation caution
+
+The previous FY response base for portal-enabled Activity CSAT is very small.
+
+Avoid direct YoY improvement framing unless a stable comparison baseline is agreed.
+
+Recommended slide wording:
+
+> Strong satisfaction on portal-enabled activity: 76.5% CSAT from 888 current-year responses.
+
+## CSAT on Support
+
+### Slide label
+
+CSAT on Support
+
+### Internal definition
+
+Customer satisfaction related to support interactions.
+
+For this pilot, Support CSAT still requires validation.
+
+Important caution:
+
+`Record_Type = 'Ask'` may indicate enquiry-style cases, but it should not be treated as the full Support CSAT definition without service and channel validation.
+
+## CSAT comparison principle
+
+For the EOFY Service Account / Portal CX pilot, CSAT should be compared by a portal-relevant service-name cohort, not only by portal enablement date.
+
+The preferred pilot framing is:
+
+1. Identify the relevant Service Account / portal service names using `vwservice_enablement`.
+2. Compare CSAT for those services across selected reporting windows.
+3. Use pre/post portal enablement analysis as a diagnostic layer to understand whether satisfaction changed after a service became portal-enabled.
+
+This separates two different questions:
+
+| Question | Purpose |
+|---|---|
+| How satisfied were customers with the relevant service cohort this year compared with last year? | Main EOFY comparison. |
+| Did CSAT change after a service became portal-enabled? | Diagnostic / impact analysis. |
+
+## CRM case data
+
+Canonical CRM case field descriptions should align to the silver-layer view:
+
+`datahub_refined.customer.vwcase`
+
+This view is treated as the descriptor source for common case fields that may appear in downstream curated datamart views, including:
+
+- `datahub_datamart.customer_account_management.vwcase`
+- `datahub_datamart.customer_intelligence.vwcase`
+
+For the EOFY Service Account / Portal CX pilot:
+
+| Purpose | Source |
+|---|---|
+| Canonical case field descriptions | `datahub_refined.customer.vwcase` |
+| CSAT calculation | `datahub_datamart.customer_intelligence.vwcase` |
+| Operational support case counting | `datahub_datamart.customer_account_management.vwsupport` |
+
+## Common CRM case fields
+
+| Field | Silver-layer description | Use in Service Account analysis |
+|---|---|---|
+| `Case_Id` | A unique identifier assigned to each service case, facilitating easy tracking and reference. | Useful for case-level joins and validation where available. |
+| `Case_Number` | An additional reference number for the service case, often used for customer communication and case management. | Used as the visible case reference in CSAT analysis. |
+| `Date_Time_Opened` | Records the exact date and time when the service case was initiated, providing a timeline for case management. | Used for operational case timing where available. |
+| `Date_Time_Closed` | Indicates the date and time when the service case was resolved and officially closed, allowing for analysis of case duration. | Used for case duration and closure timing where available. |
+| `Status` | Describes the current state of the service case, such as open, in progress, or closed, which is essential for monitoring case flow. | Useful for operational case flow analysis. |
+| `Milestone_Status` | Indicates key milestones achieved during the case handling process, helping to assess progress against predefined goals. | Useful for service level and milestone analysis. |
+| `Case_Closure_Reason` | Captures the reason for closing the case, providing insights into case outcomes and potential areas for improvement. | Useful for outcome analysis and diagnostic review. |
+| `Channel` | Identifies the communication channel through which the service case was initiated, such as phone, email, or online portal. | Used for channel mix analysis and real-time vs async segmentation. |
+| `Subject` | Summarizes the main topic or issue of the service case, aiding in categorization and analysis of case types. | Useful for diagnostics, not a headline KPI field. |
+| `Record_Type` | Defines the type of record associated with the service case, which can help in understanding the nature of the case. | Used as a case segmentation field, not as a standalone metric definition. |
+| `Case_Type` | Categorizes the service case into specific types, allowing for better analysis of case trends and service performance. | Useful for deeper case trend analysis if present in downstream views. |
+| `Suburb` | Specifies the suburb related to the service case, which can be useful for demographic and regional analysis. | Not used in headline metrics; useful for later geographic analysis. |
+| `Service_Name` | Names the specific service associated with the case, helping to identify service performance and trends. | Used to match CSAT responses to Service Account / portal-relevant services. |
+| `Service_Group` | Categorizes the service into broader groups, facilitating analysis of service delivery across different areas. | Used to group and validate portal-relevant services. |
+| `Service_Theme` | Describes the overarching theme of the service provided, which can help in understanding service focus areas. | Useful for higher-level service grouping if present downstream. |
+| `Time_Taken_Working_Days` | Calculates the total working days taken to resolve the case, providing insights into case efficiency. | Useful for operational diagnostics. |
+| `Complaints_Flag` | Indicates whether the service case is associated with a complaint, which can help prioritize case handling. | Useful for excluding or segmenting complaints if needed. |
+| `Complaints_Category` | Categorizes the complaint type if applicable, aiding in analysis of complaint trends and service improvements. | Useful for complaints diagnostics, not current headline scope. |
+| `Satisfaction_Score_5` | Captures the overall satisfaction score from the customer, which is vital for evaluating service performance. | Primary field for CSAT calculation. |
+| `Net_Ease_Score_5` | Measures the ease of service experience for the customer, providing insights into service efficiency. | Optional supporting CX metric. |
+| `Timeliness_Score_5` | Indicates how timely the service was delivered, helping to assess adherence to service level agreements. | Optional supporting CX metric. |
+| `Number_of_Contacts_5` | Records the number of contacts made regarding the service case, which can indicate complexity and engagement level. | Optional effort / complexity signal. |
+| `Improvement_Feedback` | Gathers feedback from customers on potential improvements, which is essential for continuous service enhancement. | Useful for qualitative diagnostics, not stored in repo if sensitive. |
+| `Survey_Feedback` | Collects responses from customers regarding their experience, providing valuable insights for service evaluation. | Useful for qualitative diagnostics, not stored in repo if sensitive. |
+| `Survey_Mailout_Date` | Records the date when the survey was sent to the customer, which is important for tracking feedback timelines. | Useful for survey timing validation. |
+| `Survey_Completion_Date` | Indicates when the customer completed the survey, helping to analyze response rates and feedback timing. | Primary date field for CSAT reporting windows. |
+| `Survey_Completion_Boolean` | Marks whether the survey was completed, which is useful for understanding engagement levels. | Useful for response eligibility and completion analysis. |
+| `Eligible_For_Survey` | Indicates if the service case is eligible for a survey, helping to manage customer feedback collection. | Useful for response-rate diagnostics. |
+| `Account_Id` | A unique identifier for the account associated with the service case, facilitating account management. | Useful for account-level linkage where appropriate. |
+| `Salesforce_URL` | URL of the Salesforce case. | Useful for validation only; do not store case-level URLs in repo outputs. |
+| `SourceSystem` | Identifies the system from which the service case data originated, which can be useful for data integration and analysis. | Useful for lineage and source validation. |
+
+## CRM Record Type
+
+`Record_Type` should be treated as a CRM classification field first, not a metric definition.
+
+The silver-layer descriptor defines `Record_Type` as:
+
+> Defines the type of record associated with the service case, which can help in understanding the nature of the case.
+
+### Working interpretation
+
+| Record_Type | Working interpretation | Analysis caution |
+|---|---|---|
+| `Ask` | Enquiry or request for information. | May indicate support-style demand, but should not be assumed to represent all Service Account support without validation. |
+| `Apply` | Application-related case. | Closest fit for portal-enabled application activity CSAT. |
+| `Report` | Customer lets Council know something needs attention. | Generally outside the current Service Account application workflow scope unless linked to a portal-enabled service. |
+| `Object` | Customer contests or objects to a decision. | Generally outside the current Service Account activity/support headline scope unless explicitly included later. |
 
 ## Portal eligibility
 
 The rule deciding whether an account, service, application, support case, or feedback record belongs in portal reporting.
 
-This is one of the most important rules to validate before finalising the EOFY analysis.
+For this pilot, portal eligibility is defined differently by metric:
+
+| Metric area | Portal eligibility logic |
+|---|---|
+| Customers | `vwaccount.customer_portal = TRUE` and `first_account_portal_on_date` in reporting window |
+| Activity | Application workflow activity in accepted statuses |
+| Support | `vwsupport.is_after_service_enablement = TRUE` |
+| Activity CSAT | CSAT responses for portal-relevant services, identified through `vwservice_enablement` |
+| Support CSAT | Still to validate |
 
 ## Date logic
 
 The agreed decision about which date field controls selected-period reporting.
 
-For Customers / Service Account sign-ups, the confirmed date field is:
+| Metric area | Date field |
+|---|---|
+| Customers | `vwaccount.first_account_portal_on_date` |
+| Activity | `vwpermit.period_start` |
+| Support | `vwsupport.date_time_opened` |
+| CSAT | `customer_intelligence.vwcase.Survey_Completion_Date` |
+| Portal service enablement | `vwservice_enablement.first_portal_enable_date` |
 
-`vwaccount[first_account_portal_on_date]`
+Use half-open date windows in SQL:
 
-Other metrics still need their date logic validated.
+    date_field >= start_date
+    AND date_field < end_date
+
+For FY2025:
+
+    date_field >= DATE('2024-07-01')
+    AND date_field < DATE('2025-07-01')
+
+## Capability milestone
+
+A material service, channel, platform, migration, or operating model change that may affect metric interpretation.
+
+Examples include:
+
+- Salesforce introduction
+- Genesys go-live
+- website platform upgrade
+- digital assistant launch
+- Service Account releases
+- residential parking migration
+- new permit types added to the portal
+
+Milestones are documented in:
+
+`14-capability-milestones.md`
+
+Use milestones to explain structural changes in:
+
+- customer sign-ups
+- activity volume
+- support demand
+- CSAT response volume
+- channel mix
+- comparability across reporting periods
 
 ## Source of truth
 
 The authoritative field, table, or Power BI measure used for a metric definition.
 
-For this work, existing Power BI measures should be treated as the first source of truth for business logic, then translated into reusable SQL templates where appropriate.
+For this work:
+
+- Existing Power BI measures are the first source of truth for business logic where available.
+- Curated Databricks views are used to reproduce and scale the logic.
+- `datahub_refined.customer.vwcase` is used as the canonical descriptor source for common CRM case fields.
+- The GitHub repo stores reusable logic, assumptions, caveats, non-sensitive synthesis, and lessons learned.
 
 ## Data quality warning
 
 A note highlighting missing mappings, low response counts, incomplete data, or known limitations.
 
-Any EOFY celebration analysis should keep data quality warnings outside the slide but available in the supporting notes.
+Any EOFY celebration analysis should keep data quality warnings outside the slide but available in supporting notes.
+
+Current known warnings:
+
+- Activity CSAT Previous FY has a very small response base.
+- Support CSAT filter is not yet validated.
+- Service name joins use normalised text matching and should be checked for unmatched services.
+- Capability milestones may explain major changes in activity, support, and CSAT volumes.
+- No raw organisational data or customer-level data should be stored in the repository.
+```
