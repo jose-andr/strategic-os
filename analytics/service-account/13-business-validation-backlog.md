@@ -224,16 +224,46 @@ Recommended business framing:
 
 ### Accepted for current celebration analysis
 
-Support is treated as a rate-based KPI:
+For the EOFY celebration analysis, the support numerator is accepted as:
 
-    Support = Self-Service Support Rate
+    Self-Service Support =
+        distinct support cases from vwsupport
+        where is_after_service_enablement = true
 
-    Self-Service Support Rate =
-        Self-Service Support / Self-Service Activity * 100
+The support rate is calculated as:
 
-The support rate is preferred over raw support volume for the slide because it supports the story:
+    Support Rate =
+        Self-Service Support / Activity * 100
 
-    Less support demand relative to activity
+Where Activity means:
+
+    application workflow Activity
+
+The draft result supports the celebration story because Activity grew faster than support demand.
+
+| Metric | Previous FY | Current FY | Movement |
+|---|---:|---:|---:|
+| Activity applications | 2,209 | 3,766 | +70.5% |
+| Support cases | 10,976 | 15,413 | +40.4% |
+| Support per 100 activities | 496.9 | 409.3 | -17.6% |
+
+This means support demand decreased relative to activity.
+
+For the celebration slide, this is good enough to proceed.
+
+### Still to validate for reusable reporting
+
+The exact reusable support numerator should still be validated with business representatives or data owners.
+
+Questions to validate:
+
+1. Should support be counted as distinct `case_id` from `vwsupport`?
+2. Should `is_after_service_enablement = true` be the main portal support eligibility rule?
+3. Should support be limited to Service Account customers only?
+4. Should support be limited to specific service groups or portal service names?
+5. Should all support channels be included?
+6. Should internal staff support interactions be excluded?
+7. Should resolved, expert enquiry, and assisted support types be grouped or separated?
 
 ### Still to validate with business representatives or data owners
 
