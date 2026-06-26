@@ -784,3 +784,69 @@ Current CSAT direction:
     CSAT should use customer_intelligence.vwcase and/or customer_intelligence.vwsurvey_feedback.
 
 `vwsupport_enriched` should be treated as optional exploratory context only, not a source for headline KPI production.
+
+## CSAT and CRM case validation
+
+### Validated CSAT source
+
+For the EOFY Service Account / Portal CX pilot, use:
+
+`datahub_datamart.customer_intelligence.vwcase`
+
+This view contains the fields required for pilot CSAT analysis:
+
+| Concept | Field |
+|---|---|
+| Survey completion date | `Survey_Completion_Date` |
+| Satisfaction score | `Satisfaction_Score_5` |
+| Service name | `Service_Name` |
+| Service group | `Service_Group` |
+| Channel | `Channel` |
+| Case reference | `Case_Number` |
+| Record type | `Record_Type` |
+
+### Canonical CRM case descriptor source
+
+Use the silver-layer view as the canonical descriptor source for common CRM case fields:
+
+`datahub_refined.customer.vwcase`
+
+This helps keep wording aligned across downstream datamart views.
+
+### Portal service enablement bridge
+
+Use:
+
+`datahub_datamart.customer_account_management.vwservice_enablement`
+
+for portal service cohort logic.
+
+Validated fields:
+
+| Field | Use |
+|---|---|
+| `service_key` | Optional service identifier |
+| `service_group` | Portal service grouping |
+| `service_name` | Service-name cohort and CSAT matching |
+| `first_portal_enable_date` | Pre/post enablement diagnostic date |
+
+### Important validation findings
+
+| Finding | Implication |
+|---|---|
+| `customer_intelligence.vwcase` does not contain `is_after_enablement`. | Derive portal relevance using `vwservice_enablement`, not an after-enablement flag. |
+| Direct portal-enabled Activity CSAT is available for `Apply` services. | Use as current-state strength metric. |
+| Previous FY Activity CSAT has only 18 valid responses. | Do not frame as YoY improvement. |
+| Most portal-enabled services have no usable pre-enable CSAT base. | Do not use pre/post enablement CSAT as headline impact evidence. |
+| Parking dominates the current Activity CSAT response base. | Interpret Activity CSAT in context of Residential Parking migration. |
+| `Record_Type` is a CRM classification field. | Do not assume `Ask = Support CSAT` without validation. |
+
+### Current CSAT decision
+
+Use direct Activity CSAT as a current-state strength metric:
+
+> Portal-enabled activity CSAT is strong at 76.5% from 888 current-year responses.
+
+Use RPP Support CSAT proxy for support-pathway stabilisation analysis:
+
+> Residential Parking expert support is showing signs of stabilisation, with proxy CSAT recovering from 69% post-portal to 78% in the current ELT period.
