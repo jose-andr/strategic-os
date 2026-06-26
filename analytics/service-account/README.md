@@ -104,3 +104,40 @@ Customers are reporting strong satisfaction with portal-enabled activity, with 7
 - Pre/post CSAT analysis is not viable for the full portal service cohort because most services do not have a usable pre-enable CSAT base in `customer_intelligence.vwcase`.
 - Support should be shown as a rate relative to activity, not as raw support volume.
 - No raw organisational data or customer-level data should be stored in this repository.
+
+## Agent consistency review
+
+Before treating any Service Account / Portal CX artefact as ready for use, run an agent consistency review.
+
+Use:
+
+`17-agent-review-prompt.md`
+
+The review is governed by:
+
+`16-agent-consistency-check.md`
+
+The agent should check for:
+
+- metric drift
+- source confusion
+- CSAT overclaiming
+- inconsistent slide language
+- incorrect use of `Record_Type`
+- incorrect use of `vwsupport_enriched`
+- confusion between Activity CSAT and RPP Support CSAT proxy
+
+The agent should not rewrite files unless explicitly asked.
+
+Expected output:
+
+| Area | Status | Issue found | Recommended fix |
+|---|---|---|---|
+| Customers | Pass / Needs update |  |  |
+| Activity | Pass / Needs update |  |  |
+| Support | Pass / Needs update |  |  |
+| CSAT | Pass / Needs update |  |  |
+| Record Type | Pass / Needs update |  |  |
+| RPP proxy | Pass / Needs update |  |  |
+| Slide claims | Pass / Needs update |  |  |
+| Source usage | Pass / Needs update |  |  |
