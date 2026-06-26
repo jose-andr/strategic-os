@@ -53,6 +53,16 @@ Support logic / mapping source:
 
 `portal_service_mapped_to_enquiry_support_service.csv`
 
+Expected mapping fields:
+
+| Field | Meaning |
+|---|---|
+| `portal_service_group` | Service group from the portal-enabled service cohort. |
+| `portal_service_name` | Portal-enabled service name. |
+| `first_portal_enable_date` | Date the service was first enabled in the portal. |
+| `support_service_name` | Mapped enquiry/support service name used in CSAT case data. |
+| `support_pathway` | Support pathway category: Resolved, Assisted, or Expert Enquiry. |
+
 ## Mapping principle
 
 Support CSAT should be calculated only for support/enquiry services included in the final mapping.
@@ -65,7 +75,7 @@ to related support/enquiry service names from:
 
 `customer_intelligence.vwcase.Service_Name`
 
-The mapping includes the portal enablement date so support CSAT can be analysed in relation to when the service became available through Service Account.
+The mapping includes the portal enablement date so Support CSAT can be analysed in relation to when the service became available through Service Account.
 
 ## Support pathway categories
 
@@ -106,65 +116,79 @@ Where:
 
 Use the final mapping as a filter table.
 
-```sql
-WITH mapped_support_services AS (
-  SELECT DISTINCT
-    portal_service_group,
-    portal_service_name,
-    first_portal_enable_date,
-    support_service_name,
-    support_pathway
-  FROM portal_service_mapped_to_enquiry_support_service
-),
+    WITH mapped_support_services AS (
+      SELECT DISTINCT
+        portal_service_group,
+        portal_service_name,
+        first_portal_enable_date,
+        support_service_name,
+        support_pathway
+      FROM portal_service_mapped_to_enquiry_support_service
+    ),
 
-support_csat AS (
-  SELECT
-    CASE
-      WHEN c.Survey_Completion_Date >= DATE('2024-07-01')
-       AND c.Survey_Completion_Date <  DATE('2025-07-01')
-        THEN 'FY2024/25'
-      WHEN c.Survey_Completion_Date >= DATE('2025-07-01')
-       AND c.Survey_Completion_Date <  DATE('2026-07-01')
-        THEN 'FY2025/26'
-    END AS fiscal_year,
+    support_csat AS (
+      SELECT
+        CASE
+          WHEN c.Survey_Completion_Date >= DATE('2024-07-01')
+           AND c.Survey_Completion_Date <  DATE('2025-07-01')
+            THEN 'FY2024/25'
+          WHEN c.Survey_Completion_Date >= DATE('2025-07-01')
+           AND c.Survey_Completion_Date <  DATE('2026-07-01')
+            THEN 'FY2025/26'
+        END AS fiscal_year,
 
-    m.portal_service_group,
-    m.portal_service_name,
-    m.first_portal_enable_date,
-    m.support_service_name,
-    m.support_pathway,
+        m.portal_service_group,
+        m.portal_service_name,
+        m.first_portal_enable_date,
+        m.support_service_name,
+        m.support_pathway,
 
-    c.Satisfaction_Score_5
+        c.Satisfaction_Score_5
 
-  FROM datahub_datamart.customer_intelligence.vwcase c
-  INNER JOIN mapped_support_services m
-    ON c.Service_Name = m.support_service_name
+      FROM datahub_datamart.customer_intelligence.vwcase c
+      INNER JOIN mapped_support_services m
+        ON c.Service_Name = m.support_service_name
 
-  WHERE c.Survey_Completion_Date >= DATE('2024-07-01')
-    AND c.Survey_Completion_Date <  DATE('2026-07-01')
-    AND c.Satisfaction_Score_5 IS NOT NULL
-)
+      WHERE c.Survey_Completion_Date >= DATE('2024-07-01')
+        AND c.Survey_Completion_Date <  DATE('2026-07-01')
+        AND c.Satisfaction_Score_5 IS NOT NULL
+    )
 
-SELECT
-  fiscal_year,
-  portal_service_group,
-  portal_service_name,
-  support_pathway,
-  COUNT(*) AS valid_csat_responses,
-  SUM(CASE WHEN Satisfaction_Score_5 IN (4, 5) THEN 1 ELSE 0 END) AS positive_csat_responses,
-  ROUND(
-    100.0 * SUM(CASE WHEN Satisfaction_Score_5 IN (4, 5) THEN 1 ELSE 0 END) / COUNT(*),
-    1
-  ) AS support_csat_percent
-FROM support_csat
-WHERE fiscal_year IS NOT NULL
-GROUP BY
-  fiscal_year,
-  portal_service_group,
-  portal_service_name,
-  support_pathway
-ORDER BY
-  fiscal_year,
-  portal_service_group,
-  portal_service_name,
-  support_pathway;
+    SELECT
+      fiscal_year,
+      portal_service_group,
+      portal_service_name,
+      support_pathway,
+      COUNT(*) AS valid_csat_responses,
+      SUM(CASE WHEN Satisfaction_Score_5 IN (4, 5) THEN 1 ELSE 0 END) AS positive_csat_responses,
+      ROUND(
+        100.0 * SUM(CASE WHEN Satisfaction_Score_5 IN (4, 5) THEN 1 ELSE 0 END) / COUNT(*),
+        1
+      ) AS support_csat_percent
+    FROM support_csat
+    WHERE fiscal_year IS NOT NULL
+    GROUP BY
+      fiscal_year,
+      portal_service_group,
+      portal_service_name,
+      support_pathway
+    ORDER BY
+      fiscal_year,
+      portal_service_group,
+      portal_service_name,
+      support_pathway;
+
+## Genie instruction
+
+Use this instruction in Genie:
+
+> Support CSAT must use the final manual mapping from `portal_service_mapped_to_enquiry_support_service.csv`. Do not infer Support CSAT from all Customer Enquiry services, automatic service-name matching, or `Record_Type`. Only include cases where `customer_intelligence.vwcase.Service_Name` matches a mapped `support_service_name`.
+
+## Current interpretation
+
+For the celebration pilot:
+
+- Activity CSAT is validated using the portal-enabled service cohort.
+- Headline support demand is validated using `vwsupport.is_after_service_enablement = TRUE`.
+- Support CSAT is now scoped using the final manually mapped support service list.
+- This allows Support CSAT to be discussed as portal-relevant support experience, rather than all support experience.
