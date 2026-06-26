@@ -361,3 +361,15 @@ Questions to validate:
 For the EOFY celebration analysis, the current application workflow Activity definition is good enough to proceed.
 
 The validation items in this file should be treated as follow-up work for reusable reporting, dashboard refinement, and production-grade Databricks SQL.
+
+## CSAT and support proxy validation
+
+| Validation item | Why it matters | Current working position | Owner / next action |
+|---|---|---|---|
+| Confirm whether Activity CSAT can be presented as current-state only. | Previous FY has only 18 valid responses, so YoY framing is unstable. | Use 76.5% from 888 current-year responses as a strength metric, not a YoY improvement. | Confirm with CX / branch stakeholder. |
+| Confirm RPP proxy period dates. | Proxy interpretation depends on the exact pre-portal, post-portal impact, and current ELT windows. | Dates exist in Power BI logic but need to be documented in repo. | Extract from Power BI or confirm with report owner. |
+| Confirm RPP proxy service mapping source. | Proxy depends on selected ask-service names. | Current labels are documented, but source table / mapping ownership should be confirmed. | Confirm whether mapping lives in Power BI, Databricks, or manual table. |
+| Confirm whether RPP Support CSAT proxy can be used on the celebration slide. | It is service-specific and not a complete support CSAT standard. | Use as explanatory stabilisation evidence only. | Confirm with stakeholder before final slide. |
+| Validate Support CSAT standard for broader Service Account services. | Current proxy only covers RPP support pathway. | Not yet available as a complete standard. | Future work. |
+| Validate channel segmentation for support CSAT. | Real-time vs async classification depends on actual channel values and business meaning. | Working rule: Phone, Live Chat, Face-to-Face = In Real-time; all others = Async. | Validate against `customer_intelligence.vwcase.Channel` and `vwsupport.channel`. |
+| Confirm legacy-system explanation for missing pre-enable Parking CSAT. | Explains why pre/post CSAT is structurally unavailable. | Working hypothesis: Parking permits may have lived in a legacy system before migration into the current CRM / CSAT model. | Validate with CRM / Parking / data owner. |
