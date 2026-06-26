@@ -2,17 +2,33 @@
 
 ## Purpose
 
-This document defines how Support CSAT should be scoped for the Service Account / Portal CX analysis.
+This document defines the Support CSAT scope for the Service Account / Portal CX celebration pilot.
 
-Support CSAT should only include support or enquiry services that are meaningfully related to services enabled in the Service Account portal.
+Support CSAT should only include enquiry/support services that have been explicitly mapped to services enabled in the Service Account portal.
 
-Automated service-name matching was tested, but it produced unreliable mappings because portal service names and customer enquiry service names do not share a consistent naming structure. Some services mapped too broadly, while others, such as Residential Parking Permit support pathways, were missed or incorrectly grouped.
+This mapping has been completed as part of the existing support logic work. The portal enablement date has been added so the mapping can be interpreted against the Service Account rollout timeline.
 
-Therefore, Support CSAT requires a maintained manual mapping.
+## Current status
 
-## Source principle
+Status: **Current and final for celebration pilot**
 
-The portal-enabled service cohort is defined by:
+The mapping file for this pilot is:
+
+`portal_service_mapped_to_enquiry_support_service.csv`
+
+This file should be treated as the source of truth for Support CSAT filtering during the EOFY celebration analysis.
+
+## Why manual mapping is required
+
+Automated matching from portal service names to Customer Enquiry service names was tested but did not produce reliable results.
+
+The automated approach over-mapped some generic services and under-mapped or misclassified others. For example, broad service-name matching could pull in generic Business Concierge, Planning, Parking Enforcement, or unrelated parking enquiry services.
+
+Because support service names do not consistently mirror portal service names, Support CSAT requires a curated mapping.
+
+## Source systems
+
+Portal-enabled service cohort:
 
 `datahub_datamart.customer_account_management.vwservice_enablement`
 
@@ -22,7 +38,7 @@ Key fields:
 - `service_name`
 - `first_portal_enable_date`
 
-The CSAT source is:
+CSAT source:
 
 `datahub_datamart.customer_intelligence.vwcase`
 
@@ -33,23 +49,27 @@ Key fields:
 - `Survey_Completion_Date`
 - `Satisfaction_Score_5`
 
+Support logic / mapping source:
+
+`portal_service_mapped_to_enquiry_support_service.csv`
+
 ## Mapping principle
 
-Support CSAT should not include all Customer Enquiry services.
+Support CSAT should be calculated only for support/enquiry services included in the final mapping.
 
-Support CSAT should include only Customer Enquiry services that have been manually mapped to a portal-enabled service.
-
-The mapping should connect:
+The mapping connects:
 
 `vwservice_enablement.service_name`
 
-to one or more related support/enquiry service names from:
+to related support/enquiry service names from:
 
 `customer_intelligence.vwcase.Service_Name`
 
+The mapping includes the portal enablement date so support CSAT can be analysed in relation to when the service became available through Service Account.
+
 ## Support pathway categories
 
-Support pathway should be derived from the enquiry service name.
+Support pathway is derived from the mapped enquiry service name.
 
 | Pathway | Service-name pattern | Business meaning |
 |---|---|---|
@@ -57,64 +77,94 @@ Support pathway should be derived from the enquiry service name.
 | Assisted | `Customer Enquiry - Assisted` | Contact centre resolved the enquiry during the interaction with assistance from another business area. |
 | Expert Enquiry | `Customer Enquiry - Expert Enquiry` | Contact centre could not resolve the enquiry during the interaction, so the case was assigned to an expert to contact the customer. |
 
-## Manual mapping table structure
+## Celebration pilot rule
 
-Use this structure for the maintained mapping.
+For the EOFY celebration pilot:
 
-| portal_service_group | portal_service_name | support_service_name | support_pathway | include_in_support_csat | mapping_confidence | mapping_note |
-|---|---|---|---|---|---|---|
-| PARKING | PARKING PERMIT - PARKING PERMIT APPLICATION | Permit - Residential Parking - Customer Enquiry - Resolved | Resolved | TRUE | High | Residential Parking Permit support pathway. |
-| PARKING | PARKING PERMIT - PARKING PERMIT APPLICATION | Permit - Residential Parking - Customer Enquiry - Assisted | Assisted | TRUE | High | Residential Parking Permit support pathway. |
-| PARKING | PARKING PERMIT - PARKING PERMIT APPLICATION | Permit - Residential Parking - Customer Enquiry - Expert Enquiry | Expert Enquiry | TRUE | High | Residential Parking Permit support pathway. |
-| PARKING | PARKING PERMIT - MEDICAL AND HEALTHCARE PARKING PERMIT APPLICATION | Permit - Disabled Or Medical Parking - Customer Enquiry - Resolved | Resolved | TRUE | High | Disabled / medical parking support pathway. |
-| PARKING | PARKING PERMIT - MEDICAL AND HEALTHCARE PARKING PERMIT APPLICATION | Permit - Disabled Or Medical Parking - Customer Enquiry - Assisted | Assisted | TRUE | High | Disabled / medical parking support pathway. |
-| PARKING | PARKING PERMIT - MEDICAL AND HEALTHCARE PARKING PERMIT APPLICATION | Permit - Disabled Or Medical Parking - Customer Enquiry - Expert Enquiry | Expert Enquiry | TRUE | High | Disabled / medical parking support pathway. |
+- Use the final mapped support service list.
+- Do not infer Support CSAT from all Customer Enquiry services.
+- Do not use automatic string matching.
+- Do not use `Record_Type` as the support definition.
+- Do not include unmapped enquiry services in the Support CSAT result.
+- Use `Survey_Completion_Date` as the CSAT date.
+- Use `Satisfaction_Score_5` as the CSAT score.
+- Treat scores of 4 or 5 as positive CSAT.
+- Exclude null satisfaction scores.
 
-## Exclusions
+## Support CSAT calculation
 
-Do not include a support service in Support CSAT only because it contains:
+Support CSAT is calculated as:
 
-- `Customer Enquiry`
-- `Resolved`
-- `Assisted`
-- `Expert Enquiry`
+`positive Support CSAT responses / valid Support CSAT responses`
 
-Do not use `Record_Type` as the support definition.
+Where:
 
-Do not rely on automatic string matching alone.
+- valid responses = mapped support cases with non-null `Satisfaction_Score_5`
+- positive responses = mapped support cases where `Satisfaction_Score_5` is 4 or 5
 
-Do not include unrelated enquiry services such as:
+## Recommended SQL pattern
 
-- Property Rates
-- Planning
-- Parking Enforcement
-- generic Business Support
-- generic Business Concierge
+Use the final mapping as a filter table.
 
-unless they are explicitly validated as part of the portal support pathway for a specific enabled service.
+```sql
+WITH mapped_support_services AS (
+  SELECT DISTINCT
+    portal_service_group,
+    portal_service_name,
+    first_portal_enable_date,
+    support_service_name,
+    support_pathway
+  FROM portal_service_mapped_to_enquiry_support_service
+),
 
-## Current working position
+support_csat AS (
+  SELECT
+    CASE
+      WHEN c.Survey_Completion_Date >= DATE('2024-07-01')
+       AND c.Survey_Completion_Date <  DATE('2025-07-01')
+        THEN 'FY2024/25'
+      WHEN c.Survey_Completion_Date >= DATE('2025-07-01')
+       AND c.Survey_Completion_Date <  DATE('2026-07-01')
+        THEN 'FY2025/26'
+    END AS fiscal_year,
 
-For the EOFY celebration analysis:
+    m.portal_service_group,
+    m.portal_service_name,
+    m.first_portal_enable_date,
+    m.support_service_name,
+    m.support_pathway,
 
-- Activity CSAT is validated using the portal-enabled service cohort.
-- Headline support demand is validated using `vwsupport.is_after_service_enablement = TRUE`.
-- Support CSAT is not yet validated as an overall headline metric.
-- Support CSAT can only be used where a manual support service mapping exists.
-- Residential Parking Permit support CSAT can be used as a proxy or pathway-specific stabilisation indicator if the mapping is documented and caveated.
+    c.Satisfaction_Score_5
 
-## Recommended Genie instruction
+  FROM datahub_datamart.customer_intelligence.vwcase c
+  INNER JOIN mapped_support_services m
+    ON c.Service_Name = m.support_service_name
 
-Use this rule in Genie:
+  WHERE c.Survey_Completion_Date >= DATE('2024-07-01')
+    AND c.Survey_Completion_Date <  DATE('2026-07-01')
+    AND c.Satisfaction_Score_5 IS NOT NULL
+)
 
-> Support CSAT must use a maintained manual mapping between `vwservice_enablement.service_name` and `customer_intelligence.vwcase.Service_Name`. Do not infer Support CSAT scope using automatic string matching alone. Do not use all Customer Enquiry services. Do not use `Record_Type` as the support definition. If no manual mapping exists, say Support CSAT is not yet validated.
-
-## Validation questions
-
-| Question | Why it matters | Status |
-|---|---|---|
-| Which Customer Enquiry services should be linked to each portal-enabled service? | Defines the Support CSAT filter. | Open |
-| Are Residential Parking, Disabled / Medical Parking, Reserved Parking, and Community Parking separate mappings or part of a broader Parking Permit support scope? | Prevents over- or under-counting parking support CSAT. | Open |
-| Is `Assisted` underused by contact centre agents? | May distort pathway comparisons between Resolved and Expert Enquiry. | Open |
-| Should generic Business Concierge or Business Support pathways be included for business permits? | Automated matching over-mapped these services. | Open |
-| Should Parking Enforcement be excluded from Service Account / Portal Support CSAT? | It may not relate to portal permit support. | Open |
+SELECT
+  fiscal_year,
+  portal_service_group,
+  portal_service_name,
+  support_pathway,
+  COUNT(*) AS valid_csat_responses,
+  SUM(CASE WHEN Satisfaction_Score_5 IN (4, 5) THEN 1 ELSE 0 END) AS positive_csat_responses,
+  ROUND(
+    100.0 * SUM(CASE WHEN Satisfaction_Score_5 IN (4, 5) THEN 1 ELSE 0 END) / COUNT(*),
+    1
+  ) AS support_csat_percent
+FROM support_csat
+WHERE fiscal_year IS NOT NULL
+GROUP BY
+  fiscal_year,
+  portal_service_group,
+  portal_service_name,
+  support_pathway
+ORDER BY
+  fiscal_year,
+  portal_service_group,
+  portal_service_name,
+  support_pathway;
