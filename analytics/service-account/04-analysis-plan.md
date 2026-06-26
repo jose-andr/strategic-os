@@ -72,3 +72,41 @@ This analysis is successful if it produces:
 - visible caveats
 - an executive-ready celebration narrative
 - a documented pattern that can be reused for future analytics work
+## Revised CSAT analysis path
+
+The CSAT path has been revised based on validation findings.
+
+### Key decision
+
+Use different CSAT approaches for different questions.
+
+| Question | Method | Status |
+|---|---|---|
+| How satisfied were customers with portal-enabled application activity? | Use direct CSAT from `customer_intelligence.vwcase` for portal-relevant `Apply` services. | Validated with caveat. |
+| Did portal enablement improve CSAT pre/post? | Use pre/post enablement diagnostics where pre-enable data exists. | Not viable for current pilot due to missing pre-enable CSAT base. |
+| How did Residential Parking Permit support experience change after migration? | Use RPP Support CSAT proxy based on selected enquiry/support service names. | Documented as proxy. |
+| Is support demand reducing relative to activity? | Use support per 100 activities from `vwsupport` and `vwpermit`. | Draft accepted. |
+
+### Current CSAT interpretation
+
+Direct Activity CSAT should be treated as a current-state strength metric:
+
+> Strong satisfaction on portal-enabled activity: 76.5% CSAT from 888 current-year responses.
+
+Do not frame Activity CSAT as a YoY improvement unless a stable baseline is identified.
+
+### Support CSAT proxy interpretation
+
+The RPP Support CSAT proxy indicates that early post-portal CSAT decline was concentrated in Residential Parking support, particularly expert or escalated enquiries.
+
+Current ELT period results suggest service stabilisation, especially for Residential parking enquiry - expert, which recovered from 69% in the post-portal impact period to 78%.
+
+### Remaining validation tasks
+
+- Confirm final RPP proxy period dates.
+- Confirm source of the RPP proxy service mapping.
+- Convert RPP proxy logic from Power BI to Databricks SQL if required.
+- Decide whether the celebration slide uses:
+  - Activity CSAT only
+  - RPP Support CSAT proxy
+  - both, with caveats
