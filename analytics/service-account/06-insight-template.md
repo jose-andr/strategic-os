@@ -12,7 +12,7 @@ Service Account is scaling: more customers are using the portal, self-service ac
 
 | Story point | Metric | Previous FY / baseline | Current FY / current period | Movement | Interpretation |
 |---|---|---:|---:|---:|---|
-| More customers | Customers: Service Account / portal sign-ups | To calculate | To calculate | To calculate | Pending final Customers YoY result. |
+| More customers | Customers: Service Account / portal sign-ups | 5,500 | 9,838 | +78.9% | Service Account adoption grew strongly year on year. |
 | More self-service activity | Activity applications | 2,209 | 3,766 | +70.5% | More customers are progressing application workflow activity through the portal. |
 | Less support demand relative to activity | Support per 100 activities | 496.9 | 409.3 | -17.6% | Support volume increased, but support demand reduced relative to activity. |
 | Strong activity CSAT | Portal-enabled Activity CSAT | 18 responses / 88.9% | 888 responses / 76.5% | Do not frame as YoY improvement | Current-year satisfaction is strong, but the prior-year response base is too small for a stable YoY claim. |
@@ -81,7 +81,7 @@ Use caveats in supporting notes, not as the main slide message.
 
 ## 7. Suggested celebration message
 
-Service Account adoption and usage are growing. Application workflow activity increased by 70.5%, while support demand per 100 activities reduced by 17.6%. Customers are reporting strong satisfaction with portal-enabled activity, with 76.5% CSAT from 888 current-year responses. Residential Parking support is also showing signs of stabilisation after migration, with expert enquiry CSAT recovering from 69% post-portal to 78% in the current ELT period.
+Service Account adoption and usage are growing. Customer sign-ups increased by 78.9%, and application workflow activity increased by 70.5%. Support demand per 100 activities reduced by 17.6%, showing that support demand is reducing relative to self-service activity. Customers are reporting strong satisfaction with portal-enabled activity, with 76.5% CSAT from 888 current-year responses. Residential Parking support is also showing signs of stabilisation after migration, with expert enquiry CSAT recovering from 69% post-portal to 78% in the current ELT period.
 
 ## 8. Slide-ready proof points
 
