@@ -58,3 +58,55 @@ The year-on-year view gives the branch a clearer evidence base for understanding
 - Use plain language.
 - Avoid technical data language on the slide.
 - Include caveats outside the slide if needed.
+
+## Revised CSAT slide treatment
+
+CSAT should not be framed as a simple YoY improvement unless a stable baseline is confirmed.
+
+### Activity CSAT
+
+Use Activity CSAT as a current-state strength metric.
+
+Recommended wording:
+
+> Strong satisfaction on portal-enabled activity: 76.5% CSAT from 888 current-year responses.
+
+Do not say:
+
+> Activity CSAT improved year on year.
+
+Reason:
+
+Previous FY has only 18 valid responses for the portal-enabled activity cohort, so the comparison is not stable.
+
+### Support CSAT
+
+Use the RPP Support CSAT proxy only as explanatory evidence, not as the main headline CSAT metric.
+
+Recommended wording:
+
+> Residential Parking support is stabilising after migration, with expert enquiry CSAT recovering from 69% post-portal to 78% in the current ELT period.
+
+Do not say:
+
+> Support CSAT improved overall.
+
+Reason:
+
+The RPP proxy is service-specific and support-pathway-specific. It does not yet represent a complete Service Account support CSAT standard.
+
+### Suggested slide story
+
+| Story point | Suggested treatment |
+|---|---|
+| More customers | Use Service Account / portal sign-ups once final result is calculated. |
+| More self-service activity | Use Activity applications: 2,209 to 3,766, up 70.5%. |
+| Less support demand relative to activity | Use Support per 100 activities: 496.9 to 409.3, down 17.6%. |
+| Better activity CSAT | Reframe as strong current-state Activity CSAT: 76.5% from 888 responses. |
+| Better support CSAT | Reframe as RPP support stabilisation, not full support CSAT improvement. |
+
+### Suggested slide caveat
+
+Use in speaker notes, not as a prominent slide caveat:
+
+> CSAT comparisons are affected by service migration, survey coverage, and limited pre-portal response data. Activity CSAT is treated as a current-state strength metric, while RPP Support CSAT is used as a proxy for support-pathway stabilisation.
