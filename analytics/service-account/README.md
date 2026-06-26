@@ -76,3 +76,31 @@ The EOFY celebration slide logic has been captured from Power BI and is being tr
 Power BI measures are the business logic source of truth.
 
 Databricks SQL outputs should be treated as provisional until the mapping backlog is resolved.
+
+## Current EOFY celebration pilot status
+
+The current Service Account / Portal CX pilot supports a one-slide EOFY celebration story.
+
+### Validated / accepted headline proof points
+
+| Story point | Metric | Result | Status |
+|---|---|---:|---|
+| More customers | Service Account / portal sign-ups | +78.9% | Validated |
+| More self-service activity | Activity applications | +70.5% | Draft accepted |
+| Less support demand relative to activity | Support per 100 activities | -17.6% | Draft accepted |
+| Strong activity CSAT | Portal-enabled Activity CSAT | 76.5% from 888 current-year responses | Accepted with caveat |
+| Support stabilisation | RPP Support CSAT proxy | Residential Parking expert enquiry recovered from 69% to 78% | Proxy accepted with caveat |
+
+### Slide-safe interpretation
+
+Service Account adoption and usage are growing. Customer sign-ups increased by 78.9%, and application workflow activity increased by 70.5%. Support demand per 100 activities reduced by 17.6%, showing that support demand is reducing relative to self-service activity.
+
+Customers are reporting strong satisfaction with portal-enabled activity, with 76.5% CSAT from 888 current-year responses. Residential Parking support is also showing signs of stabilisation after migration, with expert enquiry CSAT recovering from 69% post-portal to 78% in the current ELT period.
+
+### Important caveats
+
+- Activity CSAT should be treated as a current-state strength metric, not a YoY improvement claim.
+- RPP Support CSAT is a proxy based on selected enquiry/support services, not a complete Service Account support CSAT standard.
+- Pre/post CSAT analysis is not viable for the full portal service cohort because most services do not have a usable pre-enable CSAT base in `customer_intelligence.vwcase`.
+- Support should be shown as a rate relative to activity, not as raw support volume.
+- No raw organisational data or customer-level data should be stored in this repository.
