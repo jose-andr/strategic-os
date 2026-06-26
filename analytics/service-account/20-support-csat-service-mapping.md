@@ -53,7 +53,9 @@ Key fields:
 
 Support logic / mapping source:
 
-`portal_service_mapped_to_enquiry_support_service.csv`
+Databricks workspace file:
+
+`/Users/jose.andrade@melbourne.vic.gov.au/support-csat-service-mapping.md`
 
 Expected mapping fields:
 
@@ -225,7 +227,7 @@ Use the final mapping as a filter table or translate the mapping table into a CT
 
 Use this instruction in Genie:
 
-> Support CSAT must use the final manual mapping from `portal_service_mapped_to_enquiry_support_service.csv`. Do not infer Support CSAT from all Customer Enquiry services, automatic service-name matching, or `Record_Type`. Only include cases where `customer_intelligence.vwcase.Service_Name` matches a mapped `support_service_name`.
+> Support CSAT must use the manual mapping in Databricks workspace file `/Users/jose.andrade@melbourne.vic.gov.au/support-csat-service-mapping.md`. Do not infer Support CSAT from all Customer Enquiry services, automatic service-name matching, `Record_Type`, or `vwsupport_enriched`. Only include cases where `customer_intelligence.vwcase.Service_Name` matches a mapped `support_service_name`.
 
 ## Current interpretation
 
