@@ -46,7 +46,18 @@ Run the validation files before treating the final summary output as production-
 | `07_activity_status_validation.sql` | Profiles `vwpermit` status combinations to recreate `vwpermit_statused` logic | Created |
 | `08_support_logic_validation.sql` | Profiles `vwsupport` and `vwsupport_enriched` to map `[Self-Service Support]` | Created |
 | `09_csat_source_validation.sql` | Inspects `vwcase` and `vwsupport_enriched` for survey / CSAT fields | Created |
+| `14_csat_service_cohort_yoy.sql` | Compares CSAT for the portal-relevant service-name cohort across FY windows, with pre/post enablement timing as a diagnostic dimension. | Added; diagnostic result confirms pre/post CSAT is not viable for this pilot. |
+| `15_rpp_support_csat_proxy.sql` | Template for Residential Parking Permit support CSAT proxy using selected enquiry/support services and analysis periods. | Added as template; requires confirmed period dates and mapping source before production use. |
 
+## CSAT SQL guidance
+
+Use `14_csat_service_cohort_yoy.sql` for direct Activity CSAT diagnostics.
+
+Use `15_rpp_support_csat_proxy.sql` only for the Residential Parking Permit support-pathway proxy.
+
+Do not treat the RPP proxy as a complete Service Account support CSAT standard.
+
+Do not use `vwsupport_enriched` for headline support KPI production or CSAT calculation.
 ### Current validation priorities
 
 1. Confirm whether `vwpermit_statused[include_in_activity_kpi]` can be recreated in Databricks.
