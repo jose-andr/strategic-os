@@ -278,12 +278,31 @@ This is the current Databricks candidate equivalent for the Power BI `vwpermit[t
       'pending payment'
     )
 
-### Current draft result
+## Current draft metric results
 
-| Metric | Previous FY | Current FY | Movement |
-|---|---:|---:|---:|
-| Activity applications | 2,209 | 3,766 | +70.5% |
+| Story point | Metric | Previous FY / baseline | Current FY / current period | Movement | Status |
+|---|---|---:|---:|---:|---|
+| More customers | Service Account / portal sign-ups | 5,500 | 9,838 | +78.9% | Validated |
+| More self-service activity | Activity applications | 2,209 | 3,766 | +70.5% | Draft accepted |
+| Less support demand relative to activity | Support per 100 activities | 496.9 | 409.3 | -17.6% | Draft accepted |
+| Better activity CSAT | Portal-enabled Activity CSAT | 18 responses / 88.9% | 888 responses / 76.5% | Do not frame as YoY improvement | Accepted with caveat |
+| Better support CSAT | RPP Support CSAT proxy: Residential Parking expert enquiry | 69% post-portal impact | 78% current ELT period | +9 pts | Proxy accepted with caveat |
 
+## Current slide-safe interpretation
+
+The celebration slide can safely claim:
+
+- Customer sign-ups increased by 78.9%.
+- Application workflow activity increased by 70.5%.
+- Support demand per 100 activities reduced by 17.6%.
+- Portal-enabled Activity CSAT is strong at 76.5% from 888 current-year responses.
+- Residential Parking expert support is showing signs of stabilisation, with proxy CSAT recovering from 69% post-portal to 78% in the current ELT period.
+
+The slide should not claim:
+
+- Activity CSAT improved year on year.
+- Support CSAT improved overall across all Service Account services.
+- Pre/post enablement CSAT improved across the full portal service cohort.
 ### Status
 
 Accepted for the EOFY celebration pilot.
