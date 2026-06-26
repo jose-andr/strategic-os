@@ -14,11 +14,11 @@ Status: **Current and final for celebration pilot**
 
 The mapping is current and final for the EOFY celebration pilot. It does not imply that every service in `vwservice_enablement` has a mapped Support CSAT pathway.
 
-The source mapping file for this pilot is:
+The source mapping for this pilot is the Databricks workspace file:
 
-`portal_service_mapped_to_enquiry_support_service.csv`
+`/Users/jose.andrade@melbourne.vic.gov.au/support-csat-service-mapping.md`
 
-This file should be treated as the source of truth for Support CSAT filtering during the EOFY celebration analysis.
+This workspace file should be treated as the source of truth for Support CSAT filtering during the EOFY celebration analysis.
 
 ## Why manual mapping is required
 
