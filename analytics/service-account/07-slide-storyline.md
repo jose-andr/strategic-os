@@ -99,12 +99,15 @@ The RPP proxy is service-specific and support-pathway-specific. It does not yet 
 
 | Story point | Suggested treatment |
 |---|---|
-| More customers | Use Service Account / portal sign-ups once final result is calculated. |
-| More self-service activity | Use Activity applications: 2,209 to 3,766, up 70.5%. |
-| Less support demand relative to activity | Use Support per 100 activities: 496.9 to 409.3, down 17.6%. |
+| More customers | Service Account / portal sign-ups increased from 5,500 to 9,838, up 78.9%. |
+| More self-service activity | Activity applications increased from 2,209 to 3,766, up 70.5%. |
+| Less support demand relative to activity | Support per 100 activities reduced from 496.9 to 409.3, down 17.6%. |
 | Better activity CSAT | Reframe as strong current-state Activity CSAT: 76.5% from 888 responses. |
-| Better support CSAT | Reframe as RPP support stabilisation, not full support CSAT improvement. |
+| Better support CSAT | Reframe as RPP support stabilisation: Residential Parking expert enquiry CSAT recovered from 69% post-portal to 78% in the current ELT period. |
 
+### Final draft narrative
+
+Service Account adoption and usage are growing. Customer sign-ups increased by 78.9%, and application workflow activity increased by 70.5%. Support demand per 100 activities reduced by 17.6%, showing that support demand is reducing relative to self-service activity. Customers are reporting strong satisfaction with portal-enabled activity, with 76.5% CSAT from 888 current-year responses. Residential Parking support is also showing signs of stabilisation after migration, with expert enquiry CSAT recovering from 69% post-portal to 78% in the current ELT period.
 ### Suggested slide caveat
 
 Use in speaker notes, not as a prominent slide caveat:
