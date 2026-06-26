@@ -141,3 +141,29 @@ Expected output:
 | RPP proxy | Pass / Needs update |  |  |
 | Slide claims | Pass / Needs update |  |  |
 | Source usage | Pass / Needs update |  |  |
+
+## Genie pilot testing
+
+Before adding broader organisational structure to the Genie context, test the current Service Account / Portal CX pilot context.
+
+Use:
+
+`19-genie-pilot-test-prompts.md`
+
+The pilot tests whether Genie can reliably:
+
+- apply accepted metric definitions
+- select the correct Databricks source tables
+- distinguish headline, diagnostic, and proxy metrics
+- avoid CSAT overclaiming
+- avoid source confusion
+- explain caveats clearly
+- produce slide-safe synthesis
+
+The Genie context file is:
+
+`18-genie-agent-context.md`
+
+Do not add broad organisational structure until the pilot tests show that Genie can answer the core Service Account / Portal CX questions correctly.
+
+Organisational structure should be added later only as an enrichment layer for questions about service ownership, branch accountability, escalation pathways, operating model implications, or prioritisation.
