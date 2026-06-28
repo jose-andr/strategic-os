@@ -12,6 +12,10 @@ Customer intelligence / survey schema:
 
     datahub_datamart.customer_intelligence
 
+Canonical CRM descriptor schema:
+
+    datahub_refined.customer
+
 ## Tables and views reviewed
 
 From `datahub_datamart.customer_account_management`:
@@ -28,6 +32,10 @@ From `datahub_datamart.customer_intelligence`:
 - `vwcase`
 - `vwsurvey_feedback`
 
+From `datahub_refined.customer`:
+
+- `vwcase`
+
 ## Glossary and Power BI alignment
 
 This schema validation should align to the glossary in:
@@ -40,12 +48,12 @@ For the EOFY celebration analysis:
 |---|---|---|
 | Customers | Service Account / portal sign-ups | Existing Power BI measure, then SQL translation |
 | Activity | Application workflow activity through the portal | Existing Power BI measure, then SQL translation |
-| Support | Portal support demand relative to activity | Existing Power BI measure, then SQL translation |
-| CSAT on Activity | Satisfaction related to portal-enabled application activity | Existing Power BI measure / survey logic |
-| CSAT on Support | Satisfaction related to support interactions | Existing Power BI measure / survey logic |
+| Support | Portal support demand relative to Activity | Existing Power BI measure, then SQL translation |
+| CSAT on Activity | Satisfaction related to portal-enabled application activity | `customer_intelligence.vwcase` scoped to portal-enabled services |
+| CSAT on Support | Satisfaction related to mapped portal-relevant support pathways | Manual Support CSAT mapping, then `customer_intelligence.vwcase` |
 | All accounts | Total CRM account base | Context metric only |
 
-Existing Power BI measures should be treated as the first source of truth for business logic.
+Existing Power BI measures should be treated as the first source of truth for business logic where available.
 
 Databricks SQL should translate that logic once the required fields and eligibility rules are confirmed.
 
@@ -53,20 +61,38 @@ Databricks SQL should translate that logic once the required fields and eligibil
 
 | Celebration metric | Recommended table / view | Required fields found? | Support status | Notes |
 |---|---|---|---|---|
-| Customers | `customer_account_management.vwaccount` | Yes | Confirmed | Uses `account_id`, `customer_portal`, and `first_account_portal_on_date` |
-| All accounts | `customer_account_management.vwaccount` | Yes | Confirmed | Context metric only |
-| Activity | `customer_account_management.vwpermit` plus status mapping logic | Partially | Accepted for celebration analysis | Activity is based on application workflow, not permit lifecycle workflow |
-| Support | `customer_account_management.vwsupport` | Partially | Accepted for celebration analysis | Preferred source for `[Self-Service Support]` numerator |
-| Support per 100 activities | `vwsupport` plus Activity denominator | Partially | Accepted for celebration analysis | Power BI logic captured as `Self-Service Support Rate` |
-| Activity CSAT | `customer_intelligence.vwcase` and/or `customer_intelligence.vwsurvey_feedback` | Pending | Mapping pending | Need survey date, satisfaction score, service name, and portal-enabled service logic |
-| Support CSAT | `customer_intelligence.vwcase` and/or `customer_intelligence.vwsurvey_feedback` | Pending | Mapping pending | Need survey date, satisfaction score, support service logic, and channel linkage |
-| Support CSAT by channel type | Survey source plus support channel linkage | Pending | Mapping pending | Need support channel field for real-time vs async segmentation |
+| Customers | `customer_account_management.vwaccount` | Yes | Confirmed | Uses `account_id`, `customer_portal`, and `first_account_portal_on_date`. |
+| All accounts | `customer_account_management.vwaccount` | Yes | Confirmed | Context metric only. |
+| Activity | `customer_account_management.vwpermit` plus status mapping logic | Partially | Accepted for celebration analysis | Activity is based on application workflow, not permit lifecycle workflow. |
+| Support demand | `customer_account_management.vwsupport` | Yes | Accepted for celebration analysis | Preferred source for support numerator. |
+| Support per 100 activities | `vwsupport` plus Activity denominator | Yes | Accepted for celebration analysis | Uses support cases divided by Activity applications, multiplied by 100. |
+| Activity CSAT | `customer_intelligence.vwcase` plus `vwservice_enablement` | Yes | Accepted for celebration analysis | Uses portal-enabled service cohort. |
+| Support CSAT | `customer_intelligence.vwcase` plus manual Support CSAT mapping | Partially | Accepted for pilot only | Manual mapping exists for celebration pilot, but not yet as a governed Databricks asset. |
+| Support CSAT by pathway | `customer_intelligence.vwcase` plus manual Support CSAT mapping | Partially | Pilot only | Pathway comes from mapped support service list. |
+| Support CSAT by channel type | Survey source plus support channel linkage | Pending | Not productionised | Requires governed support mapping and channel validation. |
+
+## Confirmed source decisions
+
+| Metric / purpose | Source decision |
+|---|---|
+| Customers | `datahub_datamart.customer_account_management.vwaccount` |
+| Activity | `datahub_datamart.customer_account_management.vwpermit` |
+| Support demand | `datahub_datamart.customer_account_management.vwsupport` |
+| Portal service cohort | `datahub_datamart.customer_account_management.vwservice_enablement` |
+| CSAT | `datahub_datamart.customer_intelligence.vwcase` |
+| CRM case descriptors | `datahub_refined.customer.vwcase` |
+| Support CSAT mapping | Manual mapping documented in `20-support-csat-service-mapping.md` |
+| Support CSAT production asset | Not yet available |
+
+Do not use `customer_account_management.vwsupport_enriched` for headline KPI production or CSAT calculation.
+
+Do not use `Record_Type` as a Support CSAT definition.
 
 ## Field mapping notes
 
 ### `customer_account_management.vwaccount`
 
-#### Likely business entity
+#### Business entity
 
 Customer account records for accounts associated with the Salesforce portal / Service Account environment.
 
@@ -76,12 +102,12 @@ Likely one row per account.
 
 #### Fields relevant to EOFY celebration analysis
 
-| Field | Possible use | Confidence |
+| Field | Use | Confidence |
 |---|---|---|
 | `account_id` | Account identifier used for Service Account sign-up count | High |
 | `first_account_portal_on_date` | Confirmed date field for Service Account sign-up reporting | High |
 | `customer_portal` | Confirmed Service Account / customer portal inclusion filter | High |
-| `created_date` | General account creation date, but not preferred for Service Account sign-ups | Medium |
+| `created_date` | General account creation date, not preferred for Service Account sign-ups | Medium |
 | `account_created_month` | Monthly account creation trend analysis | Medium |
 | `account_record_type` | Account type / classification | Medium |
 | `onboarding_type` | Onboarding pathway or account onboarding type | Medium |
@@ -104,18 +130,13 @@ Logic summary:
 - Uses `vwaccount[first_account_portal_on_date]`
 - Applies the reporting window using `[Window Start]` and `[Window End]`
 
-#### Metrics this table may support
+#### Metrics this table supports
 
 - Service Account sign-ups YoY
 - New vs existing account mix
 - Customer portal linked account count
 - Account onboarding trend
-
-#### Definition questions
-
-- Should the EOFY slide label this metric as `Service Account sign-ups`, `new Service Accounts`, or `customers`?
-- Should YoY use the same Power BI window logic or explicit financial year logic?
-- What values exist in `account_record_type`, `onboarding_type`, and `new_or_existing`?
+- All accounts context metric
 
 ## `customer_account_management.vwcase`
 
@@ -137,11 +158,12 @@ Logic summary:
 
 `customer_account_management.vwcase` may support:
 
-- Support demand validation
 - Case-to-service mapping
 - Channel analysis
 - Portal enablement filtering
-- Support CSAT service matching, if survey data can be linked to cases
+- Case validation
+
+For the current celebration pilot, support demand uses `vwsupport`, and CSAT uses `customer_intelligence.vwcase`.
 
 ## `customer_account_management.vwpermit`
 
@@ -156,9 +178,9 @@ Logic summary:
 | `period_start` | timestamp | Indicates the start date of the relevant period for the application or case |
 | `category` | string | Categorises the application or case |
 
-### Possible uses
+### Current use
 
-`customer_account_management.vwpermit` is the confirmed Databricks base table for portal activity.
+`customer_account_management.vwpermit` is the confirmed Databricks base table for portal Activity.
 
 It contains the raw fields needed to begin recreating the Power BI `vwpermit_statused` logic, including:
 
@@ -180,16 +202,18 @@ It contains the raw fields needed to begin recreating the Power BI `vwpermit_sta
 | `service_name` | string | The specific name of the service |
 | `first_portal_enable_date` | date | Date when the service was first made available on the portal |
 
-### Possible uses
+### Current use
 
-`customer_account_management.vwservice_enablement` may replace or support Power BI `DimService`.
+`customer_account_management.vwservice_enablement` replaces or supports Power BI `DimService` for portal-enabled service cohort logic.
 
-It is likely needed for:
+It is used for:
 
-- Portal-enabled service filtering
-- Activity eligibility
+- portal-enabled service filtering
 - Activity CSAT service filtering
-- Support eligibility after service enablement
+- pre/post enablement diagnostics
+- identifying which services are in the Service Account / Portal CX scope
+
+For Support CSAT, `vwservice_enablement` identifies the portal service cohort, but the final Support CSAT filter must come from the manually mapped support service list.
 
 ## `customer_account_management.vwsupport`
 
@@ -207,40 +231,30 @@ It is likely needed for:
 | `portal_enable_date` | date | The date when the service became available on the customer portal |
 | `is_after_service_enablement` | boolean | Indicates whether the case occurred after the service was enabled |
 
-### Possible uses
+### Current use
 
-`customer_account_management.vwsupport` is the preferred Databricks source for reproducing the Power BI `[Self-Service Support]` numerator.
+`customer_account_management.vwsupport` is the preferred Databricks source for reproducing the support numerator.
 
-It may support:
+It supports:
 
-- Support numerator logic
-- Support by service
-- Support by channel
-- Support after portal service enablement
-- Real-time vs async support segmentation
+- support numerator logic
+- support by service
+- support by channel
+- support after portal service enablement
+- real-time vs async support segmentation
 
-### Current support mapping direction
+### Current support numerator
 
-For the current support rate mapping, use this working direction:
+For the current support rate mapping:
 
     Self-Service Support numerator =
         distinct support cases from vwsupport
-        where support is related to portal-enabled services
-        and support occurred after service enablement
+        where is_after_service_enablement = TRUE
 
-The exact inclusion rules still need validation, but `vwsupport` is the preferred starting point because it contains:
+The headline Support metric is then:
 
-- `case_id`
-- `case_number`
-- `date_time_opened`
-- `date_time_closed`
-- `channel`
-- `account_id`
-- `service_group`
-- `ask_service_name`
-- `portal_service_name`
-- `portal_enable_date`
-- `is_after_service_enablement`
+    Support per 100 activities =
+        Self-Service Support / Activity * 100
 
 ## `customer_account_management.vwsupport_enriched`
 
@@ -271,13 +285,7 @@ For the current analysis, support metrics should use `customer_account_managemen
 
 It should not be used as a denominator or numerator for headline metrics unless a future business rule explicitly requires event-level enriched interactions.
 
-### Role going forward
-
-| View | Role going forward | Use in EOFY celebration metrics |
-|---|---|---|
-| `vwsupport` | Source of truth candidate for support cases / support demand | Yes |
-| `vwsupport_enriched` | Legacy exploratory enrichment / qualitative driver analysis | No |
-| Agentic analysis over source tables | Preferred future direction for insight generation | Yes, for synthesis and investigation, not base KPI counts |
+It should not be used for Support CSAT.
 
 ## `customer_intelligence.vwcase`
 
@@ -293,19 +301,27 @@ Power BI source:
     in
         vwcase_View
 
-### Possible uses
+### Current use
 
-`customer_intelligence.vwcase` is a CSAT source candidate.
+`customer_intelligence.vwcase` is the validated CSAT source for the pilot.
 
-It should be inspected for fields equivalent to:
+It contains the fields required for pilot CSAT analysis:
 
-- `Survey_Completion_Date`
-- `Satisfaction_Score_5`
-- `Service_Name`
-- `Service Name Norm`
-- case identifier fields
-- channel fields
-- service fields
+| Concept | Field |
+|---|---|
+| Survey completion date | `Survey_Completion_Date` |
+| Satisfaction score | `Satisfaction_Score_5` |
+| Service name | `Service_Name` |
+| Service group | `Service_Group` |
+| Channel | `Channel` |
+| Case reference | `Case_Number` |
+| Record type | `Record_Type` |
+
+### Decision
+
+Use `customer_intelligence.vwcase` for both Activity CSAT and mapped Support CSAT.
+
+Do not use `Record_Type` alone to define Support CSAT.
 
 ## `customer_intelligence.vwsurvey_feedback`
 
@@ -321,30 +337,17 @@ Power BI source:
     in
         vwsurvey_feedback_View
 
-### Possible uses
+### Current use
 
-`customer_intelligence.vwsurvey_feedback` is a CSAT source candidate.
+`customer_intelligence.vwsurvey_feedback` was reviewed as a possible survey source but is not required for the current pilot CSAT calculation.
 
-It should be inspected for fields equivalent to:
-
-- survey completion date
-- survey response date
-- satisfaction score
-- 5-point satisfaction score
-- case identifier
-- service name
-- normalised service name
-- channel
-- survey type
-- survey response source
+Use only if future response-level survey validation requires it.
 
 ## Power BI to Databricks mapping gaps
 
-The Power BI measure logic for the EOFY celebration slide has now been captured in:
+The Power BI measure logic for the EOFY celebration slide has been captured in:
 
     11-powerbi-measures.md
-
-The remaining validation work is to confirm which Databricks tables and fields can reproduce the Power BI logic.
 
 ### Confirmed Databricks base objects
 
@@ -365,7 +368,7 @@ Customer intelligence schema:
 
     datahub_datamart.customer_intelligence
 
-Confirmed Power BI lineage views:
+Confirmed views:
 
 - `vwcase`
 - `vwsurvey_feedback`
@@ -377,11 +380,11 @@ Confirmed Power BI lineage views:
 | Customers | `vwaccount` | Base fields confirmed |
 | All accounts | `vwaccount` | Base fields confirmed |
 | Activity | `vwpermit` plus `vwpermit_statused` logic | Base table confirmed; application workflow accepted for celebration analysis |
-| Support | `Self-Service Support Rate` | Use `vwsupport` as preferred numerator source; `vwsupport_enriched` excluded from KPI production |
-| Activity CSAT | `vwcase_survey`, `DimService` | Use `customer_intelligence.vwcase` and `customer_intelligence.vwsurvey_feedback` as source candidates; field mapping pending |
-| Support CSAT | `vwcase_survey`, `Support_logic` | Use `customer_intelligence.vwcase` and `customer_intelligence.vwsurvey_feedback` as source candidates; field and support linkage mapping pending |
-| Real-time support CSAT | Support CSAT filtered by channel type | Databricks channel field mapping pending |
-| Async support CSAT | Support CSAT filtered by channel type | Databricks channel field mapping pending |
+| Support demand | `Self-Service Support Rate` | Use `vwsupport` as preferred numerator source; `vwsupport_enriched` excluded from KPI production |
+| Activity CSAT | `vwcase_survey`, `DimService` | Use `customer_intelligence.vwcase` and `vwservice_enablement` |
+| Support CSAT | `vwcase_survey`, `Support_logic` | Pilot mapping is manual; governed Databricks mapping asset still required |
+| Real-time support CSAT | Support CSAT filtered by channel type | Pending governed mapping and channel validation |
+| Async support CSAT | Support CSAT filtered by channel type | Pending governed mapping and channel validation |
 
 ## Activity validation update
 
@@ -390,10 +393,6 @@ Genie identified that `vwpermit` does not use `transaction_date` for the validat
 The available Databricks field used for the activity status profile is:
 
     period_start
-
-This affects:
-
-    sql/07_activity_status_validation.sql
 
 The Power BI measure refers to:
 
@@ -407,7 +406,7 @@ This mapping should be validated before final reusable Activity SQL is produced.
 
 ## Activity workflow distinction
 
-The key metric for portal activity is application activity.
+The key metric for portal Activity is application activity.
 
 This means the headline Activity KPI should focus on the application workflow, not the permit lifecycle workflow.
 
@@ -415,7 +414,7 @@ The Power BI dashboard separates portal transactions by status into two related 
 
 | Workflow | Example statuses | Relevance to headline Activity KPI |
 |---|---|---|
-| Application workflow | Draft, Submitted, Further information requested, In Progress, Pending Payment, Withdrawn, Declined | Primary basis for portal activity |
+| Application workflow | Draft, Submitted, Further information requested, In Progress, Pending Payment, Withdrawn, Declined | Primary basis for portal Activity |
 | Permit workflow | Issued, Extended, Renewed, Lapsed | Useful for outcomes / permit lifecycle analysis, but not the primary Activity KPI |
 
 ### Application workflow
@@ -477,39 +476,6 @@ The draft mapping confirmed that the main application workflow activity records 
 | In Progress | `in progress / in progress`, `in progress / closed`, `in progress / new` | Included |
 | Pending Payment | `pending payment / approved`, `pending payment / closed`, `pending payment / null` | Included |
 
-### Activity draft mapping observations
-
-The draft mapping supports the current working definition:
-
-    Activity = application workflow activity
-
-The largest application workflow groups were draft application records, followed by pending payment, submitted, further information requested, and in-progress records.
-
-This suggests the Activity KPI can be structured around application workflow statuses rather than permit lifecycle statuses.
-
-For the EOFY celebration analysis, Pending Payment is included because it represents an application that has progressed through the portal workflow.
-
-### Draft Activity YoY result
-
-The first run of:
-
-    sql/11_activity_yoy_application_workflow_draft.sql
-
-produced a provisional YoY Activity result using the application workflow definition.
-
-| Comparison period | Activity applications | Applications requiring confirmation |
-|---|---:|---:|
-| Previous FY | 2,209 | 13 |
-| Current FY | 3,766 | 636 |
-
-Draft movement:
-
-    Activity applications increased from 2,209 to 3,766.
-
-    Increase = 1,557 applications
-
-    Growth = 70.5%
-
 ### Accepted Activity assumption for EOFY celebration analysis
 
 For the current EOFY celebration analysis, the application workflow Activity definition is accepted as good enough to proceed.
@@ -544,22 +510,18 @@ This means the current working Activity logic is:
 
 This assumption should be documented as accepted for the celebration slide, but not yet treated as the final reusable reporting standard.
 
-The longer-term validation questions are tracked in:
-
-    13-business-validation-backlog.md
-
 ## Support validation update
 
 ### Support table distinction
 
 | View | Best use | Notes |
 |---|---|---|
-| `vwsupport` | Candidate source for `[Self-Service Support]` numerator | Contains CRM-style support case fields, service fields, account fields, support channel, and service enablement logic |
+| `vwsupport` | Source for support cases / support demand | Contains CRM-style support case fields, service fields, account fields, support channel, and service enablement logic |
 | `vwsupport_enriched` | Optional exploratory context only | Contains AI themes, source-system events, handle time, channel primary, and text enrichment fields |
 
 ### Support mapping implication
 
-For the EOFY celebration analysis, `vwsupport` is the source to use for reproducing the Power BI `[Self-Service Support]` numerator because it contains the case, service, account, channel, and portal enablement fields required for KPI logic.
+For the EOFY celebration analysis, `vwsupport` is the source to use for reproducing the support numerator because it contains the case, service, account, channel, and portal enablement fields required for KPI logic.
 
 `vwsupport_enriched` should not be treated as the primary support numerator source because it does not preserve the same CRM case and service structure.
 
@@ -569,43 +531,11 @@ For the current support rate mapping, use this working direction:
 
     Self-Service Support numerator =
         distinct support cases from vwsupport
-        where support is related to portal-enabled services
-        and support occurred after service enablement
+        where is_after_service_enablement = TRUE
 
 `vwsupport_enriched` has been reviewed and excluded from EOFY headline KPI production.
 
 It may still be useful for exploratory theme analysis, but support KPI mapping should proceed from `vwsupport`.
-
-### Draft Support Rate YoY result
-
-The first run of:
-
-    sql/13_support_rate_yoy_draft.sql
-
-calculated support demand relative to Activity.
-
-| Comparison period | Activity applications | Self-service support cases | Support per 100 activities |
-|---|---:|---:|---:|
-| Previous FY | 2,209 | 10,976 | 496.9 |
-| Current FY | 3,766 | 15,413 | 409.3 |
-
-Draft movement:
-
-    Activity increased from 2,209 to 3,766 applications.
-
-    Support cases increased from 10,976 to 15,413.
-
-    Support per 100 activities decreased from 496.9 to 409.3.
-
-    Relative improvement = 17.6% fewer support cases per 100 activities.
-
-### Interpretation
-
-The support numerator increased in raw volume, but activity grew faster.
-
-This supports the EOFY celebration storyline:
-
-    Less support demand relative to activity
 
 ### Current Support Rate decision
 
@@ -613,7 +543,7 @@ For the EOFY celebration analysis, the current support rate logic is good enough
 
     Support Rate =
         distinct support cases from vwsupport
-        where is_after_service_enablement = true
+        where is_after_service_enablement = TRUE
         divided by application workflow Activity
         multiplied by 100
 
@@ -626,166 +556,6 @@ CSAT survey data should not use:
     customer_account_management.vwsupport_enriched
 
 Power BI survey source lineage points to the customer intelligence schema.
-
-### Confirmed CSAT source candidates
-
-Power BI uses:
-
-    datahub_datamart.customer_intelligence.vwcase
-
-Power BI also uses:
-
-    datahub_datamart.customer_intelligence.vwsurvey_feedback
-
-This means CSAT validation should inspect both:
-
-    datahub_datamart.customer_intelligence.vwcase
-
-and:
-
-    datahub_datamart.customer_intelligence.vwsurvey_feedback
-
-### CSAT source implication
-
-For Activity CSAT and Support CSAT, validation should focus on finding the survey-equivalent fields in the customer intelligence views.
-
-Required fields to map include:
-
-- survey completion date
-- satisfaction score
-- service name
-- normalised service name
-- case identifier or response identifier
-- support linkage fields
-- channel fields needed for support CSAT segmentation
-
-### Current CSAT validation decision
-
-For the EOFY celebration analysis:
-
-    CSAT source candidates =
-        customer_intelligence.vwcase
-        customer_intelligence.vwsurvey_feedback
-
-Do not use:
-
-    customer_account_management.vwsupport_enriched
-
-`vwsupport_enriched` remains excluded from headline KPI production.
-
-## Remaining Databricks mapping questions
-
-1. Can `vwpermit_statused[include_in_activity_kpi]` be recreated from `vwpermit` using an explicit status mapping where the headline Activity KPI is based on application workflow activity rather than permit lifecycle status?
-2. What exact `vwsupport` logic reproduces `[Self-Service Support]`?
-3. Which customer intelligence view best reproduces `vwcase_survey`?
-4. Which Databricks fields correspond to:
-   - `Survey_Completion_Date`
-   - `Satisfaction_Score_5`
-   - `Service_Name`
-   - `Service Name Norm`
-5. Which Databricks table or logic replaces `DimService[first_portal_enable_date]`?
-6. Which Databricks table or logic replaces `Support_logic`?
-7. Which Databricks field contains support channel values such as:
-   - Phone
-   - Live Chat
-   - Face-to-Face
-   - Email
-   - Web
-   - Others
-8. How should survey responses be linked back to activity or support service logic?
-
-Note: `vwsupport_enriched` has been reviewed and excluded from EOFY headline KPI production. It may still be useful for exploratory theme analysis, but support and CSAT KPI mapping should not proceed from `vwsupport_enriched`.
-
-## Channel segmentation rule to validate
-
-Support CSAT should be segmented by channel type using this rule:
-
-    CASE
-        WHEN channel IN ('Phone', 'Live Chat', 'Face-to-Face')
-            THEN 'In Real-time'
-        ELSE 'Async'
-    END AS channel_type
-
-## Priority validation order
-
-Validate Databricks mapping in this order:
-
-1. Customers
-2. Activity
-3. Support rate numerator
-4. Activity CSAT
-5. Support CSAT
-6. Support CSAT by channel type
-
-This order keeps the EOFY celebration slide focused on the five headline story points:
-
-- More customers
-- More self-service activity
-- Less support demand relative to activity
-- Better activity CSAT
-- Better support CSAT
-
-## Key definition questions
-
-- What is the preferred definition of a Service Account customer?
-- What is the preferred source of truth for self-service activity?
-- What is the correct date field for activity financial year reporting?
-- What is the correct date field for support financial year reporting?
-- What is the correct definition of support demand?
-- Which customer intelligence view best reproduces `vwcase_survey`?
-- Where are Activity CSAT and Support CSAT stored?
-- What is the positive CSAT response logic?
-- Which field should be used as the CSAT survey completion date?
-- Which field should be used as the 5-point satisfaction score?
-- Should support per 100 activities use all support, Service Account support only, or CX-managed support only?
-- Which application workflow statuses should be included in the formal reusable Activity KPI?
-- Should Withdrawn and Declined be counted as activity, outcomes, or exclusions?
-- Should Pending Payment remain included in the formal reusable Activity KPI?
-- What exact `vwsupport` logic reproduces `[Self-Service Support]`?
-- Which Databricks field should be used for support channel segmentation?
-- How should survey responses be linked back to support and activity logic?
-
-## Initial conclusion
-
-The Databricks schemas contain the core base objects needed to begin reproducing the EOFY celebration analysis, but several Power BI-derived logic layers still need to be mapped or recreated.
-
-Confirmed:
-
-- Customers can be reproduced from `customer_account_management.vwaccount`.
-- All accounts can be reproduced from `customer_account_management.vwaccount`.
-- Activity can start from `customer_account_management.vwpermit`.
-- For the current EOFY celebration analysis, Activity is accepted as application workflow activity.
-- Support should use `customer_account_management.vwsupport` as the preferred numerator source.
-- `customer_account_management.vwsupport_enriched` is excluded from EOFY headline KPI production.
-- Portal service enablement can likely use `customer_account_management.vwservice_enablement`.
-- CSAT should use customer intelligence views, not `vwsupport_enriched`.
-
-Still pending:
-
-- Recreating the Power BI `vwpermit_statused` logic as a reusable reporting standard.
-- Mapping the exact `[Self-Service Support]` numerator logic from `vwsupport`.
-- Confirming whether `customer_intelligence.vwcase` or `customer_intelligence.vwsurvey_feedback` best reproduces `vwcase_survey`.
-- Recreating `DimService` and `Support_logic` logic in Databricks.
-- Confirming the support channel field for real-time vs async CSAT segmentation.
-- Mapping CSAT survey completion date, satisfaction score, service name, and survey linkage fields.
-
-Current Activity direction:
-
-    Activity should be application workflow activity.
-
-This is accepted for the EOFY celebration analysis.
-
-Current Support direction:
-
-    Support should use vwsupport.
-
-Current CSAT direction:
-
-    CSAT should use customer_intelligence.vwcase and/or customer_intelligence.vwsurvey_feedback.
-
-`vwsupport_enriched` should be treated as optional exploratory context only, not a source for headline KPI production.
-
-## CSAT and CRM case validation
 
 ### Validated CSAT source
 
@@ -805,48 +575,208 @@ This view contains the fields required for pilot CSAT analysis:
 | Case reference | `Case_Number` |
 | Record type | `Record_Type` |
 
-### Canonical CRM case descriptor source
+### Current CSAT decision
 
-Use the silver-layer view as the canonical descriptor source for common CRM case fields:
+Use `customer_intelligence.vwcase` for:
 
-`datahub_refined.customer.vwcase`
+- Activity CSAT
+- mapped Support CSAT where manual mapping and outputs are explicitly documented
 
-This helps keep wording aligned across downstream datamart views.
+Do not use:
 
-### Portal service enablement bridge
+- `customer_account_management.vwsupport_enriched`
+- `Record_Type` as a Support CSAT definition
+- all Customer Enquiry services as Support CSAT
+- automatic service-name matching as Support CSAT
 
-Use:
+## Activity CSAT validation
+
+Activity CSAT uses:
+
+`datahub_datamart.customer_intelligence.vwcase`
+
+scoped to portal-enabled services from:
 
 `datahub_datamart.customer_account_management.vwservice_enablement`
 
-for portal service cohort logic.
-
-Validated fields:
-
-| Field | Use |
-|---|---|
-| `service_key` | Optional service identifier |
-| `service_group` | Portal service grouping |
-| `service_name` | Service-name cohort and CSAT matching |
-| `first_portal_enable_date` | Pre/post enablement diagnostic date |
-
-### Important validation findings
+### Important Activity CSAT findings
 
 | Finding | Implication |
 |---|---|
 | `customer_intelligence.vwcase` does not contain `is_after_enablement`. | Derive portal relevance using `vwservice_enablement`, not an after-enablement flag. |
-| Direct portal-enabled Activity CSAT is available for `Apply` services. | Use as current-state strength metric. |
-| Previous FY Activity CSAT has only 18 valid responses. | Do not frame as YoY improvement. |
+| FY2024/25 Activity CSAT has 889 valid responses. | Usable as the previous year comparison base. |
+| FY2025/26 Activity CSAT has 1,721 valid responses. | Usable as the current year comparison base. |
+| Activity CSAT improved from 76.5% to 80.6%. | Slide-safe if framed as correlation, not causality. |
+| FY2023/24 Activity CSAT has only 18 valid responses. | Do not use as the main baseline. |
 | Most portal-enabled services have no usable pre-enable CSAT base. | Do not use pre/post enablement CSAT as headline impact evidence. |
-| Parking dominates the current Activity CSAT response base. | Interpret Activity CSAT in context of Residential Parking migration. |
-| `Record_Type` is a CRM classification field. | Do not assume `Ask = Support CSAT` without validation. |
+| Parking contributes strongly to current Activity CSAT response volume. | Interpret Activity CSAT in context of Residential Parking migration. |
 
-### Current CSAT decision
+### Current Activity CSAT decision
 
-Use direct Activity CSAT as a current-state strength metric:
+Use direct Activity CSAT as a celebration proof point:
 
-> Portal-enabled activity CSAT is strong at 76.5% from 888 current-year responses.
+> Portal-enabled Activity CSAT improved from 76.5% to 80.6%, with valid responses increasing from 889 to 1,721.
 
-Use RPP Support CSAT proxy for support-pathway stabilisation analysis:
+Do not claim that portal enablement caused the improvement unless causality is supported.
 
-> Residential Parking expert support is showing signs of stabilisation, with proxy CSAT recovering from 69% post-portal to 78% in the current ELT period.
+## Support CSAT mapping validation
+
+Support CSAT cannot be reliably derived from schema logic alone.
+
+### Tested approaches that are not reliable
+
+- all Customer Enquiry services
+- automatic matching between portal service names and enquiry service names
+- `Record_Type`
+- `vwsupport_enriched`
+- personal Databricks workspace markdown files as reusable Genie filters
+- personal Databricks workspace SQL files as reusable Genie filters
+
+### Current validated position
+
+- Support demand uses `customer_account_management.vwsupport`
+- Activity CSAT uses `customer_intelligence.vwcase` scoped to portal-enabled services
+- Support CSAT requires a manually curated mapping between portal-enabled services and support/enquiry service names
+- The manual mapping is final for the celebration pilot
+- The manual mapping is not yet implemented as a governed Databricks table or curated view
+- Support CSAT is not yet a repeatable self-serve Genie metric
+
+### Manual mapping documentation
+
+The manual Support CSAT mapping is documented in:
+
+`20-support-csat-service-mapping.md`
+
+The working Databricks workspace mapping file is:
+
+`/Users/jose.andrade@melbourne.vic.gov.au/support-csat-service-mapping.md`
+
+### Production recommendation
+
+Create a governed mapping asset for Support CSAT, such as:
+
+`datahub_datamart.customer_account_management.support_csat_service_mapping`
+
+or
+
+`datahub_datamart.customer_account_management.vwsupport_csat_service_mapping`
+
+Until a governed mapping asset exists, Support CSAT should only be discussed where the manual mapping and analysis outputs are explicitly documented.
+
+## Channel segmentation rule to validate
+
+Support CSAT may later be segmented by channel type using this rule:
+
+    CASE
+        WHEN channel IN ('Phone', 'Live Chat', 'Face-to-Face')
+            THEN 'In Real-time'
+        ELSE 'Async'
+    END AS channel_type
+
+This should not be productionised until Support CSAT mapping is governed and channel values are validated.
+
+## Celebration pilot results to preserve
+
+| Metric | Previous FY, FY2024/25 | Current FY, FY2025/26 | Movement |
+|---|---:|---:|---:|
+| Customers | 9,838 | 15,570 | +58.3% |
+| Activity applications | 2,209 | 3,751 | +69.8% |
+| Support cases | 10,976 | 15,475 | +41.0% |
+| Support per 100 activities | 496.9 | 412.6 | about -17.0% |
+| Activity CSAT | 76.5% | 80.6% | +4.1 percentage points |
+| Activity CSAT valid responses | 889 | 1,721 | +832 responses |
+
+Slide-safe interpretation:
+
+> Service Account adoption and usage are growing. Customer sign-ups increased by 58.3%, application workflow activity increased by 69.8%, and support demand per 100 activities reduced by about 17.0%. Portal-enabled Activity CSAT improved from 76.5% to 80.6%, with valid responses increasing from 889 to 1,721. Support CSAT should only be discussed where the manual support service mapping has been applied and documented.
+
+## Remaining Databricks mapping questions
+
+1. Can `vwpermit_statused[include_in_activity_kpi]` be recreated from `vwpermit` using an explicit status mapping where the headline Activity KPI is based on application workflow activity rather than permit lifecycle status?
+2. What exact `vwsupport` logic reproduces `[Self-Service Support]` beyond the pilot `is_after_service_enablement = TRUE` logic?
+3. Should the Activity status mapping become a governed Databricks view or remain a Power BI-derived layer?
+4. Should Support CSAT mapping become a reference table or curated view?
+5. Which Databricks field should be used for support channel segmentation?
+6. How should survey responses be linked back to support and activity logic in production?
+7. What is the update process when new services are enabled in the portal?
+
+## Priority validation order
+
+Validate Databricks mapping in this order:
+
+1. Customers
+2. Activity
+3. Support rate numerator
+4. Activity CSAT
+5. Support CSAT governed mapping
+6. Support CSAT by channel type
+
+This order keeps the EOFY celebration slide focused on the headline story points:
+
+- More customers
+- More self-service activity
+- Less support demand relative to activity
+- Better Activity CSAT
+- Support CSAT only where manually mapped and documented
+
+## Key definition questions
+
+- What is the preferred definition of a Service Account customer?
+- What is the preferred source of truth for self-service activity?
+- What is the correct date field for activity financial year reporting?
+- What is the correct date field for support financial year reporting?
+- What is the correct definition of support demand?
+- Which application workflow statuses should be included in the formal reusable Activity KPI?
+- Should Withdrawn and Declined be counted as activity, outcomes, or exclusions?
+- Should Pending Payment remain included in the formal reusable Activity KPI?
+- What exact `vwsupport` logic reproduces `[Self-Service Support]`?
+- Which Databricks field should be used for support channel segmentation?
+- Should Support CSAT mapping be implemented as a table or view?
+- Who owns the Support CSAT mapping?
+- How should the Support CSAT mapping be updated when new services are portal-enabled?
+- How should survey responses be linked back to support and activity logic?
+
+## Initial conclusion
+
+The Databricks schemas contain the core base objects needed to reproduce the EOFY celebration analysis, but several Power BI-derived or manually curated logic layers still need to be mapped, recreated, or productionised.
+
+Confirmed:
+
+- Customers can be reproduced from `customer_account_management.vwaccount`.
+- All accounts can be reproduced from `customer_account_management.vwaccount`.
+- Activity can start from `customer_account_management.vwpermit`.
+- For the current EOFY celebration analysis, Activity is accepted as application workflow activity.
+- Support demand should use `customer_account_management.vwsupport` as the preferred numerator source.
+- `customer_account_management.vwsupport_enriched` is excluded from EOFY headline KPI production.
+- Portal service enablement can use `customer_account_management.vwservice_enablement`.
+- CSAT should use `customer_intelligence.vwcase`, not `vwsupport_enriched`.
+- Activity CSAT can be calculated using `customer_intelligence.vwcase` scoped to portal-enabled services.
+- Support CSAT requires a manual mapping and is not yet productionised as a governed Databricks asset.
+
+Still pending:
+
+- Recreating the Power BI `vwpermit_statused` logic as a reusable reporting standard.
+- Mapping the exact `[Self-Service Support]` numerator logic from `vwsupport` beyond the pilot logic.
+- Creating a governed Support CSAT mapping asset.
+- Confirming the support channel field for real-time vs async CSAT segmentation.
+- Defining ownership and update process for the Support CSAT mapping.
+
+Current Activity direction:
+
+    Activity should be application workflow activity.
+
+This is accepted for the EOFY celebration analysis.
+
+Current Support direction:
+
+    Support demand should use vwsupport.
+
+Current Activity CSAT direction:
+
+    Activity CSAT should use customer_intelligence.vwcase scoped to vwservice_enablement.
+
+Current Support CSAT direction:
+
+    Support CSAT should use the manually mapped support service list for the celebration pilot only. Future use requires a governed Databricks mapping asset.
+
+`vwsupport_enriched` should be treated as optional exploratory context only, not a source for headline KPI production or CSAT calculation.
