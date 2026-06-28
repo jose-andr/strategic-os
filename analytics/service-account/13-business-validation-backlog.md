@@ -371,5 +371,13 @@ The validation items in this file should be treated as follow-up work for reusab
 | Confirm RPP proxy service mapping source. | Proxy depends on selected ask-service names. | Current labels are documented, but source table / mapping ownership should be confirmed. | Confirm whether mapping lives in Power BI, Databricks, or manual table. |
 | Confirm whether RPP Support CSAT proxy can be used on the celebration slide. | It is service-specific and not a complete support CSAT standard. | Use as explanatory stabilisation evidence only. | Confirm with stakeholder before final slide. |
 | Validate Support CSAT standard for broader Service Account services. | Current proxy only covers RPP support pathway. | Not yet available as a complete standard. | Future work. |
+
+## Support CSAT productionisation
+
+| Validation item | Why it matters | Current working position | Owner / next action |
+|---|---|---|---|
+| Implement Support CSAT mapping as a governed Databricks asset. | Genie cannot reliably use a personal workspace markdown or SQL file as a reusable Support CSAT filter. | Celebration pilot analysis is complete using the manual mapping, but Support CSAT is not yet a repeatable self-serve Genie metric. | Engage data / platform developers to create a governed reference table or curated view. |
+| Confirm target asset name and location. | A stable table or view is needed so Genie and future analysts can reuse the same Support CSAT definition. | Candidate names: `customer_account_management.support_csat_service_mapping` or `customer_account_management.vwsupport_csat_service_mapping`. | Confirm with data governance / Databricks owners. |
+| Validate mapped support services before production use. | The current mapping is final for the celebration pilot, but production use needs ownership and change control. | Manual mapping is accepted for the pilot only. | Confirm service owner and update process for future portal-enabled services. |
 | Validate channel segmentation for support CSAT. | Real-time vs async classification depends on actual channel values and business meaning. | Working rule: Phone, Live Chat, Face-to-Face = In Real-time; all others = Async. | Validate against `customer_intelligence.vwcase.Channel` and `vwsupport.channel`. |
 | Confirm legacy-system explanation for missing pre-enable Parking CSAT. | Explains why pre/post CSAT is structurally unavailable. | Working hypothesis: Parking permits may have lived in a legacy system before migration into the current CRM / CSAT model. | Validate with CRM / Parking / data owner. |
