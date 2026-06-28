@@ -24,18 +24,39 @@ Review these files as a minimum:
 - `analytics/service-account/13-business-validation-backlog.md`
 - `analytics/service-account/14-capability-milestones.md`
 - `analytics/service-account/15-rpp-support-csat-proxy.md`
+- `analytics/service-account/19-genie-pilot-test-prompts.md`
+- `analytics/service-account/20-support-csat-service-mapping.md`
 - `analytics/service-account/sql/README.md`
 
 Check specifically for inconsistencies in:
 
 - Customers
 - Activity
-- Support
-- CSAT
+- Support demand
+- Activity CSAT
+- Support CSAT
+- Support CSAT productionisation
 - CRM Record Type interpretation
+- Support pathway taxonomy
 - RPP Support CSAT proxy
 - slide-safe claims
 - source usage
+
+Support CSAT review rule:
+
+Support CSAT must not be calculated from:
+
+- all Customer Enquiry services
+- automatic service-name matching
+- `Record_Type`
+- `vwsupport_enriched`
+- unmapped support services
+
+Support CSAT is valid only where the manually documented Support CSAT mapping has been applied.
+
+If no governed mapping asset is available, state that Support CSAT is not yet a repeatable self-serve Genie metric.
+
+For the celebration pilot, Support CSAT can only be discussed where the manual mapping and outputs are explicitly documented.
 
 Do not rewrite files unless asked.
 
@@ -45,9 +66,12 @@ Return the result in this format:
 |---|---|---|---|
 | Customers | Pass / Needs update |  |  |
 | Activity | Pass / Needs update |  |  |
-| Support | Pass / Needs update |  |  |
-| CSAT | Pass / Needs update |  |  |
+| Support demand | Pass / Needs update |  |  |
+| Activity CSAT | Pass / Needs update |  |  |
+| Support CSAT | Pass / Needs update |  |  |
+| Support CSAT productionisation | Pass / Needs update |  |  |
 | Record Type | Pass / Needs update |  |  |
+| Support pathway taxonomy | Pass / Needs update |  |  |
 | RPP proxy | Pass / Needs update |  |  |
 | Slide claims | Pass / Needs update |  |  |
 | Source usage | Pass / Needs update |  |  |
