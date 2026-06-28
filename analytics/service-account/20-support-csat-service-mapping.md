@@ -20,6 +20,23 @@ The source mapping for this pilot is the Databricks workspace file:
 
 This workspace file should be treated as the source of truth for Support CSAT filtering during the EOFY celebration analysis.
 
+## Implementation note
+
+For the EOFY celebration pilot, the Support CSAT analysis has been completed using the manually mapped support service list.
+
+The manual mapping is sufficient for the current celebration analysis, but it is not yet implemented as a governed Databricks table or reusable production data asset.
+
+Attempts to use a personal Databricks workspace markdown or SQL file as a reusable Genie-accessible mapping source were not reliable. Genie could recognise that a manual mapping was required, but could not consistently access or apply the personal workspace file as an executable filter.
+
+Moving forward, Support CSAT should be implemented with developer support as a governed data asset, such as a reference table or curated view, for example:
+
+`datahub_datamart.customer_account_management.support_csat_service_mapping`
+
+or
+
+`datahub_datamart.customer_account_management.vwsupport_csat_service_mapping`
+
+Until this governed mapping exists, Support CSAT should not be treated as a repeatable self-serve Genie metric. It can be used for the celebration pilot only where the manual mapping and analysis outputs are explicitly documented.
 ## Why manual mapping is required
 
 Automated matching from portal service names to Customer Enquiry service names was tested but did not produce reliable results.
