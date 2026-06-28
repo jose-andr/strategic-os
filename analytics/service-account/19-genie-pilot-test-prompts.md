@@ -19,23 +19,24 @@ Genie should:
 - use `customer_portal = TRUE`
 - use `first_account_portal_on_date`
 - not confuse Customers with All accounts
+- compare FY2024/25 with FY2025/26 unless asked otherwise
 
 ### Expected known result
 
 | Period | Customers |
 |---|---:|
-| Previous FY | 5,500 |
-| Current FY | 9,838 |
+| Previous FY, FY2024/25 | 9,838 |
+| Current FY, FY2025/26 | 15,570 |
 
 Expected interpretation:
 
-> Service Account / portal sign-ups increased by 78.9% year on year.
+> Service Account / portal sign-ups increased by 58.3% year on year.
 
 ## Test 2: Activity
 
 ### Prompt
 
-Did self-service activity increase year on year?
+Did self-service activity increase in the current FY compared with the previous FY?
 
 ### Expected behaviour
 
@@ -46,17 +47,18 @@ Genie should:
 - use `period_start`
 - include Draft, Submitted, Further information requested, In Progress, Pending Payment
 - exclude permit lifecycle statuses unless later confirmed
+- compare FY2024/25 with FY2025/26 unless asked otherwise
 
 ### Expected known result
 
 | Period | Activity applications |
 |---|---:|
-| Previous FY | 2,209 |
-| Current FY | 3,766 |
+| Previous FY, FY2024/25 | 2,209 |
+| Current FY, FY2025/26 | 3,751 |
 
 Expected interpretation:
 
-> Application workflow activity increased by 70.5%.
+> Application workflow activity increased by 69.8%.
 
 ## Test 3: Support rate
 
@@ -71,51 +73,89 @@ Genie should:
 - use `datahub_datamart.customer_account_management.vwsupport` for support numerator
 - use `vwpermit` activity applications as denominator
 - calculate support per 100 activities
+- filter support cases to `is_after_service_enablement = TRUE`
+- use `date_time_opened` for support case date
 - avoid using raw support volume as the headline
 - not use `vwsupport_enriched` for headline KPI production
+- compare FY2024/25 with FY2025/26 unless asked otherwise
 
 ### Expected known result
 
-| Period | Support per 100 activities |
-|---|---:|
-| Previous FY | 496.9 |
-| Current FY | 409.3 |
+| Period | Activity applications | Support cases | Support per 100 activities |
+|---|---:|---:|---:|
+| Previous FY, FY2024/25 | 2,209 | 10,976 | 496.9 |
+| Current FY, FY2025/26 | 3,751 | 15,475 | 412.6 |
 
 Expected interpretation:
 
-> Support demand reduced by 17.6% relative to activity.
+> Support demand reduced by about 17.0% relative to activity. Support volume increased, but activity increased faster.
 
 ## Test 4: Activity CSAT
 
 ### Prompt
 
-Did Activity CSAT improve year on year?
+Did Activity CSAT improve in the current FY compared with the previous FY?
 
 ### Expected behaviour
-
-Genie should not simply answer yes.
 
 Genie should:
 
 - use `datahub_datamart.customer_intelligence.vwcase`
-- define CSAT using `Satisfaction_Score_5 IN (4, 5)`
+- define CSAT using `Satisfaction_Score_5 IN (4, 5)` over non-null satisfaction scores
 - use `Survey_Completion_Date`
-- explain that Activity CSAT is a current-state strength metric
-- explain that Previous FY has only 18 valid responses
-- avoid saying Activity CSAT improved YoY
+- scope Activity CSAT to portal-enabled services from `vwservice_enablement`
+- compare FY2024/25 with FY2025/26 unless asked otherwise
+- explain that FY2023/24 has only 18 valid responses and should not be used as the main baseline
+- avoid claiming portal enablement caused the improvement
 
 ### Expected known result
 
-| Period | Valid responses | CSAT |
-|---|---:|---:|
-| Previous FY | 18 | 88.9% |
-| Current FY | 888 | 76.5% |
+| Period | Valid responses | Positive responses | Activity CSAT |
+|---|---:|---:|---:|
+| FY2023/24 | 18 | 16 | 88.9% |
+| Previous FY, FY2024/25 | 889 | 680 | 76.5% |
+| Current FY, FY2025/26 | 1,721 | 1,387 | 80.6% |
 
 Expected interpretation:
 
-> Activity CSAT should not be framed as a YoY improvement. Current FY portal-enabled Activity CSAT is strong at 76.5% from 888 valid responses.
+> Portal-enabled Activity CSAT improved from 76.5% to 80.6%, with valid responses increasing from 889 to 1,721. FY2023/24 should not be used as the main baseline because it has only 18 valid responses.
 
-## Test 5: Support CSAT proxy
+## Test 5: Support CSAT mapping availability
+
+### Prompt
+
+Calculate Support CSAT for FY2024/25 vs FY2025/26 using the manual Support CSAT mapping.
+
+### Expected behaviour
+
+Genie should not calculate Support CSAT from:
+
+- all Customer Enquiry services
+- automatic service-name matching
+- `Record_Type`
+- `vwsupport_enriched`
+- unmapped services
+
+Genie should either:
+
+1. use a governed Support CSAT mapping asset if available, or
+2. say Support CSAT is not yet available as a repeatable self-serve metric because the manual mapping is not available as a governed Databricks table or view.
+
+### Pass condition
+
+Genie does not produce an unsupported Support CSAT result.
+
+### Current pilot note
+
+For the EOFY celebration pilot, Support CSAT analysis has been completed using the manually documented mapping.
+
+Future self-serve Support CSAT requires developer support to create a governed Databricks mapping asset.
+
+Expected interpretation:
+
+> Support CSAT should not be treated as a repeatable self-serve Genie metric until the manual mapping is implemented as a governed Databricks reference table or curated view.
+
+## Test 6: Support CSAT overall claim
 
 ### Prompt
 
@@ -123,20 +163,21 @@ Can we say Support CSAT improved overall?
 
 ### Expected behaviour
 
-Genie should not say support CSAT improved overall.
+Genie should not say Support CSAT improved overall unless the manual Support CSAT mapping has been applied.
 
 Genie should:
 
-- explain that full Service Account Support CSAT is not yet validated
-- distinguish the RPP Support CSAT proxy from a full support CSAT standard
-- use proxy language only
-- explain that Residential Parking expert enquiry CSAT recovered from 69% post-portal to 78% in the current ELT period
+- distinguish mapped Support CSAT from all Customer Enquiry CSAT
+- avoid using `Record_Type` as the support definition
+- avoid claiming improvement if the governed mapping asset is unavailable
+- explain that the celebration pilot used manually documented Support CSAT analysis
+- state that future self-serve Support CSAT requires a governed mapping asset
 
 ### Expected interpretation
 
-> We cannot claim Support CSAT improved overall. We can say Residential Parking expert support is showing signs of stabilisation, with proxy CSAT recovering from 69% post-portal to 78% in the current ELT period.
+> We cannot claim Support CSAT improved overall as a repeatable self-serve metric unless the manual Support CSAT mapping has been applied. For the celebration pilot, Support CSAT analysis can be discussed only where the manual mapping and outputs are explicitly documented.
 
-## Test 6: Source confusion
+## Test 7: Source confusion
 
 ### Prompt
 
@@ -150,7 +191,7 @@ Expected interpretation:
 
 > For headline support demand, use `datahub_datamart.customer_account_management.vwsupport`, not `vwsupport_enriched`. The enriched view is exploratory context only and should not be used for headline KPI production.
 
-## Test 7: Record Type
+## Test 8: Record Type
 
 ### Prompt
 
@@ -163,13 +204,33 @@ Genie should:
 - explain that `Record_Type` is a CRM classification field
 - explain that `Ask` may indicate enquiry-style demand
 - not treat `Ask` as a complete Support CSAT definition
-- recommend validating service names, channels, support case logic, and business interpretation
+- recommend using the manual Support CSAT mapping
+- avoid using `Record_Type` as the main support breakdown or rationale
 
 ### Expected interpretation
 
-> `Record_Type = 'Ask'` can be a candidate segmentation filter, but it is not sufficient by itself to define Support CSAT.
+> `Record_Type = 'Ask'` is not sufficient to define Support CSAT. Support CSAT requires a mapped list of portal-relevant support/enquiry services.
 
-## Test 8: Slide-safe synthesis
+## Test 9: Support pathway taxonomy
+
+### Prompt
+
+Compare Support CSAT by support pathway: Resolved, Assisted, and Expert Enquiry.
+
+### Expected behaviour
+
+Genie should:
+
+- use support pathway values from the manual Support CSAT mapping if available
+- not infer Support CSAT from all Customer Enquiry services
+- explain that Assisted may be underused or inconsistently applied if volumes are very low
+- treat low Assisted usage as a business validation question, not a confirmed conclusion
+
+### Expected interpretation
+
+> Support pathway analysis should use the mapped support service list. Resolved, Assisted, and Expert Enquiry describe support handling complexity, but pathway usage should be validated with Contact Centre operations before drawing operational conclusions.
+
+## Test 10: Slide-safe synthesis
 
 ### Prompt
 
@@ -179,15 +240,17 @@ Write the slide-safe summary for the EOFY celebration analysis.
 
 Genie should use only slide-safe claims:
 
-- Customers +78.9%
-- Activity +70.5%
-- Support per 100 activities -17.6%
-- Activity CSAT 76.5% from 888 current-year responses
-- RPP expert support proxy recovered from 69% to 78%
+- Customers +58.3%
+- Activity +69.8%
+- Support per 100 activities about -17.0%
+- Activity CSAT improved from 76.5% to 80.6%
+- valid Activity CSAT responses increased from 889 to 1,721
+- Support CSAT only where manually mapped and documented
+- no causality claim
 
 ### Expected response
 
-> Service Account adoption and usage are growing. Customer sign-ups increased by 78.9%, and application workflow activity increased by 70.5%. Support demand per 100 activities reduced by 17.6%, showing that support demand is reducing relative to self-service activity. Customers are reporting strong satisfaction with portal-enabled activity, with 76.5% CSAT from 888 current-year responses. Residential Parking support is also showing signs of stabilisation after migration, with expert enquiry CSAT recovering from 69% post-portal to 78% in the current ELT period.
+> Service Account adoption and usage are growing. Customer sign-ups increased by 58.3%, and application workflow activity increased by 69.8%. Support demand per 100 activities reduced by about 17.0%, showing that support demand is reducing relative to self-service activity. Portal-enabled Activity CSAT improved from 76.5% to 80.6%, with valid responses increasing from 889 to 1,721. Support CSAT should only be discussed where the manual support service mapping has been applied and documented.
 
 ## Evaluation rubric
 
@@ -195,10 +258,11 @@ Genie should use only slide-safe claims:
 |---|---|
 | Source selection | Uses the accepted source tables. |
 | Metric definition | Applies the pilot definitions correctly. |
-| Caveat handling | Flags weak baselines and proxy limitations. |
+| Caveat handling | Flags weak baselines, mapping limitations, and proxy limitations. |
 | Claim safety | Avoids unsupported improvement or causality claims. |
 | Strategic interpretation | Explains what the result means for Service Account / Portal CX. |
-| Repo alignment | Matches `16-agent-consistency-check.md` and `18-genie-agent-context.md`. |
+| Support CSAT handling | Does not calculate Support CSAT from all Customer Enquiry services, `Record_Type`, automatic matching, or `vwsupport_enriched`. |
+| Repo alignment | Matches `16-agent-consistency-check.md`, `18-genie-agent-context.md`, and `20-support-csat-service-mapping.md`. |
 
 ## Test outcome log
 
