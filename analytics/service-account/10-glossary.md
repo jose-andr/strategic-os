@@ -7,7 +7,7 @@ It is adapted from the broader Portal CX Dashboard glossary and refined for the 
 The glossary has two purposes:
 
 1. Keep slide language simple and audience-friendly.
-2. Keep internal metric language precise enough to support SQL, Power BI, Databricks validation, and future reuse.
+2. Keep internal metric language precise enough to support SQL, Power BI, Databricks validation, Genie testing, and future reuse.
 
 ## Dashboard context
 
@@ -35,7 +35,7 @@ For the EOFY celebration slide, use simple language.
 | Activity | Application workflow activity through the portal |
 | Support | Portal support demand relative to Activity |
 | CSAT on Activity | Customer satisfaction related to portal-enabled application activity |
-| CSAT on Support | Customer satisfaction related to support interactions |
+| CSAT on Support | Customer satisfaction related to mapped portal-relevant support pathways |
 | All accounts | Total CRM account base, used as a context metric only |
 
 Important distinction:
@@ -45,6 +45,8 @@ Important distinction:
 - `All accounts` means the total CRM account base and is used only for context.
 - `Activity` means application workflow activity, not permit lifecycle activity.
 - `Support` should be shown as a rate, not as raw support volume.
+- `Activity CSAT` and `Support CSAT` are separate metrics.
+- `Support CSAT` must use the manually mapped support service list.
 
 ## Celebration story frame
 
@@ -53,8 +55,8 @@ The one-slide EOFY celebration analysis uses this story frame:
 1. More customers
 2. More self-service activity
 3. Less support demand relative to activity
-4. Better activity CSAT
-5. Better support CSAT
+4. Better Activity CSAT
+5. Support CSAT only where manually mapped and documented
 
 ## Customers
 
@@ -262,9 +264,11 @@ The specific service associated with an account, case, support interaction, surv
 
 Service name is important because it is currently used to connect CSAT responses to portal-relevant services.
 
-For CSAT analysis, service names should be matched using normalised text logic unless a stronger key is available:
+For Activity CSAT analysis, service names should be matched using normalised text logic unless a stronger key is available:
 
     LOWER(TRIM(service_name))
+
+For Support CSAT analysis, do not rely on automatic service-name matching. Use the manually mapped support service list.
 
 ## Portal service enablement
 
@@ -289,9 +293,11 @@ Use `vwservice_enablement` to:
 
 - identify portal-enabled services
 - define the portal-relevant service cohort
-- filter or segment CSAT by service
+- filter or segment Activity CSAT by service
 - support pre/post enablement diagnostics
-- avoid manually guessing which services belong in the portal scope
+- avoid manually guessing which application services belong in the portal scope
+
+For Support CSAT, `vwservice_enablement` helps identify the portal service cohort, but the final Support CSAT filter must come from the manually mapped support service list.
 
 ## Support
 
@@ -367,6 +373,20 @@ For the EOFY celebration pilot:
 - do not use it for CSAT calculation
 - treat it as optional exploratory context only
 
+## Support pathway taxonomy
+
+Support pathway describes how the contact centre handled an enquiry.
+
+| Pathway | Meaning |
+|---|---|
+| Resolved | Contact centre resolved the enquiry during the interaction without assistance from another business area. |
+| Assisted | Contact centre resolved the enquiry during the interaction with assistance from another business area. |
+| Expert Enquiry | Contact centre could not resolve the enquiry during the interaction, so the case was assigned to an expert to contact the customer. |
+
+For Support CSAT, support pathway should come from the manually mapped `support_pathway` values where available.
+
+Low `Assisted` usage should be treated as a business validation question, not a confirmed conclusion about agent behaviour.
+
 ## Channel
 
 Channel describes the source or channel through which a case, support interaction, or customer contact was initiated.
@@ -382,7 +402,7 @@ Use Channel for:
 - real-time vs async classification
 - CSAT by channel diagnostics
 
-Canonical CRM case descriptors should align to `datahub_refined.customer.vwcase`. :contentReference[oaicite:0]{index=0}
+Canonical CRM case descriptors should align to `datahub_refined.customer.vwcase`.
 
 ## Channel type
 
@@ -458,23 +478,36 @@ CSAT on Activity
 
 Customer satisfaction related to portal-enabled application activity.
 
-For the pilot, this is best represented by survey responses for the portal-relevant service-name cohort, especially where `Record_Type = 'Apply'`.
+For the pilot, this is represented by survey responses for the portal-relevant service-name cohort from `vwservice_enablement`.
+
+### Databricks source
+
+`datahub_datamart.customer_intelligence.vwcase`
+
+### Portal relevance source
+
+`datahub_datamart.customer_account_management.vwservice_enablement`
 
 ### Current validated result
 
-Current FY portal-enabled Activity CSAT:
+For the current celebration comparison:
 
-    76.5% from 888 valid responses
+| Period | Valid responses | Positive responses | Activity CSAT |
+|---|---:|---:|---:|
+| FY2024/25 | 889 | 680 | 76.5% |
+| FY2025/26 | 1,721 | 1,387 | 80.6% |
+
+FY2023/24 has only 18 valid responses and should not be used as the main baseline.
 
 ### Interpretation caution
 
-The previous FY response base for portal-enabled Activity CSAT is very small.
+Activity CSAT can be compared between FY2024/25 and FY2025/26 for the celebration pilot.
 
-Avoid direct YoY improvement framing unless a stable comparison baseline is agreed.
+Do not claim that portal enablement caused the CSAT improvement unless causality is supported.
 
 Recommended slide wording:
 
-> Strong satisfaction on portal-enabled activity: 76.5% CSAT from 888 current-year responses.
+> Portal-enabled Activity CSAT improved from 76.5% to 80.6%, with valid responses increasing from 889 to 1,721.
 
 ## CSAT on Support
 
@@ -484,30 +517,68 @@ CSAT on Support
 
 ### Internal definition
 
-Customer satisfaction related to support interactions.
+Customer satisfaction related to mapped portal-relevant support pathways.
 
-For this pilot, Support CSAT still requires validation.
+Support CSAT is not all Customer Enquiry CSAT.
 
-Important caution:
+For the celebration pilot, Support CSAT must use the manually documented Support CSAT mapping.
 
-`Record_Type = 'Ask'` may indicate enquiry-style cases, but it should not be treated as the full Support CSAT definition without service and channel validation.
+### Manual mapping documentation
+
+`analytics/service-account/20-support-csat-service-mapping.md`
+
+### Working Databricks workspace mapping file
+
+`/Users/jose.andrade@melbourne.vic.gov.au/support-csat-service-mapping.md`
+
+### Support CSAT inclusion rule
+
+Only include CSAT cases where:
+
+`customer_intelligence.vwcase.Service_Name`
+
+matches a mapped:
+
+`support_service_name`
+
+### Do not calculate Support CSAT from
+
+- all Customer Enquiry services
+- automatic service-name matching
+- `Record_Type`
+- `vwsupport_enriched`
+- unmapped support services
+
+### Current productionisation status
+
+Support CSAT is valid for the celebration pilot only where the manual mapping and analysis outputs are explicitly documented.
+
+Support CSAT is not yet a repeatable self-serve Genie metric because the mapping has not been implemented as a governed Databricks table or curated view.
+
+Future self-serve Support CSAT requires developer support to create a governed mapping asset.
+
+Candidate governed asset names:
+
+- `datahub_datamart.customer_account_management.support_csat_service_mapping`
+- `datahub_datamart.customer_account_management.vwsupport_csat_service_mapping`
 
 ## CSAT comparison principle
 
-For the EOFY Service Account / Portal CX pilot, CSAT should be compared by a portal-relevant service-name cohort, not only by portal enablement date.
+For the EOFY Service Account / Portal CX pilot, CSAT should be compared by clearly defined service cohorts.
 
 The preferred pilot framing is:
 
-1. Identify the relevant Service Account / portal service names using `vwservice_enablement`.
-2. Compare CSAT for those services across selected reporting windows.
-3. Use pre/post portal enablement analysis as a diagnostic layer to understand whether satisfaction changed after a service became portal-enabled.
+1. Activity CSAT: identify relevant Service Account / portal application service names using `vwservice_enablement`.
+2. Support CSAT: use the manually mapped support service list.
+3. Use pre/post portal enablement analysis as a diagnostic layer only where a usable pre-enable baseline exists.
 
-This separates two different questions:
+This separates different questions:
 
 | Question | Purpose |
 |---|---|
-| How satisfied were customers with the relevant service cohort this year compared with last year? | Main EOFY comparison. |
-| Did CSAT change after a service became portal-enabled? | Diagnostic / impact analysis. |
+| How satisfied were customers with portal-enabled application activity this year compared with last year? | Activity CSAT comparison. |
+| How satisfied were customers with mapped portal-relevant support pathways? | Support CSAT comparison, only where manual mapping is applied. |
+| Did CSAT change after a service became portal-enabled? | Diagnostic / impact analysis only where a valid pre-enable baseline exists. |
 
 ## CRM case data
 
@@ -576,10 +647,16 @@ The silver-layer descriptor defines `Record_Type` as:
 
 | Record_Type | Working interpretation | Analysis caution |
 |---|---|---|
-| `Ask` | Enquiry or request for information. | May indicate support-style demand, but should not be assumed to represent all Service Account support without validation. |
-| `Apply` | Application-related case. | Closest fit for portal-enabled application activity CSAT. |
+| `Ask` | Enquiry or request for information. | May indicate support-style demand, but should not be assumed to represent Support CSAT. |
+| `Apply` | Application-related case. | May help identify application-style CSAT records, but Activity CSAT should still be scoped by portal-enabled services. |
 | `Report` | Customer lets Council know something needs attention. | Generally outside the current Service Account application workflow scope unless linked to a portal-enabled service. |
 | `Object` | Customer contests or objects to a decision. | Generally outside the current Service Account activity/support headline scope unless explicitly included later. |
+
+### Important caution
+
+Do not use `Record_Type` as the main Support CSAT breakdown or rationale.
+
+Support CSAT requires the manually mapped support service list.
 
 ## Portal eligibility
 
@@ -591,9 +668,9 @@ For this pilot, portal eligibility is defined differently by metric:
 |---|---|
 | Customers | `vwaccount.customer_portal = TRUE` and `first_account_portal_on_date` in reporting window |
 | Activity | Application workflow activity in accepted statuses |
-| Support | `vwsupport.is_after_service_enablement = TRUE` |
+| Support demand | `vwsupport.is_after_service_enablement = TRUE` |
 | Activity CSAT | CSAT responses for portal-relevant services, identified through `vwservice_enablement` |
-| Support CSAT | Still to validate |
+| Support CSAT | CSAT responses for manually mapped portal-relevant support services only |
 
 ## Date logic
 
@@ -603,7 +680,7 @@ The agreed decision about which date field controls selected-period reporting.
 |---|---|
 | Customers | `vwaccount.first_account_portal_on_date` |
 | Activity | `vwpermit.period_start` |
-| Support | `vwsupport.date_time_opened` |
+| Support demand | `vwsupport.date_time_opened` |
 | CSAT | `customer_intelligence.vwcase.Survey_Completion_Date` |
 | Portal service enablement | `vwservice_enablement.first_portal_enable_date` |
 
@@ -612,10 +689,34 @@ Use half-open date windows in SQL:
     date_field >= start_date
     AND date_field < end_date
 
-For FY2025:
+For FY2024/25:
 
     date_field >= DATE('2024-07-01')
     AND date_field < DATE('2025-07-01')
+
+For FY2025/26:
+
+    date_field >= DATE('2025-07-01')
+    AND date_field < DATE('2026-07-01')
+
+## Celebration comparison
+
+For the current EOFY celebration analysis, use:
+
+| Period | Date window |
+|---|---|
+| Previous FY | FY2024/25 |
+| Current FY | FY2025/26 |
+
+Known live results:
+
+| Metric | Previous FY | Current FY | Movement |
+|---|---:|---:|---:|
+| Customers | 9,838 | 15,570 | +58.3% |
+| Activity | 2,209 | 3,751 | +69.8% |
+| Support per 100 activities | 496.9 | 412.6 | about -17.0% |
+| Activity CSAT | 76.5% | 80.6% | +4.1 percentage points |
+| Activity CSAT valid responses | 889 | 1,721 | +832 responses |
 
 ## Capability milestone
 
@@ -646,7 +747,7 @@ Use milestones to explain structural changes in:
 
 ## Source of truth
 
-The authoritative field, table, or Power BI measure used for a metric definition.
+The authoritative field, table, measure, or governed reference asset used for a metric definition.
 
 For this work:
 
@@ -654,6 +755,7 @@ For this work:
 - Curated Databricks views are used to reproduce and scale the logic.
 - `datahub_refined.customer.vwcase` is used as the canonical descriptor source for common CRM case fields.
 - The GitHub repo stores reusable logic, assumptions, caveats, non-sensitive synthesis, and lessons learned.
+- Support CSAT mapping is currently documented manually and needs a governed Databricks table or curated view before it becomes a repeatable self-serve Genie metric.
 
 ## Data quality warning
 
@@ -663,8 +765,9 @@ Any EOFY celebration analysis should keep data quality warnings outside the slid
 
 Current known warnings:
 
-- Activity CSAT Previous FY has a very small response base.
-- Support CSAT filter is not yet validated.
-- Service name joins use normalised text matching and should be checked for unmatched services.
+- FY2023/24 Activity CSAT has a very small response base and should not be used as the main comparison baseline.
+- Support CSAT is valid for the celebration pilot only where the manually documented mapping and outputs are explicitly applied.
+- Support CSAT is not yet a repeatable self-serve Genie metric.
+- Service name joins for Activity CSAT use normalised text matching and should be checked for unmatched services.
 - Capability milestones may explain major changes in activity, support, and CSAT volumes.
 - No raw organisational data or customer-level data should be stored in the repository.
