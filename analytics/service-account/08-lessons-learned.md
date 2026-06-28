@@ -88,7 +88,7 @@ The celebration frame made the analytical task concrete:
 1. More customers
 2. More self-service activity
 3. Less support demand relative to activity
-4. Strong activity CSAT
+4. Strong or improving Activity CSAT
 5. Support stabilisation
 
 ### What did not work
@@ -108,7 +108,8 @@ Examples:
 | Customers | Service Account / portal sign-ups, not all CRM accounts. |
 | Activity | Application workflow activity, not permit lifecycle activity. |
 | Support | Support demand relative to activity, not raw support volume. |
-| CSAT | Must distinguish direct Activity CSAT from proxy Support CSAT. |
+| Activity CSAT | Satisfaction for portal-enabled application activity. |
+| Support CSAT | Satisfaction for mapped enquiry/support pathways only. |
 
 ### Schema issues found
 
@@ -130,7 +131,7 @@ AI assistance is most useful when constrained by:
 
 ### Interpretation issues found
 
-The slide story should avoid overstating causality or improvement where the baseline is weak.
+The slide story should avoid overstating causality or improvement where the baseline is weak or the metric is not productionised.
 
 ### Reusable pattern
 
@@ -142,7 +143,7 @@ Continue using the one-slide celebration analysis as the pilot use case.
 
 ### Next improvement
 
-Convert accepted pilot logic into reusable SQL templates and validation checklists.
+Convert accepted pilot logic into reusable SQL templates, validation checklists, and governed data assets where required.
 
 ---
 
@@ -180,7 +181,7 @@ Required fields include:
 | Case reference | `Case_Number` |
 | Record type | `Record_Type` |
 
-Direct Activity CSAT is available for portal-relevant `Apply` services.
+Direct Activity CSAT is available for portal-relevant application services.
 
 ### What did not work
 
@@ -190,27 +191,30 @@ Most portal-enabled services have no usable pre-enable CSAT base in `customer_in
 
 ### Metric issues found
 
-The portal service-name cohort has a strong current-year Activity CSAT base, but weak prior-year and pre-enable response data.
+The portal service-name cohort has a usable current and previous year Activity CSAT base for the celebration comparison, but weak earlier pre-enable response data.
 
 Key findings:
 
 | Finding | Implication |
 |---|---|
-| Current FY Activity CSAT has 888 valid responses. | Usable as a current-state strength metric. |
-| Previous FY Activity CSAT has only 18 valid responses. | Do not frame as a YoY improvement. |
+| FY2024/25 Activity CSAT has 889 valid responses. | Usable as the previous year comparison base. |
+| FY2025/26 Activity CSAT has 1,721 valid responses. | Usable as the current year comparison base. |
+| Activity CSAT improved from 76.5% to 80.6%. | Can be used as a celebration proof point, with no causality claim. |
+| FY2023/24 Activity CSAT has only 18 valid responses. | Do not use as the main baseline. |
 | Most portal-enabled services have no usable pre-enable CSAT base. | Do not use pre/post enablement CSAT as a headline impact measure. |
-| Parking dominates current Activity CSAT response volume. | Interpret results in the context of Residential Parking migration. |
-| RPP Support CSAT can be approximated using selected enquiry/support services. | Use as explanatory evidence of support-pathway stabilisation. |
+| Parking contributes strongly to current Activity CSAT response volume. | Interpret results in the context of Residential Parking migration. |
 
 ### Schema issues found
 
 `customer_intelligence.vwcase` does not include `is_after_enablement`.
 
-For CSAT analysis, portal relevance must be derived by joining to:
+For Activity CSAT analysis, portal relevance must be derived by matching:
+
+`customer_intelligence.vwcase.Service_Name`
+
+to the portal-enabled service cohort in:
 
 `datahub_datamart.customer_account_management.vwservice_enablement`
-
-using normalised service names.
 
 ### Genie / AI issues found
 
@@ -218,9 +222,9 @@ The assistant initially over-relied on a post-enable filter and assumed support-
 
 The improved framing separates:
 
-- service cohort comparison
+- Activity CSAT for portal-enabled application services
 - pre/post enablement diagnostics
-- RPP support proxy analysis
+- Support CSAT for manually mapped support/enquiry services
 
 ### Interpretation issues found
 
@@ -238,20 +242,136 @@ Separate three CSAT questions:
 
 | Question | Best current method |
 |---|---|
-| How satisfied are customers with portal-enabled application activity now? | Direct Activity CSAT from `customer_intelligence.vwcase`. |
-| Did CSAT improve after portal enablement? | Only where a usable pre-enable baseline exists. Not viable for the current pilot. |
-| Is support experience stabilising after migration? | RPP Support CSAT proxy using selected enquiry/support services. |
+| How satisfied are customers with portal-enabled application activity? | Direct Activity CSAT from `customer_intelligence.vwcase`, scoped to portal-enabled services. |
+| Did CSAT improve after portal enablement? | Only where a usable pre-enable baseline exists. Not viable as a headline for the current pilot. |
+| How satisfied are customers with portal-relevant support pathways? | Support CSAT using the manually mapped support/enquiry service list. |
 
 ### Decision or recommendation
 
 For the celebration slide, use:
 
-> Portal-enabled activity CSAT is strong at 76.5% from 888 current-year responses.
+> Portal-enabled Activity CSAT improved from 76.5% to 80.6%, with valid responses increasing from 889 to 1,721.
 
-For support, use proxy language:
-
-> Residential Parking expert support is showing signs of stabilisation, with proxy CSAT recovering from 69% post-portal to 78% in the current ELT period.
+Do not claim that portal enablement caused the improvement unless causality is supported.
 
 ### Next improvement
 
-Confirm RPP proxy period dates and maintain the RPP proxy service mapping as a reusable asset.
+Maintain separate definitions for Activity CSAT and Support CSAT, and avoid collapsing them into a single generic CSAT metric.
+
+---
+
+## Lesson 3: Support CSAT needs a governed mapping asset
+
+### Date
+
+[YYYY-MM-DD]
+
+### Theme
+
+Support CSAT / data productisation / Genie reliability
+
+### What we tested
+
+Whether Support CSAT could be calculated as a repeatable Genie metric using:
+
+- all Customer Enquiry services
+- automatic service-name matching
+- `Record_Type`
+- a manually curated mapping in a personal Databricks workspace markdown file
+- a saved SQL file in a personal Databricks workspace
+
+### What worked
+
+The analysis confirmed that Support CSAT requires a curated mapping between portal-enabled services and related enquiry/support services.
+
+The final pilot mapping was documented in:
+
+`analytics/service-account/20-support-csat-service-mapping.md`
+
+The working Databricks workspace mapping file was:
+
+`/Users/jose.andrade@melbourne.vic.gov.au/support-csat-service-mapping.md`
+
+The mapping allowed Support CSAT to be scoped to portal-relevant support experience rather than all support experience.
+
+### What did not work
+
+Automatic service-name matching did not produce reliable Support CSAT scope.
+
+Personal Databricks workspace markdown and SQL files were not reliable as reusable Genie-accessible mapping assets.
+
+Genie could recognise that Support CSAT required a manual mapping, but could not consistently access or apply the personal workspace file as an executable filter.
+
+### Metric issues found
+
+Support CSAT is not the same as all Customer Enquiry CSAT.
+
+Support CSAT should only include enquiry/support services that are explicitly mapped to portal-enabled services.
+
+The current mapping is final for the celebration pilot, but it is narrower than the full `vwservice_enablement` service list and should not be interpreted as complete coverage of all portal-enabled services.
+
+### Schema issues found
+
+The required Support CSAT mapping does not yet exist as a governed Databricks table or curated view.
+
+Candidate governed asset names:
+
+`datahub_datamart.customer_account_management.support_csat_service_mapping`
+
+or
+
+`datahub_datamart.customer_account_management.vwsupport_csat_service_mapping`
+
+### Genie / AI issues found
+
+Genie needs the mapping to exist as an accessible governed data asset, not as a personal workspace file, for reliable self-serve analysis.
+
+Without a governed mapping asset, Genie may either:
+
+- refuse to calculate Support CSAT because the mapping is unavailable
+- fall back to broad Customer Enquiry logic
+- over-map unrelated support services
+- under-map valid portal-relevant support pathways
+
+### Interpretation issues found
+
+Support CSAT should not be claimed as an overall improved metric unless the manual mapping has been applied.
+
+Support pathway analysis should use the mapped `support_pathway` values:
+
+| Pathway | Meaning |
+|---|---|
+| Resolved | Contact centre resolved the enquiry during the interaction without assistance from another business area. |
+| Assisted | Contact centre resolved the enquiry during the interaction with assistance from another business area. |
+| Expert Enquiry | Contact centre could not resolve the enquiry during the interaction, so the case was assigned to an expert to contact the customer. |
+
+The Assisted pathway appears to have low usage in some analysis outputs. This may reflect operational classification behaviour and should be treated as a business validation question, not a confirmed data conclusion.
+
+### Reusable pattern
+
+For support-related experience metrics, separate:
+
+| Layer | Purpose |
+|---|---|
+| Portal-enabled service cohort | Defines which services are in the Service Account / Portal CX scope. |
+| Support case logic | Defines support demand and support rate. |
+| Support CSAT mapping | Defines which enquiry/support services are included in Support CSAT. |
+| Support pathway taxonomy | Explains Resolved, Assisted, and Expert Enquiry. |
+| Governed data asset | Makes the mapping reusable for Genie and future analysts. |
+
+### Decision or recommendation
+
+For the EOFY celebration pilot, Support CSAT can be used only where the manual mapping and analysis output are explicitly documented.
+
+Support CSAT should not be treated as a repeatable self-serve Genie metric until the mapping is implemented as a governed Databricks reference table or curated view.
+
+### Next improvement
+
+Engage data / platform developers to productionise the Support CSAT mapping as a governed asset.
+
+Target outcome:
+
+- a governed table or view containing the final mapped support services
+- clear ownership and change control
+- update process when new services are portal-enabled
+- Genie Space connected to the governed mapping asset
