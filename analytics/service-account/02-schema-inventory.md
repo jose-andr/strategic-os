@@ -220,3 +220,41 @@ Detailed schema validation findings are captured in:
 `09-schema-validation-summary.md`
 
 Use that file to record which fields were found, which metrics are supported, and which definition questions need to be resolved before final reusable reporting.
+## GA4 portal-entry data note
+
+GA4 portal-entry behaviour is outside the curated Databricks schema inventory.
+
+The current GA4 evidence comes from CSV exports used to create Power BI visuals.
+
+Do not treat GA4 CSV exports as governed Databricks sources.
+
+### Current status
+
+The existing GA4 Power BI visual was created from older CSV exports.
+
+Do not use current GA4 values as final EOFY slide evidence.
+
+GA4 may be used as contextual digital behaviour evidence only after:
+
+- the GA4 CSV export is refreshed
+- the reporting window is confirmed
+- selected portal login and registration links are validated
+- event meaning is confirmed
+- login vs sign-up tracking is validated
+- caveat wording is confirmed
+
+### Source boundary
+
+GA4 should not replace the curated Databricks sources for:
+
+- Customers
+- Activity
+- Support demand
+- Activity CSAT
+- mapped Support CSAT
+
+### Inventory position
+
+GA4 is not part of the current Databricks schema inventory.
+
+If GA4 becomes a repeatable source later, document the refreshed export structure, field definitions, reporting window, and ownership before using it as a reusable reporting asset.
