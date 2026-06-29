@@ -354,3 +354,46 @@ The slide should not claim:
 - Validate channel segmentation for Support CSAT after mapping is governed.
 - Confirm whether any service exclusions are required for Activity CSAT.
 - Decide whether the celebration slide uses Activity CSAT only or also references mapped Support CSAT with caveats.
+## GA4 portal-entry refresh plan
+
+GA4 portal-entry behaviour can be added as contextual evidence after the headline Databricks metrics are complete.
+
+The current GA4 Power BI visual was created from older CSV exports and should not be used as final EOFY evidence.
+
+### Purpose
+
+Use refreshed GA4 data to understand how customers enter selected portal login and registration journeys.
+
+GA4 should support, not replace, the validated Databricks story.
+
+### Refresh steps
+
+1. Export refreshed GA4 data for selected portal login and registration links.
+2. Confirm the reporting window.
+3. Confirm which portal login and registration links are included.
+4. Refresh the Power BI visual.
+5. Validate login vs sign-up destination tracking.
+6. Review device, entry page, weekday, hour-of-day, source channel, and business-hours patterns.
+7. Decide whether GA4 belongs on the slide or only in the supporting report.
+
+### Analysis outputs
+
+| Output | Use |
+|---|---|
+| Portal entries | Contextual access signal only. |
+| Device mix | Shows how customers access selected portal entry points. |
+| Entry page pattern | Shows which service pages drive selected portal entry. |
+| Weekday pattern | Shows when selected portal entry is concentrated. |
+| Hour-of-day pattern | Shows whether entry is concentrated during business hours. |
+| Login vs sign-up split | Shows selected destination behaviour, not total account creation. |
+| Source channel | Optional context where available. |
+
+### Rules
+
+Do not use GA4 values until refreshed.
+
+Do not treat GA4 portal-entry values as total portal usage.
+
+Do not reconcile GA4 sign-up clicks with Service Account sign-ups unless tracking coverage and attribution are validated.
+
+Do not replace Databricks headline metrics with GA4 metrics.
