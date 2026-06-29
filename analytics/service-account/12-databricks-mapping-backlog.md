@@ -201,6 +201,10 @@ Support CSAT must use the manual Support CSAT mapping documented in:
 
 `20-support-csat-service-mapping.md`
 
+Working Databricks workspace copy:
+
+`/Users/jose.andrade@melbourne.vic.gov.au/support-csat-service-mapping.md`
+
 Support CSAT should only include CSAT cases where:
 
 `customer_intelligence.vwcase.Service_Name`
@@ -223,16 +227,64 @@ Support CSAT is not yet a repeatable self-serve Genie metric.
 
 ## Support CSAT governed mapping asset
 
+Support CSAT is currently a manually mapped pilot metric.
+
+Manual mapping documentation:
+
+`analytics/service-account/20-support-csat-service-mapping.md`
+
+Working Databricks workspace copy:
+
+`/Users/jose.andrade@melbourne.vic.gov.au/support-csat-service-mapping.md`
+
+### Required future asset
+
+Create one governed Databricks mapping asset so Support CSAT can become repeatable and Genie-safe.
+
+Candidate table:
+
+`datahub_datamart.customer_account_management.support_csat_service_mapping`
+
+Candidate curated view:
+
+`datahub_datamart.customer_account_management.vwsupport_csat_service_mapping`
+
+### Minimum fields
+
+| Field | Purpose |
+|---|---|
+| `support_service_name` | Service name to match against `customer_intelligence.vwcase.Service_Name`. |
+| `support_pathway` | Support pathway taxonomy: Resolved, Assisted, or Expert Enquiry. |
+| `portal_service_name` | Related portal-enabled service, where applicable. |
+| `include_in_support_csat` | Boolean flag for Support CSAT inclusion. |
+| `mapping_status` | Draft, validated, deprecated, or excluded. |
+| `mapping_owner` | Business/data owner responsible for the mapping. |
+| `last_validated_date` | Date the mapping was last reviewed. |
+| `notes` | Caveats or rationale for the mapping decision. |
+
+### Mapping gaps
+
 | Mapping gap | Why it matters | Current position | Required action |
 |---|---|---|---|
 | Support CSAT mapping is not available as a governed Databricks asset. | Genie and reusable SQL cannot reliably calculate Support CSAT from a personal workspace markdown or SQL file. | Manual mapping is documented and accepted for the celebration pilot only. | Create a governed table or curated view for Support CSAT mapping. |
 | Support CSAT cannot be inferred from schema fields alone. | Automatic matching over-selects and misclassifies support services. | Do not use all Customer Enquiry services, automatic matching, `Record_Type`, or `vwsupport_enriched`. | Join CSAT cases to a governed mapping field equivalent to `support_service_name`. |
 | Mapping ownership is undefined. | New portal-enabled services will need new support service mappings. | No governed update process exists yet. | Define owner and update process across CX, service owners, and data/platform team. |
 
-Candidate governed asset names:
+### Rule
 
-- `datahub_datamart.customer_account_management.support_csat_service_mapping`
-- `datahub_datamart.customer_account_management.vwsupport_csat_service_mapping`
+Support CSAT should only include CSAT cases where:
+
+`customer_intelligence.vwcase.Service_Name`
+
+matches a mapped:
+
+`support_service_name`
+
+with:
+
+`include_in_support_csat = TRUE`
+
+Do not calculate Support CSAT from schema inference, all Customer Enquiry services, `Record_Type`, `vwsupport_enriched`, or unmapped support services.
 
 ### Support CSAT by channel type
 
