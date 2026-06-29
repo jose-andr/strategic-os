@@ -84,3 +84,30 @@ Then provide:
 - Highest-risk inconsistency:
 - Files requiring edits:
 - Recommended next action:
+## GA4 portal-entry review instruction
+
+Check whether GA4 portal-entry behaviour is described consistently across the Service Account / Portal CX artefacts.
+
+GA4 should be treated as contextual digital behaviour evidence only.
+
+Review for the following:
+
+- current GA4 values are described as old and not final EOFY evidence
+- GA4 CSV export refresh is required before slide or report use
+- refreshed reporting window must be confirmed
+- selected portal login and registration links must be validated
+- GA4 portal-entry values are not described as total portal usage
+- GA4 sign-up clicks are not treated as completed Service Account sign-ups
+- GA4 does not replace Databricks headline metrics for Customers, Activity, Support demand, Activity CSAT, or mapped Support CSAT
+- any GA4 slide wording is clearly caveated as selected portal-entry behaviour
+
+Expected review response:
+
+| Area | Status | Issue found | Recommended fix |
+|---|---|---|---|
+| GA4 status | Pass / Needs update |  |  |
+| GA4 refresh requirement | Pass / Needs update |  |  |
+| GA4 coverage caveat | Pass / Needs update |  |  |
+| GA4 sign-up caveat | Pass / Needs update |  |  |
+| GA4 relationship to Databricks metrics | Pass / Needs update |  |  |
+| GA4 slide wording | Pass / Needs update |  |  |
