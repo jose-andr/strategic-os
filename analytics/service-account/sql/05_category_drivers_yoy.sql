@@ -1,19 +1,45 @@
 -- Analysis: Service Account EOFY celebration analysis
 -- File: 05_category_drivers_yoy.sql
--- Purpose: Identify permit or service categories contributing most to year-on-year activity change.
--- Business question: Which permit or service categories drove the change in Service Account self-service activity?
+-- Purpose: Identify permit or service categories contributing most to year-on-year Activity change.
+-- Business question: Which permit or service categories drove the change in Service Account self-service Activity?
+--
+-- Driver analysis status:
+-- Category / service driver analysis is diagnostic only.
+--
+-- Headline metrics are:
+-- - Customers
+-- - Activity
+-- - Support per 100 activities
+-- - Activity CSAT
+-- - mapped Support CSAT only where manual mapping is applied
+--
+-- Do not use category or service driver outputs to redefine the headline KPIs.
+-- Do not infer Support CSAT from service/category names.
+-- Support CSAT requires the manual mapping documented in:
+-- analytics/service-account/20-support-csat-service-mapping.md
+-- Use driver outputs to explain what may be contributing to movement, not as
+-- replacement metric definitions.
 -- Tables used:
 --   datahub_datamart.customer_account_management.vwservice_enablement
 --   datahub_datamart.customer_account_management.vwpermit
--- Grain: To validate.
+-- Grain:
+--   To validate.
 -- Metric definition:
---   Count of completed customer self-service transactions grouped by category and financial year.
+--   Diagnostic count of application workflow Activity grouped by category,
+--   service, and financial year.
+-- Activity definition for pilot:
+--   Distinct application_id where application_status is one of:
+--   - Draft
+--   - Submitted
+--   - Further information requested
+--   - In Progress
+--   - Pending Payment
 -- Caveats:
 --   Field names are placeholders until validated.
 --   Need to confirm preferred category field.
---   Need to confirm completion/status logic.
 --   Need to confirm whether categories should come from permit, service enablement, or both.
--- Last updated: 2026-06-23
+--   Driver outputs are diagnostic only and should not redefine headline KPIs.
+-- Last updated: 2026-06-29
 
 WITH activity_by_category_fy AS (
   SELECT
