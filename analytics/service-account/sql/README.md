@@ -278,3 +278,36 @@ Power BI measures remain the business logic source of truth where available.
 Databricks SQL outputs are valid for the pilot where definitions are documented and caveats are preserved.
 
 Reusable production SQL requires governed metric logic, governed mapping assets, and business/data-owner validation.
+
+## GA4 portal-entry SQL note
+
+GA4 portal-entry behaviour is outside the current Databricks SQL file set.
+
+The current GA4 evidence comes from older CSV exports used to create Power BI visuals.
+
+Do not create SQL files for GA4 portal-entry behaviour unless GA4 data is later made available as a governed Databricks table, curated view, or approved repeatable export.
+
+### Current position
+
+GA4 may support the EOFY celebration story as contextual digital behaviour evidence after the export is refreshed and validated.
+
+GA4 should not replace SQL outputs for:
+
+- Customers
+- Activity
+- Support demand
+- Activity CSAT
+- mapped Support CSAT
+
+### Do not create yet
+
+Do not create GA4 SQL templates until:
+
+- refreshed GA4 data is available
+- the reporting window is confirmed
+- selected portal login and registration links are validated
+- event meaning is confirmed
+- ownership and refresh process are documented
+- the source is approved for repeatable reporting
+
+Until then, GA4 remains a Power BI / CSV contextual evidence layer, not a Databricks SQL metric source.
