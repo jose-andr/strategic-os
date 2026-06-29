@@ -288,3 +288,26 @@ Do not rewrite files unless asked.
 First identify inconsistencies and recommend fixes.
 
 If asked to update files, provide copy-pasteable markdown only.
+
+## GA4 portal-entry consistency checks
+
+Use these checks only for documentation and slide-support review.
+
+GA4 is not part of the governed Databricks headline metric set.
+
+| Check | Pass condition |
+|---|---|
+| GA4 status | Documentation states that current GA4 values are old and should not be used as final EOFY evidence. |
+| GA4 role | GA4 is described as contextual digital behaviour evidence only. |
+| Headline metrics | GA4 does not replace Customers, Activity, Support demand, Activity CSAT, or mapped Support CSAT. |
+| Coverage caveat | GA4 portal-entry values are not described as total portal usage. |
+| Sign-up caveat | GA4 sign-up clicks are not treated as completed Service Account sign-ups. |
+| Refresh requirement | Documentation requires refreshed GA4 CSV exports and confirmed reporting window before use. |
+| Reconciliation | Documentation does not reconcile GA4 with Databricks sign-ups unless tracking coverage and attribution are validated. |
+| Slide wording | Any GA4 slide wording is caveated as selected portal login and registration journey behaviour. |
+
+### Required reviewer response
+
+If GA4 is mentioned in a slide, report, or README, the agent should confirm:
+
+> GA4 is being used as contextual supporting evidence only, not as a headline KPI or total portal usage measure.
