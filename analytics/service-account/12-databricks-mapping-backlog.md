@@ -315,3 +315,38 @@ Any interim analysis should clearly label unresolved measures as provisional or 
 Slide-safe position:
 
 > Service Account adoption and usage are growing. Customer sign-ups increased by 58.3%, application workflow activity increased by 69.8%, and support demand per 100 activities reduced by about 17.0%. Portal-enabled Activity CSAT improved from 76.5% to 80.6%, with valid responses increasing from 889 to 1,721. Support CSAT should only be discussed where the manual support service mapping has been applied and documented.
+## GA4 portal-entry source status
+
+GA4 portal-entry behaviour is not a current Databricks mapping backlog item because the available evidence comes from CSV exports used in Power BI visuals.
+
+Do not create Databricks mapping logic for GA4 unless GA4 data becomes available as a governed Databricks table, curated view, or approved repeatable export.
+
+### Current position
+
+GA4 can support the EOFY celebration story as contextual digital behaviour evidence after refresh.
+
+It should not replace or alter the Databricks mapping rules for:
+
+- Customers
+- Activity
+- Support demand
+- Activity CSAT
+- mapped Support CSAT
+
+### Future mapping requirement
+
+If GA4 becomes a reusable Databricks source, document:
+
+| Area | Required decision |
+|---|---|
+| Source asset | Confirm governed table, curated view, or approved repeatable export. |
+| Reporting window | Confirm refreshed start and end dates. |
+| Event definition | Confirm what counts as a portal entry. |
+| Link coverage | Confirm selected portal login and registration links. |
+| Destination split | Validate login vs sign-up tracking. |
+| Ownership | Confirm who owns refresh, QA, and field definitions. |
+| Reconciliation | Do not reconcile GA4 sign-up clicks with Service Account sign-ups unless attribution is validated. |
+
+### Rule
+
+Until a governed source exists, GA4 remains a contextual Power BI / CSV evidence layer, not a Databricks metric source.
