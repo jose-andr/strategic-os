@@ -12,7 +12,7 @@ This backlog separates:
 
 - decisions accepted for the current celebration analysis
 - assumptions that need business confirmation later
-- questions that may affect future dashboard or SQL production logic
+- questions that may affect future dashboard, Power BI, Genie, or Databricks production logic
 
 ## Current celebration analysis decision
 
@@ -220,7 +220,7 @@ Recommended business framing:
 
     Are all portal application categories valid for the Activity KPI, or should some be reported separately?
 
-## Support numerator
+## Support demand numerator
 
 ### Accepted for current celebration analysis
 
@@ -228,7 +228,7 @@ For the EOFY celebration analysis, the support numerator is accepted as:
 
     Self-Service Support =
         distinct support cases from vwsupport
-        where is_after_service_enablement = true
+        where is_after_service_enablement = TRUE
 
 The support rate is calculated as:
 
@@ -239,13 +239,13 @@ Where Activity means:
 
     application workflow Activity
 
-The draft result supports the celebration story because Activity grew faster than support demand.
+The latest celebration comparison supports the slide story because Activity grew faster than support demand.
 
-| Metric | Previous FY | Current FY | Movement |
+| Metric | Previous FY, FY2024/25 | Current FY, FY2025/26 | Movement |
 |---|---:|---:|---:|
-| Activity applications | 2,209 | 3,766 | +70.5% |
-| Support cases | 10,976 | 15,413 | +40.4% |
-| Support per 100 activities | 496.9 | 409.3 | -17.6% |
+| Activity applications | 2,209 | 3,751 | +69.8% |
+| Support cases | 10,976 | 15,475 | +41.0% |
+| Support per 100 activities | 496.9 | 412.6 | about -17.0% |
 
 This means support demand decreased relative to activity.
 
@@ -258,7 +258,7 @@ The exact reusable support numerator should still be validated with business rep
 Questions to validate:
 
 1. Should support be counted as distinct `case_id` from `vwsupport`?
-2. Should `is_after_service_enablement = true` be the main portal support eligibility rule?
+2. Should `is_after_service_enablement = TRUE` be the main portal support eligibility rule?
 3. Should support be limited to Service Account customers only?
 4. Should support be limited to specific service groups or portal service names?
 5. Should all support channels be included?
@@ -281,17 +281,28 @@ Questions to validate:
 
 ### Accepted for current celebration analysis
 
-Power BI CSAT logic is accepted as the source of truth for the current slide.
+CSAT uses:
 
-Both Activity CSAT and Support CSAT use:
-
-    positive responses / total responses
+    positive responses / total valid responses
 
 Where positive responses are satisfaction scores of 4 or 5.
 
+The accepted CSAT source for the pilot is:
+
+    datahub_datamart.customer_intelligence.vwcase
+
+Required fields:
+
+- `Survey_Completion_Date`
+- `Satisfaction_Score_5`
+- `Service_Name`
+- `Service_Group`
+- `Channel`
+- `Record_Type`
+
 ### Still to validate with business representatives or data owners
 
-Confirm the Databricks source for:
+Confirm the reusable Databricks source and governed logic for:
 
 - survey completion date
 - satisfaction score
@@ -299,6 +310,99 @@ Confirm the Databricks source for:
 - normalised service name
 - support service eligibility
 - portal-enabled service eligibility
+- survey-to-support linkage
+- survey-to-activity linkage
+
+## Activity CSAT validation
+
+### Accepted for current celebration analysis
+
+Activity CSAT is calculated from:
+
+    datahub_datamart.customer_intelligence.vwcase
+
+and scoped to portal-enabled services from:
+
+    datahub_datamart.customer_account_management.vwservice_enablement
+
+The current celebration comparison is:
+
+| Period | Valid responses | Positive responses | Activity CSAT |
+|---|---:|---:|---:|
+| FY2024/25 | 889 | 680 | 76.5% |
+| FY2025/26 | 1,721 | 1,387 | 80.6% |
+
+Accepted slide-safe interpretation:
+
+    Portal-enabled Activity CSAT improved from 76.5% to 80.6%, with valid responses increasing from 889 to 1,721.
+
+### Still to validate
+
+Confirm whether this should become a reusable reporting standard and whether any additional service exclusions or service-group caveats are needed.
+
+Important caveat:
+
+    Do not claim portal enablement caused the CSAT improvement unless causality is supported.
+
+## Support CSAT productionisation
+
+| Validation item | Why it matters | Current working position | Owner / next action |
+|---|---|---|---|
+| Implement Support CSAT mapping as a governed Databricks asset. | Genie cannot reliably use a personal workspace markdown or SQL file as a reusable Support CSAT filter. | Celebration pilot analysis is complete using the manual mapping, but Support CSAT is not yet a repeatable self-serve Genie metric. | Engage data / platform developers to create a governed reference table or curated view. |
+| Confirm target asset name and location. | A stable table or view is needed so Genie and future analysts can reuse the same Support CSAT definition. | Candidate names: `customer_account_management.support_csat_service_mapping` or `customer_account_management.vwsupport_csat_service_mapping`. | Confirm with data governance / Databricks owners. |
+| Validate mapped support services before production use. | The current mapping is final for the celebration pilot, but production use needs ownership and change control. | Manual mapping is accepted for the pilot only. | Confirm service owner and update process for future portal-enabled services. |
+| Confirm update process when new portal services are enabled. | The Support CSAT mapping must evolve as `vwservice_enablement` evolves. | No governed update process exists yet. | Define ownership between CX, service owners, and data/platform team. |
+| Validate low Assisted pathway usage. | Low Assisted usage may reflect operational classification behaviour and affect support pathway interpretation. | Treat as a business validation question, not a confirmed conclusion. | Confirm with Contact Centre / CX operations. |
+| Validate channel segmentation for Support CSAT. | Real-time vs async classification depends on actual channel values and business meaning. | Working rule: Phone, Live Chat, Face-to-Face = In Real-time; all others = Async. | Validate against `customer_intelligence.vwcase.Channel` and `vwsupport.channel`. |
+| Confirm legacy-system explanation for missing pre-enable Parking CSAT. | Explains why pre/post CSAT is structurally unavailable. | Working hypothesis: Parking permits may have lived in a legacy system before migration into the current CRM / CSAT model. | Validate with CRM / Parking / data owner. |
+
+## Support CSAT mapping decision
+
+### Accepted for current celebration analysis
+
+Support CSAT can only be used for the celebration pilot where the manually mapped support service list and analysis outputs are explicitly documented.
+
+Manual mapping documentation:
+
+    analytics/service-account/20-support-csat-service-mapping.md
+
+Working Databricks workspace mapping file:
+
+    /Users/jose.andrade@melbourne.vic.gov.au/support-csat-service-mapping.md
+
+### Not accepted as reusable self-serve logic
+
+Do not treat Support CSAT as a repeatable self-serve Genie metric until a governed mapping asset exists.
+
+Do not calculate Support CSAT from:
+
+- all Customer Enquiry services
+- automatic service-name matching
+- `Record_Type`
+- `vwsupport_enriched`
+- unmapped support services
+
+### Future production requirement
+
+Support CSAT needs a governed Databricks reference table or curated view before it can become a reusable reporting standard.
+
+Candidate names:
+
+    datahub_datamart.customer_account_management.support_csat_service_mapping
+
+or
+
+    datahub_datamart.customer_account_management.vwsupport_csat_service_mapping
+
+## Support pathway taxonomy validation
+
+| Validation item | Why it matters | Current working position | Owner / next action |
+|---|---|---|---|
+| Validate use of Resolved, Assisted, and Expert Enquiry as support pathway categories. | These categories are more meaningful for support analysis than CRM `Record_Type`. | Use mapped `support_pathway` values for Support CSAT where available. | Confirm with Contact Centre / CX operations. |
+| Validate the business meaning of Resolved. | Resolved indicates the contact centre resolved the enquiry during the interaction without assistance from another business area. | Current definition accepted as working taxonomy. | Confirm with Contact Centre leads. |
+| Validate the business meaning of Assisted. | Assisted indicates the contact centre resolved the enquiry during the interaction with assistance from another business area. | Assisted appears to have low usage in some outputs and may be underused or inconsistently applied. | Confirm whether agents regularly use this classification. |
+| Validate the business meaning of Expert Enquiry. | Expert Enquiry indicates the enquiry could not be resolved during the interaction and was assigned to an expert to contact the customer. | Current definition accepted as working taxonomy. | Confirm with Contact Centre and service owners. |
+| Investigate low Assisted usage. | Low Assisted usage may distort support pathway analysis by overstating Resolved or Expert Enquiry volumes. | Working hypothesis: Assisted may be underused, with some assisted interactions classified as Resolved. | Compare service-name patterns with operational practice and agent guidance. |
 
 ## Channel segmentation
 
@@ -306,7 +410,7 @@ Confirm the Databricks source for:
 
 Real-time and async support CSAT are not treated as separate Power BI measures.
 
-They should be produced by filtering or grouping Support CSAT by channel type.
+They should be produced by filtering or grouping Support CSAT by channel type after Support CSAT mapping is governed.
 
 Current classification rule:
 
@@ -326,11 +430,13 @@ Questions to validate:
 2. Should Email, Web, and other channels be treated as async?
 3. Are there blended channels that need special treatment?
 4. Is the Databricks channel field equivalent to the Power BI `Support_logic[channel]` field?
+5. Should channel segmentation use `customer_intelligence.vwcase.Channel`, `vwsupport.channel`, or both?
 
 ## Summary of accepted assumptions for EOFY celebration analysis
 
 | Area | Accepted assumption for current analysis |
 |---|---|
+| Customers | Service Account / portal sign-ups |
 | Activity definition | Activity means application workflow activity |
 | Permit lifecycle | Permit lifecycle statuses are not the primary Activity KPI |
 | Pending Payment | Included in Activity |
@@ -341,8 +447,13 @@ Questions to validate:
 | Withdrawn | Excluded unless later confirmed |
 | Declined | Excluded unless later confirmed |
 | Null period_start | Excluded from YoY calculation |
-| Support | Use support rate rather than raw support cases |
-| CSAT | Use positive responses divided by total valid responses |
+| Support demand | Use support rate rather than raw support cases |
+| Support demand source | Use `vwsupport` |
+| Support demand filter | `is_after_service_enablement = TRUE` |
+| Activity CSAT | Use `customer_intelligence.vwcase` scoped to `vwservice_enablement` |
+| Support CSAT | Use manually mapped support services only |
+| Support CSAT production | Not yet a repeatable self-serve Genie metric |
+| CSAT formula | Positive responses divided by total valid responses |
 | Channel segmentation | Real-time vs async is a filter/grouping rule, not separate Power BI measures |
 
 ## Priority validation questions
@@ -352,32 +463,23 @@ Questions to validate:
 3. Should Withdrawn and Declined count as activity, outcomes, or exclusions?
 4. Should any categories be excluded from headline Activity?
 5. What is the fallback date for records where `period_start` is null?
-6. What Databricks logic reproduces `[Self-Service Support]`?
-7. What Databricks table reproduces `vwcase_survey`?
-8. Which Databricks field should be used for support channel segmentation?
+6. What Databricks logic reproduces `[Self-Service Support]` beyond the pilot `is_after_service_enablement = TRUE` rule?
+7. Should Support CSAT mapping be implemented as a governed table or curated view?
+8. Who owns the Support CSAT mapping?
+9. How should the Support CSAT mapping be updated when new services are portal-enabled?
+10. Which Databricks field should be used for support channel segmentation?
+11. How should survey responses be linked back to support and activity logic?
+12. Is Assisted underused or inconsistently applied by the contact centre?
+13. Does the missing pre-enable Parking CSAT base reflect legacy-system migration?
 
 ## Current decision
 
 For the EOFY celebration analysis, the current application workflow Activity definition is good enough to proceed.
 
-The validation items in this file should be treated as follow-up work for reusable reporting, dashboard refinement, and production-grade Databricks SQL.
+The current support demand rate logic is good enough to proceed.
 
-## CSAT and support proxy validation
+Activity CSAT is good enough to proceed using the portal-enabled service cohort.
 
-| Validation item | Why it matters | Current working position | Owner / next action |
-|---|---|---|---|
-| Confirm whether Activity CSAT can be presented as current-state only. | Previous FY has only 18 valid responses, so YoY framing is unstable. | Use 76.5% from 888 current-year responses as a strength metric, not a YoY improvement. | Confirm with CX / branch stakeholder. |
-| Confirm RPP proxy period dates. | Proxy interpretation depends on the exact pre-portal, post-portal impact, and current ELT windows. | Dates exist in Power BI logic but need to be documented in repo. | Extract from Power BI or confirm with report owner. |
-| Confirm RPP proxy service mapping source. | Proxy depends on selected ask-service names. | Current labels are documented, but source table / mapping ownership should be confirmed. | Confirm whether mapping lives in Power BI, Databricks, or manual table. |
-| Confirm whether RPP Support CSAT proxy can be used on the celebration slide. | It is service-specific and not a complete support CSAT standard. | Use as explanatory stabilisation evidence only. | Confirm with stakeholder before final slide. |
-| Validate Support CSAT standard for broader Service Account services. | Current proxy only covers RPP support pathway. | Not yet available as a complete standard. | Future work. |
+Support CSAT is good enough for the celebration pilot only where the manually documented mapping and outputs are explicitly applied.
 
-## Support CSAT productionisation
-
-| Validation item | Why it matters | Current working position | Owner / next action |
-|---|---|---|---|
-| Implement Support CSAT mapping as a governed Databricks asset. | Genie cannot reliably use a personal workspace markdown or SQL file as a reusable Support CSAT filter. | Celebration pilot analysis is complete using the manual mapping, but Support CSAT is not yet a repeatable self-serve Genie metric. | Engage data / platform developers to create a governed reference table or curated view. |
-| Confirm target asset name and location. | A stable table or view is needed so Genie and future analysts can reuse the same Support CSAT definition. | Candidate names: `customer_account_management.support_csat_service_mapping` or `customer_account_management.vwsupport_csat_service_mapping`. | Confirm with data governance / Databricks owners. |
-| Validate mapped support services before production use. | The current mapping is final for the celebration pilot, but production use needs ownership and change control. | Manual mapping is accepted for the pilot only. | Confirm service owner and update process for future portal-enabled services. |
-| Validate channel segmentation for support CSAT. | Real-time vs async classification depends on actual channel values and business meaning. | Working rule: Phone, Live Chat, Face-to-Face = In Real-time; all others = Async. | Validate against `customer_intelligence.vwcase.Channel` and `vwsupport.channel`. |
-| Confirm legacy-system explanation for missing pre-enable Parking CSAT. | Explains why pre/post CSAT is structurally unavailable. | Working hypothesis: Parking permits may have lived in a legacy system before migration into the current CRM / CSAT model. | Validate with CRM / Parking / data owner. |
+The validation items in this file should be treated as follow-up work for reusable reporting, dashboard refinement, governed Databricks assets, and production-grade SQL.
