@@ -1,6 +1,6 @@
 # EOFY Service Account Celebration Slide
 
-This file defines the intended one-slide story for the EOFY Service Account celebration analysis.
+This file defines the intended one-slide story for the EOFY Service Account / Portal CX celebration analysis.
 
 ## Slide title
 
@@ -11,45 +11,106 @@ EOFY Service Account Performance
 
 More customers.  
 More self-service activity.  
-Less support demand.  
-Better customer satisfaction.
+Less support demand relative to activity.  
+Better Activity CSAT.  
+Support CSAT only where manually mapped and documented.
 
 ## Slide purpose
 
-Show how Service Account performed this financial year compared with the previous financial year, using a concise executive-ready celebration format.
+Show how Service Account / Portal CX performed this financial year compared with the previous financial year, using a concise executive-ready celebration format.
+
+## Comparison period
+
+| Period | Date window |
+|---|---|
+| Previous FY, FY2024/25 | 2024-07-01 to 2025-07-01 |
+| Current FY, FY2025/26 | 2025-07-01 to 2026-07-01 |
+
+Use half-open date windows in analysis:
+
+    date_field >= start_date
+    AND date_field < end_date
 
 ## Slide tiles
 
 ### More customers
 
-[X] service accounts  
-[+/-X% YoY]
+15,570 Service Account / portal sign-ups  
++58.3% YoY
+
+Previous FY: 9,838
 
 ### More self-service activity
 
-[X] self-service transactions  
-[+/-X% YoY]
+3,751 application workflow activities  
++69.8% YoY
 
-### Less support demand
+Previous FY: 2,209
 
-[X] support cases per 100 transactions  
-[+/-X YoY]
+### Less support demand relative to activity
 
-### Better activity CSAT
+412.6 support cases per 100 activities  
+about 17.0% lower YoY
 
-[X%]  
-[+/-X pts YoY]
+Previous FY: 496.9
 
-### Better support CSAT
+### Better Activity CSAT
 
-[X%]  
-[+/-X pts YoY]
+80.6% portal-enabled Activity CSAT  
++4.1 percentage points YoY
+
+Previous FY: 76.5%
+
+Valid responses increased from 889 to 1,721.
+
+### Support CSAT
+
+Use only where manual support service mapping has been applied and documented.
+
+Do not claim overall Support CSAT improvement unless the manual mapping has been applied.
 
 ## Supporting narrative
 
-Service Account continued to mature as a digital service platform this year, with more customers using the portal, more self-service activity completed, and support demand measured relative to transaction volume.
+Service Account continued to mature as a digital service platform this year, with more customers using the portal and more application workflow activity completed.
 
-The year-on-year view gives the branch a clearer evidence base for understanding where digital service is working well and where customers still need support.
+Support cases increased in raw volume, but activity grew faster. This means support demand reduced relative to activity.
+
+Portal-enabled Activity CSAT improved from 76.5% to 80.6%, with a stronger response base than the previous year.
+
+Support CSAT should only be discussed where the manual support service mapping has been applied and documented.
+
+## Slide-safe storyline
+
+Service Account adoption and usage are growing.
+
+Customer sign-ups increased by 58.3%, from 9,838 to 15,570.
+
+Application workflow activity increased by 69.8%, from 2,209 to 3,751.
+
+Support demand per 100 activities reduced by about 17.0%, from 496.9 to 412.6.
+
+Portal-enabled Activity CSAT improved from 76.5% to 80.6%, with valid responses increasing from 889 to 1,721.
+
+Support CSAT should only be discussed where the manual support service mapping has been applied and documented.
+
+Do not claim that Support CSAT improved overall unless the manual mapping has been applied.
+
+## Final draft narrative
+
+Service Account adoption and usage are growing. Customer sign-ups increased by 58.3%, application workflow activity increased by 69.8%, and support demand per 100 activities reduced by about 17.0%. Portal-enabled Activity CSAT improved from 76.5% to 80.6%, with valid responses increasing from 889 to 1,721.
+
+Support CSAT should only be discussed where the manual support service mapping has been applied and documented.
+
+## Suggested slide story
+
+| Story point | Suggested treatment |
+|---|---|
+| More customers | Service Account / portal sign-ups increased from 9,838 to 15,570, up 58.3%. |
+| More self-service activity | Application workflow activity increased from 2,209 to 3,751, up 69.8%. |
+| Less support demand relative to activity | Support per 100 activities reduced from 496.9 to 412.6, about 17.0% lower. |
+| Better Activity CSAT | Portal-enabled Activity CSAT improved from 76.5% to 80.6%. |
+| Stronger Activity CSAT response base | Valid Activity CSAT responses increased from 889 to 1,721. |
+| Support CSAT | Use only where the manual support service mapping has been applied and documented. |
 
 ## Design notes
 
@@ -57,59 +118,48 @@ The year-on-year view gives the branch a clearer evidence base for understanding
 - Use five headline tiles.
 - Use plain language.
 - Avoid technical data language on the slide.
-- Include caveats outside the slide if needed.
+- Show Support as a rate, not raw support volume.
+- Use `Activity` instead of `transactions` where possible.
+- Keep caveats in speaker notes or supporting appendix, not on the main slide.
 
-## Revised CSAT slide treatment
+## Suggested visual hierarchy
 
-CSAT should not be framed as a simple YoY improvement unless a stable baseline is confirmed.
+1. Top headline: Service Account adoption and usage are growing.
+2. Five metric tiles across the slide or in a 3+2 grid.
+3. Highlight growth metrics in positive accent colour.
+4. Highlight support rate reduction as an efficiency / reduced friction signal.
+5. Use a small note or icon for Support CSAT mapping caveat if Support CSAT is referenced.
 
-### Activity CSAT
+## Suggested speaker note
 
-Use Activity CSAT as a current-state strength metric.
+Customers means Service Account / portal sign-ups, not all CRM accounts. Activity means application workflow activity, not permit lifecycle activity. Support is shown as support demand relative to Activity, not raw support volume.
 
-Recommended wording:
+Activity CSAT is compared between FY2024/25 and FY2025/26. FY2023/24 has only 18 valid responses and should not be used as the main baseline.
 
-> Strong satisfaction on portal-enabled activity: 76.5% CSAT from 888 current-year responses.
+Support CSAT requires a manual mapping between portal-enabled services and support/enquiry service names. Until that mapping is implemented as a governed Databricks table or curated view, Support CSAT is a documented pilot metric only, not a repeatable self-serve Genie metric.
 
-Do not say:
-
-> Activity CSAT improved year on year.
-
-Reason:
-
-Previous FY has only 18 valid responses for the portal-enabled activity cohort, so the comparison is not stable.
-
-### Support CSAT
-
-Use the RPP Support CSAT proxy only as explanatory evidence, not as the main headline CSAT metric.
-
-Recommended wording:
-
-> Residential Parking support is stabilising after migration, with expert enquiry CSAT recovering from 69% post-portal to 78% in the current ELT period.
+## Do not say
 
 Do not say:
 
 > Support CSAT improved overall.
 
-Reason:
+Unless the manual Support CSAT mapping has been applied and the result is explicitly documented.
 
-The RPP proxy is service-specific and support-pathway-specific. It does not yet represent a complete Service Account support CSAT standard.
+Do not say:
 
-### Suggested slide story
+> Portal enablement caused the CSAT improvement.
 
-| Story point | Suggested treatment |
-|---|---|
-| More customers | Service Account / portal sign-ups increased from 5,500 to 9,838, up 78.9%. |
-| More self-service activity | Activity applications increased from 2,209 to 3,766, up 70.5%. |
-| Less support demand relative to activity | Support per 100 activities reduced from 496.9 to 409.3, down 17.6%. |
-| Better activity CSAT | Reframe as strong current-state Activity CSAT: 76.5% from 888 responses. |
-| Better support CSAT | Reframe as RPP support stabilisation: Residential Parking expert enquiry CSAT recovered from 69% post-portal to 78% in the current ELT period. |
+Use correlation language unless causality is supported.
 
-### Final draft narrative
+Do not say:
 
-Service Account adoption and usage are growing. Customer sign-ups increased by 78.9%, and application workflow activity increased by 70.5%. Support demand per 100 activities reduced by 17.6%, showing that support demand is reducing relative to self-service activity. Customers are reporting strong satisfaction with portal-enabled activity, with 76.5% CSAT from 888 current-year responses. Residential Parking support is also showing signs of stabilisation after migration, with expert enquiry CSAT recovering from 69% post-portal to 78% in the current ELT period.
-### Suggested slide caveat
+> Pre/post enablement CSAT improved across the full portal service cohort.
 
-Use in speaker notes, not as a prominent slide caveat:
+Most portal-enabled services do not have a usable pre-enable CSAT base.
 
-> CSAT comparisons are affected by service migration, survey coverage, and limited pre-portal response data. Activity CSAT is treated as a current-state strength metric, while RPP Support CSAT is used as a proxy for support-pathway stabilisation.
+Do not say:
+
+> RPP Support CSAT proxy represents full Service Account Support CSAT.
+
+The RPP proxy is service-specific explanatory evidence only.
