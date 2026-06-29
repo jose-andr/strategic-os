@@ -303,7 +303,56 @@ Do not claim:
 - RPP Support CSAT proxy represents full Service Account Support CSAT.
 - `vwsupport_enriched` is a source for headline support KPIs.
 - `Record_Type` defines Support CSAT.
+## GA4 portal entry behaviour
 
+GA4 portal-entry behaviour can be used as supporting context for the EOFY celebration story once refreshed.
+
+The current Power BI visual is based on older CSV exports and should be treated as a layout and analysis pattern only.
+
+Do not use the current GA4 values as final slide evidence.
+
+### Intended use
+
+GA4 can help explain how customers enter selected portal login and registration journeys by:
+
+- device
+- entry page
+- weekday
+- hour of day
+- login vs sign-up destination
+- source channel, where available
+- business-hours share, where available
+
+### Slide role
+
+GA4 should be used only as a supporting digital behaviour insight.
+
+It should not replace the validated Databricks headline metrics for:
+
+- Customers
+- Activity
+- Support demand
+- Activity CSAT
+- mapped Support CSAT
+
+### Required refresh before use
+
+Before including GA4 in the slide or final report, confirm:
+
+| Requirement | Status |
+|---|---|
+| Refreshed GA4 export completed | Pending |
+| Reporting window confirmed | Pending |
+| Selected portal links confirmed | Pending |
+| Login vs sign-up tracking validated | Pending |
+| Device, weekday, and hourly patterns refreshed | Pending |
+| Caveat wording confirmed | Pending |
+
+### Caveat wording
+
+Use this wording until refreshed data is validated:
+
+> GA4 portal-entry analysis is contextual only and is based on selected portal login and registration links. It should not be treated as total portal usage or as a replacement for Databricks Service Account, Activity, Support, or CSAT metrics.
 ## Recommended slide content
 
 ### Slide title
