@@ -126,3 +126,34 @@ Customers means Service Account / portal sign-ups, not all CRM accounts. Activit
 Activity CSAT is compared between FY2024/25 and FY2025/26. FY2023/24 has only 18 valid responses and should not be used as the main baseline.
 
 Support CSAT requires a manual mapping between portal-enabled services and support/enquiry service names. Until that mapping is implemented as a governed Databricks table or curated view, Support CSAT is a documented pilot metric only, not a repeatable self-serve Genie metric.
+## Optional contextual evidence: GA4 portal-entry behaviour
+
+Use this section only after GA4 CSV exports and Power BI visuals are refreshed.
+
+### Insight question
+
+How are customers entering selected portal login and registration journeys?
+
+### Evidence to include
+
+| Evidence area | What to show | Caveat |
+|---|---|---|
+| Portal entries | Count of tracked entries from selected portal login and registration links. | Not total portal usage. |
+| Device mix | Desktop, mobile, and tablet share. | Limited to tracked selected links. |
+| Entry page pattern | Top service pages driving selected portal entry. | Depends on link coverage. |
+| Login vs sign-up split | Whether selected entries go to login or registration. | Not the same as completed account sign-ups. |
+| Weekday / hour pattern | When selected portal entry occurs. | Contextual behaviour signal only. |
+| Source channel | Acquisition/source pattern, where available. | Use only if refreshed and validated. |
+
+### Interpretation pattern
+
+GA4 portal-entry tracking provides supporting context on how customers access selected portal login and registration journeys. It can help explain digital entry behaviour, but it should not be treated as total portal usage or as a replacement for Databricks Service Account, Activity, Support, or CSAT metrics.
+
+### Do not claim
+
+Do not claim:
+
+- GA4 portal-entry values represent total portal usage.
+- Old GA4 CSV export values are current EOFY evidence.
+- GA4 sign-up clicks equal Service Account sign-ups.
+- GA4 replaces Databricks headline metrics.
