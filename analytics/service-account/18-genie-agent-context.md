@@ -141,9 +141,18 @@ Do not calculate Support CSAT from:
 - `vwsupport_enriched`
 - unmapped support services
 
+Do not claim Support CSAT improved overall unless the manual mapping has been applied and documented.
+
 If the mapping is not available as a governed table or curated view, state:
 
 > Support CSAT is not yet a repeatable self-serve Genie metric because the required support service mapping is not available as a governed Databricks asset.
+
+Until a governed mapping table or curated view exists, describe Support CSAT as a manually mapped pilot metric, not a governed Genie metric.
+
+Candidate future governed assets:
+
+- `datahub_datamart.customer_account_management.support_csat_service_mapping`
+- `datahub_datamart.customer_account_management.vwsupport_csat_service_mapping`
 
 ## Support pathway taxonomy
 
