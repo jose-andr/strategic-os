@@ -1,3 +1,31 @@
+-- Activity CSAT uses the portal-enabled service cohort.
+--
+-- Use:
+--   datahub_datamart.customer_intelligence.vwcase
+-- joined or matched to:
+--   datahub_datamart.customer_account_management.vwservice_enablement
+--
+-- Match Service_Name to service_name using normalised text unless a stronger
+-- governed key is available.
+--
+-- Main comparison:
+--   FY2024/25 to FY2025/26
+--
+-- Current validated Activity CSAT result:
+--   FY2024/25: 889 valid responses, 680 positive, 76.5%
+--   FY2025/26: 1,721 valid responses, 1,387 positive, 80.6%
+--
+-- Do not use FY2023/24 as the main baseline because it has only 18 valid
+-- responses.
+--
+-- Do not claim portal enablement caused the CSAT improvement unless causality
+-- is supported.
+--
+-- This file is for Activity CSAT only.
+-- Do not use it to calculate Support CSAT.
+-- Support CSAT requires the manual mapping documented in:
+-- analytics/service-account/20-support-csat-service-mapping.md
+
 WITH params AS (
   SELECT
     DATE('2023-07-01') AS previous_fy_start,
