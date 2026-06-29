@@ -471,7 +471,45 @@ Questions to validate:
 11. How should survey responses be linked back to support and activity logic?
 12. Is Assisted underused or inconsistently applied by the contact centre?
 13. Does the missing pre-enable Parking CSAT base reflect legacy-system migration?
+## GA4 portal entry behaviour refresh
 
+GA4 portal-entry behaviour can support the EOFY celebration story as contextual evidence, but the current Power BI visual is based on older CSV exports.
+
+Before using GA4 values in the slide or supporting report, refresh the GA4 export and Power BI visuals.
+
+### Refresh required
+
+Refresh GA4 data for selected portal login and registration links, including:
+
+- portal entries
+- device mix
+- entry pages to portal
+- login vs sign-up destination split
+- weekday pattern
+- hour-of-day pattern
+- source channel where available
+- business-hours share where available
+
+### Current position
+
+Do not use the current GA4 values as final slide evidence.
+
+Treat the existing visual as a layout and analysis pattern only.
+
+### Validation questions
+
+| Question | Decision needed |
+|---|---|
+| What is the refreshed GA4 reporting window? | Confirm start and end dates. |
+| Are selected portal links representative enough for a supporting insight? | Confirm caveat wording. |
+| Does GA4 track login and registration links consistently across key portal entry pages? | Validate event/link coverage. |
+| Can refreshed GA4 data be reconciled with Service Account sign-ups or should it remain contextual only? | Keep separate unless reconciliation is validated. |
+
+### Slide rule
+
+GA4 should be used only as a supporting digital behaviour insight.
+
+It should not replace the validated Databricks headline metrics for Customers, Activity, Support demand, Activity CSAT, or mapped Support CSAT.
 ## Current decision
 
 For the EOFY celebration analysis, the current application workflow Activity definition is good enough to proceed.
