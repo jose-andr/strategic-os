@@ -191,7 +191,13 @@ Use service-name cohort matching for the main EOFY comparison.
 Use pre/post enablement logic only as a diagnostic where a valid pre-enable baseline exists.
 
 ## Support CSAT SQL note
+There is no standalone `16_support_csat_mapping_pilot.sql` file.
 
+Do not create one unless a governed Support CSAT mapping asset exists or the team explicitly decides to maintain a pilot-only SQL template.
+
+For now, Support CSAT mapping remains documented in:
+
+`analytics/service-account/20-support-csat-service-mapping.md`
 Do not create Support CSAT SQL from schema inference alone.
 
 Support CSAT requires the manual mapping documented in:
