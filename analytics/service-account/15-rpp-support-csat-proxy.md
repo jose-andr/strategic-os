@@ -6,7 +6,7 @@ This file documents the Residential Parking Permit support CSAT proxy used for p
 
 Direct portal-enabled Activity CSAT does not provide a reliable pre-portal baseline for many portal-enabled services.
 
-For Residential Parking Permits, a proxy has been developed using CRM enquiry/support services related to the RPP support pathway.
+For Residential Parking Permits, a proxy was developed using CRM enquiry/support services related to the RPP support pathway.
 
 This proxy helps answer:
 
@@ -16,10 +16,11 @@ This proxy helps answer:
 
 The RPP Support CSAT proxy is:
 
-- a support-pathway analysis
+- a service-specific support-pathway analysis
 - based on selected enquiry/support service names
 - useful for pre/post migration interpretation
 - useful for current-period stabilisation evidence
+- explanatory evidence for Residential Parking support only
 
 ## What this proxy is not
 
@@ -27,8 +28,28 @@ The RPP Support CSAT proxy is not:
 
 - a direct portal transaction CSAT metric
 - a replacement for Activity CSAT
-- a full support CSAT standard for all Service Account services
+- complete Service Account Support CSAT
+- proof that Support CSAT improved overall
+- a replacement for the mapped Support CSAT definition
+- a repeatable self-serve Genie metric
 - a customer-level extract
+
+## Current positioning
+
+The RPP Support CSAT proxy is service-specific explanatory evidence.
+
+It should not be treated as:
+
+- complete Service Account Support CSAT
+- proof that Support CSAT improved overall
+- a replacement for the mapped Support CSAT definition
+- a repeatable self-serve Genie metric
+
+Use it only to explain Residential Parking support-pathway stabilisation where the proxy period logic and selected service names are documented.
+
+For full Support CSAT, use the manual Support CSAT mapping documented in:
+
+`analytics/service-account/20-support-csat-service-mapping.md`
 
 ## Proxy service mapping
 
@@ -36,10 +57,10 @@ Current proxy service labels:
 
 | Service label | Support pathway |
 |---|---|
-| Residential parking enquiry - expert | Residential Parking Permit support |
-| Residential parking enquiry - resolved | Residential Parking Permit support |
-| Disabled or medical parking enquiry - expert | Disabled or Medical Parking Permit support |
-| Disabled or medical parking enquiry - resolved | Disabled or Medical Parking Permit support |
+| Residential parking enquiry - expert | Residential Parking Permit expert / escalated support |
+| Residential parking enquiry - resolved | Residential Parking Permit resolved support |
+| Disabled or medical parking enquiry - expert | Disabled or Medical Parking Permit expert / escalated support |
+| Disabled or medical parking enquiry - resolved | Disabled or Medical Parking Permit resolved support |
 
 ## Proxy periods
 
@@ -84,6 +105,10 @@ This suggests service stabilisation:
 
 > The most complex RPP support pathway is improving, although overall permit-support CSAT remains below the pre-portal baseline.
 
+Use this wording carefully.
+
+Do not generalise this result to all Service Account Support CSAT.
+
 ## Current proxy result notes
 
 | Service label | Period | Proxy support cases | Survey responses | Low CSAT responses | Proxy support CSAT |
@@ -101,13 +126,52 @@ This suggests service stabilisation:
 | Disabled or medical parking enquiry - resolved | Post-portal impact | 1,043 | 81 | 6 | 85% |
 | Disabled or medical parking enquiry - resolved | Current ELT period | 161 | 7 | 1 | 86% |
 
+## Slide-safe use
+
+The RPP proxy can be used as supporting evidence if the slide needs a support-pathway note.
+
+Suggested wording:
+
+> Residential Parking expert support is showing signs of stabilisation, with proxy CSAT recovering from 69% post-portal to 78% in the current ELT period.
+
+Do not say:
+
+> Support CSAT improved overall.
+
+Do not say:
+
+> Service Account Support CSAT improved.
+
+Do not say:
+
+> The portal caused Residential Parking support CSAT to recover.
+
 ## Caveats
 
 - This is a proxy, not a direct portal transaction CSAT measure.
 - The proxy depends on the selected RPP ask-service mapping.
 - Current ELT period response counts are small for some service labels.
 - The proxy should be used for explanatory analysis and support-pathway stabilisation.
-- It should not be used as the sole headline CSAT metric without caveats.
+- It should not be used as the sole headline CSAT metric.
+- It should not be used as complete Service Account Support CSAT.
+- It should not replace the mapped Support CSAT definition.
+- Full Support CSAT requires the manual Support CSAT mapping documented in `20-support-csat-service-mapping.md`.
+- Future repeatable Support CSAT requires a governed Databricks mapping asset.
+
+## Relationship to mapped Support CSAT
+
+The RPP proxy is narrower than the mapped Support CSAT definition.
+
+| Item | Purpose |
+|---|---|
+| RPP Support CSAT proxy | Explains Residential Parking support-pathway stabilisation. |
+| Manual Support CSAT mapping | Defines the broader mapped portal-relevant Support CSAT pilot. |
+| Governed Support CSAT mapping asset | Future production requirement for repeatable Databricks / Genie use. |
+
+Candidate governed mapping assets:
+
+- `datahub_datamart.customer_account_management.support_csat_service_mapping`
+- `datahub_datamart.customer_account_management.vwsupport_csat_service_mapping`
 
 ## Repository guidance
 
