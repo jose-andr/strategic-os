@@ -64,7 +64,6 @@ Do not store:
 | `13_support_rate_yoy_draft.sql` | Calculate support per 100 activities using `vwsupport` and Activity denominator. | Created |
 | `14_csat_service_cohort_yoy.sql` | Compare Activity CSAT for the portal-relevant service-name cohort across FY windows, with pre/post enablement timing as diagnostic context. | Created |
 | `15_rpp_support_csat_proxy.sql` | Template for Residential Parking Permit support CSAT proxy using selected enquiry/support services and analysis periods. | Proxy only |
-| `16_support_csat_mapping_pilot.sql` | Optional pilot-only SQL pattern for mapped Support CSAT, if manually controlled mapping values are supplied. | Pilot only / not production |
 
 ## Current validated results
 
@@ -191,6 +190,7 @@ Use service-name cohort matching for the main EOFY comparison.
 Use pre/post enablement logic only as a diagnostic where a valid pre-enable baseline exists.
 
 ## Support CSAT SQL note
+
 There is no standalone `16_support_csat_mapping_pilot.sql` file.
 
 Do not create one unless a governed Support CSAT mapping asset exists or the team explicitly decides to maintain a pilot-only SQL template.
@@ -198,6 +198,11 @@ Do not create one unless a governed Support CSAT mapping asset exists or the tea
 For now, Support CSAT mapping remains documented in:
 
 `analytics/service-account/20-support-csat-service-mapping.md`
+
+Working Databricks workspace copy:
+
+`/Users/jose.andrade@melbourne.vic.gov.au/support-csat-service-mapping.md`
+
 Do not create Support CSAT SQL from schema inference alone.
 
 Support CSAT requires the manual mapping documented in:
@@ -205,6 +210,16 @@ Support CSAT requires the manual mapping documented in:
 `analytics/service-account/20-support-csat-service-mapping.md`
 
 Until the mapping is implemented as a governed Databricks table or curated view, Support CSAT SQL should be treated as pilot-only and manually controlled.
+
+Support CSAT is not yet a repeatable self-serve Genie metric because the mapping is not implemented as a governed Databricks table or curated view.
+
+Support CSAT should only include CSAT cases where:
+
+`customer_intelligence.vwcase.Service_Name`
+
+matches a mapped:
+
+`support_service_name`
 
 Do not calculate Support CSAT from:
 
