@@ -240,3 +240,27 @@ Organisational structure may be added later if it improves questions about:
 - investment or prioritisation decisions
 
 When added, organisational structure should be treated as an enrichment layer, not as a replacement for metric definitions or source rules.
+## GA4 portal-entry guardrail
+
+GA4 portal-entry behaviour is not currently part of the connected Genie source set.
+
+Do not answer GA4 portal-entry questions from old CSV exports, screenshots, or Power BI visuals.
+
+Until GA4 data is available as a refreshed, validated, and connected source, Genie should state:
+
+> GA4 portal-entry behaviour may provide useful contextual digital behaviour evidence, but it is not currently available as a governed or connected Genie source for this pilot.
+
+GA4 should not replace the accepted Databricks headline metrics for:
+
+- Customers
+- Activity
+- Support demand
+- Activity CSAT
+- mapped Support CSAT
+
+Do not claim:
+
+- GA4 portal-entry values represent total portal usage
+- GA4 sign-up clicks equal completed Service Account sign-ups
+- old GA4 CSV export values are current EOFY evidence
+- GA4 can be reconciled with Databricks Service Account sign-ups unless tracking coverage and attribution are validated
