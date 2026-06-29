@@ -802,3 +802,50 @@ Remaining work is Databricks mapping, governance, and validation:
 4. Confirm Support CSAT mapping ownership and update process.
 5. Confirm the Databricks support `channel` field for CSAT channel segmentation.
 6. Validate channel values before producing real-time vs async Support CSAT.
+## GA4 Power BI visual note
+
+GA4 portal-entry visuals are Power BI reporting artefacts created from GA4 CSV exports.
+
+They are contextual digital behaviour evidence only.
+
+They are not Power BI business measures for the Service Account / Portal CX headline KPI set.
+
+### Current status
+
+The current GA4 Power BI visual uses older CSV exports.
+
+Do not use current GA4 values as final EOFY slide evidence.
+
+Treat the visual as a layout and analysis pattern until the GA4 export is refreshed.
+
+### Intended refreshed visual outputs
+
+| Visual output | Use | Caveat |
+|---|---|---|
+| Portal entries | Contextual count of selected portal login and registration link entries. | Not total portal usage. |
+| Device mix | Shows desktop, mobile, and tablet share for selected entries. | Limited to selected tracked links. |
+| Entry page pattern | Shows service pages driving selected portal entry. | Depends on link coverage. |
+| Login vs sign-up split | Shows selected destination behaviour. | Not the same as completed Service Account sign-ups. |
+| Weekday pattern | Shows day-of-week concentration. | Contextual only. |
+| Hour-of-day pattern | Shows time-of-day concentration. | Contextual only. |
+| Source channel | Shows acquisition/source pattern, where available. | Use only if refreshed and validated. |
+| Business-hours share | Shows whether selected entries occur during business hours. | Requires confirmed business-hours rule. |
+
+### Rule
+
+GA4 visuals should not replace Databricks headline metrics for:
+
+- Customers
+- Activity
+- Support demand
+- Activity CSAT
+- mapped Support CSAT
+
+### Do not claim
+
+Do not claim:
+
+- GA4 portal-entry values represent total portal usage.
+- Old GA4 CSV export values are current EOFY evidence.
+- GA4 sign-up clicks equal Service Account sign-ups.
+- GA4 visuals replace Databricks or Power BI headline KPI logic.
