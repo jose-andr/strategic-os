@@ -134,6 +134,27 @@ Support CSAT should only be discussed where the manual support service mapping h
 - RPP Support CSAT is a proxy, not complete Service Account Support CSAT.
 - Pre/post CSAT analysis is not viable for the full portal service cohort because most services do not have a usable pre-enable CSAT base in `customer_intelligence.vwcase`.
 
+## Support CSAT status
+
+Support CSAT is included only where the manual support service mapping has been applied and documented.
+
+Mapping documentation:
+
+`analytics/service-account/20-support-csat-service-mapping.md`
+
+Working Databricks workspace copy:
+
+`/Users/jose.andrade@melbourne.vic.gov.au/support-csat-service-mapping.md`
+
+Support CSAT is not yet a repeatable self-serve Genie metric because the mapping is not implemented as a governed Databricks table or curated view.
+
+There is no standalone `analytics/service-account/sql/16_support_csat_mapping_pilot.sql` file.
+
+Do not create one unless:
+
+1. a governed Support CSAT mapping asset exists, or
+2. the team explicitly decides to maintain a pilot-only SQL template.
+
 ## Support CSAT productionisation
 
 Support CSAT cannot be reliably calculated from schema inference alone.
@@ -149,6 +170,14 @@ Do not calculate Support CSAT from:
 For the celebration pilot, use only the manual mapping documented in:
 
 `20-support-csat-service-mapping.md`
+
+Support CSAT should only include CSAT cases where:
+
+`customer_intelligence.vwcase.Service_Name`
+
+matches a mapped:
+
+`support_service_name`
 
 Future self-serve Support CSAT requires a governed Databricks mapping asset, such as:
 
