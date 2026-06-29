@@ -36,5 +36,100 @@ Do not store:
 
 Use this pattern:
 
-```text
-ga4_portal_entry_<analysis_area>_<start-date>_<end-date>_exported-<export-date>.csv
+ga4_portal_entry_<analysis-area>_<start-date>_<end-date>_exported-<export-date>.csv
+
+Example:
+
+ga4_portal_entry_device_mix_2025-07-01_2026-06-30_exported-2026-07-03.csv
+
+## Required metadata
+
+Each export should have a matching metadata file.
+
+Use this pattern:
+
+<csv-file-name>.metadata.md
+
+Example:
+
+ga4_portal_entry_device_mix_2025-07-01_2026-06-30_exported-2026-07-03.csv.metadata.md
+
+## Metadata template
+
+Copy this template into each metadata file.
+
+### GA4 Export Metadata
+
+#### File
+
+`filename.csv`
+
+#### Reporting window
+
+Start date:
+
+End date:
+
+#### Export date
+
+YYYY-MM-DD
+
+#### Exported by
+
+
+
+#### GA4 property / source
+
+
+
+#### Analysis area
+
+Device mix / entry pages / weekday pattern / hour-of-day pattern / login vs sign-up split / source channel / business-hours share
+
+#### Included links or events
+
+
+
+#### Filters applied
+
+
+
+#### Fields included
+
+
+
+#### Aggregation level
+
+Aggregated only.
+
+#### Privacy check
+
+Confirm this export does not include:
+
+- user identifiers
+- client IDs
+- session IDs
+- IP addresses
+- personal information
+- full URLs with query strings or tokens
+- raw event-level rows
+
+#### Caveats
+
+
+
+#### Approved for repo storage?
+
+Yes / No
+
+#### Notes
+
+
+
+## Interpretation rule
+
+GA4 portal-entry data should be treated as selected-link behaviour only.
+
+Do not claim it represents total portal usage unless coverage has been validated.
+
+Do not reconcile GA4 sign-up clicks with Service Account sign-ups unless tracking coverage and attribution are validated.
