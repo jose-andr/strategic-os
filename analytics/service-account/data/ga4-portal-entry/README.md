@@ -4,6 +4,15 @@ This folder stores approved, non-sensitive GA4 CSV exports used as contextual su
 
 GA4 data in this folder is not a governed Databricks source and should not replace headline metrics for Customers, Activity, Support demand, Activity CSAT, or mapped Support CSAT.
 
+## Folder contents
+
+| File | Purpose |
+|---|---|
+| `README.md` | Explains the folder purpose, storage rules, naming convention, and interpretation rule. |
+| `export-index.md` | Tracks refreshed GA4 CSV exports and their approval status. |
+| `metadata-template.md` | Template for documenting each GA4 export. |
+| `data-dictionary.md` | Defines expected fields for approved GA4 portal-entry exports. |
+
 ## Purpose
 
 Use refreshed GA4 exports to understand how customers enter selected portal login and registration journeys, including:
@@ -56,75 +65,31 @@ ga4_portal_entry_device_mix_2025-07-01_2026-06-30_exported-2026-07-03.csv.metada
 
 ## Metadata template
 
-Copy this template into each metadata file.
+Use:
 
-### GA4 Export Metadata
+`metadata-template.md`
 
-#### File
+## Export index
 
-`filename.csv`
+Register each export in:
 
-#### Reporting window
+`export-index.md`
 
-Start date:
+Only use GA4 export values in the EOFY celebration slide or supporting report when:
 
-End date:
+- the CSV is listed in the export index
+- the matching metadata file is completed
+- the reporting window is confirmed
+- the export is approved for use
+- caveats are documented
 
-#### Export date
+## Data dictionary
 
-YYYY-MM-DD
+Use:
 
-#### Exported by
+`data-dictionary.md`
 
-
-
-#### GA4 property / source
-
-
-
-#### Analysis area
-
-Device mix / entry pages / weekday pattern / hour-of-day pattern / login vs sign-up split / source channel / business-hours share
-
-#### Included links or events
-
-
-
-#### Filters applied
-
-
-
-#### Fields included
-
-
-
-#### Aggregation level
-
-Aggregated only.
-
-#### Privacy check
-
-Confirm this export does not include:
-
-- user identifiers
-- client IDs
-- session IDs
-- IP addresses
-- personal information
-- full URLs with query strings or tokens
-- raw event-level rows
-
-#### Caveats
-
-
-
-#### Approved for repo storage?
-
-Yes / No
-
-#### Notes
-
-
+to document expected fields and derived fields.
 
 ## Interpretation rule
 
