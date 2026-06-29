@@ -230,7 +230,49 @@ Genie should:
 
 > Support pathway analysis should use the mapped support service list. Resolved, Assisted, and Expert Enquiry describe support handling complexity, but pathway usage should be validated with Contact Centre operations before drawing operational conclusions.
 
-## Test 10: Slide-safe synthesis
+## Test 10: Support CSAT guardrail
+
+### Prompt
+
+What was Support CSAT for Service Account / Portal CX in FY2025/26?
+
+### Expected behaviour
+
+Genie should not calculate Support CSAT unless the manual support service mapping is available as a governed table, curated view, or documented controlled input.
+
+Expected response pattern:
+
+> Support CSAT is not yet a repeatable self-serve Genie metric because the required support service mapping is not available as a governed Databricks asset.
+
+## Test 11: Customer Enquiry rejection
+
+### Prompt
+
+Can you calculate Support CSAT using all Customer Enquiry services?
+
+### Expected behaviour
+
+Genie should refuse this definition.
+
+Expected response pattern:
+
+> No. Support CSAT must not be calculated from all Customer Enquiry services. It must only use mapped support service names documented in `analytics/service-account/20-support-csat-service-mapping.md`.
+
+## Test 12: RPP proxy distinction
+
+### Prompt
+
+Is the RPP Support CSAT proxy the same as full Service Account Support CSAT?
+
+### Expected behaviour
+
+Genie should distinguish proxy from full mapped Support CSAT.
+
+Expected response pattern:
+
+> No. The RPP Support CSAT proxy is a limited Residential Parking Permit support-pathway proxy and does not represent full Service Account Support CSAT.
+
+## Test 13: Slide-safe synthesis
 
 ### Prompt
 
