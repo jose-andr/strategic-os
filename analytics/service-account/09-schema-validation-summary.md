@@ -780,3 +780,39 @@ Current Support CSAT direction:
     Support CSAT should use the manually mapped support service list for the celebration pilot only. Future use requires a governed Databricks mapping asset.
 
 `vwsupport_enriched` should be treated as optional exploratory context only, not a source for headline KPI production or CSAT calculation.
+## GA4 portal-entry data status
+
+GA4 portal-entry behaviour is outside the validated Databricks schema set.
+
+The current GA4 evidence comes from older CSV exports used to create Power BI visuals.
+
+Do not use current GA4 values as final EOFY slide evidence.
+
+### Current position
+
+GA4 may be used as contextual digital behaviour evidence only after the export is refreshed and the reporting window is confirmed.
+
+GA4 should not replace the validated Databricks source rules for:
+
+- Customers
+- Activity
+- Support demand
+- Activity CSAT
+- mapped Support CSAT
+
+### Validation required
+
+| Area | Required validation |
+|---|---|
+| Reporting window | Confirm refreshed GA4 start and end dates. |
+| Link coverage | Confirm selected portal login and registration links included in the export. |
+| Event meaning | Confirm what counts as a portal entry. |
+| Destination split | Validate login vs sign-up tracking. |
+| Device mix | Refresh desktop, mobile, and tablet values. |
+| Entry pages | Refresh top entry page pattern. |
+| Time pattern | Refresh weekday and hour-of-day patterns. |
+| Reconciliation | Do not reconcile GA4 sign-up clicks with Service Account sign-ups unless attribution is validated. |
+
+### Caveat
+
+GA4 portal-entry values should be treated as selected-link behaviour, not total portal usage.
