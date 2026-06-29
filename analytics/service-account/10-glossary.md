@@ -771,3 +771,54 @@ Current known warnings:
 - Service name joins for Activity CSAT use normalised text matching and should be checked for unmatched services.
 - Capability milestones may explain major changes in activity, support, and CSAT volumes.
 - No raw organisational data or customer-level data should be stored in the repository.
+## GA4 portal-entry terms
+
+### GA4 portal entry behaviour
+
+Contextual digital behaviour evidence from Google Analytics 4 showing how customers enter selected portal login and registration journeys.
+
+GA4 portal-entry behaviour is not a headline Service Account / Portal CX KPI.
+
+It should not replace Databricks metrics for Customers, Activity, Support demand, Activity CSAT, or mapped Support CSAT.
+
+### Portal entries
+
+Tracked entries from selected portal login and registration links in GA4.
+
+Portal entries should not be interpreted as total portal usage unless GA4 coverage has been validated.
+
+### Device mix
+
+The split of tracked portal entries by device category, such as desktop, mobile, or tablet.
+
+Device mix may help explain how customers access selected portal entry points.
+
+### Entry page pattern
+
+The pages or service journeys where customers clicked selected portal login or registration links.
+
+Entry page pattern may help identify which service pages are driving portal access.
+
+### Login vs sign-up destination split
+
+The split between customers clicking through to login journeys and customers clicking through to registration or sign-up journeys.
+
+This should not be reconciled with Service Account sign-ups unless tracking coverage and attribution are validated.
+
+### Source channel
+
+The GA4 acquisition or traffic source associated with selected portal-entry events, where available.
+
+Source channel should be used as contextual evidence only.
+
+### Business-hours share
+
+The share of selected portal-entry events occurring during defined business hours.
+
+Business-hours share may help interpret whether portal access is being used during operational support windows or outside them.
+
+### GA4 caveat
+
+Current GA4 values are based on older CSV exports and should not be used as final EOFY slide evidence.
+
+GA4 values may be included only after the CSV export, reporting window, selected links, and tracking logic are refreshed and validated.
