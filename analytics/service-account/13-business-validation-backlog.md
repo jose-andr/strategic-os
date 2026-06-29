@@ -521,3 +521,52 @@ Activity CSAT is good enough to proceed using the portal-enabled service cohort.
 Support CSAT is good enough for the celebration pilot only where the manually documented mapping and outputs are explicitly applied.
 
 The validation items in this file should be treated as follow-up work for reusable reporting, dashboard refinement, governed Databricks assets, and production-grade SQL.
+## GA4 portal entry behaviour refresh
+
+GA4 portal-entry behaviour can support the EOFY celebration story as contextual evidence, but the current Power BI visual is based on older CSV exports.
+
+Before using GA4 values in the slide or supporting report, refresh the GA4 export and Power BI visuals.
+
+### Refresh required
+
+Refresh GA4 data for selected portal login and registration links, including:
+
+- portal entries
+- device mix
+- entry pages to portal
+- login vs sign-up destination split
+- weekday pattern
+- hour-of-day pattern
+- source channel, where available
+- business-hours share, where available
+
+### Current position
+
+Do not use the current GA4 values as final slide evidence.
+
+Treat the existing visual as a layout and analysis pattern only.
+
+### Validation questions
+
+| Question | Decision needed |
+|---|---|
+| What is the refreshed GA4 reporting window? | Confirm start and end dates. |
+| Are selected portal links representative enough for a supporting insight? | Confirm caveat wording. |
+| Does GA4 track login and registration links consistently across key portal entry pages? | Validate event/link coverage. |
+| Can refreshed GA4 data be reconciled with Service Account sign-ups? | Keep separate unless reconciliation is validated. |
+| Should GA4 be shown on the slide or kept in the supporting report only? | Decide after refreshed results are reviewed. |
+
+### Slide rule
+
+GA4 should be used only as a supporting digital behaviour insight.
+
+It should not replace the validated Databricks headline metrics for Customers, Activity, Support demand, Activity CSAT, or mapped Support CSAT.
+
+### Do not claim
+
+Do not claim:
+
+- GA4 portal-entry values represent total portal usage.
+- Old GA4 CSV export values are current EOFY evidence.
+- GA4 replaces Databricks Customers, Activity, Support, or CSAT metrics.
+- GA4 can be reconciled with Service Account sign-ups unless reconciliation is validated.
