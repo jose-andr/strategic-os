@@ -163,3 +163,57 @@ Do not say:
 > RPP Support CSAT proxy represents full Service Account Support CSAT.
 
 The RPP proxy is service-specific explanatory evidence only.
+## Optional supporting insight: GA4 portal entry behaviour
+
+GA4 portal-entry behaviour may be used as a supporting digital behaviour insight once refreshed.
+
+The current GA4 Power BI visual was created from older CSV exports and should not be used as final slide evidence.
+
+### Slide role
+
+GA4 can support the celebration story by showing how customers enter selected portal login and registration journeys, including:
+
+- device mix
+- entry page pattern
+- weekday pattern
+- hour-of-day pattern
+- login vs sign-up destination split
+- source channel, where available
+- business-hours share, where available
+
+### Slide constraint
+
+GA4 should remain contextual only.
+
+It should not replace the validated Databricks headline metrics for:
+
+- Customers
+- Activity
+- Support demand
+- Activity CSAT
+- mapped Support CSAT
+
+### Holding wording
+
+Use this only after refreshed GA4 data is validated:
+
+> GA4 portal-entry tracking provides supporting context on how customers access selected portal login and registration journeys. It is contextual only and should not be treated as total portal usage.
+
+### Do not use yet
+
+Do not include GA4 values in the EOFY celebration slide until:
+
+- the GA4 CSV export is refreshed
+- the reporting window is confirmed
+- selected portal login and registration links are confirmed
+- login vs sign-up tracking is validated
+- caveat wording is confirmed
+
+### Do not claim
+
+Do not claim:
+
+- GA4 portal-entry values represent total portal usage
+- old GA4 CSV export values are current EOFY evidence
+- GA4 replaces Databricks Customers, Activity, Support, or CSAT metrics
+- GA4 can be reconciled with Service Account sign-ups unless reconciliation is validated
