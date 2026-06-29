@@ -375,3 +375,43 @@ Target outcome:
 - clear ownership and change control
 - update process when new services are portal-enabled
 - Genie Space connected to the governed mapping asset
+## GA4 contextual evidence lesson
+
+GA4 portal-entry behaviour can add useful digital behaviour context, but it should be treated differently from governed Databricks metrics.
+
+### Lesson
+
+Not all useful slide evidence needs to be a headline KPI.
+
+GA4 can help explain how customers enter selected portal login and registration journeys, but it should remain contextual unless the export, reporting window, selected links, and event meaning are refreshed and validated.
+
+### What worked
+
+The existing Power BI visual provides a useful layout and analysis pattern for showing:
+
+- device mix
+- entry page pattern
+- weekday pattern
+- hour-of-day pattern
+- login vs sign-up destination split
+- source channel, where available
+- business-hours share, where available
+
+### What to avoid
+
+Do not treat older GA4 CSV values as final EOFY evidence.
+
+Do not treat selected portal-entry events as total portal usage.
+
+Do not reconcile GA4 sign-up clicks with Service Account sign-ups unless tracking coverage and attribution are validated.
+
+Do not let GA4 replace the validated Databricks headline metrics.
+
+### Reusable pattern
+
+Use GA4 as a supporting behavioural layer:
+
+    Databricks = governed headline performance metrics
+    GA4 = contextual digital entry behaviour
+
+This keeps the celebration story evidence-rich without weakening metric governance.
