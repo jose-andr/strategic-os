@@ -133,6 +133,9 @@ Support CSAT should only be discussed where the manual support service mapping h
 - Support CSAT is not yet a repeatable self-serve Genie metric.
 - RPP Support CSAT is a proxy, not complete Service Account Support CSAT.
 - Pre/post CSAT analysis is not viable for the full portal service cohort because most services do not have a usable pre-enable CSAT base in `customer_intelligence.vwcase`.
+- - GA4 portal-entry behaviour can be used only as contextual supporting evidence after the CSV export and Power BI visuals are refreshed.
+- Current GA4 values are old and should not be used as final slide evidence.
+- GA4 should not replace Databricks headline metrics for Customers, Activity, Support demand, Activity CSAT, or mapped Support CSAT.
 
 ## Support CSAT status
 
@@ -270,3 +273,65 @@ The reusable reporting standard still needs:
 - ownership and update process for Support CSAT mapping
 - channel segmentation validation
 - production-grade Databricks SQL / curated views where required
+- refreshed GA4 portal-entry export and confirmed reporting window
+
+## GA4 portal-entry evidence status
+
+GA4 portal-entry behaviour can support the EOFY celebration story as contextual digital behaviour evidence once refreshed.
+
+The current Power BI visual was created from older GA4 CSV exports and should be treated as a layout and analysis pattern only.
+
+Do not use current GA4 values as final slide evidence.
+
+### Intended use
+
+GA4 can help explain how customers enter selected portal login and registration journeys, including:
+
+- device mix
+- entry page pattern
+- weekday pattern
+- hour-of-day pattern
+- login vs sign-up destination split
+- source channel, where available
+- business-hours share, where available
+
+### Source rule
+
+GA4 should remain contextual only.
+
+It should not replace the validated Databricks headline metrics for:
+
+- Customers
+- Activity
+- Support demand
+- Activity CSAT
+- mapped Support CSAT
+
+### Refresh required before use
+
+Before including GA4 values in the EOFY celebration slide or supporting report, confirm:
+
+| Requirement | Status |
+|---|---|
+| Refreshed GA4 CSV export completed | Pending |
+| Reporting window confirmed | Pending |
+| Selected portal login and registration links confirmed | Pending |
+| Login vs sign-up tracking validated | Pending |
+| Device, entry page, weekday, and hourly patterns refreshed | Pending |
+| Source channel and business-hours fields refreshed, where available | Pending |
+| Caveat wording confirmed | Pending |
+
+### Do not claim
+
+Do not claim:
+
+- GA4 portal-entry values represent total portal usage.
+- Old GA4 CSV export values are current EOFY evidence.
+- GA4 replaces Databricks Customers, Activity, Support, or CSAT metrics.
+- GA4 can be reconciled with Service Account sign-ups unless reconciliation is validated.
+
+### Holding wording
+
+Use only after refreshed GA4 data is validated:
+
+> GA4 portal-entry tracking provides supporting context on how customers access selected portal login and registration journeys. It is contextual only and should not be treated as total portal usage.
