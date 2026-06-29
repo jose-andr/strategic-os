@@ -895,3 +895,49 @@ The slide should not claim:
 - FY2023/24 Activity CSAT response volume is very small, so it should not be used as the main baseline.
 - Service name joins for Activity CSAT use normalised text matching and should be checked for unmatched services.
 - No raw organisational data or customer-level data should be stored in this repository.
+## Contextual metric: GA4 portal entry behaviour
+
+GA4 portal-entry behaviour is a contextual digital behaviour insight, not a headline Service Account / Portal CX KPI.
+
+It may be used to support the EOFY celebration story once refreshed, but it should not replace the validated Databricks headline metrics.
+
+### Intended use
+
+GA4 can help describe how customers enter selected portal login and registration journeys, including:
+
+- device mix
+- entry page pattern
+- weekday pattern
+- hour-of-day pattern
+- login vs sign-up destination split
+- source channel, where available
+- business-hours share, where available
+
+### Current status
+
+The current Power BI visual was created from older GA4 CSV exports.
+
+Do not use current GA4 values as final slide evidence.
+
+Treat the existing visual as a layout and analysis pattern only until the GA4 export is refreshed.
+
+### Source rule
+
+GA4 should remain contextual only.
+
+It should not replace Databricks metrics for:
+
+- Customers
+- Activity
+- Support demand
+- Activity CSAT
+- mapped Support CSAT
+
+### Do not claim
+
+Do not claim:
+
+- GA4 portal-entry values represent total portal usage.
+- Old GA4 CSV export values are current EOFY evidence.
+- GA4 replaces Databricks Customers, Activity, Support, or CSAT metrics.
+- GA4 can be reconciled with Service Account sign-ups unless reconciliation is validated.
