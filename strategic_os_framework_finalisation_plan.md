@@ -45,6 +45,67 @@ Desired reputation:
 
 ---
 
+## Working rules for future chats
+
+- Do not check GitHub unless explicitly asked.
+- Follow this finalisation plan as the working source of truth.
+- Use the chat sequence as the current working state during an active work session.
+- Do not repeat files because GitHub may lag after recent commits.
+- Keep repo file content clean and durable.
+- Do not include chat-process notes, “next build step” sections, or continuity thoughts inside markdown files unless the file is explicitly a plan or checklist.
+- Use `11_analytics/`, not `analytics/`, for the analytics domain area.
+
+---
+
+# Current completed work
+
+## Completed today
+
+- [x] Created or confirmed core folder scaffold from `00_inbox/` through `11_analytics/`
+- [x] Renamed analytics domain folder from `analytics/` to `11_analytics/`
+- [x] Moved `service-account/` analytics content into `11_analytics/service-account/`
+- [x] Created `11_analytics/README.md`
+- [x] Created `00_inbox/README.md`
+- [x] Created `01_career/README.md`
+- [x] Created `02_strategic_opportunities/README.md`
+- [x] Created `03_decision_briefs/README.md`
+- [x] Created `04_frameworks/README.md`
+- [x] Created `05_lessons_learned/README.md`
+- [x] Created `06_stakeholder_patterns/README.md`
+- [x] Created `08_projects/README.md`
+- [x] Created `09_thought_leadership/README.md`
+- [x] Created `10_templates/README.md`
+- [x] Updated `07_ai_agents/README.md`
+- [x] Created `04_frameworks/intake_to_output_workflow.md`
+
+## Working assumption at end of day
+
+The current root-level scaffold is:
+
+    strategic-os/
+    ├── 00_inbox/
+    ├── 01_career/
+    ├── 02_strategic_opportunities/
+    ├── 03_decision_briefs/
+    ├── 04_frameworks/
+    ├── 05_lessons_learned/
+    ├── 06_stakeholder_patterns/
+    ├── 07_ai_agents/
+    ├── 08_projects/
+    ├── 09_thought_leadership/
+    ├── 10_templates/
+    ├── 11_analytics/
+    ├── README.md
+    └── strategic_os_framework_finalisation_plan.md
+
+The current analytics structure is:
+
+    11_analytics/
+    ├── README.md
+    └── service-account/
+
+---
+
 # Finalisation checklist
 
 ## Phase 1 — Clean accidental process notes
@@ -117,23 +178,23 @@ Goal: ensure the repository structure matches the Strategic OS architecture.
 
 Create or confirm these folders:
 
-- [ ] `00_inbox/`
-- [ ] `01_career/`
-- [ ] `02_strategic_opportunities/`
-- [ ] `03_decision_briefs/`
-- [ ] `04_frameworks/`
-- [ ] `05_lessons_learned/`
-- [ ] `06_stakeholder_patterns/`
-- [ ] `07_ai_agents/`
-- [ ] `08_projects/`
-- [ ] `09_thought_leadership/`
-- [ ] `10_templates/`
-- [ ] `analytics/`
+- [x] `00_inbox/`
+- [x] `01_career/`
+- [x] `02_strategic_opportunities/`
+- [x] `03_decision_briefs/`
+- [x] `04_frameworks/`
+- [x] `05_lessons_learned/`
+- [x] `06_stakeholder_patterns/`
+- [x] `07_ai_agents/`
+- [x] `08_projects/`
+- [x] `09_thought_leadership/`
+- [x] `10_templates/`
+- [x] `11_analytics/`
 
 Definition of done:
 
-- [ ] All core Strategic OS folders exist
-- [ ] Empty folders include a `.gitkeep` or a lightweight `README.md`
+- [x] All core Strategic OS folders exist
+- [x] Empty folders include a `.gitkeep` or a lightweight `README.md`
 
 ---
 
@@ -143,32 +204,32 @@ Goal: make each folder understandable without needing chat context.
 
 Create or refine:
 
-- [ ] `00_inbox/README.md`
-- [ ] `01_career/README.md`
-- [ ] `02_strategic_opportunities/README.md`
-- [ ] `03_decision_briefs/README.md`
-- [ ] `04_frameworks/README.md`
-- [ ] `05_lessons_learned/README.md`
-- [ ] `06_stakeholder_patterns/README.md`
-- [ ] `07_ai_agents/README.md`
-- [ ] `08_projects/README.md`
-- [ ] `09_thought_leadership/README.md`
-- [ ] `10_templates/README.md`
-- [ ] `analytics/README.md`
+- [x] `00_inbox/README.md`
+- [x] `01_career/README.md`
+- [x] `02_strategic_opportunities/README.md`
+- [x] `03_decision_briefs/README.md`
+- [x] `04_frameworks/README.md`
+- [x] `05_lessons_learned/README.md`
+- [x] `06_stakeholder_patterns/README.md`
+- [x] `07_ai_agents/README.md`
+- [x] `08_projects/README.md`
+- [x] `09_thought_leadership/README.md`
+- [x] `10_templates/README.md`
+- [x] `11_analytics/README.md`
 
 Each folder README should include:
 
-- [ ] Purpose
-- [ ] What belongs here
-- [ ] What does not belong here
-- [ ] Suggested file naming
-- [ ] Related templates
-- [ ] Related agents
-- [ ] Review rhythm, where relevant
+- [x] Purpose
+- [x] What belongs here
+- [x] What does not belong here
+- [x] Suggested file naming
+- [x] Related templates
+- [x] Related agents
+- [x] Review rhythm, where relevant
 
 Definition of done:
 
-- [ ] A future chat or collaborator can understand the repository structure from the folder README files
+- [x] A future chat or collaborator can understand the repository structure from the folder README files
 
 ---
 
@@ -178,33 +239,33 @@ Goal: define how raw input becomes useful Strategic OS knowledge.
 
 Create:
 
-- [ ] `04_frameworks/intake_to_output_workflow.md`
+- [x] `04_frameworks/intake_to_output_workflow.md`
 
 Workflow to define:
 
-- [ ] Capture in `00_inbox/`
-- [ ] Triage
-- [ ] Decide output type
-- [ ] Use relevant agent
-- [ ] Use relevant template
-- [ ] Review
-- [ ] Store in correct folder
-- [ ] Index if useful
-- [ ] Convert into reusable pattern, lesson or career evidence where relevant
+- [x] Capture in `00_inbox/`
+- [x] Triage
+- [x] Decide output type
+- [x] Use relevant agent
+- [x] Use relevant template
+- [x] Review
+- [x] Store in correct folder
+- [x] Index if useful
+- [x] Convert into reusable pattern, lesson or career evidence where relevant
 
 Possible flow:
 
-- [ ] inbox item to decision brief
-- [ ] inbox item to strategic opportunity
-- [ ] inbox item to lesson learned
-- [ ] inbox item to stakeholder pattern
-- [ ] inbox item to project artefact
-- [ ] inbox item to career evidence
-- [ ] inbox item to thought leadership
+- [x] inbox item to decision brief
+- [x] inbox item to strategic opportunity
+- [x] inbox item to lesson learned
+- [x] inbox item to stakeholder pattern
+- [x] inbox item to project artefact
+- [x] inbox item to career evidence
+- [x] inbox item to thought leadership
 
 Definition of done:
 
-- [ ] Strategic OS has a clear pathway from capture to reusable knowledge
+- [x] Strategic OS has a clear pathway from capture to reusable knowledge
 
 ---
 
@@ -259,15 +320,15 @@ Goal: stabilise the general agent framework under `07_ai_agents/`.
 
 Current priority agents:
 
-- [ ] Sensemaking Agent
-- [ ] Stakeholder Journey Agent
-- [ ] Shipping Coach
-- [ ] Career Architect
+- [x] Sensemaking Agent
+- [x] Stakeholder Journey Agent
+- [x] Shipping Coach
+- [x] Career Architect
 - [ ] Chief of Staff Agent
 
 Shared files to create or confirm:
 
-- [ ] `07_ai_agents/README.md`
+- [x] `07_ai_agents/README.md`
 - [ ] `07_ai_agents/agent_operating_model.md`
 - [ ] `07_ai_agents/agent_review_checklist.md`
 - [ ] `07_ai_agents/agent_prompt_pattern.md`
@@ -435,8 +496,8 @@ Goal: ensure every priority agent has usable templates.
 
 Existing or planned templates:
 
-- [ ] `10_templates/decision_brief.md`
-- [ ] `10_templates/lesson_learned.md`
+- [x] `10_templates/decision_brief.md`
+- [x] `10_templates/lesson_learned.md`
 - [ ] `10_templates/stakeholder_alignment_assessment.md`
 - [ ] `10_templates/shipping_recommendation.md`
 - [ ] `10_templates/opportunity_review.md`
@@ -473,24 +534,24 @@ Goal: make the templates folder easy to navigate.
 
 Update:
 
-- [ ] `10_templates/README.md`
+- [x] `10_templates/README.md`
 
 It should list:
 
-- [ ] template name
-- [ ] supporting agent
-- [ ] purpose
-- [ ] when to use
+- [x] template name
+- [x] supporting agent
+- [x] purpose
+- [x] when to use
 
 It should not include:
 
-- [ ] next build steps
-- [ ] chat-process language
-- [ ] duplicate long explanations already inside each template
+- [x] next build steps
+- [x] chat-process language
+- [x] duplicate long explanations already inside each template
 
 Definition of done:
 
-- [ ] Templates are clearly connected to agents and Strategic OS workflows
+- [x] Templates are clearly connected to agents and Strategic OS workflows
 
 ---
 
@@ -500,31 +561,31 @@ Goal: support the North Star by making opportunities visible and actionable.
 
 Create:
 
-- [ ] `02_strategic_opportunities/README.md`
+- [x] `02_strategic_opportunities/README.md`
 - [ ] `02_strategic_opportunities/index.md`
 - [ ] `04_frameworks/strategic_opportunity_pipeline.md`
 
 Suggested opportunity states:
 
-- [ ] Captured
-- [ ] Shaping
-- [ ] Socialising
-- [ ] Active
-- [ ] Parked
-- [ ] Declined
-- [ ] Converted to project
-- [ ] Converted to career evidence
+- [x] Captured
+- [x] Shaping
+- [x] Socialising
+- [x] Active
+- [x] Parked
+- [x] Declined
+- [x] Converted to project
+- [x] Converted to career evidence
 
 Opportunity review should consider:
 
-- [ ] strategic value
-- [ ] stakeholder value
-- [ ] organisational value
-- [ ] customer value
-- [ ] career value
-- [ ] evidence value
-- [ ] timing
-- [ ] trade-offs
+- [x] strategic value
+- [x] stakeholder value
+- [x] organisational value
+- [x] customer value
+- [x] career value
+- [x] evidence value
+- [x] timing
+- [x] trade-offs
 
 Definition of done:
 
@@ -538,7 +599,7 @@ Goal: make career growth and promotion readiness part of the system.
 
 Create or confirm:
 
-- [ ] `01_career/README.md`
+- [x] `01_career/README.md`
 - [ ] `01_career/achievements/`
 - [ ] `01_career/feedback/`
 - [ ] `01_career/opportunities/`
@@ -550,22 +611,22 @@ Create:
 
 Career evidence flow:
 
-- [ ] project artefact
-- [ ] achievement note
-- [ ] promotion proof point
-- [ ] career narrative
-- [ ] role application or development conversation
+- [x] project artefact
+- [x] achievement note
+- [x] promotion proof point
+- [x] career narrative
+- [x] role application or development conversation
 
 Evidence categories:
 
-- [ ] strategic influence
-- [ ] organisational impact
-- [ ] customer-centred practice
-- [ ] systems thinking
-- [ ] human-centred design
-- [ ] AI-enabled capability
-- [ ] stakeholder influence
-- [ ] delivery and follow-through
+- [x] strategic influence
+- [x] organisational impact
+- [x] customer-centred practice
+- [x] systems thinking
+- [x] human-centred design
+- [x] AI-enabled capability
+- [x] stakeholder influence
+- [x] delivery and follow-through
 
 Definition of done:
 
@@ -579,22 +640,22 @@ Goal: create a home for reusable thinking models.
 
 Create:
 
-- [ ] `04_frameworks/README.md`
+- [x] `04_frameworks/README.md`
 
 Potential framework categories:
 
-- [ ] decision frameworks
-- [ ] stakeholder frameworks
-- [ ] service design frameworks
-- [ ] system mapping frameworks
-- [ ] analytics interpretation frameworks
-- [ ] opportunity assessment frameworks
-- [ ] career positioning frameworks
-- [ ] QA and performance frameworks
+- [x] decision frameworks
+- [x] stakeholder frameworks
+- [x] service design frameworks
+- [x] system mapping frameworks
+- [x] analytics interpretation frameworks
+- [x] opportunity assessment frameworks
+- [x] career positioning frameworks
+- [x] QA and performance frameworks
 
 Definition of done:
 
-- [ ] Reusable thinking patterns have a clear home outside project-specific folders
+- [x] Reusable thinking patterns have a clear home outside project-specific folders
 
 ---
 
@@ -604,18 +665,18 @@ Goal: make future project folders consistent.
 
 Create:
 
-- [ ] `08_projects/README.md`
+- [x] `08_projects/README.md`
 - [ ] `04_frameworks/project_folder_pattern.md`
 
 Recommended project pattern:
 
-- [ ] `08_projects/[project-name]/README.md`
-- [ ] `08_projects/[project-name]/context.md`
-- [ ] `08_projects/[project-name]/decisions.md`
-- [ ] `08_projects/[project-name]/stakeholder-notes.md`
-- [ ] `08_projects/[project-name]/outputs/`
-- [ ] `08_projects/[project-name]/lessons-learned.md`
-- [ ] `08_projects/[project-name]/archive/`
+- [x] `08_projects/[project-name]/README.md`
+- [x] `08_projects/[project-name]/context.md`
+- [x] `08_projects/[project-name]/decisions.md`
+- [x] `08_projects/[project-name]/stakeholder-notes.md`
+- [x] `08_projects/[project-name]/outputs/`
+- [x] `08_projects/[project-name]/lessons-learned.md`
+- [x] `08_projects/[project-name]/archive/`
 
 Definition of done:
 
@@ -629,36 +690,36 @@ Goal: prepare the architecture for multiple data and analytics agents.
 
 Update one or more of:
 
-- [ ] `07_ai_agents/README.md`
+- [x] `07_ai_agents/README.md`
 - [ ] `07_ai_agents/agent_operating_model.md`
 - [ ] `07_ai_agents/agent_output_map.md`
-- [ ] `analytics/README.md`
+- [x] `11_analytics/README.md`
 
 Principles:
 
-- [ ] General personal agents live under `07_ai_agents/`
-- [ ] Domain-specific analytical agents may live inside `analytics/` or project folders
-- [ ] Databricks / Genie agents require explicit source rules and caveats
-- [ ] Multiple Genie agents may exist for different domains
-- [ ] Service Account is the first pilot pattern, not the only future pattern
+- [x] General personal agents live under `07_ai_agents/`
+- [x] Domain-specific analytical agents may live inside `11_analytics/` or project folders
+- [x] Databricks / Genie agents require explicit source rules and caveats
+- [x] Multiple Genie agents may exist for different domains
+- [x] Service Account is the first pilot pattern, not the only future pattern
 
 Potential future domains:
 
-- [ ] `analytics/service-account/`
-- [ ] `analytics/channel-strategy/`
-- [ ] `analytics/customer-demand/`
-- [ ] `analytics/support-csat/`
-- [ ] `analytics/executive-metrics/`
-- [ ] `analytics/data-quality/`
+- [x] `11_analytics/service-account/`
+- [ ] `11_analytics/channel-strategy/`
+- [ ] `11_analytics/customer-demand/`
+- [ ] `11_analytics/support-csat/`
+- [ ] `11_analytics/executive-metrics/`
+- [ ] `11_analytics/data-quality/`
 
 Potential domain-agent files:
 
-- [ ] `agent_context.md`
-- [ ] `agent_review_prompt.md`
-- [ ] `agent_consistency_check.md`
-- [ ] `genie_context.md`
-- [ ] `metric_caveats.md`
-- [ ] `source_rules.md`
+- [x] `agent_context.md`
+- [x] `agent_review_prompt.md`
+- [x] `agent_consistency_check.md`
+- [x] `genie_context.md`
+- [x] `metric_caveats.md`
+- [x] `source_rules.md`
 
 Definition of done:
 
@@ -672,28 +733,28 @@ Goal: recognise the Service Account analytics area as the first mature domain-ag
 
 Reference area:
 
-- [ ] `analytics/service-account/`
+- [x] `11_analytics/service-account/`
 
 Relevant concepts:
 
-- [ ] agent consistency checks
-- [ ] agent review prompts
-- [ ] Genie context rules
-- [ ] metric caveats
-- [ ] documentation governance
-- [ ] evidence boundaries
-- [ ] GA4 as contextual evidence only
-- [ ] Databricks metrics as governed headline sources
+- [x] agent consistency checks
+- [x] agent review prompts
+- [x] Genie context rules
+- [x] metric caveats
+- [x] documentation governance
+- [x] evidence boundaries
+- [x] GA4 as contextual evidence only
+- [x] Databricks metrics as governed headline sources
 
 What to do:
 
-- [ ] Add a light reference to the Service Account pattern in the general framework
-- [ ] Keep Service Account-specific rules inside `analytics/service-account/`
-- [ ] Avoid copying all project-specific detail into `07_ai_agents/`
+- [x] Add a light reference to the Service Account pattern in the general framework
+- [x] Keep Service Account-specific rules inside `11_analytics/service-account/`
+- [x] Avoid copying all project-specific detail into `07_ai_agents/`
 
 Definition of done:
 
-- [ ] The framework can reuse the Service Account lesson without overgeneralising it
+- [x] The framework can reuse the Service Account lesson without overgeneralising it
 
 ---
 
@@ -938,7 +999,7 @@ Recommended index files:
 - [ ] `02_strategic_opportunities/index.md`
 - [ ] `01_career/index.md`
 - [ ] `08_projects/index.md`
-- [ ] `analytics/index.md`
+- [ ] `11_analytics/index.md`
 
 Each index should include:
 
@@ -994,17 +1055,17 @@ Goal: avoid turning framework-building into another refinement loop.
 Definition of done for v1:
 
 - [ ] Root README remains stable
-- [ ] Core folder scaffold exists
-- [ ] Folder README files exist
+- [x] Core folder scaffold exists
+- [x] Folder README files exist
 - [ ] Priority agents exist
 - [ ] Chief of Staff Agent exists
 - [ ] Each agent has an `agent_spec.md`
 - [ ] Templates exist for main outputs
-- [ ] README files explain navigation
+- [x] README files explain navigation
 - [ ] Shared operating rules exist
 - [ ] Review checklist exists
 - [ ] Naming and indexing patterns are documented
-- [ ] Multiple Databricks / Genie agents are architecturally supported
+- [x] Multiple Databricks / Genie agents are architecturally supported
 - [ ] Privacy, governance and retention rules exist
 - [ ] Cross-tool architecture is defined
 - [ ] Strategic OS system map exists
@@ -1018,44 +1079,37 @@ After this, shift from building the framework to using it on real Strategic OS w
 
 # Recommended implementation order
 
-## First
+## Completed first-stage setup
 
-- [ ] Save this file as `strategic_os_framework_finalisation_plan.md`
-- [ ] Clean accidental process notes from existing files
-- [ ] Confirm actual repo folder state
+- [x] Save this file as `strategic_os_framework_finalisation_plan.md`
+- [x] Complete folder scaffold
+- [x] Add folder-level README files
+- [x] Update `07_ai_agents/README.md`
+- [x] Update `10_templates/README.md`
+- [x] Rename analytics architecture to `11_analytics/`
+- [x] Move Service Account analytics into `11_analytics/service-account/`
+- [x] Add `04_frameworks/intake_to_output_workflow.md`
 
-## Second
+## Next work session
 
-- [ ] Complete folder scaffold
-- [ ] Add folder-level README files
-- [ ] Update `07_ai_agents/README.md`
-- [ ] Update `10_templates/README.md`
+Start from Phase 6.
 
-## Third
+Recommended next actions:
 
+- [ ] Create `04_frameworks/operating_cadence.md`
 - [ ] Add Chief of Staff Agent
 - [ ] Add Daily Briefing template
 - [ ] Add autonomy and escalation rules
+- [ ] Create `04_frameworks/privacy_governance_retention.md`
+- [ ] Create `04_frameworks/cross_tool_architecture.md`
+- [ ] Create `04_frameworks/strategic_os_system_map.md`
+- [ ] Create `04_frameworks/strategic_os_qa_model.md`
+- [ ] Create `10_templates/quarterly_strategic_os_assessment.md`
 
-## Fourth
+## Later
 
-- [ ] Add intake-to-output workflow
-- [ ] Add operating cadence
-- [ ] Add cross-tool architecture
-- [ ] Add privacy, governance and retention rules
-
-## Fifth
-
-- [ ] Add Databricks / Genie multi-agent pattern
-- [ ] Link Service Account as the first mature analytics pilot pattern
-
-## Sixth
-
-- [ ] Add QA model
-- [ ] Add quarterly Strategic OS assessment template
-
-## Seventh
-
-- [ ] Add indexes where useful
+- [ ] Finalise shared agent files
+- [ ] Standardise all agent specs
+- [ ] Add folder indexes where useful
 - [ ] Complete final quality review
 - [ ] Stop building and start using
