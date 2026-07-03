@@ -199,38 +199,29 @@ This repository contains:
 - Project artefacts
 - Thought leadership
 - Reusable templates
+- Analytics interpretation and domain-agent patterns
 
-```text
-strategic-os/
-
-README.md
-
-00_inbox/
-
-01_career/
-├── achievements/
-├── feedback/
-├── opportunities/
-└── promotion_readiness/
-
-02_strategic_opportunities/
-
-03_decision_briefs/
-
-04_frameworks/
-
-05_lessons_learned/
-
-06_stakeholder_patterns/
-
-07_ai_agents/
-├── sensemaking_agent/
-├── stakeholder_agent/
-├── shipping_coach/
-└── career_architect/
-
-08_projects/
-
-09_thought_leadership/
-
-10_templates/
+    strategic-os/
+    ├── README.md
+    ├── strategic_os_framework_finalisation_plan.md
+    ├── 00_inbox/
+    ├── 01_career/
+    │   ├── achievements/
+    │   ├── feedback/
+    │   ├── opportunities/
+    │   └── promotion_readiness/
+    ├── 02_strategic_opportunities/
+    ├── 03_decision_briefs/
+    ├── 04_frameworks/
+    ├── 05_lessons_learned/
+    ├── 06_stakeholder_patterns/
+    ├── 07_ai_agents/
+    │   ├── sensemaking_agent/
+    │   ├── stakeholder_agent/
+    │   ├── shipping_coach/
+    │   ├── career_architect/
+    │   └── chief_of_staff/
+    ├── 08_projects/
+    ├── 09_thought_leadership/
+    ├── 10_templates/
+    └── 11_analytics/
