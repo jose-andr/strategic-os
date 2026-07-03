@@ -6,7 +6,7 @@ Templates support repeatable outputs for decision-making, learning, stakeholder 
 
 Templates should be practical, markdown-first and easy to reuse across projects, opportunities and agent workflows.
 
-## Template principles
+## Template Principles
 
 Templates should:
 
@@ -19,17 +19,12 @@ Templates should:
 7. Support human judgement rather than replace it.
 8. Keep outputs proportionate to the decision or task.
 
-## Current templates
+## Current Templates
 
 | Template | File | Supports | Use for |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Decision Brief | `decision_brief.md` | Sensemaking Agent | Turning ambiguity into decision-ready advice |
 | Lesson Learned | `lesson_learned.md` | Strategic OS learning loop | Capturing reusable learning from work, decisions or experiments |
-
-## Planned templates
-
-| Template | Planned file | Supports | Use for |
-|---|---|---|---|
 | Stakeholder Alignment Assessment | `stakeholder_alignment_assessment.md` | Stakeholder Journey Agent | Assessing alignment, concerns, influence pathways and engagement sequence |
 | Shipping Recommendation | `shipping_recommendation.md` | Shipping Coach | Deciding whether to ship, socialise, refine or stop |
 | Opportunity Review | `opportunity_review.md` | Career Architect | Assessing strategic opportunities and career value |
@@ -38,17 +33,27 @@ Templates should:
 | Daily Briefing | `daily_briefing.md` | Chief of Staff Agent | Coordinating daily priorities, risks, admin, calendar and decisions required |
 | Quarterly Strategic OS Assessment | `quarterly_strategic_os_assessment.md` | Strategic OS QA model | Reviewing system performance, agent quality and North Star alignment |
 
-## Standard template structure
+## Potential Future Templates
+
+| Template | Possible File | Supports | Use for |
+| --- | --- | --- | --- |
+| Weekly Operating Review | `weekly_operating_review.md` | Chief of Staff Agent | Reviewing weekly priorities, decisions, blockers and follow-ups |
+| Admin Task List | `admin_task_list.md` | Chief of Staff Agent | Tracking low-risk operational tasks |
+| Follow-Up Tracker | `follow_up_tracker.md` | Chief of Staff Agent | Tracking promised follow-ups and dependencies |
+
+## Standard Template Structure
 
 Templates should generally include:
 
 - Purpose
 - When to use
+- Inputs
 - Main working sections
 - Final recommendation or output
 - Review checklist
+- Privacy or safety guidance, where relevant
 
-## Naming pattern
+## Naming Pattern
 
 Use lowercase filenames with underscores.
 
@@ -63,19 +68,19 @@ Examples:
 - `shipping_recommendation.md`
 - `quarterly_strategic_os_assessment.md`
 
-## Adding new templates
+## Adding New Templates
 
 When adding a new template, check:
 
-- [ ] Does it support a repeated Strategic OS workflow?
-- [ ] Is the purpose clear?
-- [ ] Is it connected to an agent, folder or operating rhythm?
-- [ ] Does it include a review checklist?
-- [ ] Is it free of sensitive organisational source data?
-- [ ] Is it reusable beyond one project?
-- [ ] Is the filename consistent with the naming pattern?
+- Does it support a repeated Strategic OS workflow?
+- Is the purpose clear?
+- Is it connected to an agent, folder or operating rhythm?
+- Does it include a review checklist?
+- Is it free of sensitive organisational source data?
+- Is it reusable beyond one project?
+- Is the filename consistent with the naming pattern?
 
-## Privacy and portability
+## Privacy And Portability
 
 Templates should not require raw organisational source data.
 
