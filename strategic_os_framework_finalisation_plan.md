@@ -1155,9 +1155,25 @@ After this, shift from building the framework to using it on real Strategic OS w
 
 ## Remaining work
 
-* [ ] Clean accidental process notes across all repo files
-* [ ] Standardise all agent specs
-* [ ] Update `07_ai_agents/agent_operating_model.md` for the final autonomy model
-* [ ] Confirm multiple Databricks / Genie agent architecture in shared agent files
-* [ ] Complete final quality review
+* [x] Clean accidental process notes across all repo files
+* [x] Standardise all agent specs
+* [x] Update `07_ai_agents/agent_operating_model.md` for the final autonomy model
+* [x] Confirm multiple Databricks / Genie agent architecture in shared agent files
+* [x] Complete final quality review
 * [ ] Stop building and start using
+
+## Current status
+
+Strategic OS v1 is now structurally complete enough to move from framework-building into active use.
+
+The remaining work is not to add more framework files. The remaining work is to use the system on real Strategic OS work and only create new files when repeated use exposes a genuine gap.
+
+Use the next active work item to test:
+
+* `00_inbox/` capture and triage
+* the relevant agent
+* the relevant template
+* the correct storage folder
+* whether the output creates a decision, opportunity, lesson, stakeholder pattern, project artefact or career evidence
+
+Do not add new framework structure unless it is needed by actual use.
