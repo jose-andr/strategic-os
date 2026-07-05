@@ -2,11 +2,13 @@
 
 ## Purpose
 
-This file defines the remaining work required to finalise the Strategic OS framework across the whole repository.
+This file defines the work completed to finalise the Strategic OS framework across the whole repository.
 
-Use this file as the continuity source when returning to the work in a new chat.
+Use this file as the continuity source when returning to Strategic OS work in a new chat.
 
-The goal is to stabilise the repository, complete the missing operating structure, support the agent framework, prepare for Chief of Staff operations, accommodate future Databricks / Genie agents, and create a QA model for ongoing performance review.
+The goal is to stabilise the repository, complete the operating structure, support the agent framework, prepare for Chief of Staff operations, accommodate future Databricks / Genie agents, and create a QA model for ongoing performance review.
+
+Strategic OS v1 is now structurally complete enough to move from framework-building into active use.
 
 ---
 
@@ -34,6 +36,8 @@ The system supports:
 * career development
 * AI-enabled ways of working
 * reusable knowledge creation
+* analytical interpretation
+* operating discipline
 
 North Star:
 
@@ -61,14 +65,16 @@ Desired reputation:
 * During active repo-sync work, prioritise missing files first, then update or standardise existing content.
 * Do not update README files during normal repo-sync work.
 * Save README corrections for the end-of-day completion pass when explicitly requested.
+* After v1 completion, prioritise active use over additional framework-building.
+* Only create new framework files when repeated real use exposes a genuine gap.
 
 ---
 
 # Current completed work
 
-## Completed today
+## Completed setup and finalisation
 
-* [x] Created or confirmed core folder scaffold from `00_inbox/` through `11_analytics/`
+* [x] Created or confirmed core folder scaffold from `00_inbox/` through `12_quality/`
 * [x] Renamed analytics domain folder from `analytics/` to `11_analytics/`
 * [x] Moved `service-account/` analytics content into `11_analytics/service-account/`
 * [x] Created `11_analytics/README.md`
@@ -83,23 +89,40 @@ Desired reputation:
 * [x] Created `09_thought_leadership/README.md`
 * [x] Created `10_templates/README.md`
 * [x] Updated `07_ai_agents/README.md`
+* [x] Updated root `README.md`
 * [x] Created `04_frameworks/intake_to_output_workflow.md`
 * [x] Created `04_frameworks/operating_cadence.md`
-* [x] Created `07_ai_agents/agent_file_naming.md`
-* [x] Created `07_ai_agents/agent_output_index_pattern.md`
-* [x] Created `07_ai_agents/chief_of_staff/agent_spec.md`
-* [x] Created `07_ai_agents/chief_of_staff/autonomy_rules.md`
-* [x] Created `07_ai_agents/chief_of_staff/escalation_rules.md`
-* [x] Created `10_templates/daily_briefing.md`
-* [x] Created `02_strategic_opportunities/index.md`
 * [x] Created `04_frameworks/strategic_opportunity_pipeline.md`
 * [x] Created `04_frameworks/career_evidence_architecture.md`
 * [x] Created `04_frameworks/project_folder_pattern.md`
 * [x] Created `04_frameworks/privacy_governance_retention.md`
 * [x] Created `04_frameworks/cross_tool_architecture.md`
+* [x] Created `04_frameworks/mcp_server_architecture.md`
 * [x] Created `04_frameworks/strategic_os_system_map.md`
 * [x] Created `04_frameworks/strategic_os_qa_model.md`
+* [x] Created `07_ai_agents/agent_file_naming.md`
+* [x] Created `07_ai_agents/agent_output_index_pattern.md`
+* [x] Updated `07_ai_agents/agent_operating_model.md`
+* [x] Updated `07_ai_agents/agent_review_checklist.md`
+* [x] Updated `07_ai_agents/agent_prompt_pattern.md`
+* [x] Updated `07_ai_agents/agent_output_map.md`
+* [x] Standardised priority agent specs
+* [x] Created `07_ai_agents/chief_of_staff/agent_spec.md`
+* [x] Created `07_ai_agents/chief_of_staff/autonomy_rules.md`
+* [x] Created `07_ai_agents/chief_of_staff/escalation_rules.md`
+* [x] Created `10_templates/daily_briefing.md`
+* [x] Created `10_templates/weekly_operating_review.md`
+* [x] Created `10_templates/admin_task_list.md`
+* [x] Created `10_templates/follow_up_tracker.md`
+* [x] Created `10_templates/decision_brief.md`
+* [x] Created `10_templates/lesson_learned.md`
+* [x] Created `10_templates/stakeholder_alignment_assessment.md`
+* [x] Created `10_templates/shipping_recommendation.md`
+* [x] Created `10_templates/opportunity_review.md`
+* [x] Created `10_templates/career_guidance.md`
+* [x] Created `10_templates/promotion_readiness_assessment.md`
 * [x] Created `10_templates/quarterly_strategic_os_assessment.md`
+* [x] Created `02_strategic_opportunities/index.md`
 * [x] Created `03_decision_briefs/index.md`
 * [x] Created `05_lessons_learned/index.md`
 * [x] Created `06_stakeholder_patterns/index.md`
@@ -110,48 +133,74 @@ Desired reputation:
 * [x] Created `01_career/feedback/`
 * [x] Created `01_career/opportunities/`
 * [x] Created `01_career/promotion_readiness/`
-* [x] Updated root `README.md` repository structure for `11_analytics/` and career subfolders
-* [x] Updated `10_templates/README.md` so completed templates are no longer listed as planned
+* [x] Created general analytics architecture files under `11_analytics/`
+* [x] Created Service Account pilot analytics domain under `11_analytics/service-account/`
+* [x] Created Databricks / Genie architecture
+* [x] Created analytics-to-decision workflow
+* [x] Created analytics quality review files
+* [x] Created repo hygiene and completion review files under `12_quality/`
 
-## Working assumption at end of day
+## Current root-level scaffold
 
-The current root-level scaffold is:
+    strategic-os/
+    ├── README.md
+    ├── strategic_os_framework_finalisation_plan.md
+    ├── 00_inbox/
+    ├── 01_career/
+    │   ├── achievements/
+    │   ├── feedback/
+    │   ├── opportunities/
+    │   └── promotion_readiness/
+    ├── 02_strategic_opportunities/
+    ├── 03_decision_briefs/
+    ├── 04_frameworks/
+    ├── 05_lessons_learned/
+    ├── 06_stakeholder_patterns/
+    ├── 07_ai_agents/
+    │   ├── sensemaking_agent/
+    │   ├── stakeholder_agent/
+    │   ├── shipping_coach/
+    │   ├── career_architect/
+    │   └── chief_of_staff/
+    ├── 08_projects/
+    ├── 09_thought_leadership/
+    ├── 10_templates/
+    ├── 11_analytics/
+    │   └── service-account/
+    └── 12_quality/
 
-```
-strategic-os/
-├── 00_inbox/
-├── 01_career/
-│   ├── achievements/
-│   ├── feedback/
-│   ├── opportunities/
-│   └── promotion_readiness/
-├── 02_strategic_opportunities/
-├── 03_decision_briefs/
-├── 04_frameworks/
-├── 05_lessons_learned/
-├── 06_stakeholder_patterns/
-├── 07_ai_agents/
-│   ├── sensemaking_agent/
-│   ├── stakeholder_agent/
-│   ├── shipping_coach/
-│   ├── career_architect/
-│   └── chief_of_staff/
-├── 08_projects/
-├── 09_thought_leadership/
-├── 10_templates/
-├── 11_analytics/
-├── README.md
-└── strategic_os_framework_finalisation_plan.md
-```
+## Current analytics structure
 
-The current analytics structure is:
-
-```
-11_analytics/
-├── README.md
-├── index.md
-└── service-account/
-```
+    11_analytics/
+    ├── README.md
+    ├── index.md
+    ├── analytical_agent_human_review_triggers.md
+    ├── analytical_agent_prompt_pattern.md
+    ├── analytical_anomaly_summary.md
+    ├── analytical_data_quality_note.md
+    ├── analytical_decision_support_evidence.md
+    ├── analytical_metric_caveat_note.md
+    ├── analytical_metric_definition_note.md
+    ├── analytical_output_review_checklist.md
+    ├── analytical_source_conflict_note.md
+    ├── analytical_storage_rules.md
+    ├── analytical_summary_template.md
+    ├── analytical_trend_summary.md
+    ├── analytics_decision_to_brief_workflow.md
+    ├── analytics_domain_setup_checklist.md
+    ├── analytics_quality_review.md
+    ├── analytics_review_cadence.md
+    ├── databricks_genie_architecture.md
+    ├── domain_agent_consistency_check.md
+    ├── domain_agent_data_quality_notes.md
+    ├── domain_agent_genie_context.md
+    ├── domain_agent_metric_caveats.md
+    ├── domain_agent_metric_definitions.md
+    ├── domain_agent_output_index.md
+    ├── domain_agent_pattern.md
+    ├── domain_agent_review_prompt.md
+    ├── domain_agent_source_rules.md
+    └── service-account/
 
 ---
 
@@ -161,26 +210,26 @@ The current analytics structure is:
 
 Goal: remove chat-process language from repository files.
 
-Files to review:
+Files reviewed:
 
-* [ ] `07_ai_agents/README.md`
+* [x] `07_ai_agents/README.md`
 * [x] `07_ai_agents/agent_file_naming.md`
 * [x] `07_ai_agents/agent_output_index_pattern.md`
 * [x] `07_ai_agents/agent_operating_model.md`
 * [x] `07_ai_agents/agent_prompt_pattern.md`
 * [x] `10_templates/README.md`
-* [ ] Any other files created during the agents-framework build
+* [x] Any other files created during the agents-framework build
 
-Remove:
+Removed or avoided:
 
-* [ ] `## Next build step` sections
-* [ ] “The next agents-framework update should...”
-* [ ] “Recommended file...”
-* [ ] “When you type 3...”
-* [ ] Any chat-process notes
-* [ ] Any temporary continuity notes that do not belong in durable repo documentation
+* [x] `## Next build step` sections
+* [x] “The next agents-framework update should...”
+* [x] “Recommended file...”
+* [x] “When you type 3...”
+* [x] Any chat-process notes
+* [x] Any temporary continuity notes that do not belong in durable repo documentation
 
-Keep:
+Kept:
 
 * [x] Purpose
 * [x] When to use
@@ -193,7 +242,7 @@ Keep:
 
 Definition of done:
 
-* [ ] Markdown files read like durable repository documentation, not chat transcripts
+* [x] Markdown files read like durable repository documentation, not chat transcripts
 
 ---
 
@@ -213,6 +262,9 @@ Check that root `README.md` clearly defines:
 * [x] Priority Agents
 * [x] Primary Success Measures
 * [x] Repository Structure
+* [x] Folder Guide
+* [x] Source Of Truth Rules
+* [x] Current Status
 
 Definition of done:
 
@@ -239,6 +291,7 @@ Create or confirm these folders:
 * [x] `09_thought_leadership/`
 * [x] `10_templates/`
 * [x] `11_analytics/`
+* [x] `12_quality/`
 
 Definition of done:
 
@@ -348,6 +401,7 @@ Suggested cadence:
 * [x] Strategic opportunities review
 * [x] Lessons learned review
 * [x] Frameworks and templates review
+* [x] Analytics domain review, where active
 
 ### Quarterly
 
@@ -356,6 +410,7 @@ Suggested cadence:
 * [x] Career evidence review
 * [x] Repository hygiene review
 * [x] North Star alignment review
+* [x] Analytics quality review
 
 Definition of done:
 
@@ -374,6 +429,7 @@ Current priority agents:
 * [x] Shipping Coach
 * [x] Career Architect
 * [x] Chief of Staff Agent
+* [x] Domain Analytical Agents
 
 Shared files to create or confirm:
 
@@ -397,38 +453,38 @@ Goal: make each agent spec coherent and consistent.
 
 Agent spec files:
 
-* [ ] `07_ai_agents/sensemaking_agent/agent_spec.md`
-* [ ] `07_ai_agents/stakeholder_agent/agent_spec.md`
-* [ ] `07_ai_agents/shipping_coach/agent_spec.md`
-* [ ] `07_ai_agents/career_architect/agent_spec.md`
+* [x] `07_ai_agents/sensemaking_agent/agent_spec.md`
+* [x] `07_ai_agents/stakeholder_agent/agent_spec.md`
+* [x] `07_ai_agents/shipping_coach/agent_spec.md`
+* [x] `07_ai_agents/career_architect/agent_spec.md`
 * [x] `07_ai_agents/chief_of_staff/agent_spec.md`
 
 Standard structure:
 
-* [ ] `# [Agent Name] Specification`
-* [ ] `## Mission`
-* [ ] `## Primary Question`
-* [ ] `## Inputs`
-* [ ] `## Outputs`
-* [ ] `## Reasoning Framework`
-* [ ] `## Operating Autonomy`
-* [ ] `## Human In The Loop`
-* [ ] `## Success Metrics`
-* [ ] `## Failure Modes`
+* [x] `# [Agent Name] Specification`
+* [x] `## Mission`
+* [x] `## Primary Question`
+* [x] `## Inputs`
+* [x] `## Outputs`
+* [x] `## Reasoning Framework`
+* [x] `## Operating Autonomy`
+* [x] `## Human In The Loop`
+* [x] `## Success Metrics`
+* [x] `## Failure Modes`
 
 Checks:
 
-* [ ] Same heading pattern across all files
-* [ ] No chat notes
-* [ ] Missions match Strategic OS intent
-* [ ] Outputs match templates
-* [ ] Human-in-the-loop rules are clear
-* [ ] Failure modes are practical
-* [ ] Agent boundaries are explicit
+* [x] Same heading pattern across all files
+* [x] No chat notes
+* [x] Missions match Strategic OS intent
+* [x] Outputs match templates
+* [x] Human-in-the-loop rules are clear
+* [x] Failure modes are practical
+* [x] Agent boundaries are explicit
 
 Definition of done:
 
-* [ ] All priority agents feel like one coherent system
+* [x] All priority agents feel like one coherent system
 
 ---
 
@@ -489,7 +545,7 @@ Goal: define how independent each agent can be.
 
 Update:
 
-* [ ] `07_ai_agents/agent_operating_model.md`
+* [x] `07_ai_agents/agent_operating_model.md`
 
 Suggested autonomy levels:
 
@@ -499,9 +555,9 @@ Agent provides advice only.
 
 Examples:
 
-* [ ] Sensemaking Agent
-* [ ] Stakeholder Journey Agent
-* [ ] Career Architect
+* [x] Sensemaking Agent
+* [x] Stakeholder Journey Agent
+* [x] Career Architect
 
 ### Level 2 — Coaching / challenge
 
@@ -509,7 +565,7 @@ Agent can recommend action and challenge delay but does not act independently.
 
 Example:
 
-* [ ] Shipping Coach
+* [x] Shipping Coach
 
 ### Level 3 — Operational coordination
 
@@ -517,7 +573,7 @@ Agent can organise, prioritise and make low-risk day-to-day decisions within def
 
 Example:
 
-* [ ] Chief of Staff Agent
+* [x] Chief of Staff Agent
 
 ### Level 4 — Domain analytical support
 
@@ -525,7 +581,8 @@ Agent can interrogate governed data through approved tools and produce analysis 
 
 Examples:
 
-* [ ] Future Databricks / Genie agents
+* [x] Future Databricks / Genie agents
+* [x] Domain Analytical Agents
 
 ### Level 5 — Human approval required
 
@@ -533,9 +590,9 @@ Any action involving sensitive communication, formal decisions, stakeholder comm
 
 Definition of done:
 
-* [ ] Agent autonomy is explicit
-* [ ] Chief of Staff independence is supported safely
-* [ ] Future Databricks / Genie agents have a place in the model
+* [x] Agent autonomy is explicit
+* [x] Chief of Staff independence is supported safely
+* [x] Future Databricks / Genie agents have a place in the model
 
 ---
 
@@ -543,7 +600,7 @@ Definition of done:
 
 Goal: ensure every priority agent has usable templates.
 
-Existing or planned templates:
+Existing templates:
 
 * [x] `10_templates/decision_brief.md`
 * [x] `10_templates/lesson_learned.md`
@@ -553,13 +610,10 @@ Existing or planned templates:
 * [x] `10_templates/career_guidance.md`
 * [x] `10_templates/promotion_readiness_assessment.md`
 * [x] `10_templates/daily_briefing.md`
+* [x] `10_templates/weekly_operating_review.md`
+* [x] `10_templates/admin_task_list.md`
+* [x] `10_templates/follow_up_tracker.md`
 * [x] `10_templates/quarterly_strategic_os_assessment.md`
-
-Potential future templates:
-
-* [ ] `10_templates/weekly_operating_review.md`
-* [ ] `10_templates/admin_task_list.md`
-* [ ] `10_templates/follow_up_tracker.md`
 
 Standard template structure:
 
@@ -740,8 +794,8 @@ Goal: prepare the architecture for multiple data and analytics agents.
 Update one or more of:
 
 * [x] `07_ai_agents/README.md`
-* [ ] `07_ai_agents/agent_operating_model.md`
-* [ ] `07_ai_agents/agent_output_map.md`
+* [x] `07_ai_agents/agent_operating_model.md`
+* [x] `07_ai_agents/agent_output_map.md`
 * [x] `11_analytics/README.md`
 
 Principles:
@@ -752,9 +806,12 @@ Principles:
 * [x] Multiple Genie agents may exist for different domains
 * [x] Service Account is the first pilot pattern, not the only future pattern
 
-Potential future domains:
+Current domain:
 
 * [x] `11_analytics/service-account/`
+
+Potential future domains, to create only when real use justifies them:
+
 * [ ] `11_analytics/channel-strategy/`
 * [ ] `11_analytics/customer-demand/`
 * [ ] `11_analytics/support-csat/`
@@ -768,11 +825,14 @@ Potential domain-agent files:
 * [x] `agent_consistency_check.md`
 * [x] `genie_context.md`
 * [x] `metric_caveats.md`
+* [x] `metric_definitions.md`
+* [x] `data_quality_notes.md`
 * [x] `source_rules.md`
+* [x] `agent_output_index.md`
 
 Definition of done:
 
-* [ ] Strategic OS can support multiple Databricks / Genie agents without forcing them into one generic agent
+* [x] Strategic OS can support multiple Databricks / Genie agents without forcing them into one generic agent
 
 ---
 
@@ -789,11 +849,12 @@ Relevant concepts:
 * [x] agent consistency checks
 * [x] agent review prompts
 * [x] Genie context rules
+* [x] metric definitions
 * [x] metric caveats
+* [x] data quality notes
 * [x] documentation governance
 * [x] evidence boundaries
-* [x] GA4 as contextual evidence only
-* [x] Databricks metrics as governed headline sources
+* [x] Databricks / Genie interpretation boundaries
 
 What to do:
 
@@ -823,6 +884,8 @@ Rules should cover:
 * [x] no confidential source extracts
 * [x] no private HR details unless safe and necessary
 * [x] no operational data copied from systems of record
+* [x] no raw Genie transcripts
+* [x] no copied dashboard extracts
 * [x] use summaries, patterns, caveats and reusable learning instead
 * [x] separate personal reflections from organisational facts
 * [x] mark assumptions clearly
@@ -1000,8 +1063,8 @@ Create:
 Potential storage location for completed assessments:
 
 * [x] `05_lessons_learned/`
+* [x] `01_career/promotion_readiness/` if used for career evidence
 * [ ] `04_frameworks/qa_assessments/`
-* [x] or `01_career/promotion_readiness/` if used for career evidence
 
 Quarterly assessment sections:
 
@@ -1074,26 +1137,26 @@ Goal: do one coherence pass across the framework.
 
 Review questions:
 
-* [ ] Does the root README remain untouched and authoritative?
-* [ ] Does the folder scaffold match the root README?
-* [ ] Does each folder have a clear purpose?
-* [ ] Do all priority agents exist?
-* [ ] Does Chief of Staff have a clear operating role and autonomy model?
-* [ ] Do agent outputs have templates?
-* [ ] Are future Databricks / Genie agents accommodated?
-* [ ] Is the Service Account pilot pattern referenced appropriately?
-* [ ] Are file names consistent?
-* [ ] Are indexes useful but not heavy?
-* [ ] Are any `Next build step` notes left inside repo files?
-* [ ] Are evidence, assumptions, interpretation, recommendation and action kept distinct?
-* [ ] Are privacy and employer-independence principles reflected?
-* [ ] Is there a QA model?
-* [ ] Is there a quarterly assessment process?
-* [ ] Is the framework useful without being overbuilt?
+* [x] Root README remains stable and authoritative
+* [x] Folder scaffold matches the root README
+* [x] Each folder has a clear purpose
+* [x] All priority agents exist
+* [x] Chief of Staff has a clear operating role and autonomy model
+* [x] Agent outputs have templates
+* [x] Future Databricks / Genie agents are accommodated
+* [x] Service Account pilot pattern is referenced appropriately
+* [x] File names are consistent
+* [x] Indexes are useful but not heavy
+* [x] No `Next build step` notes remain inside repo files
+* [x] Evidence, assumptions, interpretation, recommendation and action are kept distinct
+* [x] Privacy and employer-independence principles are reflected
+* [x] There is a QA model
+* [x] There is a quarterly assessment process
+* [x] The framework is useful without being overbuilt
 
 Definition of done:
 
-* [ ] Clean, stable v1 of the Strategic OS framework
+* [x] Clean, stable v1 of the Strategic OS framework
 
 ---
 
@@ -1103,12 +1166,12 @@ Goal: avoid turning framework-building into another refinement loop.
 
 Definition of done for v1:
 
-* [ ] Root README remains stable
+* [x] Root README remains stable
 * [x] Core folder scaffold exists
 * [x] Folder README files exist
-* [ ] Priority agents exist
+* [x] Priority agents exist
 * [x] Chief of Staff Agent exists
-* [ ] Each agent has an `agent_spec.md`
+* [x] Each agent has an `agent_spec.md`
 * [x] Templates exist for main outputs
 * [x] README files explain navigation
 * [x] Shared operating rules exist
@@ -1120,7 +1183,7 @@ Definition of done for v1:
 * [x] Strategic OS system map exists
 * [x] QA model exists
 * [x] Quarterly assessment template exists
-* [ ] No accidental process notes remain
+* [x] No accidental process notes remain
 
 After this, shift from building the framework to using it on real Strategic OS work.
 
@@ -1153,6 +1216,21 @@ After this, shift from building the framework to using it on real Strategic OS w
 * [x] Finalise shared agent files
 * [x] Add folder indexes where useful
 
+## Completed third-stage setup
+
+* [x] Standardise priority agent specs
+* [x] Add Chief of Staff secondary templates
+* [x] Add Domain Analytical Agent pattern
+* [x] Add Service Account analytical pilot domain
+* [x] Add general analytics templates and review patterns
+* [x] Add Databricks / Genie architecture
+* [x] Add analytics-to-decision workflow
+* [x] Add analytics storage and human-review rules
+* [x] Add analytics quality review
+* [x] Add repo hygiene quality pass
+* [x] Add Strategic OS completion review
+* [x] Update root README for completed v1 structure
+
 ## Remaining work
 
 * [x] Clean accidental process notes across all repo files
@@ -1179,6 +1257,7 @@ The framework now includes:
 * reusable templates
 * privacy, governance and retention rules
 * cross-tool architecture
+* MCP server architecture
 * Strategic OS system map
 * QA model
 * quarterly assessment process
