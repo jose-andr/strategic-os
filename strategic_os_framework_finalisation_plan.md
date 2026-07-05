@@ -1160,13 +1160,33 @@ After this, shift from building the framework to using it on real Strategic OS w
 * [x] Update `07_ai_agents/agent_operating_model.md` for the final autonomy model
 * [x] Confirm multiple Databricks / Genie agent architecture in shared agent files
 * [x] Complete final quality review
-* [ ] Stop building and start using
+* [x] Stop building and start using
 
 ## Current status
 
-Strategic OS v1 is now structurally complete enough to move from framework-building into active use.
+Strategic OS v1 is structurally complete enough to move from framework-building into active use.
 
-The remaining work is not to add more framework files. The remaining work is to use the system on real Strategic OS work and only create new files when repeated use exposes a genuine gap.
+The framework now includes:
+
+* core folder scaffold
+* folder README files
+* priority agent architecture
+* Chief of Staff operating model
+* Domain Analytical Agent pattern
+* Service Account analytical pilot
+* Databricks / Genie architecture
+* analytics-to-decision workflow
+* reusable templates
+* privacy, governance and retention rules
+* cross-tool architecture
+* Strategic OS system map
+* QA model
+* quarterly assessment process
+* repo hygiene and completion review checks
+
+No further framework expansion is recommended.
+
+The next work should be active use of Strategic OS on real work.
 
 Use the next active work item to test:
 
@@ -1175,5 +1195,13 @@ Use the next active work item to test:
 * the relevant template
 * the correct storage folder
 * whether the output creates a decision, opportunity, lesson, stakeholder pattern, project artefact or career evidence
+
+Only create new framework files when repeated real use exposes a genuine gap.
+
+## End-of-day completion note
+
+Build mode paused.
+
+Next session should begin with active use, not new framework creation, unless a specific repo defect or missing file is found.
 
 Do not add new framework structure unless it is needed by actual use.
