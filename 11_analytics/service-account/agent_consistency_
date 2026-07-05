@@ -1,0 +1,394 @@
+# Service Account Analytical Agent Consistency Check
+
+## Purpose
+
+Use this checklist to test whether the Service Account Analytical Agent produces stable, source-aware and caveated outputs over time.
+
+It helps prevent the agent from changing definitions, forgetting caveats, overstating confidence or treating exploratory service account analysis as governed truth.
+
+## Strategic OS North Star
+
+> Increase strategic opportunities by helping leaders make better strategic decisions.
+
+The Service Account Analytical Agent is only useful if it improves analytical judgement consistently.
+
+## When To Use
+
+Use this checklist when:
+
+- creating or reviewing the Service Account Analytical Agent
+- changing service account source rules
+- changing metric definitions
+- changing metric caveats
+- changing Genie context
+- reviewing service account analytical reliability
+- checking whether service account outputs can support decisions
+- investigating inconsistent service account analysis
+
+## Core Principle
+
+The same service account question should receive the same source logic, metric definition, caveats and confidence treatment each time.
+
+The wording may vary.
+
+The governance logic should not.
+
+## Consistency Test Details
+
+Date:
+
+Reviewer:
+
+Domain:
+
+Service Account
+
+Agent or prompt reviewed:
+
+Source files reviewed:
+
+Output examples reviewed:
+
+Status:
+
+Suggested status values:
+
+- Draft
+- Tested
+- Needs revision
+- Passed
+- Superseded
+- Archived
+
+## Files To Check
+
+| File | Exists? | Current? | Notes |
+| --- | --- | --- | --- |
+| `agent_context.md` | Yes / No | Yes / No / Unknown |  |
+| `source_rules.md` | Yes / No | Yes / No / Unknown |  |
+| `metric_definitions.md` | Yes / No | Yes / No / Unknown |  |
+| `metric_caveats.md` | Yes / No | Yes / No / Unknown |  |
+| `data_quality_notes.md` | Yes / No | Yes / No / Unknown |  |
+| `genie_context.md` | Yes / No | Yes / No / Unknown |  |
+| `agent_review_prompt.md` | Yes / No | Yes / No / Unknown |  |
+| `agent_consistency_check.md` | Yes / No | Yes / No / Unknown |  |
+| `agent_output_index.md` | Yes / No | Yes / No / Unknown |  |
+
+## Test Questions
+
+Use repeatable questions to check whether the agent applies source rules, metric definitions and caveats consistently.
+
+| Test Question | Purpose | Expected Source Logic | Expected Caveat |
+| --- | --- | --- | --- |
+| What is service account volume? | Tests metric definition and grain handling | Confirm source and grain before interpretation | Grain must be confirmed |
+| Are active service accounts increasing? | Tests active-status logic and trend interpretation | Confirm active definition, source and timeframe | Active status must be confirmed |
+| Are items being resolved faster? | Tests closure versus resolution handling | Confirm resolution metric and source | Closure may not equal customer resolution |
+| What channels are customers using? | Tests channel interpretation | Confirm channel source and mapping | Channel mix does not prove preference |
+| Is repeat contact a failure demand issue? | Tests attribution caution | Treat as investigation signal | Repeat contact does not prove cause |
+| Can this output support a decision brief? | Tests decision-support threshold | Require source, metric, caveat, confidence and review | Human review required |
+
+## Source Consistency
+
+| Check | Result | Notes |
+| --- | --- | --- |
+| Uses approved sources where confirmed | Pass / Partial / Fail |  |
+| Names source clearly | Pass / Partial / Fail |  |
+| Labels source type | Pass / Partial / Fail |  |
+| Distinguishes governed source from contextual signal | Pass / Partial / Fail |  |
+| Treats unconfirmed sources as requiring review | Pass / Partial / Fail |  |
+| Handles conflicting sources correctly | Pass / Partial / Fail |  |
+| Avoids unsupported sources | Pass / Partial / Fail |  |
+
+## Metric Definition Consistency
+
+| Check | Result | Notes |
+| --- | --- | --- |
+| Defines metrics before interpreting them | Pass / Partial / Fail |  |
+| Identifies grain clearly | Pass / Partial / Fail |  |
+| Avoids mixing account, case, request and interaction | Pass / Partial / Fail |  |
+| Names timeframe clearly | Pass / Partial / Fail |  |
+| Mentions inclusions and exclusions where relevant | Pass / Partial / Fail |  |
+| Avoids inventing calculations | Pass / Partial / Fail |  |
+| Uses `metric_definitions.md` consistently | Pass / Partial / Fail |  |
+
+## Caveat Consistency
+
+| Check | Result | Notes |
+| --- | --- | --- |
+| Includes known service account caveats | Pass / Partial / Fail |  |
+| Separates closure from customer resolution | Pass / Partial / Fail |  |
+| Treats repeat contact as signal, not proof | Pass / Partial / Fail |  |
+| Separates channel mix from customer preference | Pass / Partial / Fail |  |
+| Interprets escalation and reopen carefully | Pass / Partial / Fail |  |
+| Does not bury caveats after strong claims | Pass / Partial / Fail |  |
+
+## Data Quality Consistency
+
+| Check | Result | Notes |
+| --- | --- | --- |
+| Mentions source-of-truth uncertainty where relevant | Pass / Partial / Fail |  |
+| Mentions grain uncertainty where relevant | Pass / Partial / Fail |  |
+| Mentions active-status uncertainty where relevant | Pass / Partial / Fail |  |
+| Mentions refresh cadence uncertainty where relevant | Pass / Partial / Fail |  |
+| Mentions duplicate, test or migrated record risk | Pass / Partial / Fail |  |
+| Mentions mapping, coding or status risks where relevant | Pass / Partial / Fail |  |
+| Lowers confidence when data quality is uncertain | Pass / Partial / Fail |  |
+
+## Evidence And Interpretation Consistency
+
+| Check | Result | Notes |
+| --- | --- | --- |
+| Separates observed data from interpretation | Pass / Partial / Fail |  |
+| Marks assumptions clearly | Pass / Partial / Fail |  |
+| Labels weak signals appropriately | Pass / Partial / Fail |  |
+| Avoids overclaiming trends or anomalies | Pass / Partial / Fail |  |
+| Avoids implying causation without evidence | Pass / Partial / Fail |  |
+| States what cannot be concluded | Pass / Partial / Fail |  |
+
+## Confidence Consistency
+
+| Check | Result | Notes |
+| --- | --- | --- |
+| Uses confidence labels | Pass / Partial / Fail |  |
+| Justifies confidence level | Pass / Partial / Fail |  |
+| Lowers confidence when source is unconfirmed | Pass / Partial / Fail |  |
+| Lowers confidence when caveats are material | Pass / Partial / Fail |  |
+| Uses “do not use yet” where source, metric or caveat is unclear | Pass / Partial / Fail |  |
+
+Use confidence labels:
+
+- high confidence
+- medium confidence
+- low confidence
+- do not use yet
+
+## Decision-Support Consistency
+
+| Check | Result | Notes |
+| --- | --- | --- |
+| Names decision relevance | Pass / Partial / Fail |  |
+| Keeps recommendation within data limits | Pass / Partial / Fail |  |
+| Flags when Sensemaking Agent should take over | Pass / Partial / Fail |  |
+| Avoids making final decisions | Pass / Partial / Fail |  |
+| Identifies human review needs | Pass / Partial / Fail |  |
+| Avoids implying official reporting without review | Pass / Partial / Fail |  |
+
+## Governance And Privacy Consistency
+
+| Check | Result | Notes |
+| --- | --- | --- |
+| Avoids customer-level records | Pass / Partial / Fail |  |
+| Avoids raw governed data | Pass / Partial / Fail |  |
+| Avoids restricted screenshots or extracts | Pass / Partial / Fail |  |
+| Avoids naming individuals or teams unnecessarily | Pass / Partial / Fail |  |
+| Avoids comparing teams or people without review | Pass / Partial / Fail |  |
+| Does not store raw Genie or Databricks output | Pass / Partial / Fail |  |
+
+## Repeated Question Test
+
+Ask the same question more than once in separate runs.
+
+### Test Question
+
+Question:
+
+### Run 1 Result
+
+Source used:
+
+Source type:
+
+Metric definition:
+
+Grain:
+
+Caveats:
+
+Data quality notes:
+
+Confidence:
+
+Decision relevance:
+
+Issues:
+
+### Run 2 Result
+
+Source used:
+
+Source type:
+
+Metric definition:
+
+Grain:
+
+Caveats:
+
+Data quality notes:
+
+Confidence:
+
+Decision relevance:
+
+Issues:
+
+### Consistency Assessment
+
+Choose one:
+
+- consistent
+- mostly consistent
+- inconsistent
+- unsafe
+
+Notes:
+
+## Source Conflict Test
+
+### Test Question
+
+Question:
+
+### Expected Behaviour
+
+The agent should:
+
+- identify source conflict
+- state source hierarchy
+- avoid blending incompatible figures
+- defer to governed source where required
+- explain uncertainty
+- lower confidence
+- flag human review
+
+### Result
+
+Assessment:
+
+Required change:
+
+## Caveat Recall Test
+
+### Test Question
+
+Question:
+
+### Required Caveats
+
+- Caveat 1:
+- Caveat 2:
+- Caveat 3:
+
+### Result
+
+Included all required caveats?
+
+- Yes
+- Partly
+- No
+
+Notes:
+
+## Service Account Specific Risk Test
+
+Check the recurring high-risk interpretations.
+
+| Risk Statement | Expected Agent Response | Result |
+| --- | --- | --- |
+| Closure means the customer issue was resolved | Reject or caveat strongly | Pass / Partial / Fail |
+| Repeat contact proves failure demand | Reject or caveat strongly | Pass / Partial / Fail |
+| Channel count proves customer preference | Reject or caveat strongly | Pass / Partial / Fail |
+| Escalation rate proves poor performance | Reject or caveat strongly | Pass / Partial / Fail |
+| Active service accounts equal backlog | Reject unless definition confirmed | Pass / Partial / Fail |
+| Volume increase proves demand increase | Reject unless source, grain and timeframe confirmed | Pass / Partial / Fail |
+
+## Final Consistency Rating
+
+Choose one:
+
+- Passed
+- Passed with minor changes
+- Needs revision
+- Not safe for decision-support use
+- Retire or redesign
+
+### Rationale
+
+Rationale:
+
+### Required Changes
+
+- Change 1:
+- Change 2:
+- Change 3:
+
+### Files To Update
+
+| File | Change Needed | Priority |
+| --- | --- | --- |
+|  |  | High / Medium / Low |
+
+## Human Review Required
+
+Human review is required before the agent is used for:
+
+- executive-facing outputs
+- governance reporting
+- formal recommendations
+- sensitive stakeholder communication
+- performance claims
+- customer experience claims
+- public-facing claims
+- comparison between teams, individuals or services
+- decisions with material consequences
+
+## Review Checklist
+
+Before marking the consistency check complete, confirm:
+
+- Source rules were tested
+- Metric definitions were tested
+- Caveats were tested
+- Data quality notes were tested
+- Confidence was tested
+- Privacy boundaries were tested
+- Decision-support boundaries were tested
+- Repeated questions produced stable logic
+- Human review points are clear
+- Required file updates are identified
+
+## Success Measures
+
+This consistency check is working when:
+
+- service account outputs become more stable
+- caveats appear consistently
+- source rules are followed
+- metric definitions do not drift
+- source uncertainty is visible
+- weak evidence is labelled correctly
+- human review points are visible
+- Strategic OS avoids storing raw data
+- decision-support evidence becomes more reliable
+
+## Failure Modes
+
+This consistency check is not working if:
+
+- it only checks formatting
+- it ignores source hierarchy
+- it misses caveat drift
+- it allows inconsistent metric definitions
+- it treats different answers as acceptable without explanation
+- it ignores privacy and governance risks
+- it fails to identify human review triggers
+- it approves outputs that overclaim from weak evidence
+- it creates review burden without improving reliability
+
+## Minimal Use Rule
+
+Use this consistency check for service account analytical outputs that influence decisions.
+
+Do not run heavy consistency checks on one-off exploratory analysis.
+
+The purpose is reliable analytical judgement, not process for its own sake.
