@@ -2,197 +2,470 @@
 
 ## Purpose
 
-Use this template to assess whether an opportunity supports long-term strategic positioning, career development and the Strategic OS North Star.
+Use this template to assess whether an opportunity is worth pursuing, shaping, socialising, parking or declining.
 
-This template supports the Career Architect Agent.
+It helps the user clarify:
 
-## When to use
+* what the opportunity is
+* why it matters
+* how it connects to strategic direction
+* how it may create career evidence
+* what value it could create
+* what trade-offs it requires
+* what risks or dependencies exist
+* what next action is most useful
 
-Use this when:
+This template supports the Career Architect Agent and may also support the Sensemaking Agent, Shipping Coach and Chief of Staff Agent.
 
-- A new opportunity appears
-- A project could become strategically valuable
-- A role, task or initiative needs to be assessed
-- Time and focus need to be protected
-- Promotion evidence needs to be created
-- Work needs to be translated into career value
+North Star:
 
-## Opportunity
+> Increase strategic opportunities by helping leaders make better strategic decisions.
 
-### Title
+## When To Use
 
-[Name of opportunity, project, role, task or initiative]
+Use this template when assessing:
 
-### Context
+* a role opportunity
+* project opportunity
+* strategic initiative
+* stretch assignment
+* thought leadership opportunity
+* partnership or collaboration
+* capability-building opportunity
+* career move
+* internal proposal
+* emerging organisational need
+* opportunity signal from daily or weekly review
 
-[Briefly describe the opportunity and why it has appeared now.]
+Do not use this template to justify every interesting idea. Use it when there is a real choice about whether to pursue, shape, socialise, park or decline.
 
-### Source
+## Inputs
 
-[Where did this opportunity come from?]
+Useful inputs may include:
 
-### Timeframe
+* role descriptions
+* project notes
+* strategic priorities
+* stakeholder signals
+* customer or public value signals
+* career goals
+* capability gaps
+* decision briefs
+* lessons learned
+* feedback
+* operating reviews
+* market or organisational context
+* raw notes from `00_inbox/`
 
-[When does this need attention?]
+## Opportunity Details
 
-## Strategic fit
+Date:
 
-### Connection to Strategic OS North Star
+Prepared by:
 
-How does this help increase strategic opportunities by helping leaders make better strategic decisions?
+Opportunity title:
 
-[Write assessment here.]
+Source:
 
-### Connection to desired reputation
+Status:
 
-Does this support the reputation:
+Suggested status values:
 
-> He helps us make better strategic decisions.
+* Captured
+* Shaping
+* Socialising
+* Active
+* Parked
+* Declined
+* Converted to project
+* Converted to career evidence
+* Superseded
+* Archived
 
-[Write assessment here.]
+## Opportunity Summary
 
-### Strategic positioning value
+### What Is The Opportunity?
 
-How does this strengthen positioning as a customer-centred strategic advisor?
+Describe the opportunity clearly.
 
-[Write assessment here.]
+Opportunity:
 
-## Value assessment
+### Why Now?
 
-| Value area | Assessment | Notes |
-|---|---|---|
-| Strategic influence | [High / medium / low] | [Notes] |
-| Organisational impact | [High / medium / low] | [Notes] |
-| Customer-centred practice | [High / medium / low] | [Notes] |
-| Systems thinking | [High / medium / low] | [Notes] |
-| AI-enabled capability | [High / medium / low] | [Notes] |
-| Stakeholder visibility | [High / medium / low] | [Notes] |
-| Reusable evidence | [High / medium / low] | [Notes] |
+Why has this opportunity emerged now?
 
-## Evidence this could create
+Why now:
 
-### Possible proof points
+### What Triggered It?
 
-- [Proof point 1]
-- [Proof point 2]
-- [Proof point 3]
+What signal, event, conversation, need or gap created this opportunity?
 
-### Possible artefacts
+Trigger:
 
-- [Decision brief]
-- [Framework]
-- [Stakeholder map]
-- [Recommendation]
-- [Case study]
-- [Lesson learned]
-- [Thought leadership note]
+### Who Is Involved?
 
-### Promotion evidence
+List relevant people, teams, groups or audiences.
 
-This opportunity could support evidence for:
+People or groups involved:
 
-- [ ] Strategic influence
-- [ ] Organisational impact
-- [ ] Customer outcomes
-- [ ] Cross-functional collaboration
-- [ ] Systems thinking
-- [ ] Human-centred design practice
-- [ ] AI-enabled ways of working
-- [ ] Leadership or influence without authority
+## Strategic Fit
 
-## Capability assessment
+### Connection To Strategic Direction
 
-### Strengths this uses
+How does this opportunity support strategic direction?
 
-- [Strength 1]
-- [Strength 2]
-- [Strength 3]
+Strategic fit:
 
-### Capabilities this builds
+### Connection To The North Star
 
-- [Capability 1]
-- [Capability 2]
-- [Capability 3]
+How could this increase strategic opportunities or improve decision-making?
 
-### Capability gaps or risks
+North Star connection:
 
-- [Gap or risk 1]
-- [Gap or risk 2]
-- [Gap or risk 3]
+### Customer Or Public Value
 
-## Stakeholder value
+What customer, community or public value could this create?
 
-### Who could this help?
+Customer or public value:
 
-- [Stakeholder or group]
-- [Stakeholder or group]
+### Organisational Value
 
-### Who could notice the value?
+What organisational value could this create?
 
-- [Stakeholder or group]
-- [Stakeholder or group]
+Organisational value:
 
-### Relationships this could strengthen
+### Systems Value
 
-- [Relationship 1]
-- [Relationship 2]
+Could this improve a system, operating model, service, process or capability?
 
-## Trade-offs
+Systems value:
 
-### What would this require?
+## Career Value
 
-- [Time]
-- [Focus]
-- [Stakeholder effort]
-- [Emotional energy]
-- [Delivery commitment]
+### Capability Evidence
 
-### What might need to be paused or reduced?
+What capability could this opportunity demonstrate?
 
-- [Work or activity 1]
-- [Work or activity 2]
+| Capability                     | Evidence It Could Create | Strength                 |
+| ------------------------------ | ------------------------ | ------------------------ |
+| Strategic influence            |                          | Strong / Emerging / Weak |
+| Organisational impact          |                          | Strong / Emerging / Weak |
+| Customer-centred practice      |                          | Strong / Emerging / Weak |
+| Systems thinking               |                          | Strong / Emerging / Weak |
+| Human-centred design           |                          | Strong / Emerging / Weak |
+| Business design                |                          | Strong / Emerging / Weak |
+| AI-enabled capability          |                          | Strong / Emerging / Weak |
+| Stakeholder influence          |                          | Strong / Emerging / Weak |
+| Delivery and follow-through    |                          | Strong / Emerging / Weak |
+| Communication and storytelling |                          | Strong / Emerging / Weak |
 
-### Risks of saying yes
+### Reputation Value
 
-- [Risk 1]
-- [Risk 2]
+How could this strengthen the desired reputation?
 
-### Risks of saying no
+Reputation value:
 
-- [Risk 1]
-- [Risk 2]
+### Career Evidence Value
+
+What future career evidence could this create?
+
+Career evidence value:
+
+### Development Value
+
+What would this help the user learn, practise or strengthen?
+
+Development value:
+
+## Value Assessment
+
+| Value Area               | Assessment          | Confidence          |
+| ------------------------ | ------------------- | ------------------- |
+| Strategic value          | High / Medium / Low | High / Medium / Low |
+| Career value             | High / Medium / Low | High / Medium / Low |
+| Customer or public value | High / Medium / Low | High / Medium / Low |
+| Organisational value     | High / Medium / Low | High / Medium / Low |
+| Relationship value       | High / Medium / Low | High / Medium / Low |
+| Learning value           | High / Medium / Low | High / Medium / Low |
+| Timing value             | High / Medium / Low | High / Medium / Low |
+
+## Evidence And Assumptions
+
+### Evidence
+
+| Evidence Or Signal | Source | Strength               | Notes |
+| ------------------ | ------ | ---------------------- | ----- |
+|                    |        | Strong / Medium / Weak |       |
+
+### Assumptions
+
+| Assumption | Why It Matters | Confidence          | Validation Needed |
+| ---------- | -------------- | ------------------- | ----------------- |
+|            |                | High / Medium / Low |                   |
+
+### Unknowns
+
+* Unknown:
+* Why it matters:
+* How to learn more:
+
+## Trade-Offs
+
+What would pursuing this opportunity require?
+
+| Trade-Off        | Implication | Acceptable?       |
+| ---------------- | ----------- | ----------------- |
+| Time             |             | Yes / No / Unsure |
+| Focus            |             | Yes / No / Unsure |
+| Reputation       |             | Yes / No / Unsure |
+| Relationship     |             | Yes / No / Unsure |
+| Delivery         |             | Yes / No / Unsure |
+| Learning curve   |             | Yes / No / Unsure |
+| Opportunity cost |             | Yes / No / Unsure |
+
+### What This May Displace
+
+What would need to be stopped, reduced, deferred or simplified?
+
+Displacement:
+
+### Cost Of Saying Yes
+
+Cost:
+
+### Cost Of Saying No
+
+Cost:
+
+## Risks And Dependencies
+
+| Risk Or Dependency | Type                                                                             | Impact              | Response |
+| ------------------ | -------------------------------------------------------------------------------- | ------------------- | -------- |
+|                    | Strategic / Career / Stakeholder / Delivery / Reputation / Capacity / Governance | Low / Medium / High |          |
+
+## Stakeholder Considerations
+
+### Who Needs To Be Involved?
+
+| Stakeholder Or Group | Role | Interest Or Impact | Engagement Needed |
+| -------------------- | ---- | ------------------ | ----------------- |
+|                      |      |                    |                   |
+
+### Stakeholder Sensitivities
+
+What needs care before this opportunity is socialised or pursued?
+
+Sensitivity:
+
+### Sponsorship Or Support Needed
+
+What support would make this opportunity more viable?
+
+Support needed:
+
+## Options
+
+### Option 1: Pursue
+
+What would pursuing mean?
+
+Benefits:
+
+Risks:
+
+First action:
+
+### Option 2: Shape Further
+
+What needs to be clarified or shaped?
+
+Questions to resolve:
+
+First action:
+
+### Option 3: Socialise
+
+Who should this be tested with?
+
+Question to ask:
+
+First action:
+
+### Option 4: Park
+
+Why might this be worth parking?
+
+Revisit condition:
+
+### Option 5: Decline
+
+Why might this not be worth pursuing?
+
+Useful learning to keep:
 
 ## Recommendation
 
-Recommended decision:
+Recommended path:
 
-- [ ] Pursue
-- [ ] Socialise
-- [ ] Shape first
-- [ ] Park
-- [ ] Decline
+* Pursue
+* Shape further
+* Socialise
+* Park
+* Decline
+* Convert to project
+* Convert to career evidence
+* Convert to decision brief
+* Convert to lesson learned
 
 ### Rationale
 
-[Explain the recommendation.]
+Why is this the recommended path?
 
-### Minimum next action
+Rationale:
 
-[What is the smallest useful next step?]
+### Confidence
 
-### Suggested timing
+Choose one:
 
-[When should this happen?]
+* High confidence
+* Medium confidence
+* Low confidence
 
-## Review checklist
+Reason:
 
-Before acting, check:
+## Minimum Next Action
 
-- [ ] Does this support the Strategic OS North Star?
-- [ ] Does this strengthen the desired reputation?
-- [ ] Is the opportunity strategically useful, not just interesting?
-- [ ] Is there a clear next action?
-- [ ] Is the trade-off worth it?
-- [ ] Could this create reusable evidence?
-- [ ] Does this help with long-term positioning?
-- [ ] Should anything be paused to make room for it?
+### Next Action
+
+What is the smallest useful next step?
+
+Next action:
+
+### Owner
+
+Who needs to act or decide?
+
+Owner:
+
+### Timing
+
+When should this happen?
+
+Timing:
+
+### Done Means
+
+What would count as useful progress?
+
+Done means:
+
+## Human Review Required
+
+Human review is required before this review is used to:
+
+* pursue a career move
+* make or imply a commitment
+* socialise sensitive opportunities
+* contact stakeholders
+* use confidential organisational examples
+* claim organisational impact
+* change priorities that affect others
+* convert the opportunity into public-facing material
+* store sensitive stakeholder or career context
+
+Review required from:
+
+Reason:
+
+## Storage Recommendation
+
+Suggested location:
+
+* `02_strategic_opportunities/`
+* `01_career/opportunities/`
+* `08_projects/`
+* `03_decision_briefs/`
+* `05_lessons_learned/`
+* `09_thought_leadership/`
+* `00_inbox/`
+
+Store only if the opportunity creates durable strategic value, career evidence, decision context, reusable learning or project continuity.
+
+Do not store:
+
+* unsupported claims
+* raw organisational source data
+* customer-level records
+* confidential extracts
+* sensitive stakeholder commentary
+* temporary ideas with no reuse value
+
+## Final Opportunity Decision
+
+Choose one:
+
+* Pursue now
+* Shape further
+* Socialise first
+* Park and revisit
+* Decline
+* Convert to project
+* Convert to career evidence
+* Convert to decision brief
+* Convert to lesson learned
+
+### One-Sentence Rationale
+
+Rationale:
+
+### Immediate Next Step
+
+Next step:
+
+### Revisit Date Or Trigger
+
+Revisit:
+
+## Review Checklist
+
+Before acting on this opportunity review, check:
+
+* Is the opportunity clearly described?
+* Is the strategic value clear?
+* Is the career value clear?
+* Is evidence separated from assumptions?
+* Are trade-offs visible?
+* Are risks and dependencies named?
+* Are stakeholder sensitivities handled carefully?
+* Is the recommendation proportionate?
+* Is the next action specific?
+* Is human review required before action?
+* Is the storage location appropriate?
+* Does the opportunity support the Strategic OS North Star?
+
+## Output Quality Bar
+
+A useful opportunity review should be:
+
+* clear about value
+* honest about trade-offs
+* grounded in evidence
+* practical about next action
+* careful with stakeholder sensitivity
+* useful for strategic and career decision-making
+* specific enough to pursue, shape, socialise, park or decline
+
+## Failure Modes
+
+This template is not working if:
+
+* every idea becomes an opportunity
+* strategic value is vague
+* career value is inflated
+* trade-offs are ignored
+* risks are minimised
+* unsupported impact is claimed
+* stakeholder sensitivity is missed
+* the recommendation is unclear
+* the next action is too broad
+* temporary ideas are stored as durable opportunities
