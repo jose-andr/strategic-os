@@ -33,9 +33,10 @@ For this EOFY celebration analysis, the slide language is intentionally simple.
 | Slide term | Internal definition |
 |---|---|
 | Service Account sign-ups | Distinct accounts that first became portal-enabled during the reporting window |
-| Online applications | Distinct portal-enabled applications created in qualifying pre-outcome workflow stages |
-| Support demand | Portal support cases relative to qualifying online applications |
-| CSAT on Activity | Customer satisfaction related to portal-enabled application services |
+| Portal service activity | Distinct portal-enabled application or permit lifecycle records created during the reporting window |
+| Online application activity | Distinct applications in qualifying pre-outcome workflow stages |
+| Support demand | Post-enablement support cases relative to Portal service activity |
+| CSAT on Activity | Customer satisfaction related to portal-enabled services |
 | CSAT on Support | Customer satisfaction related to mapped portal-relevant support pathways |
 | All accounts | Total CRM account base, used as context only |
 
@@ -43,27 +44,30 @@ Important distinctions:
 
 - Service Account sign-ups does not mean all CRM accounts.
 - All accounts means the total CRM account base and is used only for context.
-- Online applications means qualifying pre-outcome application workflow activity.
-- Online applications does not mean the full permit lifecycle.
+- Portal service activity is the broader lifecycle denominator used for the headline support-demand rate.
+- Online application activity is a narrower diagnostic focused on pre-outcome application stages.
+- Online application activity must not be used as the denominator for full portal support demand.
 - Support demand should be shown as a rate, not as raw support volume.
 - Activity CSAT and Support CSAT are separate metrics.
 - Support CSAT must use the manually mapped support service list.
 
-Existing Power BI measures and model logic should be treated as the first source of truth for current business logic.
+Existing Power BI measures and model logic are evidence of the current business implementation.
 
-The logic must then be documented explicitly and translated into governed Databricks SQL, permanent Genie instructions, or curated views before it is treated as a reusable production metric.
+The governed definitions in this file must be translated into permanent Databricks Genie instructions and reproducible Databricks logic before they are treated as reusable production metrics.
 
 ## Celebration metric frame
 
 The one-slide EOFY celebration analysis uses this frame:
 
 1. More Service Account sign-ups
-2. More online application activity
-3. Less support demand relative to online application activity
+2. More portal service activity
+3. Support demand relative to portal service activity
 4. Better Activity CSAT
 5. Support CSAT only where manually mapped and documented
 
-Diagnostics such as account quality, service mapping quality, and knowledge-content performance must remain separate from headline celebration metrics.
+Online application activity remains available as a supporting diagnostic but is not the denominator for the headline full-portal support metric.
+
+Diagnostics such as account quality, service mapping quality, workflow status distribution, and knowledge-content performance must remain separate from headline celebration metrics.
 
 ## Source system principles
 
@@ -72,7 +76,8 @@ The pilot uses curated Databricks views where possible.
 | Area | Pilot source |
 |---|---|
 | Service Account sign-ups | `datahub_datamart.customer_account_management.vwaccount` |
-| Online application records | `datahub_datamart.customer_account_management.vwpermit` |
+| Portal service activity | `datahub_datamart.customer_account_management.vwpermit` |
+| Online application activity diagnostic | `datahub_datamart.customer_account_management.vwpermit` plus governed status mapping |
 | Support demand | `datahub_datamart.customer_account_management.vwsupport` |
 | Portal service enablement | `datahub_datamart.customer_account_management.vwservice_enablement` |
 | CSAT | `datahub_datamart.customer_intelligence.vwcase` |
@@ -170,7 +175,7 @@ Latest Genie movement:
 
 ### Validation status
 
-Definition is stable.
+The definition is stable.
 
 The current output values require reconciliation before final slide lock because the latest Genie output differs from the existing benchmark.
 
@@ -185,6 +190,12 @@ Use the latest values only after confirming:
 - reporting windows
 - source refresh date
 - reason for the difference from the previous benchmark
+
+### Status
+
+Definition aligned.
+
+Values require reconciliation before final slide lock.
 
 ## 2. All accounts
 
@@ -232,11 +243,232 @@ Validated as a context metric only.
 
 Do not use this as the slide definition of Service Account sign-ups.
 
-## 3. Digital self-service activity
+## 3. Portal service activity
 
 ### Business question
 
-Did customers undertake more portal-enabled online application activity year on year?
+How much portal-enabled service activity occurred across the full customer service lifecycle?
+
+### Slide label
+
+Portal service activity
+
+### Business definition
+
+Distinct application or permit lifecycle records associated with portal-enabled services, using the related CRM case creation date as the activity date.
+
+This metric represents the broader portal service lifecycle available to customers.
+
+It includes activity associated with applying for, progressing, receiving, renewing, extending, or managing a permit or portal-enabled service.
+
+### Working definition
+
+Count distinct `application_id` values where:
+
+- the related CRM case has a valid creation date
+- the related service has a valid first portal enablement date
+- the related CRM case creation date is on or after the service's first portal enablement date
+- the related CRM case creation date falls within the reporting window
+
+Do not apply an application-status filter to the headline Portal service activity metric.
+
+### Included lifecycle scope
+
+The metric may include application or permit records with statuses such as:
+
+- Draft
+- Submitted
+- In Progress
+- Further Information Requested
+- Pending Payment
+- Withdrawn
+- Declined
+- Issued
+- Extended
+- Renewed
+- Lapsed
+
+The presence of these statuses does not mean each status is counted as a separate activity event.
+
+The metric counts distinct `application_id`.
+
+### Governed sources
+
+| Purpose | Source |
+|---|---|
+| Application and permit lifecycle records | `datahub_datamart.customer_account_management.vwpermit` |
+| Related CRM case creation date | `datahub_refined.customer.vwcase` |
+| Related service name and group | `datahub_refined.customer.vwcase` |
+| Portal service enablement | `datahub_datamart.customer_account_management.vwservice_enablement` |
+
+### Required fields
+
+| Concept | Field |
+|---|---|
+| Activity identifier | `vwpermit.application_id` |
+| Related case identifier | `vwpermit.case_id` |
+| Activity timestamp | Related CRM case creation timestamp |
+| Related service name | CRM case service name |
+| Related service group | CRM case service group |
+| First portal enablement date | `vwservice_enablement.first_portal_enable_date` |
+
+### Activity date
+
+The activity date is the creation date of the CRM case associated with the application or permit lifecycle record.
+
+Power BI lineage:
+
+`vwcase.case_created_date`  
+→ `DimCase[CaseCreatedDate]`  
+→ related to `vwpermit` through `case_id`  
+→ `vwpermit[transaction_date]`
+
+The Power BI `transaction_date` field is a calculated date-only value:
+
+    transaction_date =
+        DATE (
+            YEAR ( RELATED ( DimCase[CaseCreatedDate] ) ),
+            MONTH ( RELATED ( DimCase[CaseCreatedDate] ) ),
+            DAY ( RELATED ( DimCase[CaseCreatedDate] ) )
+        )
+
+Do not use `vwpermit.period_start` as the portal activity date.
+
+`period_start` represents the permit period start and does not represent when the digital service activity began.
+
+Do not describe `transaction_date` as a native Databricks field.
+
+In Databricks and Genie, use the related CRM case creation timestamp directly.
+
+### Portal enablement condition
+
+A record is eligible only where:
+
+- the related service has a nonblank `first_portal_enable_date`
+- the activity date is on or after `first_portal_enable_date`
+
+Portal enablement is a service-level milestone indicating when the service became available through the portal.
+
+Portal-facing display-name mappings do not determine activity eligibility.
+
+Fields such as the following are diagnostic or presentation controls only:
+
+- `portal_service_mapping_result`
+- `portal_mapping_status`
+- `service_requires_business_confirmation`
+- `requires_business_confirmation`
+
+They must not automatically exclude an otherwise qualifying record.
+
+### Power BI reference logic
+
+    Self-Service Activity =
+    VAR StartDate = [Window Start]
+    VAR EndDate = [Window End]
+    RETURN
+        CALCULATE (
+            DISTINCTCOUNT ( vwpermit[application_id] ),
+            KEEPFILTERS (
+                FILTER (
+                    vwpermit,
+                    vwpermit[transaction_date] >= StartDate
+                        && vwpermit[transaction_date] < EndDate
+                        && NOT ISBLANK (
+                            RELATED ( DimService[first_portal_enable_date] )
+                        )
+                        && vwpermit[transaction_date]
+                            >= RELATED ( DimService[first_portal_enable_date] )
+                )
+            )
+        )
+
+The Power BI measure name may remain `Self-Service Activity` temporarily.
+
+The governed documentation and Genie language should use `Portal service activity`.
+
+### Reporting window
+
+`[Window Start]` and `[Window End]` are Power BI measures controlled by the dashboard date selection.
+
+The governed metric is not dependent on a specific Power BI slicer implementation.
+
+Any Databricks or Genie implementation must receive explicit start and end dates and apply the same half-open date-window logic.
+
+### Databricks translation requirements
+
+The reusable Databricks implementation must:
+
+1. Start from `datahub_datamart.customer_account_management.vwpermit`.
+2. Join the related CRM case using `case_id`.
+3. Use the related CRM case creation timestamp as the activity date.
+4. Obtain the related service name from the CRM case.
+5. Join the related service to `vwservice_enablement`.
+6. Require a nonblank `first_portal_enable_date`.
+7. Require the CRM case creation timestamp to be on or after first portal enablement.
+8. Apply the requested half-open reporting window.
+9. Count distinct `application_id`.
+10. Do not filter application status for the headline Portal service activity metric.
+
+### Conceptual SQL pattern
+
+    COUNT(DISTINCT permit.application_id)
+
+    WHERE case.case_created_date >= start_date
+      AND case.case_created_date < end_date
+      AND enablement.first_portal_enable_date IS NOT NULL
+      AND case.case_created_date >= enablement.first_portal_enable_date
+
+The exact CRM case field names, service join, and service-name normalisation must be validated in Databricks before this becomes a production SQL standard.
+
+### Current Power BI support-rate test
+
+The Portal service activity denominator was tested indirectly through the current Power BI support-rate measures.
+
+| Period | Support cases per 100 portal service activities |
+|---|---:|
+| FY2024/25 | 28.57 |
+| FY2025/26 | 34.86 |
+
+Direct denominator values must be recorded from Power BI or reproduced in Databricks before being treated as validated output.
+
+Do not treat denominator values inferred from rounded rates as final.
+
+### Interpretation
+
+Portal service activity is the appropriate denominator for full portal support because customers can use the portal across the broader service lifecycle, not only during pre-outcome application stages.
+
+### Current validation status
+
+The business definition has been selected.
+
+The Power BI rate has been tested.
+
+Pending:
+
+- direct Portal service activity counts
+- Databricks replication
+- permanent Genie instruction
+- source and join validation
+- service-name match diagnostics
+- final slide decision
+
+### Status
+
+Business definition selected.
+
+Not yet fully validated in Databricks.
+
+## 3A. Online application activity diagnostic
+
+### Business question
+
+How much activity occurred in pre-outcome online application workflow stages?
+
+### Role
+
+Supporting diagnostic only.
+
+This metric is not the denominator for full portal support demand.
 
 ### Slide label
 
@@ -244,25 +476,11 @@ Online applications
 
 ### Business definition
 
-Distinct online applications created through portal-enabled services while they are in a qualifying pre-outcome application workflow stage.
+Distinct applications in qualifying pre-outcome workflow stages.
 
-This metric represents digital application activity.
-
-It does not represent the complete permit lifecycle.
-
-### Working definition
-
-Count distinct `application_id` values where:
-
-- the application is mapped to a qualifying pre-outcome workflow stage
-- the related case has a valid creation date
-- the related service has a valid first portal enablement date
-- the related case creation date is on or after the service's first portal enablement date
-- the related case creation date falls within the reporting window
+This metric represents online application workflow activity rather than the full permit or service lifecycle.
 
 ### Qualifying workflow stages
-
-Include the following pre-outcome stages:
 
 | Application status | Workflow bucket | Workflow order |
 |---|---|---:|
@@ -289,84 +507,25 @@ Exclude outcomes and permit lifecycle states, including:
 - Renewed
 - Lapsed
 
-These states may be used for workflow or lifecycle diagnostics, but they are not part of the headline digital self-service activity denominator.
+These states may be used for workflow or lifecycle diagnostics, but they are not part of the Online application activity diagnostic.
+
+### Working definition
+
+Count distinct `application_id` values where:
+
+- the workflow bucket is one of the five qualifying pre-outcome stages
+- the related CRM case creation date falls within the reporting window
+- the related service has a valid first portal enablement date
+- the related CRM case creation date is on or after first portal enablement
 
 ### Governed sources
 
 | Purpose | Source |
 |---|---|
 | Application records | `datahub_datamart.customer_account_management.vwpermit` |
-| Case creation date | `datahub_refined.customer.vwcase` |
-| Case-to-service relationship | `datahub_refined.customer.vwcase` |
+| Related CRM case creation date | `datahub_refined.customer.vwcase` |
 | Portal service enablement | `datahub_datamart.customer_account_management.vwservice_enablement` |
 | Workflow status classification | Governed status mapping derived from the Power BI `Status Map` logic |
-
-### Required fields
-
-| Concept | Field |
-|---|---|
-| Application identifier | `vwpermit.application_id` |
-| Application status | `vwpermit.application_status` |
-| Case status | `vwpermit.case_status` |
-| Related case identifier | `vwpermit.case_id` |
-| Activity timestamp | Related case creation timestamp |
-| Service name | Related case service name |
-| First portal enablement date | `vwservice_enablement.first_portal_enable_date` |
-
-### Activity date
-
-The activity date is the creation date of the case associated with the application.
-
-In the Power BI model, the lineage is:
-
-`vwcase.case_created_date`  
-→ `DimCase[CaseCreatedDate]`  
-→ related to the application through `case_id`  
-→ `vwpermit_statused[activity_date]`
-
-The Power BI calculated column removes the time component:
-
-    activity_date =
-    VAR CaseCreatedDate =
-        RELATED ( DimCase[CaseCreatedDate] )
-    RETURN
-        IF (
-            ISBLANK ( CaseCreatedDate ),
-            BLANK (),
-            DATE (
-                YEAR ( CaseCreatedDate ),
-                MONTH ( CaseCreatedDate ),
-                DAY ( CaseCreatedDate )
-            )
-        )
-
-Do not use `vwpermit.period_start` as the digital activity date.
-
-`period_start` represents the permit period start, not creation of the digital application.
-
-Do not describe `activity_date` as a native field in `vwpermit`.
-
-It is derived from the related case creation timestamp.
-
-### Portal enablement condition
-
-An application is eligible only where:
-
-- the related service has a nonblank `first_portal_enable_date`
-- `activity_date >= first_portal_enable_date`
-
-Portal enablement is a service-level milestone indicating when that service became available through the portal.
-
-Portal-facing display-name mappings do not determine activity eligibility.
-
-Fields such as the following are diagnostic or presentation controls only:
-
-- `portal_service_mapping_result`
-- `portal_mapping_status`
-- `service_requires_business_confirmation`
-- `requires_business_confirmation`
-
-They must not automatically exclude an otherwise qualifying application.
 
 ### Status mapping logic
 
@@ -385,11 +544,9 @@ The status mapping must produce:
 - activity inclusion indicator
 - mapping diagnostics
 
-The headline online application activity metric includes only the five qualifying pre-outcome workflow stages listed above.
-
 ### Governed status map
 
-| Application status | Case status | Display name | Workflow bucket | Workflow order | Include in headline activity |
+| Application status | Case status | Display name | Workflow bucket | Workflow order | Include in application diagnostic |
 |---|---|---|---|---:|---:|
 | Draft | Any | Draft | Draft | 10 | 1 |
 | Submitted | Any | Submitted | Submitted | 20 | 1 |
@@ -460,8 +617,6 @@ A future production model should introduce a stable service key if duplicate ser
 
 ### Power BI reference measure
 
-The measure must count and filter the same transformed table.
-
     Digital Self-Service Activity =
     VAR StartDate = [Window Start]
     VAR EndDate = [Window End]
@@ -490,88 +645,60 @@ The measure must count and filter the same transformed table.
             )
         )
 
-### Reporting window
+### Current Power BI test result
 
-`[Window Start]` and `[Window End]` are Power BI measures controlled by the dashboard date selection.
+| Period | Online application activity |
+|---|---:|
+| FY2024/25 | 5,674 |
+| FY2025/26 | 8,739 |
 
-The governed metric is not dependent on a specific slicer implementation.
+Movement:
 
-Any Databricks or Genie implementation must instead receive explicit start and end dates and apply the same half-open date-window logic.
+    +3,065 applications
+    +54.0%
 
-### Databricks translation requirements
+### Interpretation
 
-The reusable Databricks implementation must:
+This metric describes growth in online application workflow activity.
 
-1. Start from `vwpermit`.
-2. Join the related CRM case using `case_id`.
-3. Use the related case creation timestamp as the activity date.
-4. Classify application workflow using the governed status mapping.
-5. Obtain the service name from the related case.
-6. Join the service to `vwservice_enablement`.
-7. Require a nonblank first portal enablement date.
-8. Require activity to occur on or after first portal enablement.
-9. Restrict activity to the five qualifying pre-outcome workflow stages.
-10. Count distinct `application_id`.
-
-### Conceptual SQL pattern
-
-    COUNT(DISTINCT permit.application_id)
-
-    WHERE case.case_created_date >= start_date
-      AND case.case_created_date < end_date
-      AND service.first_portal_enable_date IS NOT NULL
-      AND case.case_created_date >= service.first_portal_enable_date
-      AND workflow_bucket IN (
-        'Draft',
-        'Submitted',
-        'In Progress',
-        'In Assessment',
-        'Pending Payment'
-      )
-
-The exact case source, field names, service join, and governed status-mapping implementation must be validated in Databricks before this becomes a production SQL standard.
-
-### Current validation status
-
-The business definition is aligned with the reconstructed and refined Power BI model.
-
-The revised result has not yet been validated after the latest Power BI changes.
-
-Do not retain previous activity values as accepted headline results until the revised measure has refreshed and been reconciled.
-
-### Pending validation
-
-- refreshed Power BI activity result
-- Databricks SQL replication
-- permanent Genie instruction
-- productionised status mapping
-- reconciliation against previous EOFY outputs
+It must not be divided into the full portal support numerator because that numerator includes support across the broader service and permit lifecycle.
 
 ### Status
 
-Definition aligned with the current Power BI business logic.
+Validated as a supporting Power BI diagnostic.
 
-Not yet slide-safe.
+Not the governed support-rate denominator.
+
+Pending Databricks replication.
 
 ## 4. Activity by category
 
 ### Business question
 
-Which service or application categories contributed most to online application activity growth?
+Which services, service groups, or workflow stages contributed most to portal activity growth?
 
 ### Working definition
 
-Qualifying digital self-service applications grouped by:
+Portal service activity grouped by governed dimensions such as:
 
 - service
 - service group
 - permit category
+- application status
 - application workflow bucket
-- another governed category field
+- permit lifecycle bucket
 
-### Source
+### Headline category analysis
 
-Use the same governed activity dataset and eligibility logic defined in Section 3.
+For analysis of the full portal lifecycle, inherit the Portal service activity eligibility logic from Section 3.
+
+Do not apply a workflow-stage filter unless the analysis is explicitly labelled as Online application activity.
+
+### Online application diagnostic analysis
+
+For pre-outcome workflow analysis, inherit the Online application activity eligibility logic from Section 3A.
+
+### Sources
 
 Primary sources:
 
@@ -584,26 +711,27 @@ Primary sources:
 | Concept | Candidate field |
 |---|---|
 | Application identifier | `application_id` |
-| Activity date | Related case creation date |
+| Activity date | Related CRM case creation date |
 | Application status | `application_status` |
 | Case status | `case_status` |
 | Workflow bucket | Governed status map |
-| Service group | Related case service group |
-| Service name | Related case service name |
+| Permit lifecycle bucket | Governed status map |
+| Service group | Related CRM case service group |
+| Service name | Related CRM case service name |
 | Permit category | Confirm from `vwpermit` |
 
 ### Rules
 
-Category analysis must inherit the same:
+All category analysis must inherit the same:
 
 - reporting window
 - portal enablement condition
-- workflow-stage inclusion logic
 - distinct application count
+- activity-date definition
 
-Do not use `period_start` as the digital application activity date.
+Do not use `period_start` as the portal activity date.
 
-Do not mix permit lifecycle counts into online application activity analysis.
+Do not mix the full lifecycle measure and pre-outcome application diagnostic without clear labelling.
 
 ### Status
 
@@ -611,7 +739,7 @@ Partially validated.
 
 Use for driver analysis, not as a headline metric unless category mapping is confirmed.
 
-## 5. Support cases
+## 5. Portal support cases
 
 ### Business question
 
@@ -619,7 +747,7 @@ How much support demand was created after relevant services became portal-enable
 
 ### Slide role
 
-Numerator for the support-demand rate.
+Numerator for the Portal Support Demand Rate.
 
 ### Business definition
 
@@ -678,47 +806,59 @@ Count distinct `case_id` values where:
       AND case_created_date < end_date
       AND is_after_service_enablement = TRUE
 
-### Current reconciliation references
+### Current Power BI test result
 
-Existing benchmark:
-
-| Period | Support cases |
+| Period | Portal support cases |
 |---|---:|
 | FY2024/25 | 10,976 |
-| FY2025/26 | 15,475 |
+| FY2025/26 | 13,910 |
 
-Latest Genie output:
+Movement:
 
-| Period | Support cases |
-|---|---:|
-| FY2024/25 | 10,909 |
-| FY2025/26 | 15,582 |
+    +2,934 support cases
+    +26.7%
+
+### Support-service scope
+
+The current numerator includes support across the broader portal-enabled service lifecycle.
+
+Examples include:
+
+- application support
+- permit-management support
+- renewals and extensions
+- active permit enquiries
+- service-specific resolved enquiries
+- assisted enquiries
+- expert enquiries
+
+This broader scope is intentional for the Portal Support Demand Rate.
+
+It must not be divided by the narrower Online application activity diagnostic.
 
 ### Interpretation
 
-Raw support volume may increase while support demand relative to online application activity decreases.
+Raw support volume increased.
 
-Raw support cases should not be used as the headline support story.
-
-The headline support story must use Self-Service Support Rate.
+Raw support cases should not be used as the headline support story without the Portal service activity denominator.
 
 ### Validation status
 
 The numerator definition is aligned with the Power BI measure.
 
-The current values require reconciliation before final slide use.
+Databricks must reproduce the same result before the values are treated as governed production outputs.
 
 ### Status
 
-Definition aligned.
+Power BI logic tested.
 
-Values not yet final.
+Pending Databricks and Genie replication.
 
-## 6. Self-service support rate
+## 6. Portal Support Demand Rate
 
 ### Business question
 
-Did support demand reduce relative to digital self-service application activity?
+How much support demand occurred relative to activity across the full portal-enabled service lifecycle?
 
 ### Slide label
 
@@ -726,18 +866,18 @@ Support demand
 
 ### Business definition
 
-Distinct qualifying support cases divided by distinct qualifying digital self-service applications, multiplied by 100.
+Distinct post-enablement support cases divided by distinct Portal service activities, multiplied by 100.
 
 ### Formula
 
-    Self-Service Support Rate =
-      distinct qualifying support cases
-      / distinct qualifying digital self-service applications
+    Portal Support Demand Rate =
+      distinct qualifying portal support cases
+      / distinct qualifying portal service activities
       * 100
 
 ### Numerator
 
-Use the Self-Service Support definition in Section 5.
+Use the Portal support cases definition in Section 5.
 
 The numerator counts distinct support cases where:
 
@@ -746,104 +886,122 @@ The numerator counts distinct support cases where:
 
 ### Denominator
 
-Use the Digital self-service activity definition in Section 3.
+Use the Portal service activity definition in Section 3.
 
-The denominator counts distinct applications that:
+The denominator counts distinct `application_id` values where:
 
-- are in a qualifying pre-outcome workflow stage
-- have a valid related case creation date
-- belong to a service with a valid first portal enablement date
-- were created on or after that service's first portal enablement date
-- fall within the same reporting window as the numerator
+- the related CRM case creation date falls within the same reporting window
+- the related service has a nonblank first portal enablement date
+- the related CRM case creation date is on or after first portal enablement
+
+Do not apply an application-status filter to the headline denominator.
 
 ### Power BI reference formula
 
     Self-Service Support Rate =
         DIVIDE (
             [Self-Service Support],
-            [Digital Self-Service Activity]
+            [Self-Service Activity]
         ) * 100
+
+The current Power BI measure name may remain temporarily.
+
+The governed documentation, Genie instructions, and slide language should use Portal Support Demand Rate.
+
+### Current Power BI result
+
+| Metric | FY2024/25 | FY2025/26 |
+|---|---:|---:|
+| Distinct portal support cases | 10,976 | 13,910 |
+| Support cases per 100 portal service activities | 28.57 | 34.86 |
+
+Movement:
+
+    +6.29 support cases per 100 portal service activities
+    +22.0%
 
 ### Interpretation
 
-The metric is expressed as support cases per 100 qualifying online applications.
+The metric represents support demand across the broader portal-enabled service lifecycle.
 
-A reduction means qualifying online application activity grew faster than post-enablement support demand.
+It includes support related to customers:
 
-Because a single application may generate more than one support case, the rate may exceed 100.
+- applying for services
+- progressing applications
+- receiving outcomes
+- managing active permits
+- renewing or extending permits
+- requesting service-specific assistance
 
-It is not:
+The current result indicates that support demand increased relative to Portal service activity.
 
-- a percentage of customers who contacted support
-- a percentage of applications that required support
-- a transaction success rate
-- a contact deflection rate
+Do not describe this result as reduced support demand.
+
+### Slide wording
+
+Slide-safe factual wording:
+
+> Support demand was 34.9 cases per 100 portal service activities.
+
+Comparison wording:
+
+> Support demand increased from 28.6 to 34.9 cases per 100 portal service activities.
+
+Do not use celebratory language for this result.
+
+### Distinction from application support
+
+This is not an application-only support rate.
+
+A future application-support metric would require a separately governed numerator restricted to support pathways directly associated with pre-outcome application activity.
 
 ### Denominator labelling
 
 Use:
 
-> support cases per 100 online applications
+> support cases per 100 portal service activities
 
 Do not label the denominator as:
 
-- transactions
-- portal interactions
-- permits
+- online applications
 - customers
+- permit applications
+- transactions
 
-unless a separate governed metric with that denominator has been defined.
+unless the metric uses that specific governed denominator.
 
-### Previous outputs requiring reconciliation
+### Previous output reconciliation
 
-Latest Genie output:
+Earlier outputs included rates such as:
 
-| Metric | FY2024/25 | FY2025/26 |
-|---|---:|---:|
-| Online applications | 2,126 | 3,168 |
-| Support cases | 10,909 | 15,582 |
-| Support cases per 100 applications | 513.1 | 491.9 |
+- 513.1 to 491.9 support cases per 100 applications
+- 496.9 to 412.6 support cases per 100 activities
+- approximately 30 support cases per 100 transactions
 
-Existing benchmark:
+These outputs used different denominator definitions.
 
-| Metric | FY2024/25 | FY2025/26 |
-|---|---:|---:|
-| Online applications | 2,209 | 3,751 |
-| Support cases | 10,976 | 15,475 |
-| Support cases per 100 applications | 496.9 | 412.6 |
+They must not be treated as interchangeable with the Portal Support Demand Rate.
 
-Previous rough-slide reference:
+The current Power BI test of 28.57 to 34.86 aligns most closely with the broader full-lifecycle denominator.
 
-    Approximately 30 support cases per 100 transactions
-
-The rough-slide reference is not currently defined as the same metric.
-
-It may use a broader denominator such as:
-
-- workflow events
-- portal interactions
-- sessions
-- forms
-- service transactions
-- all digital activity
-
-Do not attempt to force the governed support rate to match that reference.
-
-### Reconciliation requirement
+### Required reconciliation record
 
 Before the metric is used on the EOFY slide, record:
 
 - support numerator
-- online application denominator
+- Portal service activity denominator
 - support rate per 100
 - support source table
 - support date field
 - support filters
 - activity source tables
 - activity date field
-- included workflow stages
 - portal enablement condition
 - reporting windows
+- join keys
+- service-name normalisation
+- unmatched service records
+- duplicate application records
 - source refresh date
 - explanation of differences from previous outputs
 
@@ -854,47 +1012,57 @@ Confirm:
 1. The numerator counts distinct `vwsupport.case_id`.
 2. The numerator uses `case_created_date`.
 3. The numerator applies `is_after_service_enablement = TRUE`.
-4. The denominator counts distinct `application_id`.
-5. The denominator uses the related case creation date.
-6. The denominator excludes permit-period dates.
-7. The denominator includes only the five pre-outcome workflow stages.
+4. The denominator counts distinct `vwpermit.application_id`.
+5. The denominator uses the related CRM case creation date.
+6. The denominator does not use `period_start`.
+7. The denominator does not apply an application-status filter.
 8. The denominator applies the portal enablement condition.
 9. The numerator and denominator use the same reporting window.
 10. The result can be reproduced in both Power BI and Databricks.
 
+### Required Genie output
+
+For every calculation, Genie must return:
+
+1. reporting periods
+2. support numerator values
+3. Portal service activity denominator values
+4. support cases per 100 Portal service activities
+5. absolute and relative changes
+6. support source and date field
+7. activity sources and date field
+8. join keys
+9. portal enablement filters
+10. duplicate and unmatched-service diagnostics
+11. whether the output matches this definition
+12. whether the result is slide-safe
+
 ### Current validation status
 
-The business definition has been reconstructed and refined.
+The business definition has been selected.
 
-The revised metric has not yet been rerun after:
+The Power BI result has been tested.
 
-- moving the activity count to `vwpermit_statused`
-- adding the relationship from `vwpermit_statused` to `DimCase`
-- deriving `activity_date` from the related case creation date
-- adding the related portal enablement date
-- restricting activity to pre-outcome workflow stages
-- correcting the workflow sequence
-- separating In Progress from Draft
+Direct Portal service activity counts have not yet been recorded.
 
-Previous benchmark values are reconciliation references only.
-
-They are not slide-safe under the revised definition.
+The Databricks and Genie implementation has not yet been reconciled.
 
 ### Slide-safety rule
 
-Do not publish the result until:
+Do not publish the comparison result until:
 
-1. the revised Power BI measure refreshes successfully
-2. numerator and denominator values are recorded
-3. Databricks reproduces the same logic
-4. differences from previous outputs are explained
-5. the result is marked slide-safe in the analysis log
+1. direct denominator values are recorded
+2. Databricks reproduces the same logic
+3. differences from previous outputs are explained
+4. the result is marked slide-safe in the analysis log
 
 ### Status
 
-Business definition aligned with the current Power BI model.
+Business definition selected.
 
-Not yet slide-safe.
+Power BI rate tested.
+
+Pending Databricks and Genie replication.
 
 ## 7. CSAT
 
@@ -978,7 +1146,7 @@ Pilot CSAT source validated.
 
 ### Business question
 
-How satisfied were customers with portal-relevant application services?
+How satisfied were customers with portal-relevant services?
 
 ### Slide label
 
@@ -986,7 +1154,7 @@ CSAT on Activity
 
 ### Business definition
 
-Customer satisfaction related to portal-enabled application services.
+Customer satisfaction related to portal-enabled services.
 
 ### Working definition
 
@@ -1270,7 +1438,8 @@ Portal display mappings do not change `first_portal_enable_date`.
 Use this source to:
 
 - identify portal-enabled services
-- enforce the online application eligibility date
+- enforce the Portal service activity eligibility date
+- enforce the Online application activity eligibility date
 - define the Activity CSAT service cohort
 - explain structural changes in activity, support, and CSAT
 - support pre/post diagnostics where a valid baseline exists
@@ -1314,16 +1483,19 @@ A metric movement may reflect a capability change rather than a pure performance
 |---|---|
 | Service Account sign-ups | Distinct portal-enabled accounts using `first_account_portal_on_date` |
 | All accounts | Total CRM accounts, context only |
-| Online application activity | Distinct qualifying applications in pre-outcome workflow stages |
-| Included application stages | Draft, Submitted, In Progress, In Assessment, Pending Payment |
-| Excluded application stages | Withdrawn, Declined, Issued, Extended, Renewed, Lapsed |
-| Activity date | Related CRM case creation date |
-| Permit period start | Not used as the online application activity date |
+| Portal service activity | Distinct `application_id` across the broader portal-enabled lifecycle |
+| Portal service activity date | Related CRM case creation date |
+| Portal service activity status filter | No application-status filter |
+| Online application activity | Distinct applications in qualifying pre-outcome workflow stages |
+| Included application diagnostic stages | Draft, Submitted, In Progress, In Assessment, Pending Payment |
+| Excluded application diagnostic stages | Withdrawn, Declined, Issued, Extended, Renewed, Lapsed |
+| Permit period start | Not used as the portal activity date |
 | Portal eligibility | Activity date must be on or after first portal enablement |
 | Support source | `vwsupport` |
 | Support numerator | Distinct `case_id` where `is_after_service_enablement = TRUE` |
 | Support date | `case_created_date` |
-| Support KPI | Support cases per 100 qualifying online applications |
+| Headline support KPI | Support cases per 100 Portal service activities |
+| Online application support rate | Not currently governed |
 | CSAT source | `customer_intelligence.vwcase` |
 | Positive CSAT logic | `Satisfaction_Score_5 IN (4, 5)` |
 | Activity CSAT filter | Portal-enabled service cohort from `vwservice_enablement` |
@@ -1337,8 +1509,10 @@ A metric movement may reflect a capability change rather than a pure performance
 | Story point | Metric | FY2024/25 | FY2025/26 | Movement | Status |
 |---|---|---:|---:|---:|---|
 | More sign-ups | Service Account sign-ups | 9,837 latest Genie | 15,699 latest Genie | +59.6% | Reconcile before slide lock |
-| More online application activity | Qualifying online applications | Pending refreshed measure | Pending refreshed measure | Pending | Not slide-safe |
-| Less support demand relative to activity | Support cases per 100 online applications | Pending refreshed measure | Pending refreshed measure | Pending | Not slide-safe |
+| Portal lifecycle activity | Portal service activity | Direct count pending | Direct count pending | Pending | Not yet reconciled |
+| Online application diagnostic | Pre-outcome online applications | 5,674 | 8,739 | +54.0% | Power BI diagnostic |
+| Portal support volume | Distinct post-enablement support cases | 10,976 | 13,910 | +26.7% | Power BI test |
+| Portal support demand | Support cases per 100 Portal service activities | 28.57 | 34.86 | +22.0% | Power BI test; Databricks pending |
 | Better Activity CSAT | Portal-enabled Activity CSAT | 76.5% | 80.6% | +4.1 pp | Accepted |
 | Better Activity CSAT response base | Valid responses | 889 | 1,721 | +832 responses | Accepted |
 | Support CSAT | Mapped support pathways | Manual analysis only | Manual analysis only | Do not claim unless mapping applied | Pilot only |
@@ -1352,15 +1526,21 @@ The celebration slide can currently use:
 
 Service Account sign-ups may be used only after the latest Genie values are reconciled against the previous benchmark.
 
-Online application activity and support demand must not be published until the revised Power BI measure has refreshed and the Databricks implementation has been reconciled.
+Online application activity may be used as a supporting diagnostic after Databricks replication or explicit acknowledgement that it is currently a Power BI result.
+
+Portal Support Demand Rate must not be described as an improvement.
+
+The current Power BI result indicates that support demand increased from 28.57 to 34.86 cases per 100 Portal service activities.
 
 Support CSAT should only be discussed where the manual support service mapping has been applied and documented.
 
 ## The slide should not claim
 
-- Online application activity growth using the previous `period_start` definition.
-- Support demand improved using an unreconciled denominator.
-- Approximately 30 support cases per 100 transactions is the same metric as support cases per 100 qualifying applications.
+- Support demand reduced.
+- Online application activity is the denominator for full portal support demand.
+- Portal service activity and Online application activity are the same metric.
+- `period_start` represents when portal activity occurred.
+- Approximately 30 support cases per 100 transactions is interchangeable with an application-only support rate.
 - Support CSAT improved overall unless the manual mapping has been applied.
 - Portal enablement caused CSAT improvement.
 - Pre/post enablement CSAT improved across the full portal service cohort.
@@ -1371,19 +1551,38 @@ Support CSAT should only be discussed where the manual support service mapping h
 ## Current caveats
 
 - These definitions are pilot definitions, not final enterprise reporting standards.
-- `vwpermit_statused` logic currently exists in Power BI and has not yet been upstreamed into Databricks.
-- The workflow status map is currently maintained in Power BI.
+- Portal service activity has been tested through the existing Power BI measure but direct denominator values have not yet been recorded.
+- Portal service activity has not yet been reproduced in Databricks.
 - The activity date is derived from the related CRM case creation date.
 - The service eligibility rule depends on `first_portal_enable_date`.
 - The Power BI model currently assumes service names provide a valid relationship key.
-- The revised online application measure has not yet been refreshed and reconciled.
-- The revised support rate has not yet been refreshed and reconciled.
+- The workflow status map is currently maintained in Power BI.
+- Online application activity is a separate diagnostic and is not the Portal Support Demand Rate denominator.
 - Service Account sign-up outputs differ slightly between the existing benchmark and latest Genie run.
 - Support CSAT requires a manually documented mapping and is not yet implemented as a governed Databricks asset.
 - Support CSAT is not yet a repeatable self-serve Genie metric.
 - FY2023/24 Activity CSAT response volume is very small and should not be used as the main baseline.
 - Service-name joins for Activity CSAT use normalised text matching and should be checked for unmatched services.
 - No raw organisational data or customer-level data should be stored in this repository.
+
+## Genie implementation requirement
+
+Permanent Account Management Genie instructions should be maintained separately in:
+
+`21-account-management-genie-instructions.md`
+
+The Genie instructions must define:
+
+- governed source tables
+- activity date logic
+- portal enablement conditions
+- distinct-count logic
+- Portal service activity as the support denominator
+- Online application activity as a separate diagnostic
+- required reconciliation output
+- slide-safety classification
+
+Genie must not infer alternate metric definitions from field names or previous exploratory outputs.
 
 ## Contextual metric: GA4 portal entry behaviour
 
@@ -1420,6 +1619,7 @@ GA4 should remain contextual only.
 It should not replace Databricks metrics for:
 
 - Service Account sign-ups
+- Portal service activity
 - Online application activity
 - Support demand
 - Activity CSAT
