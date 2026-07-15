@@ -51,7 +51,7 @@ Important distinctions:
 - Activity CSAT and Support CSAT are separate metrics.
 - Support CSAT must use the manually mapped support service list.
 
-Existing Power BI measures and model logic are evidence of the current business implementation.
+Existing Power BI measures and model logic are evidence of the business implementation.
 
 The governed definitions in this file must be translated into permanent Databricks Genie instructions and reproducible Databricks logic before they are treated as reusable production metrics.
 
@@ -1634,19 +1634,35 @@ Do not claim:
 - GA4 replaces Databricks sign-up, activity, support, or CSAT metrics.
 - GA4 can be reconciled with Service Account sign-ups unless reconciliation is validated.
 
-### Current Power BI reference values
+## Current Power BI reference values
 
-| Measure | FY2024/25 | FY2025/26 | Change | Relative change |
+| Measure | FY2024/25 | FY2025/26 | Absolute change | Relative change |
 |---|---:|---:|---:|---:|
 | Portal service activities | 38,422 | 39,898 | +1,476 | +3.8% |
 | Portal support cases | 10,976 | 13,910 | +2,934 | +26.7% |
 | Support cases per 100 portal service activities | 28.57 | 34.86 | +6.29 | +22.0% |
 
-The Power BI dashboard displays Portal service activity growth as 4% because the percentage is rounded to a whole number.
+Power BI displays Portal service activity growth as `4%` because the value is rounded to a whole percentage.
 
-The reference rates reconcile to the direct denominator values:
+The support-demand rates reconcile directly to the recorded numerator and denominator values:
 
 - FY2024/25: `10,976 / 38,422 * 100 = 28.57`
 - FY2025/26: `13,910 / 39,898 * 100 = 34.86`
 
-These values confirm that support demand increased faster than portal service activity. The result must not be described as reduced support demand or as a positive improvement without further evidence.
+These denominator values were read directly from Power BI. They were not reconstructed from rounded rate values.
+
+## Validation status
+
+The Power BI reference values are now recorded for:
+
+- Portal service activity
+- Portal support cases
+- Portal Support Demand Rate
+
+Databricks and Account Management Genie replication remain pending.
+
+The governed interpretation is:
+
+> Support demand increased relative to portal service activity.
+
+Do not describe this result as reduced support demand, improved self-service performance or a celebratory improvement without separate supporting evidence.
