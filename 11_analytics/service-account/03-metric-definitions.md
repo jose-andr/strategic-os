@@ -1633,3 +1633,20 @@ Do not claim:
 - Old GA4 CSV export values are current EOFY evidence.
 - GA4 replaces Databricks sign-up, activity, support, or CSAT metrics.
 - GA4 can be reconciled with Service Account sign-ups unless reconciliation is validated.
+
+### Current Power BI reference values
+
+| Measure | FY2024/25 | FY2025/26 | Change | Relative change |
+|---|---:|---:|---:|---:|
+| Portal service activities | 38,422 | 39,898 | +1,476 | +3.8% |
+| Portal support cases | 10,976 | 13,910 | +2,934 | +26.7% |
+| Support cases per 100 portal service activities | 28.57 | 34.86 | +6.29 | +22.0% |
+
+The Power BI dashboard displays Portal service activity growth as 4% because the percentage is rounded to a whole number.
+
+The reference rates reconcile to the direct denominator values:
+
+- FY2024/25: `10,976 / 38,422 * 100 = 28.57`
+- FY2025/26: `13,910 / 39,898 * 100 = 34.86`
+
+These values confirm that support demand increased faster than portal service activity. The result must not be described as reduced support demand or as a positive improvement without further evidence.
