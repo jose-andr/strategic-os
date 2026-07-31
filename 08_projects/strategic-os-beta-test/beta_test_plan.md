@@ -1,35 +1,28 @@
-## Beta purpose
+# Strategic OS Beta Test Plan
+
+## Status
+
+Draft for beta launch
+
+## Purpose
 
 Evaluate whether the Strategic OS agentic team can reliably support a real strategic workstream from initial ambiguity through sensemaking, stakeholder preparation, artefact production, review and next-action coordination.
 
-The beta will specifically test:
+The beta is primarily testing:
 
-- agent role clarity and coordination;
-- quality of handoffs between agents;
-- automation reliability;
-- communication and notification quality through Slack;
-- human oversight and intervention points;
-- output quality and usability;
-- traceability of evidence, assumptions and decisions;
-- workflow speed and friction;
-- recovery when information is incomplete or an agent produces a weak result; and
-- the ability to create reusable strategic knowledge without storing sensitive source material.
+- agent role clarity;
+- coordination between agents;
+- quality of agent handoffs;
+- workflow automation;
+- Slack communication and notifications;
+- human oversight and intervention;
+- output quality;
+- recovery from errors or incomplete information; and
+- creation of reusable strategic knowledge.
 
-The selected Bitbucket documentation opportunity provides a realistic and strategically relevant test subject.
+The selected Bitbucket documentation opportunity is the strategic test subject.
 
-Its strategic value contributes to the difficulty and usefulness of the beta, but the proposal being approved, rejected or changed is not deterministic of beta success.
-
-A strategically sound recommendation may still expose poor agent coordination or unreliable automation.
-
-A proposal that stakeholders reject may still demonstrate strong agent performance if the system:
-
-- identified the decision clearly;
-- surfaced evidence and uncertainty;
-- anticipated stakeholder concerns;
-- produced useful artefacts;
-- communicated progress effectively;
-- supported an informed human decision; and
-- recorded reusable lessons.
+Its strategic relevance makes the test realistic, but approval or adoption of the proposal does not determine whether the beta succeeds.
 
 ## Primary beta question
 
@@ -37,15 +30,15 @@ A proposal that stakeholders reject may still demonstrate strong agent performan
 
 ## Secondary beta question
 
-> Does the system improve the clarity, quality and efficiency of the work compared with completing the same activity manually?
+> Does the agentic workflow improve the clarity, quality and efficiency of the work compared with completing the same activity manually?
 
 ## Test subject
 
-The beta will use the following strategic opportunity:
+The beta will use the following opportunity:
 
 > Explore whether City of Melbourne's established Bitbucket capability could support reusable, governed and machine-readable sources for internal project artefacts and customer-facing knowledge across multiple teams and channels.
 
-The subject may produce artefacts relating to:
+The subject may involve:
 
 - project and design documentation;
 - customer information architecture;
@@ -53,175 +46,386 @@ The subject may produce artefacts relating to:
 - customer segmentation profiles;
 - Channel Strategy patterns;
 - multi-channel publishing;
-- cross-team governance workflows; and
+- cross-team governance workflows;
+- reusable design elements; and
 - trusted source material for emerging agents.
 
 These are test inputs and outputs.
 
-They do not define the beta's primary success criteria.
+They are not the primary beta success criteria.
+
+## Beta boundary
+
+The beta will test the agentic workflow using one contained strategic workstream.
+
+It will not:
+
+- test every Strategic OS agent;
+- automate every possible workflow;
+- establish a production operating model;
+- replace organisational systems of record;
+- migrate existing documentation libraries;
+- store raw customer or organisational data;
+- assess Bitbucket as an enterprise platform implementation; or
+- treat stakeholder approval as the sole indicator of success.
+
+## Agents in scope
+
+The initial beta should use only the agents required for the test subject.
+
+Expected roles include:
+
+### Sensemaking Agent
+
+Responsible for:
+
+- clarifying the opportunity;
+- separating evidence from assumptions;
+- identifying the decision required;
+- framing options and trade-offs; and
+- preparing structured inputs for later agents.
+
+### Stakeholder Journey Agent
+
+Responsible for:
+
+- identifying stakeholder interests and concerns;
+- tailoring engagement approaches;
+- anticipating resistance;
+- defining desired stakeholder movement; and
+- preparing stakeholder-ready communication.
+
+### Shipping Coach
+
+Responsible for:
+
+- assessing whether outputs are ready to use;
+- identifying minimum remaining work;
+- preventing unnecessary refinement;
+- recommending whether to ship, socialise, refine or stop; and
+- preparing the next action.
+
+### Orchestration layer
+
+Responsible for:
+
+- selecting the appropriate agent;
+- passing relevant context;
+- maintaining workflow state;
+- triggering automation;
+- notifying José through Slack;
+- requesting approval at defined points; and
+- recording outcomes and failures.
+
+## Workflow under test
+
+The initial workflow is:
+
+    Strategic opportunity captured
+                |
+                v
+    Sensemaking Agent analyses the opportunity
+                |
+                v
+    José receives Slack summary and review request
+                |
+                v
+    Stakeholder Journey Agent prepares alignment approach
+                |
+                v
+    José receives Slack action notification
+                |
+                v
+    Decision brief and working-session artefacts are prepared
+                |
+                v
+    Shipping Coach evaluates readiness
+                |
+                v
+    José approves, redirects, pauses or rejects
+                |
+                v
+    Final status, decisions and lessons are recorded
+
+## Human-in-the-loop gates
+
+José retains final decision authority.
+
+Human review is required before:
+
+- stakeholder-facing content is used;
+- recommendations are treated as agreed;
+- significant workflow changes are made;
+- sensitive or organisational material is retained;
+- the system proceeds after an error;
+- a final artefact is marked ready; or
+- the beta result is determined.
+
+The system should make each intervention point clear through Slack.
 
 ## Evaluation dimensions
 
-### 1. Agent-team performance
+## 1. Agent performance
 
 Evaluate whether each agent:
 
 - understood its assigned role;
-- stayed within its scope;
+- stayed within scope;
 - used relevant prior outputs;
 - avoided unnecessary duplication;
+- identified uncertainty;
+- preserved important caveats;
 - produced a useful handoff;
-- identified uncertainty and missing evidence;
 - requested human input only when necessary; and
-- improved the work rather than adding documentation volume.
+- improved decision clarity.
 
-### 2. Orchestration and handoffs
+## 2. Agent coordination
 
-Evaluate whether the workflow:
+Evaluate whether agents:
 
-- selected the appropriate agent for each task;
-- passed sufficient context between agents;
-- preserved important decisions and caveats;
-- avoided contradictory outputs;
-- prevented repeated work;
-- maintained a visible current state; and
-- recovered cleanly when a step failed or needed revision.
+- used consistent definitions;
+- avoided contradictory recommendations;
+- preserved decisions and context;
+- built on previous outputs;
+- avoided repeating completed work;
+- handed off in a usable format; and
+- maintained a clear current state.
 
-### 3. Automation performance
+## 3. Orchestration
+
+Evaluate whether the orchestration layer:
+
+- selected the right agent;
+- triggered work at the right time;
+- passed sufficient context;
+- prevented duplicate actions;
+- maintained workflow status;
+- detected failures;
+- supported retries or redirection; and
+- kept José informed.
+
+## 4. Automation
 
 Evaluate:
 
 - trigger reliability;
-- task sequencing;
-- data or context passed between steps;
-- duplicate or missed actions;
+- sequence accuracy;
+- data passed between steps;
+- missed actions;
+- duplicate actions;
 - error handling;
 - retry behaviour;
-- auditability;
+- manual interventions;
 - status accuracy; and
-- the amount of manual intervention required.
+- auditability.
 
-Automation should support the operating model rather than conceal unclear ownership or weak process design.
+Automation should reduce coordination effort without hiding uncertainty or failure.
 
-### 4. Slack communication and notifications
+## 5. Slack communication
 
-Evaluate whether Slack communication:
+Evaluate whether Slack notifications:
 
-- reached the correct person;
-- arrived at the appropriate point in the workflow;
-- explained what happened;
-- made the required decision or action clear;
-- provided enough context without excessive detail;
-- distinguished information from action requests;
-- avoided duplicate or low-value notifications;
-- allowed José to intervene or redirect the process; and
-- confirmed important outcomes and failures.
+- reached José;
+- arrived at the appropriate time;
+- explained what occurred;
+- identified the responsible agent;
+- made the required action clear;
+- distinguished information from approval requests;
+- included enough context;
+- avoided unnecessary detail;
+- avoided duplication;
+- reported errors visibly; and
+- confirmed completed decisions or actions.
 
-### 5. Human-in-the-loop performance
+## 6. Human control
 
 Evaluate whether José could:
 
 - understand the current workflow state;
-- review material before consequential use;
-- correct assumptions;
-- approve or reject agent recommendations;
-- pause or redirect the workflow;
-- identify which agent produced an output;
-- understand why a recommendation was made; and
+- identify which agent produced each output;
+- review assumptions and evidence;
+- approve or reject recommendations;
+- pause the workflow;
+- redirect an agent;
+- request rework;
+- recover from errors; and
 - retain final decision authority.
 
-### 6. Output quality
+## 7. Output quality
 
 Evaluate whether outputs were:
 
 - decision-relevant;
 - evidence-aware;
-- appropriately caveated;
+- caveated;
 - internally consistent;
+- stakeholder-appropriate;
 - reusable;
 - maintainable;
 - privacy-safe;
-- suitable for the intended stakeholder;
-- visually and structurally clear; and
-- ready to use with limited manual correction.
+- structurally clear; and
+- usable with limited manual correction.
 
-### 7. Strategic contribution
+## 8. Strategic contribution
 
 Evaluate whether the agentic team helped:
 
-- frame the opportunity clearly;
+- clarify the opportunity;
 - distinguish the capability from the technology;
 - identify stakeholder-specific concerns;
-- define realistic options and boundaries;
-- improve the decision process; and
-- create useful strategic artefacts.
+- define realistic options;
+- surface risks and dependencies;
+- improve the quality of the decision process; and
+- produce useful strategic artefacts.
 
-Strategic contribution is an important evaluation dimension, but stakeholder endorsement of the Bitbucket proposal is not required for beta success.
-
-## Success criteria
-
-The beta is successful when the evidence shows that the agentic team can:
-
-- complete an end-to-end workflow with understandable agent roles;
-- coordinate work without material contradictions or excessive duplication;
-- produce useful strategic outputs;
-- notify José through Slack at meaningful intervention points;
-- make required actions and decisions clear;
-- maintain human review before consequential outputs are used;
-- recover transparently from automation or agent errors;
-- preserve evidence, caveats and decision history;
-- avoid retaining sensitive organisational source material; and
-- create enough value to justify another controlled test.
+Stakeholder endorsement of the Bitbucket proposal is not required for success.
 
 ## Outcome independence
 
-The following business outcomes do not independently determine beta success:
+The following outcomes do not independently determine beta success:
 
-- manager approval of the proposal;
+- approval by the manager;
 - stakeholder enthusiasm for Git or Bitbucket;
-- agreement on the preferred documentation platform;
-- adoption of the proposed publishing model;
-- immediate implementation of the pilot; or
-- confirmation that the original strategic hypothesis was correct.
+- adoption of the documentation model;
+- implementation of the pilot;
+- agreement on the preferred platform;
+- confirmation that the initial strategic hypothesis was correct; or
+- immediate organisational value.
 
-The beta should be considered successful when it supports a well-informed decision, including a decision to reject, narrow or substantially change the proposed solution.
+The beta may still succeed if the proposal is rejected, narrowed or redirected, provided the system supported a clear, evidence-aware and well-communicated decision.
+
+The beta may fail even if stakeholders approve the proposal, if the agentic workflow was unreliable, opaque or required excessive manual reconstruction.
+
+## Success criteria
+
+The beta is successful when the evidence shows that the system can:
+
+- complete an end-to-end workflow;
+- maintain understandable agent roles;
+- coordinate work without material contradictions;
+- produce useful strategic outputs;
+- notify José through Slack at meaningful points;
+- make required actions and decisions clear;
+- retain human review before consequential use;
+- detect and communicate errors;
+- recover from failed or weak steps;
+- preserve evidence, assumptions and caveats;
+- avoid storing sensitive source material;
+- create reusable learning; and
+- deliver enough value to justify another controlled test.
 
 ## Failure indicators
 
 The beta should be considered weak or unsuccessful if:
 
-- agents repeatedly duplicate or contradict each other;
-- important context is lost between steps;
-- automation triggers incorrectly or silently fails;
-- Slack notifications are missing, unclear or excessive;
-- José cannot understand or control the workflow;
-- outputs require substantial reconstruction before use;
+- agents repeatedly duplicate work;
+- agents contradict each other without surfacing the conflict;
+- important context is lost;
+- automation silently fails;
+- triggers occur in the wrong order;
+- Slack notifications are unclear, missing or excessive;
+- José cannot understand the workflow state;
+- outputs require substantial reconstruction;
 - recommendations overstate weak evidence;
-- the system optimises for document creation rather than decision support;
-- sensitive information is retained;
-- errors are hidden rather than surfaced; or
-- the workflow costs more effort than the value it creates.
+- errors are hidden;
+- privacy boundaries are breached;
+- the workflow creates documentation without improving decisions; or
+- manual intervention is disproportionate to the value created.
 
-## Beta measures
+## Measures
 
 | Dimension | Measure |
 |---|---|
-| Agent performance | Percentage of outputs accepted with minor or no revision |
-| Role clarity | Number of duplicated, conflicting or out-of-scope agent actions |
-| Handoffs | Number of handoffs requiring manual context reconstruction |
-| Automation | Successful triggers, failures, retries and manual interventions |
-| Slack notifications | Useful, missed, duplicated and unnecessary notifications |
-| Human control | Number of meaningful review and approval points |
-| Output quality | Usability, clarity, evidence quality and stakeholder readiness |
-| Efficiency | Approximate manual effort compared with an unassisted workflow |
-| Recovery | Ability to detect, communicate and correct failed steps |
-| Reuse | Outputs or lessons suitable for future work |
+| Agent performance | Outputs accepted with no, minor or major revision |
+| Role clarity | Out-of-scope or duplicated agent actions |
+| Handoffs | Handoffs requiring manual context reconstruction |
+| Coordination | Contradictions, repeated work or lost decisions |
+| Automation | Successful triggers, failures, retries and interventions |
+| Slack | Useful, missed, duplicated and unnecessary notifications |
+| Human control | Successful approvals, pauses, redirects and rework requests |
+| Output quality | Clarity, usability, evidence quality and readiness |
+| Efficiency | Approximate effort compared with an unassisted workflow |
+| Recovery | Time and actions required to correct failed steps |
+| Reuse | Outputs and lessons suitable for future work |
 | Privacy | Information-boundary incidents or near misses |
-| Strategic contribution | Improvement in decision framing and stakeholder preparation |
+| Strategic contribution | Improvement in framing, options and stakeholder preparation |
+
+## Slack notification checkpoints
+
+The beta should test notifications at these minimum points:
+
+### Workflow started
+
+Notify José that:
+
+- the test has started;
+- the subject has been recorded;
+- the current agent is identified; and
+- the next expected action is visible.
+
+### Agent output ready
+
+Notify José that:
+
+- an output is ready;
+- the producing agent is identified;
+- the output purpose is clear;
+- unresolved caveats are summarised; and
+- a review action is requested.
+
+### Approval required
+
+Notify José that:
+
+- a decision is required;
+- the available choices are explicit;
+- the consequences are summarised; and
+- the workflow will not proceed without human approval.
+
+### Workflow failure
+
+Notify José that:
+
+- a failure occurred;
+- the failed step is identified;
+- the impact is explained;
+- any retry is visible; and
+- the required human action is clear.
+
+### Workflow completed
+
+Notify José that:
+
+- the workflow is complete;
+- the final output or status is identified;
+- important decisions are summarised;
+- outstanding actions are visible; and
+- evaluation feedback is requested.
+
+## Beta evidence log
+
+Record each test event using:
+
+| Field | Record |
+|---|---|
+| Date and time | |
+| Workflow stage | |
+| Agent or automation | |
+| Trigger | |
+| Expected result | |
+| Actual result | |
+| Slack notification sent | Yes / No |
+| Notification useful | Yes / Partly / No |
+| Human action required | |
+| Human intervention | |
+| Output quality | Accepted / Minor revision / Major revision / Rejected |
+| Error or friction | |
+| Recovery action | |
+| Time or effort | |
+| Lesson | |
+| Follow-up change | |
 
 ## Beta result categories
-
-At completion, assign one overall result:
 
 ### Continue
 
@@ -229,16 +433,43 @@ The agentic team, automation and Slack workflow performed reliably enough for an
 
 ### Continue with contained improvements
 
-The operating model created clear value, but specific agents, handoffs, automations or notifications require correction.
+The system created clear value, but specific agents, handoffs, automations or notifications require correction.
 
 ### Redesign a workflow component
 
-A material part of the agentic workflow was unreliable, although the wider approach remains promising.
+A material component was unreliable, although the wider agentic approach remains promising.
 
 ### Pause
 
-The agentic model created insufficient value or required disproportionate manual intervention.
+The system created insufficient value or required disproportionate manual intervention.
 
 ### Stop
 
 The test exposed fundamental problems that make continued use inappropriate without a substantially different approach.
+
+## Exit criteria
+
+The beta may be closed when:
+
+- one complete strategic workflow has run;
+- all planned agent handoffs have been tested;
+- Slack checkpoints have been exercised;
+- at least one human approval or redirect has occurred;
+- at least one failure or exception path has been tested or simulated;
+- outputs have been evaluated;
+- privacy boundaries have been reviewed;
+- lessons have been recorded;
+- the overall result category has been assigned; and
+- the next recommendation has been agreed.
+
+## Immediate next action
+
+Confirm the automation and Slack workflow to be tested, including:
+
+- triggers;
+- agent sequence;
+- Slack checkpoints;
+- approval actions;
+- failure notifications;
+- workflow-state storage; and
+- beta logging.
