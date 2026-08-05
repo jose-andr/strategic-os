@@ -735,3 +735,25 @@ José Andrade
 
 **Next authorised step:**  
 [Add next step]
+
+# Completed intake-schema validation
+
+## Validation scope
+
+This validation confirms that the current minimum Sensemaking Review scenario preserves and uses the complete intake context required by the Relevance Sensemaking Agent.
+
+It does not validate the full test suite, advanced output validation, retry handling, failure recovery or inactive human-response routes.
+
+## Fields validated
+
+The following fields were mapped through the active workflow:
+
+```text
+decision_question
+opportunity_summary
+evidence
+known_assumptions
+constraints
+requested_output
+privacy_confirmed
+requested_outcome
