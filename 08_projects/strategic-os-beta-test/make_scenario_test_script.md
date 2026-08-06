@@ -976,10 +976,26 @@ Copy this section for each future execution.
 - automated GitHub commits disabled; and
 - production use excluded.
 
+## Current credential status
+
+There is no recorded evidence that the Relevance AI credential was exposed.
+
+Credential rotation is therefore not required based on the current evidence.
+
+The remaining control is to confirm that:
+
+- the current Relevance AI connection works;
+- no credential value appears in Make.com execution logs;
+- no credential value appears in Slack;
+- no credential value is stored in the Data Store; and
+- no credential value appears in repository evidence.
+
+Do not record the credential value, partial token or screenshots containing it.
+
 ## Still to confirm
 
 - the rotated intake scenario is saved and Active;
-- any previously exposed Relevance credential has been revoked and replaced;
+- the current Relevance AI connection works without credential leakage;
 - authorised-responder validation before wider beta use;
 - explicit intake rejection when privacy confirmation is false;
 - bounded retry and failure handling; and
@@ -1015,8 +1031,9 @@ Do not extend the workflow to wider beta use until:
 - retry and retry-limit behaviour are tested;
 - Slack review-notification failure is visible and recoverable;
 - sensitive-content safeguard behaviour is tested;
-- any exposed Relevance credential has been revoked and replaced;
 - the rotated intake scenario is confirmed saved and Active;
+- the current Relevance AI connection is confirmed operational;
+- no credential values appear in logs, Slack, Data Store records or repository evidence;
 - no silent failure remains;
 - no unauthorised state change is possible; and
 - all material defects have an owner and disposition.
@@ -1056,11 +1073,16 @@ Privacy-safe Make.com execution references, Slack message references and final D
 - Duplicate attempts are silently blocked.
 - Advanced validation, retries and wider failure handling remain untested.
 - Downstream automation remains disabled.
+- Relevance AI credential exposure has not been identified.
 
 **Required corrections:**  
 
 - Confirm the rotated intake scenario is saved and Active.
-- Confirm any exposed Relevance credential has been revoked and replaced.
+- Confirm the current Relevance AI connection works without exposing credential values.
+- Implement and test authorised-responder validation before wider beta use.
+
+**Next authorised step:**  
+Continue contained beta testing only. Do not add downstream automation or additional response routes without a separate decision.
 - Implement and test authorised-responder validation before wider beta use.
 
 **Next authorised step:**  
