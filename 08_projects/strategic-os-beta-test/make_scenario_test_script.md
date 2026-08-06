@@ -1050,7 +1050,29 @@ Record one outcome:
 - `Proceed with contained corrections`
 - `Retest required`
 - `Stop`
+## Authorised-responder control
 
+**Status:**  
+Not required for the contained beta
+
+**Decision:**  
+The Slack workspace is personal and no other users have access. The existing controls are sufficient for the current boundary:
+
+- command must start with `APPROVE`;
+- command must come from the configured beta channel;
+- workflow record must exist; and
+- `current_state` must equal `human-review-required`.
+
+**Risk acceptance:**  
+The risk of another Slack user approving a workflow is accepted as negligible within the current personal-workspace boundary.
+
+**Review trigger:**  
+Implement authorised-user validation before:
+
+- adding another Slack workspace member;
+- moving the scenario to an organisational workspace;
+- allowing shared beta access; or
+- expanding the workflow beyond personal testing.
 ## Current decision record
 
 **Outcome:**  
