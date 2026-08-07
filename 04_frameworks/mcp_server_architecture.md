@@ -430,8 +430,10 @@ Before enabling or using an MCP server, check:
 - Are governed data boundaries protected?
 - Is sensitive information excluded or abstracted?
 - Is the server useful enough to maintain?
+- Does the server remove more recurring administration than it introduces?
+- Does the integration avoid unnecessary manual synchronisation, reconciliation or duplicate handling?
+- Can the connection remain reliable with minimal routine human intervention once configured?
 - Does the workflow support the Strategic OS North Star?
-
 ## Success Measures
 
 MCP server architecture is working when:
