@@ -12,6 +12,28 @@ Agents support the Strategic OS North Star:
 
 Agents do not replace human judgement, stakeholder engagement, governance or final decision-making.
 
+## Interaction Model
+
+The preferred operating pattern is:
+
+José
+→ Slack or another approved interaction surface
+→ Strategic OS agent
+→ relevant reasoning and source tools
+→ decision-ready response
+→ human review
+→ approved durable knowledge
+→ GitHub-backed Markdown
+↔ Obsidian
+
+Slack is the preferred lightweight interface with agents where integration is available.
+
+Obsidian is the primary workspace for navigating and developing Strategic OS knowledge.
+
+GitHub remains the authoritative Strategic OS repository.
+
+Agents may draft repository updates, but they must not silently turn conversations or temporary workspace content into durable knowledge.
+
 ## What Belongs Here
 
 This folder contains:
@@ -38,24 +60,27 @@ Do not store:
 - project-specific artefacts that belong in `08_projects/`
 - analytics domain rules that belong in `11_analytics/`
 - temporary chat notes
+- Slack conversation history
+- Obsidian scratch notes with no durable value
 - next-step reminders that only make sense in one conversation
 
 ## Priority Agents
 
-Strategic OS currently uses five priority agents.
+Strategic OS currently uses five general priority agents plus domain analytical agents.
 
 | Agent | Folder | Primary role | Default autonomy |
-| --- | --- | --- | --- |
+|---|---|---|---|
 | Sensemaking Agent | `sensemaking_agent/` | Turns ambiguity into decision-ready advice | Level 1 — Advisory |
 | Stakeholder Journey Agent | `stakeholder_agent/` | Maps alignment, resistance and engagement sequencing | Level 1 — Advisory |
 | Shipping Coach | `shipping_coach/` | Helps move useful work from thinking into visible progress | Level 2 — Coaching / Challenge |
 | Career Architect | `career_architect/` | Converts work and feedback into career evidence and positioning | Level 1 — Advisory |
 | Chief of Staff Agent | `chief_of_staff/` | Coordinates daily activity, priorities, follow-ups and decision-required items | Level 3 — Operational Coordination |
+| Domain Analytical Agents | `11_analytics/[domain]/` | Support governed analytical interpretation | Level 4 — Domain Analytical Support |
 
 ## Shared Framework Files
 
 | File | Purpose |
-| --- | --- |
+|---|---|
 | `agent_operating_model.md` | Defines agent categories, autonomy levels, human review requirements and escalation rules |
 | `agent_review_checklist.md` | Provides a shared checklist for reviewing agent outputs before use or storage |
 | `agent_prompt_pattern.md` | Defines the standard prompt structure for running Strategic OS agents |
@@ -70,9 +95,9 @@ Each priority agent should have its own folder.
 Recommended structure:
 
 - `agent_spec.md`
-- supporting rules, where required
-- examples, where useful
-- local prompt patterns, where useful
+- supporting rules where required
+- examples where useful
+- local prompt patterns where useful
 
 The standard agent specification structure is:
 
@@ -89,10 +114,8 @@ The standard agent specification structure is:
 
 ## Autonomy Model
 
-Strategic OS agents operate within defined autonomy levels.
-
 | Level | Name | Meaning |
-| --- | --- | --- |
+|---|---|---|
 | Level 1 | Advisory | Provides synthesis, options and recommendations only |
 | Level 2 | Coaching / Challenge | Recommends action, challenges delay and identifies smallest useful next steps |
 | Level 3 | Operational Coordination | Organises and prioritises low-risk day-to-day work within approved rules |
@@ -113,6 +136,7 @@ Human review is required before an agent output is:
 - used for career positioning
 - used to make a commitment
 - used where sensitive information is involved
+- committed as durable Strategic OS knowledge
 
 Human review should check:
 
@@ -123,7 +147,25 @@ Human review should check:
 - Is the recommendation proportionate?
 - Is the next action realistic?
 - Is the storage location appropriate?
+- Is the content safe to retain?
 - Does the output support the Strategic OS North Star?
+
+## Conversation-To-Knowledge Rule
+
+Agent conversations are temporary working context unless intentionally promoted.
+
+When an interaction produces reusable value:
+
+1. identify the reusable knowledge
+2. remove conversation noise
+3. remove or abstract sensitive source material
+4. distinguish evidence, assumption, interpretation, recommendation and action
+5. use the relevant Strategic OS template where helpful
+6. review the proposed durable content
+7. save it to the appropriate GitHub-backed Markdown file
+8. use Obsidian to navigate and connect it
+
+Do not store raw conversation history merely for completeness.
 
 ## Domain Analytical Agents
 
@@ -145,7 +187,7 @@ Relevant local files may include:
 - `metric_caveats.md`
 - `source_rules.md`
 
-The Service Account analytics area is the first mature pilot pattern:
+The Service Account analytics area remains the first mature pilot pattern:
 
 `11_analytics/service-account/`
 
@@ -168,6 +210,10 @@ Agent outputs should be stored according to purpose:
 - Reusable templates go in `10_templates/`
 - Analytics guidance and governed analytical patterns go in `11_analytics/`
 
+GitHub owns durable storage.
+
+Obsidian provides the working interface to that storage.
+
 ## Quality Bar
 
 A good agent output should:
@@ -183,6 +229,7 @@ A good agent output should:
 - avoid overclaiming
 - respect privacy and governance boundaries
 - create reusable knowledge where appropriate
+- remain understandable outside any single interface or tool
 
 ## Review Rhythm
 
@@ -198,4 +245,6 @@ Review questions:
 - Which templates need improvement?
 - Which agent specs need refinement?
 - Did analytical agents document source rules and caveats?
+- Is Slack improving the usability of agent interaction?
+- Is Obsidian improving retrieval and reuse without creating unnecessary maintenance?
 - Did agent outputs support the Strategic OS North Star?
