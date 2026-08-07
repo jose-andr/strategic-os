@@ -26,6 +26,8 @@ Reuse intentionally.
 
 Discard confidently.
 
+Automate repetitive administration where safe.
+
 ## Workflow Overview
 
 The standard workflow is:
@@ -37,13 +39,21 @@ The standard workflow is:
 5. Use relevant template
 6. Review
 7. Store in the correct repository folder
-8. Link where useful in Obsidian
+8. Link or explore through Obsidian when useful and available
 9. Reuse
 10. Discard or archive what no longer has value
 
-Slack and Obsidian are interaction and workspace surfaces.
+Slack is the primary Strategic OS agent interaction surface.
+
+GitHub web is the primary cloud-accessible Strategic OS workspace.
 
 GitHub-backed Markdown is the durable Strategic OS record.
+
+Obsidian desktop and mobile are optional enhanced navigation, linking and visual-thinking surfaces.
+
+Approved enterprise tools such as Microsoft 365 Copilot may support organisational meeting synthesis, knowledge retrieval and automation before privacy-safe abstraction into Strategic OS.
+
+Approved capture tools may provide temporary source material, but the capture surface does not determine durable storage.
 
 ## 1. Capture
 
@@ -70,20 +80,29 @@ Raw material may include:
 - weekly operating review signals
 - follow-up dependencies
 - Databricks or Genie interpretation notes
+- approved Copilot meeting or knowledge summaries
+- privacy-safe abstractions from approved capture tools
 
 ### Capture Surfaces
 
 Inputs may begin in:
 
 - Slack
-- Obsidian
+- GitHub web
 - `00_inbox/`
+- Obsidian desktop or mobile when available
 - meeting notes
+- Microsoft 365 Copilot or other approved enterprise AI
 - approved organisational tools
+- approved conversation-capture tools
 - an agent conversation
 - personal reflection
 
 The capture surface does not determine the durable storage location.
+
+Raw organisational source material should remain in its approved system of record.
+
+Only reviewed, privacy-safe and reusable abstraction should move into Strategic OS.
 
 ### Slack Capture Rule
 
@@ -95,11 +114,23 @@ Extract the reusable signal and move only the reviewed, privacy-safe result into
 
 ### Obsidian Capture Rule
 
-Obsidian may be used for quick Markdown capture, but unprocessed material should still follow the inbox and triage discipline.
+Obsidian desktop or mobile may be used for optional Markdown capture when available, but Strategic OS must not depend on Obsidian for capture or operation.
+
+Unprocessed material should still follow the inbox and triage discipline.
 
 Avoid creating permanent notes for every thought.
 
-If the input is not yet classified, use `00_inbox/`.
+If the input is not yet classified and is safe to retain, use `00_inbox/`.
+
+### Enterprise AI And Meeting-Capture Rule
+
+Microsoft 365 Copilot or another approved enterprise AI may be used to summarise meetings, query authorised organisational knowledge and reduce administrative work where organisationally enabled.
+
+External capture tools such as PLAUD must be treated as evaluation items until organisational approval, consent, privacy, security and records requirements are confirmed.
+
+Do not transfer raw meeting transcripts, recordings, private communications or sensitive organisational content into Strategic OS.
+
+Extract only the reviewed strategic signal that is safe and useful to retain.
 
 ## 2. Triage
 
@@ -117,6 +148,7 @@ Ask:
 - Is an agent useful?
 - Is it safe to retain?
 - Should it be discarded instead?
+- Can this workflow be automated or simplified to reduce recurring human administration without weakening review or governance?
 
 ## 3. Decide Output Type
 
@@ -151,38 +183,33 @@ Typical routing:
 - Chief of Staff Agent — operating rhythm, coordination, follow-up
 - Domain Analytical Agent — governed analytics interpretation
 
-Agent use does not change source-of-truth ownership.
+Enterprise AI tools such as Microsoft 365 Copilot remain distinct from Strategic OS agents.
+
+Copilot may supply authorised organisational context or administrative assistance where approved.
+
+Strategic OS agents remain responsible for reusable strategic reasoning patterns, not enterprise source ownership.
 
 ## 5. Use Relevant Template
 
-Use the smallest template that creates a useful output.
+Use a template when it improves consistency, reuse or review.
 
-Examples:
+Common templates include:
 
-| Output | Template |
-|---|---|
-| Decision brief | `10_templates/decision_brief.md` |
-| Lesson learned | `10_templates/lesson_learned.md` |
-| Stakeholder assessment | `10_templates/stakeholder_alignment_assessment.md` |
-| Shipping recommendation | `10_templates/shipping_recommendation.md` |
-| Opportunity review | `10_templates/opportunity_review.md` |
-| Career guidance | `10_templates/career_guidance.md` |
-| Promotion readiness assessment | `10_templates/promotion_readiness_assessment.md` |
-| Daily briefing | `10_templates/daily_briefing.md` |
-| Quarterly assessment | `10_templates/quarterly_strategic_os_assessment.md` |
-| Analytical summary | Domain-specific template or prompt in `11_analytics/[domain]/` |
+- `10_templates/decision_brief.md`
+- `10_templates/lesson_learned.md`
+- `10_templates/stakeholder_alignment_assessment.md`
+- `10_templates/shipping_recommendation.md`
+- `10_templates/opportunity_review.md`
+- `10_templates/career_guidance.md`
+- `10_templates/promotion_readiness_assessment.md`
+- `10_templates/daily_briefing.md`
+- `10_templates/quarterly_strategic_os_assessment.md`
 
-Templates should reduce friction.
-
-If a template adds unnecessary complexity, simplify the output.
+Do not force a template onto work that does not benefit from structure.
 
 ## 6. Review
 
-### Purpose
-
-Review protects quality, judgement, privacy and usefulness.
-
-Before storing or using an output, check:
+Before durable storage, ask:
 
 - Is the purpose clear?
 - Is the recommendation explicit where relevant?
@@ -232,9 +259,11 @@ Human review is required when the output involves:
 
 GitHub is authoritative for durable Strategic OS content.
 
-Obsidian is the primary workspace for viewing and developing that content.
+GitHub web is the primary cloud-accessible workspace for maintaining that content.
 
-## 8. Link In Obsidian Where Useful
+Obsidian is an optional enhanced interface to that content.
+
+## 8. Link Or Explore Where Useful
 
 Create links only when they improve future retrieval or reasoning.
 
@@ -248,23 +277,28 @@ Useful links may connect:
 - a framework to examples of use
 - a stakeholder pattern to relevant decisions
 
-Do not add links merely to make the graph denser.
+Links may be created through standard Markdown or enhanced through Obsidian when available.
+
+Do not add links merely to make a graph denser.
 
 The purpose of linking is decision support, not visual complexity.
 
 ## 9. Reuse
 
-Reusable knowledge should help answer future questions faster.
+Reusable Strategic OS knowledge should improve future work.
 
-Examples:
+Reuse may include:
 
-- Have we seen this stakeholder pattern before?
-- Which framework helped with a similar decision?
-- What caveat applies to this metric?
-- What evidence supports this opportunity?
-- Which previous lesson should shape the next action?
-
-Agents may use repository knowledge to support synthesis, subject to privacy and access controls.
+- informing a new decision
+- preparing for a stakeholder conversation
+- applying a service-design pattern
+- checking an analytical caveat
+- recognising a repeated organisational pattern
+- supporting a strategic opportunity
+- building career evidence
+- adapting a template
+- improving an agent prompt
+- informing a thought-leadership idea
 
 ## 10. Discard Or Archive
 
@@ -276,6 +310,8 @@ Discard:
 - sensitive material that should not be retained
 - source material already governed elsewhere
 - obsolete operating noise
+- raw meeting recordings or transcripts
+- raw Copilot or capture-tool output that has no durable Strategic OS value
 
 Archive only when history itself has reusable value.
 
@@ -289,7 +325,7 @@ Archive only when history itself has reusable value.
 → human review
 → `03_decision_briefs/`
 → GitHub
-↔ Obsidian
+→ optional Obsidian navigation
 
 Review for:
 
@@ -302,18 +338,17 @@ Review for:
 - next action
 - human review points
 
-### Slack Conversation To Durable Knowledge
+### Interaction To Durable Knowledge
 
-Slack
-→ agent interaction
+Slack / approved agent conversation / approved Copilot summary
 → useful insight or recommendation
 → extract reusable value
 → privacy and evidence review
 → relevant template if needed
 → GitHub-backed Markdown
-↔ Obsidian
+→ optional Obsidian navigation
 
-Do not preserve the raw conversation as the knowledge object.
+Do not preserve the raw interaction as the knowledge object.
 
 ### Inbox Item To Strategic Opportunity
 
@@ -379,30 +414,56 @@ Business question
 
 Do not copy raw governed data into Strategic OS.
 
-## Quality Test
+### Teams Meeting To Organisational Actions And Strategic Signal
 
-A successful intake-to-output workflow should:
+Teams meeting
+→ approved Teams / Copilot recap where enabled
+→ decisions, actions and unresolved questions reviewed
+→ organisational tasks stay in approved task or collaboration systems
+→ reusable strategic learning abstracted where useful
+→ human review
+→ Strategic OS only if safe and reusable
 
-- reduce clutter
-- improve decision clarity
-- preserve useful learning
-- protect privacy
-- maintain source-of-truth boundaries
-- make durable knowledge easy to find through Obsidian
-- keep GitHub authoritative
-- avoid turning Slack or Obsidian into uncontrolled stores
-- create less documentation than the value it produces
+### Approved Portable Capture To Strategic Signal
 
-## Final Rule
+Approved in-person recording
+→ approved capture tool
+→ transcript / summary
+→ consent, privacy and governance review
+→ raw source remains outside Strategic OS
+→ reusable strategic signal abstracted
+→ human review
+→ Strategic OS only if appropriate
 
-Capture where convenient.
+## Low-Management Workflow Rule
 
-Think with agents.
+Prefer workflows that require minimal recurring human administration once configured.
 
-Review before retention.
+Automation should reduce repetitive capture, routing, filing, reminders and administrative coordination where it can do so safely.
 
-Store durable knowledge in GitHub-backed Markdown.
+Do not automate:
 
-Navigate and connect it in Obsidian.
+- strategic judgement
+- formal approval
+- sensitive stakeholder communication
+- governance decisions
+- uncontrolled movement of organisational content into Strategic OS
 
-Discard what does not deserve to become part of the system.
+Initial configuration may be complex when it creates a simpler, stable and lower-maintenance operating model afterwards.
+
+## Workflow Review Questions
+
+Ask periodically:
+
+- Which capture channels are genuinely useful?
+- Which outputs are repeatedly reused?
+- Which steps create unnecessary friction?
+- Which steps can be safely automated?
+- Are any tools duplicating each other?
+- Is GitHub still authoritative?
+- Can the workflow operate without optional local applications?
+- Is recurring human management proportionate to the value created?
+- Are raw organisational sources staying in approved systems?
+- Is Strategic OS still helping decisions rather than creating documentation volume?
+
+Do not expand the workflow unless repeated use exposes a genuine gap.

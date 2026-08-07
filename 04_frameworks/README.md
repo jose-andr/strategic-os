@@ -49,8 +49,8 @@ The Strategic OS finalisation plan currently expects these framework files:
 | Strategic Opportunity Pipeline | `strategic_opportunity_pipeline.md` | Defines how opportunities are captured, shaped and converted |
 | Career Evidence Architecture | `career_evidence_architecture.md` | Defines how work becomes career evidence and promotion proof |
 | Project Folder Pattern | `project_folder_pattern.md` | Defines how future project folders should be structured |
-| Privacy, Governance and Retention | `privacy_governance_retention.md` | Defines what can and cannot be stored in Strategic OS, including Obsidian workspace boundaries |
-| Cross-Tool Architecture | `cross_tool_architecture.md` | Defines the role of GitHub, Obsidian, Slack, Relevance AI, Make.com, Databricks Genie, Power BI, SharePoint, Teams, Miro and Jira |
+| Privacy, Governance and Retention | `privacy_governance_retention.md` | Defines what can and cannot be stored in Strategic OS across cloud, optional local, enterprise-AI and capture surfaces |
+| Cross-Tool Architecture | `cross_tool_architecture.md` | Defines tool roles, cloud-first access, enterprise-AI boundaries, optional local workspaces, orchestration and low-management architecture principles |
 | Strategic OS System Map | `strategic_os_system_map.md` | Shows the whole system from interaction and inputs through agents, review, storage and reuse |
 | Strategic OS QA Model | `strategic_os_qa_model.md` | Defines how the quality and performance of Strategic OS is assessed |
 
@@ -100,11 +100,23 @@ Reusable models for assessing whether Strategic OS is working, useful, safe and 
 
 ## Workspace rule
 
-Obsidian is the preferred human workspace for navigating, linking and developing Strategic OS Markdown.
+GitHub web is the primary cloud-accessible workspace for Strategic OS.
 
-GitHub remains authoritative.
+GitHub remains authoritative for Strategic OS structure and durable knowledge.
+
+Obsidian desktop and mobile are optional enhanced workspaces for navigating, linking, authoring, reflecting on and visually exploring Strategic OS Markdown when available.
+
+Strategic OS must remain fully usable without Obsidian.
 
 Framework content must remain valid, understandable Markdown outside Obsidian. Obsidian-specific metadata, links or views may enhance navigation but must not become the only way essential knowledge can be understood.
+
+## Architecture management rule
+
+Prefer systems, applications and workflows that require minimal ongoing human administration once configured.
+
+Complex initial setup is acceptable when it creates a stable, low-maintenance operating model.
+
+Avoid architecture that depends on repeated manual synchronisation, duplicate filing, constant tagging or recurring conflict resolution.
 
 ## Related templates
 
@@ -137,6 +149,7 @@ Use the review to ask:
 - Which project-specific patterns should be generalised?
 - Which frameworks support the North Star?
 - Which frameworks should be archived or simplified?
+- Which tools or workflows create recurring management overhead without enough value?
 
 ## Review checklist
 
@@ -148,5 +161,7 @@ Before saving a framework, check:
 - [ ] Is it different from an existing template?
 - [ ] Is it free of sensitive organisational source data?
 - [ ] Does it support Strategic OS principles?
-- [ ] Is it readable in GitHub and Obsidian?
+- [ ] Is it readable in GitHub and optional Obsidian workspaces?
+- [ ] Does it remain usable without Obsidian?
+- [ ] Does it minimise ongoing human administration once configured?
 - [ ] Is there a clear example or use case?

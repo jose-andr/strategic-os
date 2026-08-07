@@ -14,9 +14,11 @@ The purpose of this framework is to clarify:
 - what each tool should not be used for
 - where information should live
 - how agents should interact with tools
-- how Obsidian and GitHub work together
+- how GitHub web and optional Obsidian workspaces fit together
+- how enterprise AI and capture tools fit without becoming new sources of truth
 - how privacy, governance and source-of-truth boundaries are maintained
 - how Chief of Staff and analytics workflows can operate safely
+- how architecture can minimise recurring human administration
 
 ## Strategic OS North Star
 
@@ -36,21 +38,47 @@ Strategic OS should connect tools through clear boundaries, not blur them.
 
 The operating distinction is:
 
-> Slack is where the user interacts with agents.  
-> Obsidian is where the user navigates and develops Strategic OS knowledge.  
-> GitHub is where Strategic OS knowledge is governed and version controlled.
+> Slack is where the user primarily interacts with Strategic OS agents.  
+> GitHub web is the primary cloud-accessible Strategic OS workspace.  
+> GitHub is where Strategic OS knowledge is governed and version controlled.  
+> Obsidian desktop and mobile are optional enhanced workspaces over Strategic OS Markdown.  
+> Microsoft 365 Copilot operates inside the approved enterprise information environment where enabled.  
+> Organisational systems remain authoritative for organisational records and governed data.
 
-Official organisational systems remain authoritative for organisational records and governed data.
+Strategic OS must remain fully usable without Obsidian.
+
+PLAUD is an evaluation candidate rather than an assumed architectural component.
+
+## Low-Management Architecture Principle
+
+Prefer architecture that is complex once and simple to run.
+
+Initial installation, configuration or integration may require significant thinking when it creates a stable operating model afterwards.
+
+Prefer systems that minimise:
+
+- manual synchronisation
+- duplicate filing
+- repeated tagging
+- conflict resolution
+- manual information transfer
+- recurring configuration
+- brittle handoffs
+- routine administration required only to keep the architecture functioning
+
+Do not add a tool unless its recurring value exceeds its ongoing management burden.
 
 ## Tool Role Summary
 
 | Tool | Primary Role | Boundary |
 |---|---|---|
-| Slack | Agent interaction interface | Supports prompts, briefings, approvals and lightweight capture; not permanent knowledge storage |
-| Obsidian | Strategic workspace and knowledge interface | Supports authoring, linking, navigation and visual thinking; does not replace GitHub authority |
-| GitHub | Authoritative Strategic OS repository | Stores reusable Strategic OS knowledge, not raw organisational records |
+| Slack | Primary Strategic OS agent interaction interface | Supports prompts, briefings, approvals and lightweight capture; not permanent knowledge storage |
+| GitHub / GitHub web | Authoritative Strategic OS repository and primary cloud workspace | Stores reusable Strategic OS knowledge, not raw organisational records |
+| Obsidian desktop / mobile | Optional enhanced Markdown workspace | Improves navigation, linking and visual thinking without becoming a second source of truth |
 | Relevance AI | Agent memory and reasoning layer | Supports reasoning but does not become the source of truth |
 | Make.com | Workflow orchestration | Moves approved signals and triggers but does not own decisions |
+| Microsoft 365 Copilot | Enterprise AI layer | Works with authorised organisational knowledge and approved workflows; organisational systems retain authority |
+| PLAUD | Optional conversation-capture capability to evaluate | Must not be used for organisational content without appropriate approval, consent and governance |
 | Databricks Genie | Governed data interrogation | Answers governed data questions with caveats |
 | Power BI | Reporting source of truth | Holds approved dashboards and reporting views |
 | SharePoint / OneDrive | Organisational document storage | Stores official documents and governed files |
@@ -67,8 +95,9 @@ José
 → decision-ready response
 → human review
 → safe reusable knowledge
-→ GitHub
-↔ Obsidian
+→ GitHub-backed Markdown
+→ optional Obsidian navigation and visual thinking
+→ reuse
 
 The system should optimise for fast interaction while keeping durable knowledge controlled.
 
@@ -120,84 +149,13 @@ Avoid using Slack to store:
 - credentials
 - formal approvals that belong in official systems
 
-## Obsidian
-
-### Role
-
-Obsidian is the primary human workspace for Strategic OS knowledge.
-
-It sits over the Markdown repository and supports:
-
-- navigation
-- backlinks
-- linked-note exploration
-- authoring
-- search
-- strategic synthesis
-- service and systems thinking
-- visual canvases
-- reusable templates
-- discovery of relationships across decisions, evidence, stakeholders, patterns and lessons
-
-### Source-Of-Truth Boundary
-
-Obsidian is a workspace, not a separate source of truth.
-
-GitHub remains authoritative for Strategic OS structure and durable knowledge.
-
-Preferred pattern:
-
-- open the GitHub-backed repository directly as an Obsidian vault; or
-- use a controlled sync method that preserves the GitHub repository as authoritative.
-
-Do not maintain a second divergent copy of Strategic OS in a separate Obsidian-only vault.
-
-### Markdown Portability Rule
-
-Strategic OS content must remain usable without Obsidian.
-
-Obsidian-specific capabilities may enhance the workspace, but essential knowledge must remain readable as plain Markdown.
-
-Use Obsidian features carefully:
-
-- standard Markdown links are preferred where practical
-- wiki links may be used when they do not create portability problems
-- properties may support navigation and filtering
-- Canvas or Excalidraw may support visual thinking
-- plugin-dependent dashboards should supplement, not replace, durable Markdown content
-
-### Appropriate Use
-
-Use Obsidian for:
-
-- navigating Strategic OS
-- linking related decisions and frameworks
-- developing reusable knowledge
-- reviewing the inbox
-- tracing relationships
-- finding previous patterns
-- preparing strategic thinking before agent interaction
-- reviewing proposed agent outputs before repository retention
-- visualising systems, services or stakeholder relationships
-
-### Avoid
-
-Avoid using Obsidian to:
-
-- create an uncontrolled shadow repository
-- store raw organisational data
-- store confidential documents
-- retain customer-level information
-- replace Jira for task management
-- replace SharePoint or OneDrive for organisational records
-- replace Databricks or Power BI as governed data sources
-- rely on plugins that make essential knowledge inaccessible outside Obsidian
-
 ## GitHub
 
 ### Role
 
 GitHub is the authoritative Strategic OS knowledge repository.
+
+GitHub web is the primary cloud-accessible workspace for accessing, reviewing and maintaining Strategic OS when local applications are unavailable.
 
 It stores:
 
@@ -231,6 +189,7 @@ GitHub should not store:
 - raw Databricks or Genie outputs
 - copied Power BI data
 - raw email, Teams or Slack threads
+- raw meeting recordings or transcripts
 - full Jira issue records
 
 ### GitHub Source-Of-Truth Role
@@ -247,6 +206,84 @@ GitHub is the source of truth for:
 - safe patterns and lessons
 
 GitHub is not the source of truth for organisational records, customer records, governed dashboards, legal or HR documents, operational delivery records, formal approval records, or financial, procurement and compliance records.
+
+## Obsidian
+
+### Role
+
+Obsidian desktop and mobile are optional enhanced workspaces over Strategic OS Markdown.
+
+They may support:
+
+- navigation
+- backlinks
+- linked-note exploration
+- authoring
+- search
+- strategic synthesis
+- service and systems thinking
+- visual canvases
+- reusable templates
+- reflection
+- discovery of relationships across decisions, evidence, stakeholders, patterns and lessons
+
+### Source-Of-Truth Boundary
+
+Obsidian is a workspace, not a separate source of truth.
+
+GitHub remains authoritative for Strategic OS structure and durable knowledge.
+
+Preferred pattern:
+
+- open the GitHub-backed repository directly as an Obsidian vault where a supported local device is available; or
+- use a controlled synchronisation method that preserves the GitHub repository as authoritative.
+
+Do not maintain a second divergent copy of Strategic OS in a separate Obsidian-only vault.
+
+Strategic OS must remain fully usable without Obsidian.
+
+### Markdown Portability Rule
+
+Strategic OS content must remain usable without Obsidian.
+
+Obsidian-specific capabilities may enhance the workspace, but essential knowledge must remain readable as plain Markdown.
+
+Use Obsidian features carefully:
+
+- standard Markdown links are preferred where practical
+- wiki links may be used when they do not create portability problems
+- properties may support navigation and filtering
+- Canvas or Excalidraw may support visual thinking
+- plugin-dependent dashboards should supplement, not replace, durable Markdown content
+
+### Appropriate Use
+
+Use Obsidian for:
+
+- navigating Strategic OS
+- linking related decisions and frameworks
+- developing reusable knowledge
+- reviewing the inbox
+- tracing relationships
+- finding previous patterns
+- preparing strategic thinking before agent interaction
+- reviewing proposed agent outputs before repository retention
+- visualising systems, services or stakeholder relationships
+- mobile reading, capture and reflection when useful
+
+### Avoid
+
+Avoid using Obsidian to:
+
+- create an uncontrolled shadow repository
+- store raw organisational data
+- store confidential documents
+- retain customer-level information
+- replace Jira for task management
+- replace SharePoint or OneDrive for organisational records
+- replace Databricks or Power BI as governed data sources
+- rely on plugins that make essential knowledge inaccessible outside Obsidian
+- introduce recurring manual reconciliation with GitHub
 
 ## Relevance AI
 
@@ -294,6 +331,63 @@ It can support:
 Make.com can move signals.
 
 It should not make strategic decisions, create commitments, bypass governance or commit durable Strategic OS changes without appropriate review.
+
+## Microsoft 365 Copilot
+
+### Role
+
+Microsoft 365 Copilot may act as the enterprise AI layer for authorised organisational work where the organisation has enabled and approved the relevant capabilities.
+
+Potential uses include:
+
+- summarising Teams meetings
+- extracting actions, decisions and unresolved questions
+- querying authorised organisational knowledge
+- preparing meeting and stakeholder briefings
+- supporting email, calendar and document administration
+- supporting approved workflow automation
+- reducing repetitive administrative work
+
+### Boundary
+
+Microsoft 365 Copilot operates inside the organisational information environment.
+
+It does not change source-of-truth ownership.
+
+Organisational records, documents, communications and governed data remain in their approved systems.
+
+Strategic OS should receive only reviewed, privacy-safe abstraction where reusable strategic value exists.
+
+Do not copy raw meeting transcripts, private communications or sensitive organisational content into Strategic OS.
+
+### Evaluation Status
+
+Treat specific Copilot capabilities and automations as discovery items until licensing, tenant configuration, permissions and organisational governance are confirmed.
+
+## PLAUD
+
+### Role
+
+PLAUD may be evaluated as a portable conversation-capture layer for situations where approved enterprise meeting capture is unavailable or impractical.
+
+Potential value may include:
+
+- in-person stakeholder conversations
+- workshops
+- interviews
+- site or frontline conversations
+- personal verbal reflection
+- structured extraction of actions, decisions and themes
+
+### Boundary
+
+PLAUD is not a confirmed Strategic OS component.
+
+Do not use it for organisational conversations unless organisational approval, participant consent, privacy, information-security and records requirements are satisfied.
+
+Raw recordings and transcripts should not be stored in Strategic OS.
+
+Where approved capture produces reusable value, retain only the reviewed, privacy-safe abstraction appropriate for Strategic OS.
 
 ## Databricks Genie
 
@@ -350,41 +444,37 @@ Strategic OS should not copy private threads or raw communications into the repo
 
 Agents may prepare messages or planning notes but must not make commitments or send communications without the appropriate human approval and organisational controls.
 
+Microsoft 365 Copilot may support these environments where organisationally enabled, but source ownership remains unchanged.
+
 ## Miro
 
-Miro supports collaborative visual work such as:
+Miro supports visual collaboration, workshops, journey mapping, system mapping and shared exploration.
 
-- journey mapping
-- service blueprinting
-- ecosystem mapping
-- workshops
-- system diagrams
-- stakeholder mapping
-
-Strategic OS may retain simplified, privacy-safe reusable patterns or summaries, not uncontrolled board exports.
+Strategic OS may retain reusable abstractions or patterns from Miro work, but official or sensitive workshop content should remain in the approved organisational environment.
 
 ## Jira
 
-Jira tracks delivery activity.
+Jira is the delivery tracking system where organisationally used.
 
-Strategic OS stores strategic knowledge, decision logic and reusable learning.
+Use Jira for:
 
-Use links and summaries rather than duplicating issue records.
+- delivery work
+- tasks
+- owners
+- status
+- dependencies
+- sprint activity
+- blockers
 
-## Human-In-The-Loop Writeback Rule
+Strategic OS should not duplicate Jira as a task system.
 
-No conversation, agent memory, Obsidian note or automated workflow becomes durable Strategic OS knowledge solely because it exists.
+Retain only durable decision context, reusable lessons or strategic patterns where useful.
 
-Before durable writeback:
+## Cross-Tool Knowledge Rule
 
-1. identify the reusable value
-2. remove or abstract sensitive source material
-3. distinguish evidence, assumption and interpretation
-4. identify the correct repository location
-5. review the proposed content
-6. commit or approve the GitHub-backed Markdown change
+Temporary interaction does not equal durable knowledge.
 
-Agents may draft changes.
+Slack messages, Copilot outputs, PLAUD transcripts, Obsidian scratch notes, agent memory and workflow payloads are temporary working context unless intentionally promoted.
 
 Humans decide whether they become durable knowledge.
 
@@ -401,6 +491,7 @@ Safe inputs may include:
 - project context
 - reviewed inbox items
 - non-sensitive operating signals
+- approved Copilot-derived summaries where appropriate
 
 Outputs may include:
 
@@ -412,7 +503,7 @@ Outputs may include:
 - decision-required list
 - focus protection recommendation
 
-The Chief of Staff Agent must not send messages, change calendar events, accept meetings, contact stakeholders, make commitments, escalate issues externally, store sensitive raw source material or treat temporary operating notes as durable knowledge.
+The Chief of Staff Agent must not send messages, change calendar events, accept meetings, contact stakeholders, make commitments, escalate issues externally, store sensitive raw source material or treat temporary operating notes as durable knowledge without the required approval.
 
 ## Analytics Workflows
 
@@ -420,56 +511,67 @@ Domain Analytical Agents may use governed analytical tools to support decision-m
 
 Inputs may include:
 
-- governed metric definitions
-- approved dashboard views
-- source rules
-- metric caveats
-- data quality notes
-- user-approved analytical questions
-- safe summaries of analytical findings
+- business question
+- governed metric
+- source rule
+- grain
+- filters
+- numerator
+- denominator
+- caveat
+- period
+- safe contextual evidence
 
 Outputs may include:
 
-- analytical summary
-- metric caveat note
-- source rules
-- Genie context
-- agent review prompt
-- agent consistency check
+- caveated interpretation
+- decision-support summary
+- metric risk
 - data quality note
-- decision-support evidence summary
+- analytical question
+- slide-safe wording
 
-Analytical agents must not treat exploratory output as official reporting, copy raw datasets into GitHub or Obsidian, store customer-level data, omit caveats or bypass human review.
+Raw governed data remains in the official analytical system.
 
-## Information Movement Rules
+## Tool And Architecture Evaluation Criteria
 
-Before moving information between tools:
+Evaluate new systems, applications and integrations against:
 
-1. **Identify the source** — Where did the information come from?
-2. **Identify the destination** — Where is it going?
-3. **Identify the purpose** — Why does it need to move?
-4. **Identify sensitivity** — Is it public, personal, internal-safe, sensitive or restricted?
-5. **Convert if needed** — Can it be abstracted, summarised or generalised?
-6. **Review before durable storage** — Does a human need to approve it?
-7. **Store or discard** — Should it be retained, kept temporarily or discarded?
+- strategic decision value
+- stakeholder-alignment value
+- evidence and source-of-truth clarity
+- privacy, security and governance fit
+- organisational approval
+- device and browser accessibility
+- interoperability
+- portability
+- automation potential
+- duplication risk
+- vendor dependency
+- human-review requirements
+- ongoing human management burden
 
-## Cross-Tool Storage Rules
+### Management-Overhead Decision Rule
 
-| Source | May Become Durable Strategic OS Knowledge | Do Not Retain |
-|---|---|---|
-| Slack | Reviewed safe summaries, approved decisions, reusable prompts | Raw threads, sensitive conversation history |
-| Obsidian | Reviewed Markdown intended for repository retention | Uncontrolled local-only sensitive material or divergent copies |
-| Relevance AI | Reviewed safe summaries, prompts and agent rules | Unreviewed memory or sensitive source material |
-| Make.com | Approved workflow rules and safe metadata patterns | Sensitive payloads or uncontrolled execution history |
-| Databricks / Genie | Definitions, caveats, source rules, interpretation | Raw data, customer records, sensitive query results |
-| Power BI | Metric interpretation, caveats, safe references | Copied dashboards, raw exports |
-| SharePoint / OneDrive | Safe summaries, patterns, references | Confidential or official documents |
-| Teams / Email / Calendar | Abstracted actions, decision context, reusable patterns | Raw private communications |
-| Miro | Simplified reusable patterns and diagrams | Sensitive board exports |
-| Jira | Delivery lessons and decision implications | Full backlog or issue records |
+> Prefer complex-once, simple-to-run architecture over simple-to-start architecture that requires permanent manual maintenance.
 
-## Final Rule
+A tool should not be added merely because it is capable or interesting.
 
-The Strategic OS architecture should remain simple:
+Prefer the smallest architecture that delivers the required strategic value with the least recurring human administration.
 
-**Interact in Slack. Think and navigate in Obsidian. Govern durable knowledge in GitHub. Keep official records in official systems. Keep humans accountable for decisions and writeback.**
+## Architecture Review Questions
+
+Review the architecture periodically and ask:
+
+- Is each tool still doing a distinct job?
+- Is GitHub still authoritative?
+- Is Strategic OS fully usable without optional local applications?
+- Are organisational systems still treated as systems of record?
+- Are AI and capture tools operating inside appropriate governance boundaries?
+- Are raw organisational records staying out of Strategic OS?
+- Are agents supporting rather than replacing human judgement?
+- Are workflows creating useful leverage?
+- Is recurring management overhead proportionate to value?
+- Can a tool, sync layer or workflow be removed without reducing strategic value?
+
+Do not expand the architecture unless repeated real use exposes a genuine gap.

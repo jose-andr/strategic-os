@@ -19,7 +19,8 @@ Strategic OS turns raw signals into reusable strategic knowledge.
 The core flow is:
 
 Inputs
-→ interaction or capture
+→ approved organisational or personal capture surface
+→ Slack / approved agent interaction
 → `00_inbox/` when unstructured
 → triage
 → agent support
@@ -27,9 +28,11 @@ Inputs
 → human review
 → durable Markdown
 → GitHub
-↔ Obsidian
+→ optional Obsidian desktop / mobile enhancement
 → reuse
 → better decisions, stronger alignment and more strategic opportunities
+
+Organisational AI and capture tools may support work before abstraction, but organisational source content remains in approved organisational systems.
 
 ## Interaction Layer
 
@@ -46,24 +49,36 @@ It may be used to:
 
 Slack does not own durable Strategic OS knowledge.
 
+Microsoft 365 Copilot may provide an enterprise AI interaction layer for authorised organisational work where enabled and approved.
+
 ## Workspace Layer
 
-Obsidian is the primary workspace for navigating and developing Strategic OS knowledge.
+GitHub web is the primary cloud-accessible Strategic OS workspace.
 
 It supports:
 
-- authoring
-- search
+- browser-based access
+- Markdown authoring and review
+- repository navigation
+- controlled change
+- version history
+- access without dependence on locally installed applications
+
+Obsidian desktop and mobile provide an optional enhanced workspace when available.
+
+Obsidian may support:
+
 - backlinks
 - related-note discovery
 - graph navigation
-- templates
 - Canvas and visual thinking
-- review of decisions, evidence, assumptions, stakeholders, patterns and lessons
+- reflection
+- lightweight Markdown authoring
+- mobile navigation and capture
 
-Obsidian works over the Strategic OS Markdown repository.
+Strategic OS must remain fully usable without Obsidian.
 
-It must not become a separate divergent source of truth.
+Obsidian must not become a separate divergent source of truth.
 
 ## Repository Layer
 
@@ -76,25 +91,30 @@ GitHub provides:
 - version history
 - controlled change
 - portability
-- auditability
-- repository structure
-- a common source for human and agent use
+- recoverability
+- cloud accessibility
+- durable source-of-truth ownership
 
 ## Whole-System Map
 
 Organisational systems and personal inputs
-→ Slack / approved interaction surface
+→ approved capture and enterprise-AI surfaces where appropriate
+→ Slack / approved Strategic OS interaction surface
 → Strategic OS agents
 → `00_inbox/` when capture is needed
 → triage and synthesis
 → appropriate template or output
 → human review
 → GitHub-backed Markdown
-↔ Obsidian workspace
+→ optional Obsidian desktop / mobile navigation and visual thinking
 → indexing and linking
 → reuse in future decisions
 
 External governed sources remain outside Strategic OS.
+
+Microsoft 365 Copilot may support authorised organisational knowledge retrieval, Teams meeting synthesis and approved automation without changing source-of-truth ownership.
+
+PLAUD may be evaluated for approved portable conversation capture, but raw recordings or transcripts do not belong in Strategic OS.
 
 Strategic OS stores safe interpretation and reusable logic rather than copied source records.
 
@@ -116,6 +136,8 @@ Inputs may include:
 - lessons
 - external research
 - thought-leadership ideas
+- approved Copilot summaries
+- privacy-safe abstractions from approved capture tools
 
 Inputs must be handled according to privacy and source-of-truth rules.
 
@@ -123,7 +145,7 @@ Inputs must be handled according to privacy and source-of-truth rules.
 
 Use `00_inbox/` when an input is useful but not yet classified.
 
-Not every Slack message or Obsidian scratch note belongs in the inbox.
+Not every Slack message, GitHub working edit, Obsidian scratch note, Copilot output or approved capture transcript belongs in the inbox.
 
 Capture only material with plausible decision, learning, opportunity, project, stakeholder, career or reusable knowledge value.
 
@@ -139,6 +161,8 @@ Triage asks:
 - Is the material safe to retain?
 - Where should the durable output live?
 - Can the original input be discarded after abstraction?
+- Can repetitive handling be automated safely?
+- Will the proposed workflow create recurring management overhead?
 
 Typical pathways include:
 
@@ -155,30 +179,29 @@ Typical pathways include:
 
 ## Agent Layer
 
-Strategic OS agents structure, challenge, synthesise and coordinate work.
+Strategic OS agents support reasoning, synthesis, challenge, interpretation and coordination.
 
-| Agent | Primary Role | Main Output |
-|---|---|---|
-| Sensemaking Agent | Turns ambiguity into decision-ready advice | Decision Brief |
-| Stakeholder Journey Agent | Supports stakeholder alignment and influence | Stakeholder Alignment Assessment |
-| Shipping Coach | Helps move work from refinement to delivery | Shipping Recommendation |
-| Career Architect | Turns work into career evidence and opportunity positioning | Career Guidance |
-| Chief of Staff Agent | Coordinates daily priorities, follow-ups and operating rhythm | Daily Briefing |
-| Domain Analytical Agents | Support source-aware analytical interpretation | Caveated analytical outputs |
+Priority agents include:
+
+- Sensemaking Agent
+- Stakeholder Journey Agent
+- Shipping Coach
+- Career Architect
+- Chief of Staff Agent
+- Domain Analytical Agents
 
 ### Agent Boundaries
 
 Agents may:
 
-- structure thinking
-- synthesise evidence
-- identify patterns
-- recommend next steps
-- challenge weak framing
-- surface risks
-- prepare drafts
-- suggest storage locations
-- support review cadence
+- synthesise
+- recommend
+- structure
+- challenge
+- identify assumptions
+- identify caveats
+- prepare draft outputs
+- support approved low-risk coordination
 
 Agents must not:
 
@@ -189,7 +212,7 @@ Agents must not:
 - replace governance
 - treat assumptions as facts
 - copy raw organisational source data into Strategic OS
-- silently convert Slack or Obsidian content into durable repository knowledge
+- silently convert Slack, Copilot, PLAUD, Obsidian or other temporary interaction content into durable repository knowledge
 
 ## Human Review Layer
 
@@ -247,7 +270,9 @@ Durable outputs are stored by purpose.
 
 ## Knowledge Navigation Layer
 
-Obsidian provides the primary navigation experience over durable Markdown.
+GitHub web provides the primary cloud-accessible navigation experience.
+
+Obsidian provides optional enhanced navigation over durable Markdown when available.
 
 Useful relationships may include:
 
@@ -266,17 +291,20 @@ Links should improve retrieval and reasoning without creating unnecessary metada
 
 ## Tool Layer
 
-| Tool | Role |
+| Tool | System Role |
 |---|---|
-| Slack | Agent interaction and lightweight capture |
-| Obsidian | Strategic workspace, linking and navigation |
-| GitHub | Authoritative Strategic OS knowledge repository |
-| Relevance AI | Agent memory and reasoning layer |
-| Make.com | Workflow orchestration |
+| Slack | Primary Strategic OS agent interaction |
+| GitHub web | Primary cloud-accessible Strategic OS workspace |
+| GitHub repository | Authoritative durable Strategic OS source of truth |
+| Obsidian desktop / mobile | Optional enhanced navigation, linking and visual thinking |
+| Microsoft 365 Copilot | Approved enterprise AI support for organisational knowledge, meetings and automation |
+| PLAUD | Optional capture capability to evaluate subject to approval |
+| Relevance AI | Agent memory and reasoning where appropriate |
+| Make.com | Workflow orchestration where appropriate |
 | Databricks Genie | Governed data interrogation |
-| Power BI | Reporting source of truth |
+| Power BI | Governed reporting |
 | SharePoint / OneDrive | Organisational document storage |
-| Teams / Email / Calendar | Operational coordination |
+| Teams / Email / Calendar | Operational communication and coordination |
 | Miro | Visual collaboration and system mapping |
 | Jira | Delivery tracking |
 
@@ -311,7 +339,7 @@ Input
 → human review
 → `03_decision_briefs/`
 → GitHub
-↔ Obsidian
+→ optional Obsidian navigation
 → future decision support
 
 ### Flow 2: Input To Strategic Opportunity
@@ -323,7 +351,7 @@ Input
 → human review
 → `02_strategic_opportunities/`
 → GitHub
-↔ Obsidian
+→ optional Obsidian navigation
 → revisit when trigger occurs
 
 ### Flow 3: Work To Lesson
@@ -360,18 +388,39 @@ Business question
 
 Raw data remains in the governed source.
 
-### Flow 6: Agent Conversation To Durable Knowledge
+### Flow 6: Interaction To Durable Knowledge
 
-Slack conversation
-→ agent recommendation
+Slack conversation, approved Copilot output, meeting summary or other temporary working context
 → identify reusable value
 → remove sensitive or temporary context
+→ distinguish evidence from interpretation
 → human review
 → repository-ready Markdown
 → GitHub
-↔ Obsidian
+→ optional Obsidian navigation
 
-The raw conversation is not the durable knowledge object.
+The raw interaction is not the durable knowledge object.
+
+### Flow 7: Enterprise Meeting To Strategic Signal
+
+Teams meeting
+→ approved Teams / Microsoft 365 Copilot recap where enabled
+→ actions, decisions, unresolved questions and evidence reviewed
+→ organisational actions remain in approved systems
+→ reusable strategic signal abstracted where appropriate
+→ human review
+→ Strategic OS durable knowledge only if safe and reusable
+
+### Flow 8: Approved Portable Capture To Strategic Signal
+
+Approved in-person capture
+→ PLAUD or another approved tool where permitted
+→ transcription / summary
+→ privacy and consent review
+→ raw source remains outside Strategic OS
+→ reusable strategic signal abstracted
+→ human review
+→ durable Strategic OS knowledge only if appropriate
 
 ## Review Rhythm
 
@@ -390,7 +439,9 @@ Primary support:
 
 - Chief of Staff Agent
 - Slack
-- Obsidian workspace as needed
+- GitHub web as needed
+- Microsoft 365 Copilot for approved enterprise context where available
+- optional Obsidian mobile or desktop as useful
 
 ### Weekly
 
@@ -402,6 +453,7 @@ Focus on:
 - stakeholder alignment
 - open decisions
 - project movement
+- automation opportunities that remove repetitive administration
 
 ### Monthly
 
@@ -413,6 +465,7 @@ Focus on:
 - frameworks and templates
 - active project patterns
 - knowledge links that are genuinely useful
+- architecture management overhead
 
 ### Quarterly
 
@@ -425,23 +478,22 @@ Focus on:
 - privacy and governance compliance
 - North Star alignment
 - tool architecture effectiveness
-- whether Obsidian is improving retrieval and decision quality rather than creating maintenance overhead
+- whether optional tools are improving decision quality rather than creating maintenance overhead
+- whether any tool, sync layer or workflow can be removed
 
-## System Health Questions
+## System Design Review Criteria
 
 Ask:
 
-- Is Strategic OS helping make better strategic decisions?
-- Is Slack making agent interaction easier?
-- Is Obsidian making relevant knowledge easier to find and connect?
-- Is GitHub still clearly authoritative?
-- Are agents supporting rather than replacing judgement?
-- Is reusable knowledge being captured without raw organisational data?
-- Are official systems still treated as systems of record?
-- Is the system becoming simpler through use rather than more complex through configuration?
+- Does the system improve decision clarity?
+- Does it improve stakeholder alignment?
+- Is evidence used with caveats?
+- Are source-of-truth boundaries clear?
+- Is human review preserved?
+- Does the architecture minimise ongoing human administration once configured?
+- Can Strategic OS still operate if optional local applications are unavailable?
+- Are enterprise AI and capture tools kept inside appropriate organisational governance boundaries?
+- Is durable knowledge portable and readable as Markdown?
+- Has any tool become redundant or duplicative?
 
-## Final Rule
-
-Strategic OS should behave as one connected operating system:
-
-**Interact through agents. Navigate and think in Obsidian. Govern durable knowledge in GitHub. Keep organisational truth in organisational systems.**
+Do not expand the system unless repeated real use exposes a genuine gap.

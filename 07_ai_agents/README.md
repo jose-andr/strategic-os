@@ -24,15 +24,21 @@ José
 → human review
 → approved durable knowledge
 → GitHub-backed Markdown
-↔ Obsidian
+→ optional Obsidian desktop / mobile navigation and visual thinking
 
-Slack is the preferred lightweight interface with agents where integration is available.
+Slack is the primary conversational interface with Strategic OS agents where integration is available.
 
-Obsidian is the primary workspace for navigating and developing Strategic OS knowledge.
+GitHub web is the primary cloud-accessible Strategic OS workspace.
 
 GitHub remains the authoritative Strategic OS repository.
 
-Agents may draft repository updates, but they must not silently turn conversations or temporary workspace content into durable knowledge.
+Obsidian desktop and mobile are optional enhanced workspaces for navigation, linking, reflection and visual thinking when available. Strategic OS must remain fully usable without them.
+
+Microsoft 365 Copilot is a separate enterprise AI layer where organisationally enabled and approved. It may support authorised organisational knowledge retrieval, Teams meeting synthesis and approved administrative automation without becoming the Strategic OS source of truth.
+
+PLAUD may be evaluated as a portable capture capability, but is not a confirmed Strategic OS component and must not be used for organisational content without appropriate organisational approval and governance.
+
+Agents may draft repository updates, but they must not silently turn conversations, meeting transcripts, Copilot outputs, capture-tool outputs or temporary workspace content into durable knowledge.
 
 ## What Belongs Here
 
@@ -59,34 +65,41 @@ Do not store:
 - confidential extracts from systems of record
 - project-specific artefacts that belong in `08_projects/`
 - analytics domain rules that belong in `11_analytics/`
-- temporary chat notes
-- Slack conversation history
+- temporary interaction or workspace notes with no durable value
+- raw Slack conversation history
+- raw Microsoft 365 Copilot conversations or organisational source content
+- raw meeting recordings or transcripts
+- raw PLAUD or other external capture-tool output
 - Obsidian scratch notes with no durable value
 - next-step reminders that only make sense in one conversation
 
 ## Priority Agents
 
-Strategic OS currently uses five general priority agents plus domain analytical agents.
+Strategic OS currently prioritises:
 
-| Agent | Folder | Primary role | Default autonomy |
-|---|---|---|---|
-| Sensemaking Agent | `sensemaking_agent/` | Turns ambiguity into decision-ready advice | Level 1 — Advisory |
-| Stakeholder Journey Agent | `stakeholder_agent/` | Maps alignment, resistance and engagement sequencing | Level 1 — Advisory |
-| Shipping Coach | `shipping_coach/` | Helps move useful work from thinking into visible progress | Level 2 — Coaching / Challenge |
-| Career Architect | `career_architect/` | Converts work and feedback into career evidence and positioning | Level 1 — Advisory |
-| Chief of Staff Agent | `chief_of_staff/` | Coordinates daily activity, priorities, follow-ups and decision-required items | Level 3 — Operational Coordination |
-| Domain Analytical Agents | `11_analytics/[domain]/` | Support governed analytical interpretation | Level 4 — Domain Analytical Support |
+### Sensemaking Agent
 
-## Shared Framework Files
+Turns ambiguity, evidence and complexity into decision-ready advice.
 
-| File | Purpose |
-|---|---|
-| `agent_operating_model.md` | Defines agent categories, autonomy levels, human review requirements and escalation rules |
-| `agent_review_checklist.md` | Provides a shared checklist for reviewing agent outputs before use or storage |
-| `agent_prompt_pattern.md` | Defines the standard prompt structure for running Strategic OS agents |
-| `agent_output_map.md` | Maps agents to outputs, templates, storage locations and review points |
-| `agent_file_naming.md` | Defines naming conventions for agent files and outputs |
-| `agent_output_index_pattern.md` | Defines how agent outputs should be indexed where useful |
+### Stakeholder Journey Agent
+
+Supports alignment, influence, stakeholder sequencing and communication.
+
+### Shipping Coach
+
+Challenges unnecessary refinement and helps move useful work forward.
+
+### Career Architect
+
+Supports strategic opportunity creation, career evidence and promotion readiness.
+
+### Chief of Staff Agent
+
+Coordinates daily operating rhythm, priorities, follow-ups and decision attention.
+
+### Domain Analytical Agents
+
+Support governed analytical interpretation using source-aware definitions, caveats and human review.
 
 ## Agent Folder Pattern
 
@@ -140,32 +153,32 @@ Human review is required before an agent output is:
 
 Human review should check:
 
-- Is the evidence strong enough?
-- Are assumptions visible?
-- Are interpretations separated from facts?
-- Are risks and trade-offs clear?
-- Is the recommendation proportionate?
-- Is the next action realistic?
-- Is the storage location appropriate?
-- Is the content safe to retain?
-- Does the output support the Strategic OS North Star?
+- evidence
+- assumptions
+- caveats
+- privacy
+- source alignment
+- recommendation quality
+- decision relevance
+- stakeholder sensitivity
+- whether the output should be retained at all
 
-## Conversation-To-Knowledge Rule
+## Interaction-To-Knowledge Rule
 
-Agent conversations are temporary working context unless intentionally promoted.
+Agent conversations, Copilot interactions, meeting summaries, capture-tool outputs and workspace notes are temporary working context unless intentionally promoted.
 
 When an interaction produces reusable value:
 
 1. identify the reusable knowledge
-2. remove conversation noise
+2. remove interaction noise
 3. remove or abstract sensitive source material
 4. distinguish evidence, assumption, interpretation, recommendation and action
 5. use the relevant Strategic OS template where helpful
 6. review the proposed durable content
 7. save it to the appropriate GitHub-backed Markdown file
-8. use Obsidian to navigate and connect it
+8. optionally use Obsidian desktop or mobile to navigate and connect it when available
 
-Do not store raw conversation history merely for completeness.
+Do not store raw interaction history merely for completeness.
 
 ## Domain Analytical Agents
 
@@ -187,17 +200,58 @@ Relevant local files may include:
 - `metric_caveats.md`
 - `source_rules.md`
 
-The Service Account analytics area remains the first mature pilot pattern:
+Domain Analytical Agents should distinguish:
 
-`11_analytics/service-account/`
+- business question
+- metric definition
+- numerator
+- denominator
+- source
+- grain
+- filters
+- period
+- result
+- caveat
+- interpretation
+- recommendation
+- slide-safe wording
 
-Service Account-specific rules should remain inside that domain folder.
+They must state plainly when a technically calculated result is unsafe for decision-making or presentation.
+
+## Enterprise AI Boundary
+
+Microsoft 365 Copilot is not a Strategic OS agent.
+
+Where organisationally approved, it may support:
+
+- Teams meeting recap
+- organisational knowledge retrieval
+- document drafting
+- email and calendar support
+- approved admin automation
+- enterprise-context synthesis
+
+Its outputs remain subject to organisational source-of-truth and governance rules.
+
+Strategic OS agents may reason from reviewed, safe abstractions of those outputs where useful.
+
+Do not treat access to enterprise AI as permission to transfer raw organisational content into Strategic OS.
+
+## Capture Tool Boundary
+
+PLAUD is not a Strategic OS agent.
+
+It may be evaluated as a capture surface for approved in-person conversations or personal reflection.
+
+Do not use it for organisational content until organisational approval, consent, privacy, security and records obligations are understood.
+
+Raw recordings and transcripts do not belong in Strategic OS.
 
 ## Output Storage Logic
 
 Agent outputs should be stored according to purpose:
 
-- Raw or unprocessed material goes in `00_inbox/`
+- Raw or unprocessed safe material goes in `00_inbox/`
 - Career evidence goes in `01_career/`
 - Strategic opportunities go in `02_strategic_opportunities/`
 - Decision briefs go in `03_decision_briefs/`
@@ -212,7 +266,26 @@ Agent outputs should be stored according to purpose:
 
 GitHub owns durable storage.
 
-Obsidian provides the working interface to that storage.
+GitHub web provides the primary cloud-accessible workspace.
+
+Obsidian provides an optional enhanced interface to that storage when available.
+
+## Agent Architecture Management Principle
+
+Agent architecture should minimise recurring human administration.
+
+Prefer:
+
+- stable routing rules
+- reusable prompts
+- automated low-risk coordination
+- controlled handoffs
+- clear source ownership
+- human review at meaningful decision points
+
+Avoid architectures that require constant manual synchronisation, duplicate filing, repeated tagging or routine reconciliation between tools.
+
+Complex initial configuration is acceptable when it creates a simpler and more reliable operating model afterwards.
 
 ## Quality Bar
 
@@ -230,21 +303,22 @@ A good agent output should:
 - respect privacy and governance boundaries
 - create reusable knowledge where appropriate
 - remain understandable outside any single interface or tool
+- avoid creating unnecessary recurring management overhead
 
-## Review Rhythm
+## Maintenance
 
-Agent performance should be reviewed quarterly as part of the Strategic OS QA assessment.
+Do not add a new agent merely because a new tool or use case appears.
 
-Review questions:
+Prefer extending an existing agent when the mission and reasoning pattern already fit.
 
-- Which agents were used?
-- Which outputs helped decisions?
-- Which outputs were ignored or reworked?
-- Where did agents overreach?
-- Where was human review unclear?
-- Which templates need improvement?
-- Which agent specs need refinement?
-- Did analytical agents document source rules and caveats?
-- Is Slack improving the usability of agent interaction?
-- Is Obsidian improving retrieval and reuse without creating unnecessary maintenance?
-- Did agent outputs support the Strategic OS North Star?
+Create a new agent only when repeated use exposes a distinct, durable role that improves decision clarity, stakeholder alignment, evidence use or strategic capability.
+
+Review agents periodically for:
+
+- actual use
+- overlap
+- output quality
+- privacy
+- maintenance burden
+- decision impact
+- whether an agent can be simplified or retired

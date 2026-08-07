@@ -44,42 +44,44 @@ Strategic OS should not duplicate confidential systems of record.
 
 GitHub is the authoritative store for durable Strategic OS knowledge.
 
-Obsidian is a workspace over that Markdown knowledge.
+GitHub web is the primary cloud-accessible Strategic OS workspace.
 
-Slack and agent runtimes are interaction and reasoning surfaces.
+Obsidian desktop and mobile are optional enhanced workspaces over that Markdown knowledge when available.
 
-This means privacy rules apply across all Strategic OS surfaces, not only GitHub.
+Slack and Strategic OS agent runtimes are interaction and reasoning surfaces.
 
-Do not assume that material is safe merely because it is stored locally in Obsidian, temporarily in Slack, or inside an agent memory layer.
+Microsoft 365 Copilot may operate as an approved enterprise AI layer inside the organisational environment.
+
+PLAUD or other external capture tools are not assumed approved and must be evaluated against organisational consent, privacy, security, information-management and records requirements before organisational use.
+
+Privacy rules apply across all Strategic OS surfaces and any connected workflow.
+
+Do not assume that material is safe merely because it is stored locally, temporarily in Slack, inside an agent memory layer, or processed by an external AI or capture service.
 
 ## What Strategic OS Can Store
 
 Strategic OS may store:
 
-- privacy-safe summaries
 - reusable frameworks
-- templates
 - decision logic
+- safe summaries
+- de-identified stakeholder patterns
 - lessons learned
-- non-sensitive career evidence
-- abstracted stakeholder patterns
-- project reflections
-- safe opportunity notes
-- prompt patterns
+- career evidence that is safe to retain
+- metric definitions
+- caveats
+- source hierarchy rules
+- interpretation guidance
+- safe project context
+- reusable prompts
 - agent specifications
-- autonomy and escalation rules
-- governance caveats
-- analytics interpretation guidance
-- metric caveats
-- source rules
-- personal operating principles
-- public or non-sensitive reference material
-- links or references to official systems where safe
-- Obsidian metadata or links that improve navigation without exposing sensitive material
+- templates
+- privacy-safe thought leadership
+- approved strategic abstractions from organisational work
 
 ## What Strategic OS Must Not Store
 
-Do not store:
+Strategic OS must not store:
 
 - customer personal information
 - customer-level records
@@ -96,17 +98,25 @@ Do not store:
 - raw email, Teams or Slack threads
 - governed dashboard exports
 - raw Databricks or Genie outputs containing sensitive information
+- raw meeting recordings
+- raw meeting transcripts
+- raw Copilot conversations containing organisational source content
+- raw PLAUD or external capture-tool output
 - material whose retention would create a shadow system of record
 
-These restrictions apply to GitHub, Obsidian, agent memory and automated workflows.
+These restrictions apply to GitHub, optional Obsidian workspaces, agent memory, Slack interactions and automated Strategic OS workflows.
 
-## Obsidian-Specific Rules
+Organisational AI and capture tools must additionally follow the organisation's own governance, approval and retention requirements.
+
+## Optional Obsidian Workspace Rules
 
 Obsidian does not create a privacy exception.
 
-The vault should contain only material appropriate for Strategic OS retention.
+Obsidian desktop and mobile are optional interfaces over Strategic OS knowledge, not separate stores for material that would be inappropriate in GitHub.
 
-Do not use local-only Obsidian notes as a hidden store for material that would be inappropriate in the repository.
+Strategic OS must remain fully usable without Obsidian.
+
+Do not use local-only or mobile-only notes as a hidden store for organisational source material.
 
 If temporary scratch material contains sensitive information:
 
@@ -126,8 +136,47 @@ Before enabling a plugin that reads, indexes, syncs or sends vault content exter
 - whether credentials are required
 - whether data is retained externally
 - whether the plugin is necessary
+- whether the plugin creates recurring administration or sync risk
 
 Prefer the smallest plugin set required for useful operation.
+
+## Enterprise AI And Capture Rules
+
+### Microsoft 365 Copilot
+
+Where organisationally approved and enabled, Microsoft 365 Copilot may support:
+
+- Teams meeting summaries
+- organisational knowledge retrieval
+- email, calendar and document assistance
+- approved administrative automation
+- action and decision extraction
+
+Copilot output does not automatically become Strategic OS knowledge.
+
+Organisational source content remains governed by its organisational system and applicable policies.
+
+Only reviewed, privacy-safe abstraction with reusable strategic value should be retained in Strategic OS.
+
+### PLAUD And External Capture Tools
+
+PLAUD and similar external capture services must be treated as unapproved for organisational use until the organisation's requirements are confirmed.
+
+Before use, validate:
+
+- organisational approval
+- participant notification and consent
+- privacy requirements
+- information classification
+- security requirements
+- data-processing location where relevant
+- retention and deletion controls
+- records-management obligations
+- whether organisational content may be processed by the service
+
+Do not store raw recordings or confidential transcripts in Strategic OS.
+
+If approved capture produces reusable strategic learning, retain only the reviewed, privacy-safe abstraction.
 
 ## Slack-Specific Rules
 
@@ -145,45 +194,50 @@ When a conversation contains reusable value:
 
 ## Agent Memory Rules
 
-Agent memory must not become a shadow archive.
+Agent memory should support reasoning, not become a shadow information store.
 
-Retain only information that is:
+Do not assume agent memory is appropriate for:
 
-- necessary
-- proportionate
-- safe
-- useful
-- intentionally approved for persistence
+- raw organisational documents
+- confidential stakeholder material
+- personal customer information
+- sensitive operational extracts
+- credentials
+- unrestricted conversation history
 
-Do not retain sensitive raw context merely to improve convenience.
+Where memory is useful, prefer:
 
-## Privacy-Safe Abstraction
+- reusable preferences
+- safe definitions
+- approved frameworks
+- decision rules
+- privacy-safe patterns
+- source hierarchy guidance
+- caveats
 
-Use abstraction when the learning is valuable but the source material is sensitive.
+Durable Strategic OS knowledge should still be stored in GitHub-backed Markdown when appropriate.
 
-### Unsafe
+## Workflow And Automation Rules
 
-`A named stakeholder said a specific team repeatedly failed vulnerable customers.`
+Automation must not weaken privacy or governance controls.
 
-### Safer
+Automated workflows may:
 
-`There may be a cross-team handover risk where vulnerability indicators require continuity and clear ownership.`
+- move approved safe signals
+- trigger reminders
+- route low-risk tasks
+- prompt human review
+- create draft summaries
+- prepare structured outputs
 
-### Unsafe
+Automated workflows must not:
 
-`Customer case 12345 waited 18 days and called three times.`
-
-### Safer
-
-`A repeated-contact pattern may indicate that customers are not receiving clear status visibility after lodging a request.`
-
-### Unsafe
-
-`The internal dashboard shows Team X has the worst resolution rate.`
-
-### Safer
-
-`Resolution performance varies across teams and should be interpreted with agreed metric definitions, caveats and governance context.`
+- copy sensitive source material into Strategic OS
+- bypass human approval
+- send sensitive communications without approval
+- create formal commitments
+- treat AI interpretation as official organisational truth
+- silently promote temporary content into durable knowledge
 
 ## Governance Boundaries
 
@@ -257,7 +311,11 @@ Use Strategic OS when the question requires:
 - a caveat
 - a strategic synthesis
 
-Use Obsidian to navigate Strategic OS knowledge, not to override source ownership.
+Use GitHub web as the primary cloud-accessible Strategic OS workspace.
+
+Use optional Obsidian desktop or mobile to enhance navigation and thinking, not to override source ownership.
+
+Use Microsoft 365 Copilot to work with authorised organisational knowledge where approved, not to redefine source ownership.
 
 ## Human Review
 
@@ -343,32 +401,27 @@ Delete files that are:
 - temporary task noise
 - likely to create risk if retained
 
-## Review Before Commit Or Sync
+## Management-Overhead Principle
 
-Before committing or synchronising a durable file, check:
+Privacy and governance controls should be designed to require the least recurring manual administration consistent with safe operation.
 
-- Does this contain raw organisational source material?
-- Does this contain customer-level information?
-- Does this contain sensitive stakeholder commentary?
-- Does this contain confidential extracts?
-- Does this copy operational data from a system of record?
-- Does this include private HR or employee information?
-- Does this include raw Databricks, Genie or Power BI output?
-- Does an Obsidian plugin expose this content externally?
-- Are assumptions clearly marked?
-- Is evidence separated from interpretation?
-- Is the file useful beyond the immediate moment?
-- Is GitHub the intended authoritative destination?
-- Should this be deleted instead?
+Prefer controls that are configured once and applied consistently over controls that depend on the user remembering repeated manual steps.
 
-## Review Rhythm
+Low management overhead does not justify weaker privacy, security, consent, records or human-review controls.
 
-Review privacy, governance and retention at least quarterly and whenever a new integration, agent-memory mechanism, Obsidian plugin or synchronisation method is introduced.
+## Review Questions
 
-## Final Rule
+Ask during periodic review:
 
-Strategic OS should remember the reusable lesson, not retain the sensitive source.
+- Is this still useful?
+- Is this safe to retain?
+- Does it duplicate an official source?
+- Could identifying detail be removed?
+- Is a temporary note being treated as permanent knowledge?
+- Is an agent or automation retaining too much?
+- Is an optional workspace creating a shadow repository?
+- Are enterprise AI and capture tools being used inside approved boundaries?
+- Could a configured control replace a recurring manual privacy step without weakening governance?
+- Should this file be kept, archived or deleted?
 
-Obsidian improves access to the knowledge.
-
-It does not change what is safe to keep.
+Privacy by design is part of Strategic OS quality, not a separate compliance activity.
