@@ -455,11 +455,11 @@ Weak signals:
 - raw operational data is copied into GitHub
 - assumptions are presented as facts
 
-## 10. Cross-Tool And Analytics Reliability
+## 10. Cross-Tool, Analytics And Management Reliability
 
 ### Purpose
 
-Assess whether Strategic OS respects tool boundaries and uses analytics sources responsibly.
+Assess whether Strategic OS respects tool boundaries, uses analytics sources responsibly and remains low-maintenance to operate.
 
 ### Review Questions
 
@@ -471,6 +471,10 @@ Assess whether Strategic OS respects tool boundaries and uses analytics sources 
 - Are Teams, email and calendar summaries privacy-safe?
 - Are analytics domains documented clearly?
 - Are contextual signals labelled correctly?
+- Does the architecture minimise recurring human administration once configured?
+- Are manual synchronisation, duplicate filing, repeated tagging or reconciliation becoming routine?
+- Are optional tools removing more administration than they introduce?
+- Could any tool, integration or workflow be simplified or removed without reducing strategic value?
 
 ### Evidence To Look For
 
@@ -482,6 +486,12 @@ Assess whether Strategic OS respects tool boundaries and uses analytics sources 
 - agent consistency checks
 - analytics interpretation notes
 - references to official systems
+- recurring manual sync or reconciliation activity
+- duplicate filing across tools
+- repeated manual tagging or routing
+- tool maintenance effort
+- automation failures or workarounds
+- optional tools that require frequent intervention
 
 ### Quality Signals
 
@@ -492,6 +502,10 @@ Strong signals:
 - analytics caveats are visible
 - domain-agent patterns are documented
 - Strategic OS stores interpretation, not raw data
+- normal operation requires little manual synchronisation or reconciliation
+- automation removes repetitive administration without weakening governance
+- optional tools provide clear value relative to their maintenance burden
+- the architecture remains usable when optional local applications are unavailable
 
 Weak signals:
 
@@ -500,6 +514,11 @@ Weak signals:
 - Power BI screenshots replace governed reporting
 - official documents are duplicated
 - tool boundaries are unclear
+- routine work depends on manual syncing between systems
+- the same information is repeatedly filed or tagged in multiple places
+- optional tools create more administration than strategic value
+- integrations require frequent repair or human intervention
+- architecture complexity grows without measurable decision or workflow benefit
 
 ## North Star Alignment Score
 
