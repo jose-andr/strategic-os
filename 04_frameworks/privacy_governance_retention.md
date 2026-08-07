@@ -10,13 +10,13 @@ It should not become a shadow organisational record system.
 
 The purpose of this framework is to protect:
 
-* customers
-* stakeholders
-* the user
-* the organisation
-* governed data sources
-* confidential work
-* the long-term usefulness of the repository
+- customers
+- stakeholders
+- the user
+- the organisation
+- governed data sources
+- confidential work
+- the long-term usefulness of the repository
 
 ## Strategic OS North Star
 
@@ -30,151 +30,132 @@ Store reusable knowledge, not raw organisational source material.
 
 Strategic OS should capture:
 
-* what was learned
-* how decisions were framed
-* what patterns emerged
-* what assumptions were tested
-* what can be reused
-* what capability was demonstrated
-* what caveats should be remembered
+- what was learned
+- how decisions were framed
+- what patterns emerged
+- what assumptions were tested
+- what can be reused
+- what capability was demonstrated
+- what caveats should be remembered
 
 Strategic OS should not duplicate confidential systems of record.
+
+## Storage Architecture
+
+GitHub is the authoritative store for durable Strategic OS knowledge.
+
+Obsidian is a workspace over that Markdown knowledge.
+
+Slack and agent runtimes are interaction and reasoning surfaces.
+
+This means privacy rules apply across all Strategic OS surfaces, not only GitHub.
+
+Do not assume that material is safe merely because it is stored locally in Obsidian, temporarily in Slack, or inside an agent memory layer.
 
 ## What Strategic OS Can Store
 
 Strategic OS may store:
 
-* privacy-safe summaries
-* reusable frameworks
-* templates
-* decision logic
-* lessons learned
-* non-sensitive career evidence
-* abstracted stakeholder patterns
-* project reflections
-* safe opportunity notes
-* prompt patterns
-* agent specifications
-* autonomy and escalation rules
-* governance caveats
-* analytics interpretation guidance
-* metric caveats
-* source rules
-* personal operating principles
-* public or non-sensitive reference material
-* links or references to official systems, where safe
+- privacy-safe summaries
+- reusable frameworks
+- templates
+- decision logic
+- lessons learned
+- non-sensitive career evidence
+- abstracted stakeholder patterns
+- project reflections
+- safe opportunity notes
+- prompt patterns
+- agent specifications
+- autonomy and escalation rules
+- governance caveats
+- analytics interpretation guidance
+- metric caveats
+- source rules
+- personal operating principles
+- public or non-sensitive reference material
+- links or references to official systems where safe
+- Obsidian metadata or links that improve navigation without exposing sensitive material
 
 ## What Strategic OS Must Not Store
 
 Do not store:
 
-* customer-level records
-* personally identifiable customer information
-* raw organisational documents
-* confidential source extracts
-* governed datasets
-* operational data copied from systems of record
-* sensitive stakeholder commentary
-* private employee matters
-* HR records
-* procurement-sensitive material
-* legal advice
-* unpublished organisational decisions
-* raw emails containing confidential information
-* confidential meeting transcripts
-* system exports
-* screenshots of sensitive systems
-* access credentials
-* passwords
-* tokens
-* private keys
-* identifiable complaints or case details
-* raw Databricks or Genie outputs containing sensitive information
-* Power BI screenshots or copied reporting extracts
-* Teams, email or calendar threads copied into the repo
+- customer personal information
+- customer-level records
+- raw organisational datasets
+- credentials
+- access tokens
+- client secrets
+- private employee records
+- raw HR material
+- sensitive stakeholder commentary
+- confidential organisational documents
+- unredacted screenshots
+- restricted system extracts
+- raw email, Teams or Slack threads
+- governed dashboard exports
+- raw Databricks or Genie outputs containing sensitive information
+- material whose retention would create a shadow system of record
 
-## Preferred Storage Pattern
+These restrictions apply to GitHub, Obsidian, agent memory and automated workflows.
 
-When something useful comes from sensitive or organisational work, convert it before storing.
+## Obsidian-Specific Rules
 
-| Source Material           | Do Not Store                                | Store Instead                                      |
-| ------------------------- | ------------------------------------------- | -------------------------------------------------- |
-| Customer record           | Raw case details                            | Abstracted service pattern                         |
-| Stakeholder comment       | Named private comment                       | Privacy-safe alignment risk                        |
-| Internal report           | Confidential extract                        | Safe summary of decision logic                     |
-| Dashboard export          | Copied operational data                     | Metric caveat or interpretation note               |
-| Email thread              | Full email text                             | Follow-up principle or action pattern              |
-| Meeting transcript        | Raw transcript                              | Key decision, assumption or lesson                 |
-| HR-related matter         | Private employee details                    | General capability or process lesson               |
-| Databricks / Genie result | Raw query output                            | Reviewed analytical interpretation with caveats    |
-| Power BI report           | Screenshot or copied values                 | Metric definition, caveat or safe source reference |
-| Miro board                | Full exported board with sensitive material | Abstracted pattern or public-safe artefact         |
-| Jira issue                | Full operational record                     | Delivery lesson or decision logic                  |
+Obsidian does not create a privacy exception.
 
-## Evidence, Assumptions And Interpretation
+The vault should contain only material appropriate for Strategic OS retention.
 
-Strategic OS files should clearly separate:
+Do not use local-only Obsidian notes as a hidden store for material that would be inappropriate in the repository.
 
-* evidence
-* assumptions
-* interpretation
-* recommendation
-* action
+If temporary scratch material contains sensitive information:
 
-### Evidence
+- minimise it
+- abstract it as early as possible
+- do not link it broadly
+- do not sync or commit it
+- delete it when the immediate purpose is complete
 
-Evidence is information directly observed, measured or confirmed.
+Obsidian plugins must not be assumed safe by default.
 
-Examples:
+Before enabling a plugin that reads, indexes, syncs or sends vault content externally, consider:
 
-* a decision was made
-* a template was used
-* a workshop occurred
-* a recommendation was adopted
-* a metric changed, where the source is governed and safely referenced
+- what content it can access
+- whether it sends content to third parties
+- where data is processed
+- whether credentials are required
+- whether data is retained externally
+- whether the plugin is necessary
 
-### Assumptions
+Prefer the smallest plugin set required for useful operation.
 
-Assumptions are beliefs that may be reasonable but are not yet confirmed.
+## Slack-Specific Rules
 
-Examples:
+Slack is an interaction surface, not durable Strategic OS memory.
 
-* a stakeholder may be concerned about timing
-* a service issue may relate to unclear ownership
-* a pattern may indicate unmet customer need
+Do not treat raw Slack history as repository-ready knowledge.
 
-### Interpretation
+When a conversation contains reusable value:
 
-Interpretation is the meaning drawn from evidence and assumptions.
+1. identify the useful insight
+2. remove unnecessary identifying or sensitive details
+3. separate evidence from interpretation
+4. review the result
+5. store only the safe durable knowledge object
 
-Examples:
+## Agent Memory Rules
 
-* this may indicate a handover issue
-* this suggests a need for clearer decision rights
-* this pattern may create customer effort
+Agent memory must not become a shadow archive.
 
-### Recommendation
+Retain only information that is:
 
-A recommendation is a proposed action or direction.
+- necessary
+- proportionate
+- safe
+- useful
+- intentionally approved for persistence
 
-Examples:
-
-* clarify the decision owner
-* test the framing with stakeholders
-* create a decision brief
-* park the opportunity until evidence improves
-
-### Action
-
-An action is the next step to be taken.
-
-Examples:
-
-* draft a brief
-* prepare a conversation
-* update a template
-* capture a lesson learned
-* review an analytics caveat
+Do not retain sensitive raw context merely to improve convenience.
 
 ## Privacy-Safe Abstraction
 
@@ -182,15 +163,15 @@ Use abstraction when the learning is valuable but the source material is sensiti
 
 ### Unsafe
 
-`Jane Smith said the complaints process is broken because Team X keeps missing vulnerable customer cases.`
+`A named stakeholder said a specific team repeatedly failed vulnerable customers.`
 
 ### Safer
 
-`There may be a cross-team handover risk in complaint handling, especially where customer vulnerability indicators require continuity and clear ownership.`
+`There may be a cross-team handover risk where vulnerability indicators require continuity and clear ownership.`
 
 ### Unsafe
 
-`Customer case 12345 shows that the resident waited 18 days and called three times.`
+`Customer case 12345 waited 18 days and called three times.`
 
 ### Safer
 
@@ -210,172 +191,110 @@ Strategic OS is not a replacement for official systems.
 
 Official systems remain the source of truth for:
 
-* organisational records
-* customer records
-* operational data
-* legal or policy documents
-* HR records
-* procurement records
-* financial records
-* governed reporting
-* formal project documentation
-* official decisions
-* approved communication records
+- organisational records
+- customer records
+- operational data
+- legal or policy documents
+- HR records
+- procurement records
+- financial records
+- governed reporting
+- formal project documentation
+- official decisions
+- approved communication records
 
-Strategic OS may reference the existence of official material when safe, but should not copy confidential content from those systems.
+Strategic OS may reference official material when safe, but should not copy confidential content from those systems.
 
 ## Analytics And Data Rules
 
 For analytics-related work, Strategic OS may store:
 
-* metric definitions
-* caveats
-* interpretation guidance
-* source hierarchy rules
-* safe analytical notes
-* reusable review prompts
-* known limitations
-* decision-support framing
-* data quality notes
-* reviewed analytical assumptions
+- metric definitions
+- caveats
+- interpretation guidance
+- source hierarchy rules
+- safe analytical notes
+- reusable review prompts
+- known limitations
+- decision-support framing
+- data quality notes
+- reviewed analytical assumptions
 
 Strategic OS must not store:
 
-* raw data exports
-* customer-level data
-* copied operational datasets
-* governed metrics without source caveats
-* screenshots of restricted dashboards
-* sensitive query outputs
-* confidential data extracts
-* raw Databricks or Genie transcripts where sensitive data appears
+- raw data exports
+- customer-level data
+- copied operational datasets
+- governed metrics without source caveats
+- screenshots of restricted dashboards
+- sensitive query outputs
+- confidential data extracts
+- raw Databricks or Genie transcripts where sensitive data appears
 
 When using analytics, clearly label:
 
-* source
-* definition
-* caveat
-* confidence
-* whether the metric is governed, contextual or directional
-* whether interpretation needs human review
+- source
+- definition
+- numerator and denominator where relevant
+- grain
+- filters
+- caveat
+- confidence
+- whether the metric is governed, contextual or directional
+- whether interpretation needs human review
 
-## Databricks And Genie Rules
+## Source-Of-Truth Rule
 
-Databricks and Genie may support governed analytical interpretation.
+Use the originating official system when the question requires the official record.
 
-Strategic OS may store:
+Use Strategic OS when the question requires:
 
-* source rules
-* metric caveats
-* safe analytical prompts
-* agent review prompts
-* Genie context notes
-* decision-support interpretation
-* data quality caveats
-* analytical assumptions that need checking
+- reusable interpretation
+- a framework
+- a decision model
+- a lesson
+- a safe pattern
+- a caveat
+- a strategic synthesis
 
-Strategic OS must not store:
+Use Obsidian to navigate Strategic OS knowledge, not to override source ownership.
 
-* raw query outputs
-* copied tables
-* customer-level records
-* sensitive operational rows
-* dashboard screenshots
-* restricted source data
-* confidential extracts
-* outputs that could be treated as official reporting without review
+## Human Review
 
-Store domain-specific analytical material in:
+Human review is required before durable retention when material involves:
 
-`11_analytics/[domain]/`
-
-Examples:
-
-* `11_analytics/service-account/`
-* `11_analytics/channel-strategy/`
-* `11_analytics/customer-demand/`
-* `11_analytics/support-csat/`
-* `11_analytics/executive-metrics/`
-* `11_analytics/data-quality/`
-
-Use Domain Analytical Agents for governed data interpretation and caveat-aware analysis.
-
-## Stakeholder Information Rules
-
-Strategic OS may store stakeholder patterns.
-
-It should not store private stakeholder commentary.
-
-### Store
-
-* alignment conditions
-* influence patterns
-* communication needs
-* engagement risks
-* abstracted concerns
-* decision-readiness observations
-* reusable stakeholder lessons
-* generalised engagement sequences
-
-### Do Not Store
-
-* private comments attributed to named individuals
-* sensitive conflict details
-* unverified motives
-* confidential relationship dynamics
-* personal criticism
-* private employee information
-* anything that would breach trust if read out of context
-
-## Career Evidence Rules
-
-Career evidence should be safe, truthful and reusable.
-
-### Store
-
-* achievements
-* outcomes
-* capability examples
-* non-sensitive feedback summaries
-* portfolio-safe examples
-* promotion proof points
-* role application evidence
-* lessons showing growth
-* privacy-safe career narratives
-
-### Do Not Store
-
-* private performance information about others
-* confidential recruitment material
-* sensitive employee matters
-* named stakeholder criticism
-* raw confidential feedback
-* internal documents copied as evidence
-* claims that cannot be supported
-* inflated impact claims
+- stakeholder sensitivity
+- confidential organisational context
+- career or HR implications
+- governed data
+- external publication
+- legal, policy or compliance interpretation
+- customer impacts
+- formal decisions
+- reputational consequences
 
 ## Chief Of Staff Output Rules
 
 Most Chief of Staff outputs should remain temporary.
 
-Do not store routine:
+Do not retain routine:
 
-* daily briefings
-* admin task lists
-* follow-up trackers
-* calendar notes
-* reminder lists
-* low-value operating notes
+- daily briefings
+- admin task lists
+- follow-up trackers
+- calendar notes
+- reminder lists
+- low-value operating notes
 
 Store only when the output creates durable value, such as:
 
-* decision context
-* project continuity
-* strategic opportunity signal
-* reusable lesson
-* stakeholder pattern
-* career evidence
-* risk or blocker requiring later review
+- decision context
+- project continuity
+- strategic opportunity signal
+- reusable lesson
+- stakeholder pattern
+- career evidence
+- risk or blocker requiring later review
 
 If a daily or weekly operating note contains sensitive information, generalise it before storing or do not store it.
 
@@ -383,193 +302,73 @@ If a daily or weekly operating note contains sensitive information, generalise i
 
 Strategic OS should retain material only while it remains useful, safe and appropriate.
 
-## Keep
+### Keep
 
 Keep files that are:
 
-* reusable
-* decision-relevant
-* career-relevant
-* privacy-safe
-* framework-level
-* template-level
-* useful for future projects
-* useful for quarterly review
-* useful for understanding system evolution
-* useful for analytical caveat or source-rule reuse
+- reusable
+- decision-relevant
+- career-relevant
+- privacy-safe
+- framework-level
+- template-level
+- useful for future projects
+- useful for quarterly review
+- useful for understanding system evolution
+- useful for analytical caveat or source-rule reuse
 
-## Archive
+### Archive
 
 Archive files that are:
 
-* superseded but useful for history
-* old versions with learning value
-* closed project summaries
-* completed assessments
-* outdated drafts with reference value
-* inactive opportunities with a clear revisit trigger
+- superseded but useful for history
+- old versions with learning value
+- closed project summaries
+- completed assessments
+- outdated drafts with reference value
+- inactive opportunities with a clear revisit trigger
 
-## Delete
+### Delete
 
 Delete files that are:
 
-* sensitive
-* unsafe
-* duplicated
-* low value
-* misleading
-* no longer useful
-* raw source material
-* confidential extracts
-* temporary task noise
-* likely to create risk if retained
+- sensitive
+- unsafe
+- duplicated
+- low value
+- misleading
+- no longer useful
+- raw source material
+- confidential extracts
+- temporary task noise
+- likely to create risk if retained
 
-## Review Before Commit
+## Review Before Commit Or Sync
 
-Before committing a file to the repository, check:
+Before committing or synchronising a durable file, check:
 
-* Does this contain raw organisational source material?
-* Does this contain customer-level information?
-* Does this contain sensitive stakeholder commentary?
-* Does this contain confidential extracts?
-* Does this copy operational data from a system of record?
-* Does this include private HR or employee information?
-* Does this include raw Databricks, Genie or Power BI output?
-* Are assumptions clearly marked?
-* Is evidence separated from interpretation?
-* Is the file useful beyond the immediate moment?
-* Is the storage location appropriate?
-* Would this still feel safe if reviewed later?
+- Does this contain raw organisational source material?
+- Does this contain customer-level information?
+- Does this contain sensitive stakeholder commentary?
+- Does this contain confidential extracts?
+- Does this copy operational data from a system of record?
+- Does this include private HR or employee information?
+- Does this include raw Databricks, Genie or Power BI output?
+- Does an Obsidian plugin expose this content externally?
+- Are assumptions clearly marked?
+- Is evidence separated from interpretation?
+- Is the file useful beyond the immediate moment?
+- Is GitHub the intended authoritative destination?
+- Should this be deleted instead?
 
-If unsure, do not commit the file in its current form.
+## Review Rhythm
 
-Convert it into a safer summary first.
+Review privacy, governance and retention at least quarterly and whenever a new integration, agent-memory mechanism, Obsidian plugin or synchronisation method is introduced.
 
-## Sensitivity Levels
+## Final Rule
 
-Use simple sensitivity levels when helpful.
+Strategic OS should remember the reusable lesson, not retain the sensitive source.
 
-| Level         | Meaning                                   | Storage Guidance               |
-| ------------- | ----------------------------------------- | ------------------------------ |
-| Public        | Already public or safe to share           | May be stored if useful        |
-| Personal      | Personal reflection or career note        | Store carefully and truthfully |
-| Internal-safe | Non-sensitive work summary                | May be stored as a summary     |
-| Sensitive     | Could affect trust, privacy or governance | Abstract, minimise or avoid    |
-| Restricted    | Should remain in official systems only    | Do not store                   |
+Obsidian improves access to the knowledge.
 
-## File-Level Safety Note
-
-Where useful, add a short safety note to files that are based on sensitive work.
-
-Example:
-
-`Privacy note: This file contains abstracted patterns only. It does not include customer-level records, confidential extracts or raw organisational source material.`
-
-Use a safety note when a file is derived from:
-
-* stakeholder-sensitive work
-* analytics interpretation
-* customer experience patterns
-* career evidence
-* project retrospectives
-* operating reviews
-* sensitive organisational context
-
-## Agent Rules
-
-Strategic OS agents must follow these rules.
-
-Agents should:
-
-* summarise safely
-* abstract sensitive detail
-* separate evidence from assumptions
-* identify uncertainty
-* recommend human review when sensitivity exists
-* avoid storing raw source material
-* respect folder-level storage rules
-* stay within autonomy boundaries
-* flag Level 5 human-approval triggers
-
-Agents must not:
-
-* copy confidential material into repo files
-* infer private motives as fact
-* convert sensitive information into permanent notes without review
-* present governed data without caveats
-* replace human judgement on sensitive matters
-* make commitments on behalf of the user
-* treat draft advice as approved advice
-
-## Cross-Tool Rules
-
-Strategic OS may connect conceptually to other tools, but each tool has a boundary.
-
-| Tool                     | Role                            | Boundary                                                            |
-| ------------------------ | ------------------------------- | ------------------------------------------------------------------- |
-| GitHub                   | Personal knowledge repository   | Do not store raw confidential organisational records                |
-| Databricks / Genie       | Governed data interrogation     | Do not copy raw sensitive outputs into GitHub                       |
-| Power BI                 | Reporting source of truth       | Reference definitions and caveats, not screenshots or exports       |
-| SharePoint / OneDrive    | Organisational document storage | Leave official documents in official storage                        |
-| Teams / Email / Calendar | Operational coordination        | Summarise actions, do not copy private threads                      |
-| Miro                     | Visual collaboration            | Store safe summaries or exported public-safe artefacts only         |
-| Jira                     | Delivery tracking               | Store lessons or decision logic, not full operational records       |
-| Slack or chat tools      | Fast coordination               | Capture only safe actions, lessons or decisions                     |
-| Relevance AI / Make.com  | Automation and workflow support | Do not automate storage of sensitive source material without review |
-
-## Quarterly Review
-
-During quarterly repository hygiene review, check:
-
-* Are any files storing material that should be removed?
-* Are sensitive details abstracted?
-* Are assumptions marked?
-* Are old drafts still needed?
-* Are indexes exposing too much information?
-* Are analytics caveats still accurate?
-* Are career evidence files safe and useful?
-* Are project folders free from raw confidential source material?
-* Are Chief of Staff temporary outputs being deleted or kept only when useful?
-* Are Domain Analytical Agent outputs stored with source rules and caveats?
-* Are any files better suited to official organisational systems?
-
-## Success Measures
-
-This framework is working when:
-
-* Strategic OS remains safe to maintain
-* useful knowledge is retained without duplicating source systems
-* sensitive information is abstracted or excluded
-* assumptions are visible
-* decision logic is reusable
-* career evidence is credible and safe
-* analytics interpretation includes caveats
-* stakeholder patterns preserve trust
-* temporary operating notes do not create clutter
-* files remain useful over time
-
-## Failure Modes
-
-This framework is failing if:
-
-* raw organisational documents are copied into the repo
-* customer-level details appear in files
-* sensitive stakeholder commentary is retained
-* assumptions are presented as facts
-* analytics outputs lack caveats
-* career evidence includes unsafe details
-* project folders become shadow records
-* old sensitive drafts remain in the repository
-* Chief of Staff outputs become permanent task clutter
-* Databricks or Genie outputs are stored without source rules
-* the repo becomes risky to maintain or share
-
-## Minimal Use Rule
-
-When in doubt, store less.
-
-Keep the pattern, not the private detail.
-
-Keep the decision logic, not the confidential source.
-
-Keep the learning, not the raw record.
+It does not change what is safe to keep.

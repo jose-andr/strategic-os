@@ -8,7 +8,7 @@ It creates a clear pathway from capture to decision support, reusable learning, 
 
 The goal is to prevent Strategic OS from becoming a dumping ground.
 
-Every useful input should either become an output, become reusable knowledge, remain a temporary working note, or be discarded.
+Every useful input should either become an output, become reusable knowledge, remain temporary, or be discarded.
 
 ## Strategic OS North Star
 
@@ -36,164 +36,141 @@ The standard workflow is:
 4. Use relevant agent
 5. Use relevant template
 6. Review
-7. Store in the correct folder
-8. Index if useful
-9. Convert into reusable knowledge where relevant
+7. Store in the correct repository folder
+8. Link where useful in Obsidian
+9. Reuse
 10. Discard or archive what no longer has value
+
+Slack and Obsidian are interaction and workspace surfaces.
+
+GitHub-backed Markdown is the durable Strategic OS record.
 
 ## 1. Capture
 
 ### Purpose
 
-Capture raw material before it is lost.
+Capture useful raw material before it is lost.
 
 Raw material may include:
 
-* meeting notes
-* stakeholder comments
-* project observations
-* customer insights
-* service pain points
-* strategic signals
-* decision questions
-* risks
-* ideas
-* lessons
-* career evidence
-* analytics observations
-* thought leadership seeds
-* daily briefing notes
-* weekly operating review signals
-* follow-up dependencies
-* Databricks or Genie interpretation notes
+- meeting notes
+- stakeholder comments
+- project observations
+- customer insights
+- service pain points
+- strategic signals
+- decision questions
+- risks
+- ideas
+- lessons
+- career evidence
+- analytics observations
+- thought-leadership seeds
+- daily briefing notes
+- weekly operating review signals
+- follow-up dependencies
+- Databricks or Genie interpretation notes
 
-### Default Location
+### Capture Surfaces
 
-Use:
+Inputs may begin in:
 
-`00_inbox/`
+- Slack
+- Obsidian
+- `00_inbox/`
+- meeting notes
+- approved organisational tools
+- an agent conversation
+- personal reflection
 
-The inbox is for unsorted material only.
+The capture surface does not determine the durable storage location.
 
-It is not a permanent storage location.
+### Slack Capture Rule
 
-### Capture Rules
+Slack is useful for fast capture and agent interaction.
 
-Capture enough context to understand the signal later.
+Do not retain an entire Slack conversation merely because part of it is useful.
 
-A useful inbox item should include:
+Extract the reusable signal and move only the reviewed, privacy-safe result into Strategic OS.
 
-* date
-* source or context
-* short description
-* why it may matter
-* possible destination, if known
-* sensitivity level, if relevant
-* immediate next action, if obvious
+### Obsidian Capture Rule
 
-Do not capture raw sensitive material unless it is appropriate, necessary and safe to store.
+Obsidian may be used for quick Markdown capture, but unprocessed material should still follow the inbox and triage discipline.
 
-Prefer short summaries over raw extracts.
+Avoid creating permanent notes for every thought.
+
+If the input is not yet classified, use `00_inbox/`.
 
 ## 2. Triage
 
-### Purpose
-
-Triage turns raw material into a decision about what should happen next.
-
-Each inbox item should be assigned one of six outcomes:
-
-| Outcome          | Meaning                                                         | Typical Next Step               |
-| ---------------- | --------------------------------------------------------------- | ------------------------------- |
-| Use now          | The item supports an immediate decision, action or conversation | Route to an agent or template   |
-| Develop          | The item has value but needs shaping                            | Create a draft output or review |
-| Store            | The item is already useful and safe to retain                   | Move to the correct folder      |
-| Convert          | The item should become another output type                      | Use the relevant template       |
-| Hold temporarily | The item may be useful soon but is not durable knowledge        | Keep briefly with review date   |
-| Discard          | The item has no clear value or is unsafe to keep                | Delete or do not store          |
-
-### Triage Questions
-
 Ask:
 
-* Is this still useful?
-* Does it support a decision?
-* Does it reveal a pattern?
-* Does it create an opportunity?
-* Does it belong to an active project?
-* Does it strengthen career evidence?
-* Could it become a lesson, template or framework?
-* Is it safe to store?
-* Is it only a temporary working note?
-* Where will I look for it later?
-* What happens if I discard it?
+- What is this?
+- Why does it matter?
+- Is there a decision here?
+- Is there an opportunity?
+- Is there reusable learning?
+- Does a stakeholder pattern exist?
+- Does it belong to a project?
+- Does it support career evidence?
+- Is it an analytical interpretation?
+- Is an agent useful?
+- Is it safe to retain?
+- Should it be discarded instead?
 
 ## 3. Decide Output Type
 
-### Purpose
+Common output types include:
 
-Choose the type of output the input should become.
+| Input Need | Output |
+|---|---|
+| Decision or trade-off | Decision Brief |
+| Strategic possibility | Opportunity Review |
+| Reusable learning | Lesson Learned |
+| Stakeholder alignment issue | Stakeholder Alignment Assessment |
+| Delivery friction | Shipping Recommendation |
+| Career positioning | Career Guidance |
+| Promotion evidence | Promotion Readiness Assessment |
+| Daily coordination | Daily Briefing |
+| Governed analytical question | Caveated analytical summary |
+| Reusable method | Framework |
+| Repeated structure | Template |
 
-Common output types:
-
-| Output Type               | Use When                                                      |
-| ------------------------- | ------------------------------------------------------------- |
-| Decision brief            | A decision, recommendation or trade-off needs structure       |
-| Strategic opportunity     | A signal may create strategic, career or organisational value |
-| Lesson learned            | Experience creates reusable learning                          |
-| Stakeholder pattern       | A stakeholder alignment or engagement pattern is visible      |
-| Project artefact          | Material belongs to active or future project work             |
-| Career evidence           | Work demonstrates capability, value or reputation             |
-| Thought leadership note   | An idea may become externally shareable thinking              |
-| Analytical interpretation | Data, metrics or caveats need decision-support framing        |
-| Reusable framework        | A pattern can support future judgement                        |
-| Reusable template         | A repeated output needs structure                             |
-| Agent prompt pattern      | A repeated agent request should be reused                     |
-| Daily briefing            | Operating context needs daily coordination                    |
-| Weekly operating review   | Weekly progress, decisions or open loops need review          |
-| Admin task list           | Low-risk tasks need grouping without creating clutter         |
-| Follow-up tracker         | Promised follow-ups and dependencies need visibility          |
+Do not create a new output type when an existing one is adequate.
 
 ## 4. Use Relevant Agent
 
-### Purpose
+Use an agent when it meaningfully improves clarity, challenge, synthesis or reuse.
 
-Use the right Strategic OS agent to help convert input into a useful output.
+Typical routing:
 
-| Input Need                                                | Recommended Agent         |
-| --------------------------------------------------------- | ------------------------- |
-| Ambiguity, mixed evidence or unclear decision             | Sensemaking Agent         |
-| Stakeholder alignment, influence or relationship dynamics | Stakeholder Journey Agent |
-| Momentum, delivery focus or over-refinement risk          | Shipping Coach            |
-| Career evidence, opportunity positioning or progression   | Career Architect          |
-| Daily priorities, follow-ups or operating coordination    | Chief of Staff Agent      |
-| Governed data, metric caveats or analytics interpretation | Domain Analytical Agent   |
+- Sensemaking Agent — ambiguity, decisions, synthesis
+- Stakeholder Journey Agent — alignment, influence, engagement
+- Shipping Coach — over-refinement, stalled work, delivery
+- Career Architect — career evidence, positioning, opportunities
+- Chief of Staff Agent — operating rhythm, coordination, follow-up
+- Domain Analytical Agent — governed analytics interpretation
 
-Use agents to support judgement.
-
-Do not use agents to replace judgement.
+Agent use does not change source-of-truth ownership.
 
 ## 5. Use Relevant Template
 
-### Purpose
+Use the smallest template that creates a useful output.
 
-Use a template when the output needs consistency, speed or future reuse.
+Examples:
 
-| Output Type                         | Suggested Template                                             |
-| ----------------------------------- | -------------------------------------------------------------- |
-| Decision brief                      | `10_templates/decision_brief.md`                               |
-| Lesson learned                      | `10_templates/lesson_learned.md`                               |
-| Stakeholder alignment assessment    | `10_templates/stakeholder_alignment_assessment.md`             |
-| Shipping recommendation             | `10_templates/shipping_recommendation.md`                      |
-| Opportunity review                  | `10_templates/opportunity_review.md`                           |
-| Career guidance                     | `10_templates/career_guidance.md`                              |
-| Promotion readiness assessment      | `10_templates/promotion_readiness_assessment.md`               |
-| Daily briefing                      | `10_templates/daily_briefing.md`                               |
-| Weekly operating review             | `10_templates/weekly_operating_review.md`                      |
-| Admin task list                     | `10_templates/admin_task_list.md`                              |
-| Follow-up tracker                   | `10_templates/follow_up_tracker.md`                            |
-| Quarterly Strategic OS assessment   | `10_templates/quarterly_strategic_os_assessment.md`            |
-| Analytical summary or metric caveat | Domain-specific template or prompt in `11_analytics/[domain]/` |
+| Output | Template |
+|---|---|
+| Decision brief | `10_templates/decision_brief.md` |
+| Lesson learned | `10_templates/lesson_learned.md` |
+| Stakeholder assessment | `10_templates/stakeholder_alignment_assessment.md` |
+| Shipping recommendation | `10_templates/shipping_recommendation.md` |
+| Opportunity review | `10_templates/opportunity_review.md` |
+| Career guidance | `10_templates/career_guidance.md` |
+| Promotion readiness assessment | `10_templates/promotion_readiness_assessment.md` |
+| Daily briefing | `10_templates/daily_briefing.md` |
+| Quarterly assessment | `10_templates/quarterly_strategic_os_assessment.md` |
+| Analytical summary | Domain-specific template or prompt in `11_analytics/[domain]/` |
 
 Templates should reduce friction.
 
@@ -207,459 +184,225 @@ Review protects quality, judgement, privacy and usefulness.
 
 Before storing or using an output, check:
 
-* Is the purpose clear?
-* Is the recommendation explicit, where relevant?
-* Are assumptions separated from evidence?
-* Is the confidence level appropriate?
-* Is sensitive material removed or abstracted?
-* Is the output useful beyond the immediate moment?
-* Is the storage location correct?
-* Does this need human review before use?
-* Is this safe to store?
-* Could this be discarded instead?
-* Does this support the Strategic OS North Star?
+- Is the purpose clear?
+- Is the recommendation explicit where relevant?
+- Are assumptions separated from evidence?
+- Is the confidence level appropriate?
+- Is sensitive material removed or abstracted?
+- Is the output useful beyond the immediate moment?
+- Is the storage location correct?
+- Does this need human review before use?
+- Is this safe to store?
+- Could this be discarded instead?
+- Does this support the Strategic OS North Star?
 
 ### Human Review Triggers
 
 Human review is required when the output involves:
 
-* stakeholder sensitivity
-* formal decisions
-* confidential organisational information
-* customer-level information
-* governed data
-* reputational risk
-* career or HR consequences
-* external publication
-* commitments affecting others
-* analysis that may be treated as official reporting
+- stakeholder sensitivity
+- formal decisions
+- confidential organisational information
+- customer-level information
+- governed data
+- reputational risk
+- career or HR consequences
+- external publication
+- commitments affecting others
+- analysis that may be treated as official reporting
+- conversion of temporary conversation context into durable knowledge
 
 ## 7. Store In The Correct Folder
 
-### Purpose
+| Output | Storage Location |
+|---|---|
+| Unsorted capture | `00_inbox/` |
+| Career evidence or positioning | `01_career/` |
+| Strategic opportunity | `02_strategic_opportunities/` |
+| Decision brief | `03_decision_briefs/` |
+| Reusable framework | `04_frameworks/` |
+| Lesson learned | `05_lessons_learned/` |
+| Stakeholder pattern | `06_stakeholder_patterns/` |
+| Agent specification | `07_ai_agents/` |
+| Project artefact | `08_projects/` |
+| Thought leadership | `09_thought_leadership/` |
+| Reusable template | `10_templates/` |
+| Analytics guidance | `11_analytics/` |
+| QA output | `12_quality/` |
 
-Store outputs where they will be found and reused.
+GitHub is authoritative for durable Strategic OS content.
 
-| Output                                                 | Storage Location              |
-| ------------------------------------------------------ | ----------------------------- |
-| Unsorted capture                                       | `00_inbox/`                   |
-| Career evidence or positioning                         | `01_career/`                  |
-| Strategic opportunity                                  | `02_strategic_opportunities/` |
-| Decision brief                                         | `03_decision_briefs/`         |
-| Reusable framework                                     | `04_frameworks/`              |
-| Lesson learned                                         | `05_lessons_learned/`         |
-| Stakeholder pattern                                    | `06_stakeholder_patterns/`    |
-| Agent specification or agent framework                 | `07_ai_agents/`               |
-| Project artefact                                       | `08_projects/`                |
-| Thought leadership seed or draft                       | `09_thought_leadership/`      |
-| Reusable template                                      | `10_templates/`               |
-| Analytics interpretation or governed analytics pattern | `11_analytics/[domain]/`      |
-| Temporary daily coordination material                  | Do not store by default       |
+Obsidian is the primary workspace for viewing and developing that content.
 
-### Storage Rules
+## 8. Link In Obsidian Where Useful
 
-Store only when the output creates durable value.
+Create links only when they improve future retrieval or reasoning.
 
-Durable value may include:
+Useful links may connect:
 
-* decision context
-* reusable learning
-* career evidence
-* strategic opportunity evidence
-* stakeholder pattern evidence
-* project continuity
-* analytical caveat or source guidance
-* reusable framework or template value
+- a decision to supporting evidence
+- a decision to affected stakeholders
+- a project to lessons
+- a metric to its definition and caveat
+- an opportunity to career evidence
+- a framework to examples of use
+- a stakeholder pattern to relevant decisions
 
-Do not store:
+Do not add links merely to make the graph denser.
 
-* temporary task noise
-* raw organisational source data
-* customer-level records
-* confidential extracts
-* governed datasets copied from source systems
-* sensitive stakeholder commentary
-* private employee or HR material
-* unreviewed assumptions about people or teams
+The purpose of linking is decision support, not visual complexity.
 
-## 8. Index If Useful
+## 9. Reuse
 
-### Purpose
+Reusable knowledge should help answer future questions faster.
 
-Index outputs that may need to be found, compared or reviewed later.
+Examples:
 
-Index when the output relates to:
+- Have we seen this stakeholder pattern before?
+- Which framework helped with a similar decision?
+- What caveat applies to this metric?
+- What evidence supports this opportunity?
+- Which previous lesson should shape the next action?
 
-* decisions
-* strategic opportunities
-* career evidence
-* stakeholder alignment
-* lessons learned
-* project patterns
-* analytics interpretation
-* reusable frameworks
-* metric caveats
-* source rules
-* quarterly review material
-
-Do not index:
-
-* low-value drafts
-* temporary notes
-* routine daily briefings
-* admin task lists with no durable value
-* follow-up trackers that only served a short-term need
-* raw analytical outputs
-* sensitive material
-
-Indexes should stay lightweight.
-
-Use:
-
-`agent_output_index.md`
-
-only when a folder has enough durable outputs to justify it.
-
-## 9. Convert Into Reusable Knowledge
-
-### Purpose
-
-The highest-value Strategic OS outputs become reusable knowledge.
-
-A single input may become:
-
-* a decision principle
-* a stakeholder pattern
-* a service design insight
-* a project heuristic
-* a career evidence point
-* a reusable prompt
-* a template
-* a framework
-* a thought leadership seed
-* an analytical caveat
-* a source rule
-* a quality review improvement
-
-Ask:
-
-* What can this teach me later?
-* Where else could this pattern apply?
-* What decision did this improve?
-* What capability does this demonstrate?
-* What would I reuse from this?
-* What should be generalised before storing?
-* What should not be retained?
+Agents may use repository knowledge to support synthesis, subject to privacy and access controls.
 
 ## 10. Discard Or Archive
 
-### Purpose
+Discard:
 
-Strategic OS should stay useful by letting low-value material leave the system.
+- raw temporary chat content
+- duplicate notes
+- low-value capture
+- sensitive material that should not be retained
+- source material already governed elsewhere
+- obsolete operating noise
 
-Discard when:
-
-* the item has no clear future use
-* the item duplicates existing material
-* the item is temporary task noise
-* the item is unsafe to store
-* the item is too vague to retrieve later
-* the item does not support decisions, opportunities, learning, career evidence or project continuity
-
-Archive when:
-
-* the item was once useful but is now superseded
-* the item is needed for history but not active use
-* the item should not influence current decisions
-* the item has been replaced by a stronger output
+Archive only when history itself has reusable value.
 
 ## Common Flow Patterns
 
-## Inbox Item To Decision Brief
+### Inbox Item To Decision Brief
 
-Use this flow when an input raises a decision, trade-off or recommendation.
-
-Path:
-
-`00_inbox/` → Sensemaking Agent → `10_templates/decision_brief.md` → `03_decision_briefs/`
-
-Review for:
-
-* clear decision required
-* options
-* trade-offs
-* recommendation
-* assumptions
-* risks
-* next action
-* human review points
-
-## Inbox Item To Strategic Opportunity
-
-Use this flow when an input suggests a role, project, partnership, initiative or positioning opportunity.
-
-Path:
-
-`00_inbox/` → Career Architect or Sensemaking Agent → `10_templates/opportunity_review.md` → `02_strategic_opportunities/`
+`00_inbox/`
+→ Sensemaking Agent
+→ `10_templates/decision_brief.md`
+→ human review
+→ `03_decision_briefs/`
+→ GitHub
+↔ Obsidian
 
 Review for:
 
-* opportunity value
-* timing
-* strategic fit
-* stakeholder support
-* next move
-* evidence required
-* trade-offs
-* revisit trigger
+- clear decision required
+- options
+- trade-offs
+- recommendation
+- assumptions
+- risks
+- next action
+- human review points
 
-## Inbox Item To Lesson Learned
+### Slack Conversation To Durable Knowledge
 
-Use this flow when an experience creates reusable learning.
+Slack
+→ agent interaction
+→ useful insight or recommendation
+→ extract reusable value
+→ privacy and evidence review
+→ relevant template if needed
+→ GitHub-backed Markdown
+↔ Obsidian
 
-Path:
+Do not preserve the raw conversation as the knowledge object.
 
-`00_inbox/` → Shipping Coach or Sensemaking Agent → `10_templates/lesson_learned.md` → `05_lessons_learned/`
+### Inbox Item To Strategic Opportunity
 
-Review for:
-
-* what happened
-* what worked
-* what failed
-* what should be repeated
-* what should be avoided
-* reusable principle
-* privacy-safe abstraction
-
-## Inbox Item To Stakeholder Pattern
-
-Use this flow when an input reveals something about alignment, trust, influence or engagement.
-
-Path:
-
-`00_inbox/` → Stakeholder Journey Agent → `10_templates/stakeholder_alignment_assessment.md` → `06_stakeholder_patterns/`
+`00_inbox/`
+→ Career Architect or Sensemaking Agent
+→ `10_templates/opportunity_review.md`
+→ `02_strategic_opportunities/`
 
 Review for:
 
-* stakeholder need
-* alignment condition
-* concern or resistance
-* influence path
-* communication framing
-* privacy-safe abstraction
-* assumptions about people or teams
+- opportunity value
+- timing
+- strategic fit
+- stakeholder support
+- next move
+- evidence required
+- trade-offs
+- revisit trigger
 
-## Inbox Item To Project Artefact
+### Inbox Item To Lesson Learned
 
-Use this flow when an input belongs to an active or future project.
-
-Path:
-
-`00_inbox/` → relevant agent → project-specific template or note → `08_projects/`
-
-Review for:
-
-* project relevance
-* decision link
-* delivery impact
-* owner
-* next action
-* sensitivity
-* storage value
-
-## Inbox Item To Career Evidence
-
-Use this flow when an input demonstrates capability, value or reputation.
-
-Path:
-
-`00_inbox/` → Career Architect → `10_templates/career_guidance.md` or career evidence note → `01_career/`
+`00_inbox/`
+→ Shipping Coach or Sensemaking Agent
+→ `10_templates/lesson_learned.md`
+→ `05_lessons_learned/`
 
 Review for:
 
-* capability demonstrated
-* outcome influenced
-* evidence quality
-* strategic value
-* promotion or opportunity relevance
-* reusable story
-* sensitivity
+- what happened
+- what worked
+- what failed
+- what should be repeated
+- what should be avoided
+- reusable principle
+- privacy-safe abstraction
 
-## Inbox Item To Thought Leadership
+### Inbox Item To Stakeholder Pattern
 
-Use this flow when an input could become a shareable idea, article, talk, model or perspective.
-
-Path:
-
-`00_inbox/` → Sensemaking Agent or Career Architect → thought leadership note → `09_thought_leadership/`
-
-Review for:
-
-* idea clarity
-* audience
-* originality
-* evidence
-* examples
-* reputational fit
-* sensitivity
-* public-safe framing
-
-## Inbox Item To Analytics Interpretation
-
-Use this flow when an input relates to metrics, dashboard interpretation, data caveats or analytics-enabled decisions.
-
-Path:
-
-`00_inbox/` → Domain Analytical Agent → domain-specific analytical note → `11_analytics/[domain]/`
+`00_inbox/`
+→ Stakeholder Journey Agent
+→ `10_templates/stakeholder_alignment_assessment.md`
+→ `06_stakeholder_patterns/`
 
 Review for:
 
-* metric definition
-* data source
-* caveat
-* decision relevance
-* confidence
-* governance boundary
-* source rules
-* whether output is governed, contextual or directional
+- stakeholder need
+- alignment condition
+- concern or resistance
+- influence path
+- communication framing
+- privacy-safe abstraction
+- assumptions about people or teams
 
-## Daily Operating Signal To Durable Output
+### Governed Analytics To Decision Support
 
-Use this flow when a daily briefing or follow-up item reveals something worth keeping.
+Business question
+→ governed source
+→ definition, numerator, denominator, grain and filters
+→ caveat check
+→ analytical agent
+→ human review
+→ safe decision-support interpretation
 
-Path:
+Do not copy raw governed data into Strategic OS.
 
-Chief of Staff Agent → `10_templates/daily_briefing.md` or `10_templates/follow_up_tracker.md` → triage → durable folder if useful
+## Quality Test
 
-Possible durable outputs:
+A successful intake-to-output workflow should:
 
-* decision brief
-* strategic opportunity
-* lesson learned
-* stakeholder pattern
-* project artefact
-* career evidence
+- reduce clutter
+- improve decision clarity
+- preserve useful learning
+- protect privacy
+- maintain source-of-truth boundaries
+- make durable knowledge easy to find through Obsidian
+- keep GitHub authoritative
+- avoid turning Slack or Obsidian into uncontrolled stores
+- create less documentation than the value it produces
 
-Review for:
+## Final Rule
 
-* whether the item is more than temporary coordination
-* whether it creates decision context
-* whether it reveals a reusable pattern
-* whether it should be discarded after use
+Capture where convenient.
 
-## Weekly Review To Pipeline Update
+Think with agents.
 
-Use this flow when a weekly operating review surfaces repeated blockers, opportunities or decisions.
+Review before retention.
 
-Path:
+Store durable knowledge in GitHub-backed Markdown.
 
-Chief of Staff Agent → `10_templates/weekly_operating_review.md` → opportunity, decision, project, lesson or career folder
+Navigate and connect it in Obsidian.
 
-Review for:
-
-* recurring blockers
-* decisions still required
-* strategic opportunity signals
-* stakeholder movement
-* career evidence
-* lessons learned
-* next week focus
-* what should stop
-
-## Output Quality Bar
-
-A useful Strategic OS output should be:
-
-* clear
-* concise
-* decision-oriented
-* reusable where appropriate
-* explicit about assumptions
-* careful with sensitive information
-* stored in the right place
-* connected to the North Star
-* specific about next action
-* clear about human review
-* safe to discard if it is temporary
-
-## Privacy And Governance Rules
-
-Do not store:
-
-* customer-level records
-* raw confidential organisational extracts
-* governed datasets
-* private employee matters
-* sensitive stakeholder commentary
-* information that should remain in official systems only
-* unreviewed assumptions about people or teams
-* screenshots or extracts from restricted tools
-
-Prefer storing:
-
-* abstractions
-* patterns
-* non-sensitive summaries
-* decision logic
-* reusable frameworks
-* lessons learned
-* career-safe evidence
-* privacy-safe examples
-* metric caveats
-* source rules
-* reviewed analytical interpretations
-
-## Review Cadence
-
-Use this workflow during:
-
-* daily capture where useful
-* weekly inbox triage
-* weekly operating review
-* monthly lessons learned review
-* monthly strategic opportunities review
-* monthly career evidence review
-* quarterly repository hygiene review
-* quarterly Strategic OS QA assessment
-* analytics domain review where governed data is involved
-
-## Success Measures
-
-This workflow is working when:
-
-* the inbox does not become permanent storage
-* useful signals become clear outputs
-* decisions are easier to frame
-* lessons are reused
-* career evidence accumulates
-* strategic opportunities are easier to identify
-* sensitive information is not stored unnecessarily
-* files are easier to find later
-* temporary Chief of Staff outputs do not create clutter
-* analytical caveats and source rules are findable
-* the repository becomes more useful over time
-
-## Failure Modes
-
-This workflow is failing if:
-
-* everything stays in `00_inbox/`
-* too many low-value files are created
-* sensitive material is copied into the repo
-* outputs are not reused
-* decisions remain unclear
-* notes cannot be found later
-* templates create more friction than value
-* agents produce content without improving judgement
-* temporary daily coordination becomes permanent clutter
-* analytical outputs are stored without caveats
-* weak signals are over-converted into durable files
-* the workflow becomes administration rather than leverage
-
-## Minimal Use Rule
-
-Do the smallest useful amount of processing.
-
-Do not force every input through every step.
-
-A good workflow protects judgement, reduces clutter and makes useful work easier to find again.
+Discard what does not deserve to become part of the system.

@@ -49,14 +49,12 @@ The Strategic OS finalisation plan currently expects these framework files:
 | Strategic Opportunity Pipeline | `strategic_opportunity_pipeline.md` | Defines how opportunities are captured, shaped and converted |
 | Career Evidence Architecture | `career_evidence_architecture.md` | Defines how work becomes career evidence and promotion proof |
 | Project Folder Pattern | `project_folder_pattern.md` | Defines how future project folders should be structured |
-| Privacy, Governance and Retention | `privacy_governance_retention.md` | Defines what can and cannot be stored in Strategic OS |
-| Cross-Tool Architecture | `cross_tool_architecture.md` | Defines the role of GitHub, Relevance AI, Make.com, Slack, Databricks Genie, Power BI, SharePoint, Teams, Miro and Jira |
-| Strategic OS System Map | `strategic_os_system_map.md` | Shows the whole system from inputs to agents, templates, outputs, review and reuse |
+| Privacy, Governance and Retention | `privacy_governance_retention.md` | Defines what can and cannot be stored in Strategic OS, including Obsidian workspace boundaries |
+| Cross-Tool Architecture | `cross_tool_architecture.md` | Defines the role of GitHub, Obsidian, Slack, Relevance AI, Make.com, Databricks Genie, Power BI, SharePoint, Teams, Miro and Jira |
+| Strategic OS System Map | `strategic_os_system_map.md` | Shows the whole system from interaction and inputs through agents, review, storage and reuse |
 | Strategic OS QA Model | `strategic_os_qa_model.md` | Defines how the quality and performance of Strategic OS is assessed |
 
 ## Framework categories
-
-Use these categories to organise frameworks over time:
 
 ### Decision frameworks
 
@@ -100,6 +98,14 @@ Reusable models for assessing whether Strategic OS is working, useful, safe and 
 | Career Architect | Convert frameworks into career evidence and positioning value |
 | Chief of Staff Agent | Use operating frameworks to coordinate daily and weekly activity |
 
+## Workspace rule
+
+Obsidian is the preferred human workspace for navigating, linking and developing Strategic OS Markdown.
+
+GitHub remains authoritative.
+
+Framework content must remain valid, understandable Markdown outside Obsidian. Obsidian-specific metadata, links or views may enhance navigation but must not become the only way essential knowledge can be understood.
+
 ## Related templates
 
 | Template | Use |
@@ -142,4 +148,5 @@ Before saving a framework, check:
 - [ ] Is it different from an existing template?
 - [ ] Is it free of sensitive organisational source data?
 - [ ] Does it support Strategic OS principles?
+- [ ] Is it readable in GitHub and Obsidian?
 - [ ] Is there a clear example or use case?
