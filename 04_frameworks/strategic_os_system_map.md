@@ -4,7 +4,7 @@
 
 This file maps how Strategic OS works as a whole system.
 
-It shows how inputs move through capture, sensemaking, agent support, templates, review, storage, indexing and reuse.
+It shows how inputs move through interaction, capture, sensemaking, agent support, human review, storage, navigation and reuse.
 
 The purpose is to make Strategic OS understandable without needing chat history.
 
@@ -18,24 +18,129 @@ Strategic OS turns raw signals into reusable strategic knowledge.
 
 The core flow is:
 
-Inputs  
-→ `00_inbox/`  
-→ triage  
-→ agent support  
-→ template output  
-→ human review  
-→ storage  
-→ indexing  
-→ reuse  
+Inputs
+→ interaction or capture
+→ `00_inbox/` when unstructured
+→ triage
+→ agent support
+→ template or structured output
+→ human review
+→ durable Markdown
+→ GitHub
+↔ Obsidian
+→ reuse
 → better decisions, stronger alignment and more strategic opportunities
+
+## Interaction Layer
+
+Slack is the preferred lightweight interface for interacting with Strategic OS agents where integration is available.
+
+It may be used to:
+
+- ask questions
+- request synthesis
+- receive briefings
+- approve or reject proposed actions
+- capture safe signals
+- request repository-ready drafts
+
+Slack does not own durable Strategic OS knowledge.
+
+## Workspace Layer
+
+Obsidian is the primary workspace for navigating and developing Strategic OS knowledge.
+
+It supports:
+
+- authoring
+- search
+- backlinks
+- related-note discovery
+- graph navigation
+- templates
+- Canvas and visual thinking
+- review of decisions, evidence, assumptions, stakeholders, patterns and lessons
+
+Obsidian works over the Strategic OS Markdown repository.
+
+It must not become a separate divergent source of truth.
+
+## Repository Layer
+
+GitHub is the authoritative source of truth for Strategic OS structure and durable knowledge.
+
+Approved durable knowledge is stored as Markdown in the relevant repository folder.
+
+GitHub provides:
+
+- version history
+- controlled change
+- portability
+- auditability
+- repository structure
+- a common source for human and agent use
 
 ## Whole-System Map
 
-Inputs enter the system from work, reflection, projects, stakeholders, analytics, tools and external signals.
+Organisational systems and personal inputs
+→ Slack / approved interaction surface
+→ Strategic OS agents
+→ `00_inbox/` when capture is needed
+→ triage and synthesis
+→ appropriate template or output
+→ human review
+→ GitHub-backed Markdown
+↔ Obsidian workspace
+→ indexing and linking
+→ reuse in future decisions
 
-They are captured first in `00_inbox/` when they are not yet organised.
+External governed sources remain outside Strategic OS.
 
-From there, they are triaged into the right pathway:
+Strategic OS stores safe interpretation and reusable logic rather than copied source records.
+
+## Input Types
+
+Inputs may include:
+
+- meeting notes
+- stakeholder signals
+- project observations
+- decision questions
+- risks
+- opportunities
+- customer themes
+- service-design observations
+- analytical questions
+- metric caveats
+- career evidence
+- lessons
+- external research
+- thought-leadership ideas
+
+Inputs must be handled according to privacy and source-of-truth rules.
+
+## Capture Layer
+
+Use `00_inbox/` when an input is useful but not yet classified.
+
+Not every Slack message or Obsidian scratch note belongs in the inbox.
+
+Capture only material with plausible decision, learning, opportunity, project, stakeholder, career or reusable knowledge value.
+
+## Triage Layer
+
+Triage asks:
+
+- What is this?
+- Why does it matter?
+- Is a decision required?
+- Is an agent useful?
+- Is there a relevant template?
+- Is the material safe to retain?
+- Where should the durable output live?
+- Can the original input be discarded after abstraction?
+
+Typical pathways include:
 
 - decision support
 - strategic opportunity
@@ -48,141 +153,20 @@ From there, they are triaged into the right pathway:
 - reusable framework
 - reusable template
 
-Agents help structure, challenge, synthesise and coordinate the work.
-
-Templates help convert thinking into consistent outputs.
-
-Folders store outputs where they can be found and reused.
-
-Indexes make important outputs easier to review over time.
-
-Cadence keeps the system alive.
-
-QA checks whether the system is still useful, safe and aligned to the North Star.
-
-## System Components
-
-| Component | Role |
-| --- | --- |
-| Inputs | Raw signals, questions, evidence, conversations, tasks and opportunities |
-| `00_inbox/` | Temporary capture point for unsorted material |
-| Triage | Decides whether to use, develop, store, convert or discard material |
-| Agents | Support sensemaking, stakeholder alignment, shipping, career evidence and coordination |
-| Templates | Convert work into consistent outputs |
-| Output folders | Store finished or reusable material |
-| Indexes | Track important outputs without creating heavy administration |
-| Frameworks | Store reusable thinking patterns and operating rules |
-| Projects | Hold structured project-specific knowledge |
-| Analytics domains | Hold governed analytics interpretation patterns and caveats |
-| Cadence | Creates daily, weekly, monthly and quarterly rhythm |
-| QA model | Reviews whether Strategic OS is working |
-| External tools | Hold official records, communications, governed data and collaboration artefacts |
-
-## Inputs
-
-Strategic OS may receive inputs from:
-
-- meetings
-- emails
-- calendar commitments
-- stakeholder conversations
-- customer insights
-- workshops
-- project work
-- decision questions
-- analytics observations
-- dashboards
-- service data
-- external trends
-- role descriptions
-- feedback
-- operational friction
-- lessons learned
-- strategic opportunities
-- personal reflections
-- AI-assisted outputs
-
-## Input Rules
-
-Inputs should be captured when they may help with:
-
-- a decision
-- a strategic opportunity
-- stakeholder alignment
-- customer understanding
-- service improvement
-- project learning
-- career evidence
-- reusable thinking
-- future communication
-- strategic positioning
-
-Inputs should be discarded when they are:
-
-- low value
-- unsafe to store
-- duplicated
-- purely temporary
-- not useful beyond the moment
-- better retained only in official systems
-
-## Inbox
-
-Default capture location:
-
-`00_inbox/`
-
-The inbox is for temporary capture only.
-
-It is not a long-term archive.
-
-Inbox items should be reviewed and moved through the intake-to-output workflow.
-
-Possible inbox outcomes:
-
-- use now
-- develop
-- store
-- convert
-- discard
-
-## Triage
-
-Triage determines what an input should become.
-
-Triage questions:
-
-- Is this useful?
-- Is this safe to store?
-- Does it support a decision?
-- Does it reveal a pattern?
-- Does it create an opportunity?
-- Does it belong to a project?
-- Does it strengthen career evidence?
-- Should it become a framework, template or lesson?
-- Where will I look for this later?
-
-Triage is governed by:
-
-`04_frameworks/intake_to_output_workflow.md`
-
 ## Agent Layer
 
-Agents help turn inputs into structured outputs.
-
-They support judgement.
-
-They do not replace human decision-making.
+Strategic OS agents structure, challenge, synthesise and coordinate work.
 
 | Agent | Primary Role | Main Output |
-| --- | --- | --- |
+|---|---|---|
 | Sensemaking Agent | Turns ambiguity into decision-ready advice | Decision Brief |
 | Stakeholder Journey Agent | Supports stakeholder alignment and influence | Stakeholder Alignment Assessment |
 | Shipping Coach | Helps move work from refinement to delivery | Shipping Recommendation |
 | Career Architect | Turns work into career evidence and opportunity positioning | Career Guidance |
 | Chief of Staff Agent | Coordinates daily priorities, follow-ups and operating rhythm | Daily Briefing |
+| Domain Analytical Agents | Support source-aware analytical interpretation | Caveated analytical outputs |
 
-## Agent Boundaries
+### Agent Boundaries
 
 Agents may:
 
@@ -204,7 +188,24 @@ Agents must not:
 - store sensitive material without review
 - replace governance
 - treat assumptions as facts
-- copy raw organisational source data into the repo
+- copy raw organisational source data into Strategic OS
+- silently convert Slack or Obsidian content into durable repository knowledge
+
+## Human Review Layer
+
+Human review is the gate between useful agent output and durable Strategic OS knowledge.
+
+Review should confirm:
+
+- decision relevance
+- evidence quality
+- assumptions
+- caveats
+- privacy
+- source alignment
+- appropriate storage location
+- whether the material is reusable
+- whether it should be retained at all
 
 ## Template Layer
 
@@ -213,7 +214,7 @@ Templates convert agent-supported thinking into consistent outputs.
 Key templates include:
 
 | Template | Purpose |
-| --- | --- |
+|---|---|
 | `10_templates/decision_brief.md` | Supports decision-making |
 | `10_templates/lesson_learned.md` | Captures reusable lessons |
 | `10_templates/stakeholder_alignment_assessment.md` | Reviews stakeholder alignment |
@@ -224,139 +225,54 @@ Key templates include:
 | `10_templates/daily_briefing.md` | Supports daily operating rhythm |
 | `10_templates/quarterly_strategic_os_assessment.md` | Supports quarterly QA review |
 
-## Output Folders
+## Storage Layer
 
-Outputs should be stored where they will be found and reused.
+Durable outputs are stored by purpose.
 
-| Output Type | Storage Location |
-| --- | --- |
+| Output | Location |
+|---|---|
 | Unsorted capture | `00_inbox/` |
 | Career evidence | `01_career/` |
-| Strategic opportunities | `02_strategic_opportunities/` |
-| Decision briefs | `03_decision_briefs/` |
-| Frameworks | `04_frameworks/` |
-| Lessons learned | `05_lessons_learned/` |
-| Stakeholder patterns | `06_stakeholder_patterns/` |
-| Agent specifications and frameworks | `07_ai_agents/` |
-| Project artefacts | `08_projects/` |
+| Strategic opportunity | `02_strategic_opportunities/` |
+| Decision brief | `03_decision_briefs/` |
+| Reusable framework | `04_frameworks/` |
+| Lesson learned | `05_lessons_learned/` |
+| Stakeholder pattern | `06_stakeholder_patterns/` |
+| Agent specification | `07_ai_agents/` |
+| Project artefact | `08_projects/` |
 | Thought leadership | `09_thought_leadership/` |
-| Templates | `10_templates/` |
-| Analytics interpretation and domain-agent patterns | `11_analytics/` |
+| Reusable template | `10_templates/` |
+| Analytics interpretation pattern | `11_analytics/` |
+| QA material | `12_quality/` |
 
-## Index Layer
+## Knowledge Navigation Layer
 
-Indexes make important material easier to review.
+Obsidian provides the primary navigation experience over durable Markdown.
 
-Use indexes when a folder contains outputs that need to be found, compared or reviewed over time.
+Useful relationships may include:
 
-Potential indexes:
+- decision ↔ evidence
+- decision ↔ stakeholder
+- decision ↔ project
+- framework ↔ use case
+- lesson ↔ project
+- metric ↔ definition
+- metric ↔ source rule
+- opportunity ↔ career evidence
+- stakeholder pattern ↔ decision
+- prompt ↔ agent
 
-- `02_strategic_opportunities/index.md`
-- `03_decision_briefs/index.md`
-- `05_lessons_learned/index.md`
-- `06_stakeholder_patterns/index.md`
-- `01_career/index.md`
-- `08_projects/index.md`
-- `11_analytics/index.md`
+Links should improve retrieval and reasoning without creating unnecessary metadata overhead.
 
-Indexes should remain lightweight.
-
-Do not index every minor draft.
-
-## Reusable Knowledge Layer
-
-Strategic OS becomes more valuable when outputs become reusable knowledge.
-
-Reusable knowledge may include:
-
-- decision principles
-- stakeholder patterns
-- service design heuristics
-- system mapping methods
-- analytics caveats
-- project folder patterns
-- operating rhythms
-- career proof points
-- prompts
-- templates
-- frameworks
-- thought leadership seeds
-
-## Career Evidence Layer
-
-Career evidence is created when work demonstrates strategic value.
-
-Career evidence may come from:
-
-- decision support
-- stakeholder alignment
-- systems thinking
-- customer-centred design
-- human-centred design practice
-- AI-enabled ways of working
-- delivery and follow-through
-- strategic recommendations
-- frameworks or templates created
-- outcomes influenced
-- feedback received
-
-Career evidence is governed by:
-
-`04_frameworks/career_evidence_architecture.md`
-
-## Project Layer
-
-Projects hold structured project-specific knowledge.
-
-Standard project pattern:
-
-- `08_projects/project-name/README.md`
-- `08_projects/project-name/context.md`
-- `08_projects/project-name/decisions.md`
-- `08_projects/project-name/stakeholder-notes.md`
-- `08_projects/project-name/outputs/`
-- `08_projects/project-name/lessons-learned.md`
-- `08_projects/project-name/archive/`
-
-Project structure is governed by:
-
-`04_frameworks/project_folder_pattern.md`
-
-## Analytics Domain Layer
-
-Analytics domains live under:
-
-`11_analytics/`
-
-They support governed analytics interpretation, source rules and caveats.
-
-Example pilot pattern:
-
-`11_analytics/service-account/`
-
-A mature analytics domain may include:
-
-- `agent_context.md`
-- `agent_review_prompt.md`
-- `agent_consistency_check.md`
-- `genie_context.md`
-- `metric_caveats.md`
-- `source_rules.md`
-
-Analytics domains should not store raw governed datasets or customer-level data.
-
-They should store interpretation rules, caveats, source logic and safe analytical patterns.
-
-## External Tool Layer
-
-Strategic OS connects to external tools through clear boundaries.
+## Tool Layer
 
 | Tool | Role |
-| --- | --- |
-| GitHub | Strategic OS knowledge repository |
+|---|---|
+| Slack | Agent interaction and lightweight capture |
+| Obsidian | Strategic workspace, linking and navigation |
+| GitHub | Authoritative Strategic OS knowledge repository |
 | Relevance AI | Agent memory and reasoning layer |
 | Make.com | Workflow orchestration |
-| Slack | User interface and lightweight interaction |
 | Databricks Genie | Governed data interrogation |
 | Power BI | Reporting source of truth |
 | SharePoint / OneDrive | Organisational document storage |
@@ -368,30 +284,117 @@ Tool boundaries are governed by:
 
 `04_frameworks/cross_tool_architecture.md`
 
-## Review Points
+## Source-Of-Truth Layer
 
-Strategic OS has review points at multiple rhythms.
+Strategic OS does not replace official systems.
 
-## Daily Review
+Official sources remain authoritative for:
 
-Focus:
+- governed data
+- formal documents
+- customer records
+- reporting
+- delivery records
+- approvals
+- organisational communications
 
-- daily priorities
-- key meetings
+Strategic OS retains safe reusable interpretation, patterns, decision logic, definitions, caveats and lessons.
+
+## Core Flows
+
+### Flow 1: Input To Decision
+
+Input
+→ Slack or `00_inbox/`
+→ Sensemaking Agent
+→ `10_templates/decision_brief.md`
+→ human review
+→ `03_decision_briefs/`
+→ GitHub
+↔ Obsidian
+→ future decision support
+
+### Flow 2: Input To Strategic Opportunity
+
+Input
+→ capture
+→ Career Architect or Sensemaking Agent
+→ opportunity review
+→ human review
+→ `02_strategic_opportunities/`
+→ GitHub
+↔ Obsidian
+→ revisit when trigger occurs
+
+### Flow 3: Work To Lesson
+
+Experience
+→ reflection
+→ Sensemaking Agent or Shipping Coach
+→ lesson learned
+→ human review
+→ `05_lessons_learned/`
+→ linked to relevant framework or project
+→ reuse
+
+### Flow 4: Stakeholder Signal To Pattern
+
+Signal
+→ safe abstraction
+→ Stakeholder Journey Agent
+→ stakeholder alignment assessment
+→ human review
+→ `06_stakeholder_patterns/`
+→ reuse without retaining unnecessary identifiable detail
+
+### Flow 5: Governed Analytics To Decision Support
+
+Business question
+→ Databricks Genie / approved data source
+→ metric definition and source check
+→ caveated interpretation
+→ Domain Analytical Agent
+→ human review
+→ safe analytical summary
+→ decision support
+
+Raw data remains in the governed source.
+
+### Flow 6: Agent Conversation To Durable Knowledge
+
+Slack conversation
+→ agent recommendation
+→ identify reusable value
+→ remove sensitive or temporary context
+→ human review
+→ repository-ready Markdown
+→ GitHub
+↔ Obsidian
+
+The raw conversation is not the durable knowledge object.
+
+## Review Rhythm
+
+### Daily
+
+Focus on:
+
+- priorities
+- meetings
 - decisions required
 - stakeholder preparation
 - follow-ups
 - risks and blockers
-- admin loose ends
 
 Primary support:
 
 - Chief of Staff Agent
-- `10_templates/daily_briefing.md`
+- Slack
+- Obsidian workspace as needed
 
-## Weekly Review
+### Weekly
 
-Focus:
+Focus on:
 
 - inbox triage
 - sensemaking
@@ -400,31 +403,20 @@ Focus:
 - open decisions
 - project movement
 
-Primary support:
+### Monthly
 
-- Sensemaking Agent
-- Shipping Coach
-- Stakeholder Journey Agent
-
-## Monthly Review
-
-Focus:
+Focus on:
 
 - strategic opportunities
 - lessons learned
 - career evidence
 - frameworks and templates
 - active project patterns
+- knowledge links that are genuinely useful
 
-Primary support:
+### Quarterly
 
-- Career Architect
-- Strategic Opportunity Pipeline
-- Career Evidence Architecture
-
-## Quarterly Review
-
-Focus:
+Focus on:
 
 - Strategic OS QA
 - agent performance
@@ -432,165 +424,24 @@ Focus:
 - repository hygiene
 - privacy and governance compliance
 - North Star alignment
-- Databricks / Genie analytical reliability, where relevant
+- tool architecture effectiveness
+- whether Obsidian is improving retrieval and decision quality rather than creating maintenance overhead
 
-Primary support:
+## System Health Questions
 
-- Strategic OS QA Model
-- Quarterly Strategic OS Assessment template
+Ask:
 
-## Core Flows
+- Is Strategic OS helping make better strategic decisions?
+- Is Slack making agent interaction easier?
+- Is Obsidian making relevant knowledge easier to find and connect?
+- Is GitHub still clearly authoritative?
+- Are agents supporting rather than replacing judgement?
+- Is reusable knowledge being captured without raw organisational data?
+- Are official systems still treated as systems of record?
+- Is the system becoming simpler through use rather than more complex through configuration?
 
-## Flow 1: Input To Decision
+## Final Rule
 
-Input  
-→ `00_inbox/`  
-→ triage  
-→ Sensemaking Agent  
-→ `10_templates/decision_brief.md`  
-→ human review  
-→ `03_decision_briefs/`  
-→ decision support  
-→ lesson or framework if reusable
+Strategic OS should behave as one connected operating system:
 
-## Flow 2: Input To Strategic Opportunity
-
-Input  
-→ `00_inbox/`  
-→ triage  
-→ Career Architect or Sensemaking Agent  
-→ `10_templates/opportunity_review.md`  
-→ `02_strategic_opportunities/index.md`  
-→ active, parked, declined or converted  
-→ project, career evidence, decision brief or thought leadership
-
-## Flow 3: Input To Stakeholder Pattern
-
-Input  
-→ `00_inbox/`  
-→ triage  
-→ Stakeholder Journey Agent  
-→ `10_templates/stakeholder_alignment_assessment.md`  
-→ human review  
-→ `06_stakeholder_patterns/`  
-→ reusable engagement pattern
-
-## Flow 4: Input To Project Artefact
-
-Input  
-→ `00_inbox/`  
-→ triage  
-→ relevant agent  
-→ project output  
-→ `08_projects/project-name/`  
-→ decision, lesson, output or archive
-
-## Flow 5: Input To Career Evidence
-
-Input  
-→ `00_inbox/`  
-→ triage  
-→ Career Architect  
-→ career evidence note  
-→ `01_career/`  
-→ promotion readiness, opportunity positioning or interview story
-
-## Flow 6: Input To Analytics Interpretation
-
-Analytics question  
-→ governed data tool  
-→ source and caveat review  
-→ safe interpretation  
-→ `11_analytics/`  
-→ decision support or analytics lesson
-
-## Flow 7: Input To Reusable Framework
-
-Repeated pattern  
-→ `00_inbox/` or project folder  
-→ Sensemaking Agent  
-→ framework draft  
-→ human review  
-→ `04_frameworks/`  
-→ future reuse
-
-## Source Of Truth Map
-
-| Knowledge Type | Source Of Truth |
-| --- | --- |
-| Strategic OS structure | GitHub |
-| Frameworks | GitHub |
-| Templates | GitHub |
-| Agent specs | GitHub |
-| Official organisational documents | SharePoint / OneDrive |
-| Governed data | Databricks or governed data platform |
-| Approved reporting | Power BI |
-| Operational communication | Teams / Email / Calendar |
-| Delivery tracking | Jira |
-| Visual collaboration | Miro |
-| Workflow automation | Make.com |
-| Agent reasoning | Relevance AI |
-
-## Safety Layer
-
-All flows must follow:
-
-`04_frameworks/privacy_governance_retention.md`
-
-Core safety rules:
-
-- do not store raw organisational source data
-- do not store customer-level records
-- do not store sensitive stakeholder commentary
-- do not copy operational data from systems of record
-- do not store governed datasets
-- use summaries, patterns, caveats and reusable learning
-- separate evidence, assumptions, interpretation, recommendation and action
-- review sensitive files before committing
-
-## System Success Measures
-
-Strategic OS is working when:
-
-- important inputs are not lost
-- the inbox is triaged regularly
-- decisions are easier to frame
-- stakeholders are easier to align
-- projects create reusable learning
-- career evidence accumulates naturally
-- agents produce useful outputs
-- templates reduce friction
-- analytics interpretation includes caveats
-- privacy and governance boundaries are respected
-- strategic opportunities are captured and converted
-- the system supports the North Star
-
-## System Failure Modes
-
-Strategic OS is failing if:
-
-- `00_inbox/` becomes permanent storage
-- outputs are created but not reused
-- agents generate noise instead of clarity
-- templates become too heavy
-- indexes are not maintained
-- sensitive information is stored unnecessarily
-- project folders become dumping grounds
-- analytics caveats are lost
-- career evidence is captured too late
-- opportunities are not reviewed
-- the system adds work without improving decisions
-
-## Minimal Operating Rule
-
-When in doubt, use the smallest path that creates value.
-
-Capture only what matters.
-
-Store only what is safe and useful.
-
-Review before committing.
-
-Reuse what helps future decisions.
-
-Discard what creates clutter or risk.
+**Interact through agents. Navigate and think in Obsidian. Govern durable knowledge in GitHub. Keep organisational truth in organisational systems.**
