@@ -2,70 +2,174 @@
 
 ## Purpose
 
-Assess which organisation-approved enterprise AI agents can reduce recurring administrative work, retrieve authoritative organisational policy and guidance, and support Strategic OS work by playing to the native strengths of each platform.
+Assess how organisation-approved enterprise AI capabilities can reduce recurring administrative work, improve access to authoritative organisational guidance and support Strategic OS without duplicating systems of record.
 
-This assessment replaces the earlier Microsoft 365 Copilot-only capability test.
+The initial discovery phase is now complete.
+
+The assessment has established a small number of useful roles rather than a broad enterprise-AI architecture.
 
 ## Decision question
 
-Which enterprise AI agents should be used for which recurring work because they:
-- remove repetitive administration;
-- retrieve authoritative organisational information from their native systems;
-- prepare useful outputs for human review;
-- work within restrictive organisational permissions and governance;
-- avoid duplicating another platform's stronger capability; and
-- require low ongoing human management once configured?
+Which enterprise AI capabilities should be used for which work because they:
 
-## Operating assumption
+- play to the strengths of the system they already sit within;
+- reduce recurring manual administration;
+- preserve authoritative organisational sources;
+- work within restrictive organisational permissions and governance;
+- require little ongoing configuration or maintenance; and
+- avoid duplicating another platform or Strategic OS capability?
+
+## Operating principle
 
 Assume a conservative, risk-averse organisational environment.
 
-Agents may be able to retrieve, summarise, classify, prepare, draft and recommend a next administrative action.
-
-Do not assume they can autonomously decide, publish, alter authoritative records, execute cross-system workflows, use unrestricted connectors, or retain sensitive organisational knowledge outside approved systems.
-
-Preferred pattern:
+Prefer:
 
 > Retrieve → summarise → prepare → human review → action in the system of record.
 
-## Platforms in scope
+Do not design around autonomous execution unless a real, approved workflow proves it is available and worthwhile.
 
-- **Microsoft 365 Copilot / Agent Builder** — meetings, email, calendar, Microsoft 365 knowledge, policy retrieval and narrow repeatable admin support.
-- **Atlassian Rovo** — Jira, Confluence, project governance, decision traceability and Atlassian-based policy/process retrieval.
-- **Databricks Genie** — governed analytics, repeatable metric retrieval and diagnostic evidence.
-- **Miro AI / Sidekick** — extraction and summarisation of existing board content.
+## Current enterprise AI roles
 
-Miro AI is not being assessed as a creativity or design substitute.
+### CoMpanion — adopted
+
+Primary role:
+
+> Internal organisational process, policy and service-navigation agent.
+
+Use CoMpanion to:
+
+- find internal processes and procedures;
+- identify relevant organisational guidance;
+- locate authoritative internal sources;
+- find forms and Service Hub requests;
+- explain role or access requirements;
+- provide procedural steps;
+- navigate CoMWeb, Service Hub, Salesforce Knowledge and other approved sources exposed through the agent.
+
+CoMpanion provides guidance and navigation.
+
+It does not create or update organisational records, accounts, permits or documents.
+
+### Microsoft 365 Copilot in Teams — adopted for narrow use
+
+Primary role:
+
+> Teams activity management assistant.
+
+Use Copilot in Teams to support:
+
+- meeting recap;
+- meeting decisions;
+- actions and owners;
+- unresolved questions;
+- personal follow-up;
+- meeting preparation where Teams context is available;
+- chat catch-up;
+- preparation of follow-up messages or task lists.
+
+Do not treat generic Copilot Chat as the preferred organisational policy or process retrieval layer.
+
+CoMpanion is better positioned for that role because it exposes approved internal organisational knowledge sources.
+
+### Databricks Genie — existing capability
+
+Primary role:
+
+> Governed analytics and evidence retrieval.
+
+Genie has already been tested through analytics work.
+
+Continue using it for:
+
+- governed metric retrieval;
+- diagnostic analysis;
+- source-aligned analytical questions;
+- metric-definition checking;
+- evidence preparation.
+
+Do not duplicate the Genie assessment in this project.
+
+### Atlassian Rovo — deferred
+
+Rovo is available but will be evaluated later through real Jira and Confluence project workflows.
+
+Likely areas for future testing include:
+
+- project-state retrieval;
+- decision traceability;
+- Jira and Confluence reconciliation;
+- project governance preparation;
+- organisational process retrieval where Confluence is authoritative.
+
+Do not create a generic Rovo test before a real project workflow requires it.
+
+### Miro AI / Sidekick — deferred
+
+Miro AI is available but will be evaluated later inside real Miro and project workflows.
+
+Potential narrow uses include:
+
+- extracting actions;
+- identifying decisions;
+- summarising existing board content;
+- preparing handoff material.
+
+Do not assess Miro AI as a creativity or design substitute.
+
+## Custom Copilot agents
+
+The proposed custom Copilot "Meeting Admin" agent is not being pursued.
+
+Current Agent Builder exploration did not expose enough useful execution capability to justify creating and maintaining another agent.
+
+The existing Teams Copilot capability should be used first.
+
+Revisit custom agents only if repeated work exposes a clear task that:
+
+- cannot be handled adequately by existing enterprise agents;
+- can be automated within approved organisational controls; and
+- removes more recurring administration than the agent introduces.
 
 ## Strategic OS boundary
 
-Strategic OS remains the durable layer for interpretation, decision logic, reusable operating patterns, caveats and lessons.
+Organisational systems remain authoritative for:
 
-Organisational systems remain the source of truth for policies, documents, meetings, email, Jira, Confluence, governed data, Miro boards and official records.
+- organisational policy;
+- internal procedures;
+- documents;
+- meetings;
+- email;
+- project records;
+- governed analytics;
+- official records.
+
+Strategic OS retains only:
+
+- reusable interpretation;
+- decisions;
+- caveats;
+- operating patterns;
+- safe capability findings;
+- lessons learned.
 
 Do not copy raw organisational source material into this repository.
 
-## Files
+## Current operating model
 
-- `context.md`
-- `decisions.md`
-- `stakeholder-notes.md`
-- `outputs/enterprise-ai-agent-capability-assessment.md`
-- `lessons-learned.md`
-- `archive/`
+| Need | Preferred capability |
+|---|---|
+| Internal policy and process navigation | CoMpanion |
+| Internal forms and Service Hub pathways | CoMpanion |
+| Teams meeting and chat administration | Microsoft 365 Copilot in Teams |
+| Governed analytics | Databricks Genie |
+| Jira / Confluence AI support | Rovo — assess in project workflow |
+| Miro board AI support | Miro AI — assess in project workflow |
+| Strategic interpretation | Strategic OS + human judgement |
+| Creativity and design | Human-led |
 
-## Current status
+## Status
 
-**Phase:** Capability discovery
+**Initial enterprise AI discovery: Complete**
 
-Current evidence confirms the presence of Microsoft 365 Copilot, Microsoft agent-building surfaces, organisation-deployed Copilot Studio agents, Atlassian Rovo, Databricks Genie and Miro AI / Sidekick.
-
-Presence does not prove unrestricted permissions, full licensing, approved connectors or write capability.
-
-## Test rule
-
-Do not compare agents on generic creativity or writing quality.
-
-Test each platform against the work it is structurally best positioned to support.
-
-> What recurring work can this agent prepare correctly enough that the user mainly needs to review and act?
+**Next phase:** Use the adopted capabilities in normal work and only expand the model when repeated real use exposes a genuine gap.
