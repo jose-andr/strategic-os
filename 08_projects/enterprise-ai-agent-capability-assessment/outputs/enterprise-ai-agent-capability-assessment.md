@@ -13,7 +13,7 @@ The goal was not to catalogue every AI capability available in the organisation.
 | Capability | Platform | Result | Decision |
 |---|---|---|---|
 | Internal organisational process navigation | CoMpanion | Proven useful | Adopt |
-| Internal policy / guidance navigation | CoMpanion | Strong fit based on internal knowledge access; validate source where material | Adopt |
+| Internal policy and guidance navigation | CoMpanion | Strong fit based on internal knowledge access; validate source where material | Adopt |
 | Internal forms and service pathways | CoMpanion | Proven useful | Adopt |
 | Teams meeting activity management | Microsoft 365 Copilot | Available | Adopt for narrow use |
 | Teams chat activity management | Microsoft 365 Copilot | Available capability | Adopt for narrow use |
@@ -23,15 +23,13 @@ The goal was not to catalogue every AI capability available in the organisation.
 | Jira / Confluence AI workflow | Atlassian Rovo | Not assessed in this phase | Defer to project workflow |
 | Miro board AI workflow | Miro AI / Sidekick | Not assessed in this phase | Defer to project workflow |
 
----
+## CoMpanion
 
-# CoMpanion
-
-## Role
+### Role
 
 > Internal organisational process, policy and service-navigation agent.
 
-## Capability evidence
+### Capability evidence
 
 CoMpanion demonstrated useful internal process retrieval for software and system-access requests.
 
@@ -58,7 +56,7 @@ Sources used in the observed test included:
 - Ivanti / Service Hub knowledge;
 - approved organisational source material exposed through CoMpanion.
 
-## What CoMpanion can support
+### What CoMpanion can support
 
 Use it for questions such as:
 
@@ -70,7 +68,7 @@ Use it for questions such as:
 - Where is the authoritative internal guidance?
 - What internal source should I validate before acting?
 
-## Execution boundary
+### Execution boundary
 
 CoMpanion states that it does not directly:
 
@@ -81,11 +79,11 @@ CoMpanion states that it does not directly:
 - perform administrative actions;
 - make decisions affecting individuals.
 
-## Preferred interaction pattern
+### Preferred interaction pattern
 
 > Ask → locate source → understand process → follow link → act in system of record.
 
-## Strategic OS decision
+### Strategic OS decision
 
 **Adopt.**
 
@@ -93,15 +91,13 @@ CoMpanion is the preferred agent for internal organisational process and policy 
 
 Do not duplicate this role with a custom Strategic OS agent.
 
----
+## Microsoft 365 Copilot in Teams
 
-# Microsoft 365 Copilot in Teams
-
-## Role
+### Role
 
 > Teams activity management assistant.
 
-## Scope
+### Scope
 
 Use Copilot for:
 
@@ -115,9 +111,9 @@ Use Copilot for:
 - catching up on Teams conversations;
 - meeting preparation where Teams context is available.
 
-## Meeting configuration observed
+### Meeting configuration observed
 
-### Copilot
+#### Copilot
 
 Copilot can be enabled:
 
@@ -125,7 +121,7 @@ Copilot can be enabled:
 
 This setting appeared organisation-controlled in the tested meeting configuration.
 
-### Transcription
+#### Transcription
 
 Transcription can be configured as:
 
@@ -137,18 +133,18 @@ However, a newly created meeting still defaulted to:
 
 No user-accessible meeting template was available to make transcription-only the default for every new meeting.
 
-## Practical workflow
+### Practical workflow
 
 Current lowest-maintenance workflow:
 
-1. create Teams meeting;
-2. enable transcription where appropriate;
-3. Copilot is available during and after the meeting;
-4. allow Teams to retain meeting context;
-5. use Copilot for recap, decisions, actions and follow-up preparation;
-6. human reviews and transfers required actions to the appropriate system.
+1. Create Teams meeting.
+2. Enable transcription where appropriate.
+3. Copilot is available during and after the meeting.
+4. Allow Teams to retain meeting context.
+5. Use Copilot for recap, decisions, actions and follow-up preparation.
+6. Human reviews and transfers required actions to the appropriate system.
 
-## Policy-search test
+### Policy-search test
 
 Generic Copilot Chat was tested for internal AI-use guidance.
 
@@ -160,36 +156,34 @@ Therefore:
 
 Use CoMpanion for internal organisational guidance.
 
-## Strategic OS decision
+### Strategic OS decision
 
 **Adopt for narrow use.**
 
 Copilot owns Teams activity management, not broad organisational knowledge management.
 
----
+## Custom Copilot Agent Builder
 
-# Custom Copilot Agent Builder
+### Experiment
 
-## Experiment
-
-A possible custom "Meeting Admin" agent was explored.
+A possible custom Meeting Admin agent was explored.
 
 The intended workflow was:
 
-> create meeting → configure transcription → use meeting context → prepare recap/actions.
+> Create meeting → configure transcription → use meeting context → prepare recap and actions.
 
-## Finding
+### Finding
 
 The available Agent Builder surface demonstrated lightweight agent configuration but did not provide enough confirmed execution capability to justify building and maintaining the proposed agent.
 
-There was no sufficient evidence from the explored configuration that the agent could reliably:
+There was insufficient evidence from the explored configuration that the agent could reliably:
 
 - create and configure Teams meetings;
 - enable transcription automatically;
 - control Teams meeting options;
 - execute useful downstream administrative actions.
 
-## Decision
+### Decision
 
 **Reject for now.**
 
@@ -199,11 +193,9 @@ Use native Teams Copilot capability first.
 
 Revisit only if repeated work reveals a genuine gap and approved execution capability becomes available.
 
----
+## Databricks Genie
 
-# Databricks Genie
-
-## Role
+### Role
 
 > Governed analytics and evidence retrieval.
 
@@ -220,18 +212,16 @@ Continue to use it for:
 
 Do not duplicate Genie testing in this project.
 
-Strategic OS remains responsible for turning the analytical evidence into:
+Strategic OS remains responsible for turning analytical evidence into:
 
 - interpretation;
 - caveat;
 - recommendation;
 - decision implication.
 
----
+## Atlassian Rovo
 
-# Atlassian Rovo
-
-## Status
+### Status
 
 **Deferred to project workflow.**
 
@@ -249,11 +239,9 @@ Likely future areas:
 - RAID preparation;
 - delivery-to-documentation alignment.
 
----
+## Miro AI / Sidekick
 
-# Miro AI / Sidekick
-
-## Status
+### Status
 
 **Deferred to project workflow.**
 
@@ -277,53 +265,53 @@ Do not rely on Miro AI for:
 
 These remain human-led.
 
----
+## Enterprise AI operating model
 
-# Enterprise AI operating model
+Internal organisational guidance  
+→ CoMpanion  
+→ source + process + form  
+→ human  
+→ organisational system of record
 
-```text
-Internal organisational guidance
-        ↓
-    CoMpanion
-        ↓
-source + process + form
-        ↓
-      Human
-        ↓
-organisational system of record
+Teams meetings and chats  
+→ Microsoft 365 Copilot  
+→ recap + actions + follow-up  
+→ human  
+→ appropriate work system
 
+Governed organisational data  
+→ Databricks Genie  
+→ metrics + diagnostics + evidence  
+→ human  
+→ Strategic OS interpretation
 
-Teams meetings + chats
-        ↓
-Microsoft 365 Copilot
-        ↓
-recap + actions + follow-up
-        ↓
-      Human
-        ↓
-appropriate work system
+Jira / Confluence  
+→ Rovo  
+→ assess later in project workflow
 
+Miro boards  
+→ Miro AI  
+→ assess later in project workflow
 
-Governed organisational data
-        ↓
-Databricks Genie
-        ↓
-metrics + diagnostics + evidence
-        ↓
-      Human
-        ↓
-Strategic OS interpretation
+## Final decision
 
+Do not build a broad enterprise-AI architecture.
 
-Jira / Confluence
-        ↓
-Rovo
-        ↓
-assess later in project workflow
+Use the smallest approved capability closest to the authoritative source.
 
+Current adopted pattern:
 
-Miro boards
-        ↓
-Miro AI
-        ↓
-assess later in project workflow
+> CoMpanion for organisational navigation.  
+> Copilot for Teams activity.  
+> Genie for analytics.  
+> Rovo and Miro AI only when real project workflows justify testing.  
+> Strategic OS for reusable interpretation and decision logic.  
+> Human judgement for decisions, creativity and design.
+
+## Assessment state
+
+**Complete.**
+
+Do not continue generic enterprise-AI exploration.
+
+Future capability assessment should occur through real work.
