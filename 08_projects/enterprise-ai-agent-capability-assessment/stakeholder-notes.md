@@ -2,55 +2,118 @@
 
 ## Purpose
 
-Capture safe, generalised governance and stakeholder considerations that affect enterprise AI use.
+Record only governance or stakeholder considerations that materially affect the adopted enterprise AI operating model.
 
 ## Working organisational posture
 
-Assume a conservative risk posture until evidence shows otherwise.
+Assume a conservative risk posture.
 
-Favour:
-- read access before write access;
-- preparation before autonomous action;
-- existing approved systems before new integrations;
+Prefer:
+
+- approved enterprise agents;
+- authorised source access;
+- read and retrieval before write access;
+- human review before action;
+- existing systems of record;
 - explicit provenance;
-- narrow use cases;
-- human review;
-- reversible workflows.
+- narrow, reversible workflows.
 
-## Stakeholder questions
+## CoMpanion
 
-### Microsoft 365 / IT administration
-- Which Copilot capabilities are licensed?
-- Which agent-building capabilities are enabled?
-- Which connectors or actions are permitted?
-- Can agents write to organisational systems or only retrieve?
+### Current role
 
-### Atlassian administration
-- Which Rovo sources and connectors are enabled?
-- Can Rovo agents access both Jira and Confluence?
-- Can agents be used in Jira automation?
-- Which write actions are restricted?
-- Are policy spaces indexed and authoritative?
+CoMpanion is treated as the preferred internal organisational navigation agent.
 
-### Data / Databricks governance
-- Which Genie spaces are governed for business use?
-- Which metric definitions are authoritative?
-- Can Genie expose source, grain, filters and metric logic?
+It can support:
 
-### Privacy / records / information security
-- What policy governs AI use?
-- What guidance applies to meeting transcripts and summaries?
-- What information may be used with enterprise agents?
-- Which generated outputs become organisational records?
-- Which integrations or connectors are prohibited?
+- process discovery;
+- policy and guidance discovery;
+- internal system navigation;
+- forms and Service Hub pathways;
+- procedural guidance.
+
+### Governance boundary
+
+CoMpanion does not replace:
+
+- process owners;
+- policy owners;
+- Service Hub;
+- organisational records;
+- approval workflows.
+
+Where a decision depends on exact policy wording, authority or current approval status, follow the source returned by CoMpanion and validate there.
+
+### Evidence handling
+
+Do not copy full internal CoMpanion source material into Strategic OS.
+
+Retain only:
+
+- safe source reference;
+- interpretation;
+- process implication;
+- decision;
+- reusable lesson.
+
+## Microsoft 365 Copilot in Teams
+
+### Current role
+
+Copilot is limited to Teams activity management.
+
+### Governance boundary
+
+Meeting transcription should only be enabled where appropriate and permitted.
+
+Meeting transcripts and Teams content remain within organisational systems.
+
+Strategic OS should not store raw transcripts.
+
+### Operational constraint
+
+Copilot can be available during and after meetings, but transcription currently requires a meeting-level setting rather than automatically applying to every new meeting.
+
+Do not pursue a complex workaround unless repeated use shows that the manual step materially reduces value.
+
+## Custom Copilot agents
+
+No custom Strategic OS-related Copilot agent is currently required.
+
+Do not request additional permissions, connectors or automation capability without a demonstrated workflow need.
+
+## Databricks Genie
+
+Existing analytics governance continues to apply.
+
+Use governed definitions where available and preserve:
+
+- metric definition;
+- source;
+- numerator;
+- denominator;
+- grain;
+- filters;
+- period;
+- caveat.
+
+Do not move raw organisational analytical extracts into Strategic OS.
+
+## Rovo and Miro
+
+No additional governance investigation is required now.
+
+Assess governance only when a real project workflow is tested.
 
 ## Engagement rule
 
-Do not begin broad governance discovery before a concrete use case exposes a dependency.
+Do not conduct broad stakeholder or governance discovery for hypothetical AI use.
 
 Use:
-1. identify a recurring task;
-2. test the visible capability;
-3. record the exact restriction;
-4. ask the smallest governance or admin question needed;
-5. update the decision.
+
+1. identify a real recurring task;
+2. use the existing approved capability;
+3. observe the specific constraint;
+4. identify the smallest required governance question;
+5. seek clarification only when necessary;
+6. update the operating decision.
