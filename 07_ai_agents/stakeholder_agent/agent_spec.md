@@ -1,4 +1,3 @@
-```markdown
 # Stakeholder Journey Agent Specification
 
 ## Mission
