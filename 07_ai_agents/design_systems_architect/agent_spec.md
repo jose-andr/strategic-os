@@ -1,4 +1,3 @@
-```markdown
 # Design Systems Architect Agent Specification
 
 ## Mission
