@@ -122,15 +122,252 @@ Avoid creating permanent notes for every thought.
 
 If the input is not yet classified and is safe to retain, use `00_inbox/`.
 
-### Enterprise AI And Meeting-Capture Rule
+### Enterprise AI And Conversation-Capture Rule
 
-Microsoft 365 Copilot or another approved enterprise AI may be used to summarise meetings, query authorised organisational knowledge and reduce administrative work where organisationally enabled.
+Organisational conversations may contain useful decision context, stakeholder signals, commitments, risks, unresolved questions and reusable learning.
 
-External capture tools such as PLAUD must be treated as evaluation items until organisational approval, consent, privacy, security and records requirements are confirmed.
+Strategic OS should use those conversations selectively without becoming a transcript repository.
 
-Do not transfer raw meeting transcripts, recordings, private communications or sensitive organisational content into Strategic OS.
+The operating principle is:
 
-Extract only the reviewed strategic signal that is safe and useful to retain.
+> Reuse approved source transcripts where they already exist. Use approved capture tools only where needed. Interpret through Strategic OS agents. Retain only reviewed strategic abstraction.
+
+#### Source hierarchy
+
+Use the lowest-cost approved source that preserves useful conversational evidence.
+
+Preferred order:
+
+1. approved organisational transcript, such as a Microsoft Teams transcript;
+2. approved external capture and transcription service, such as PLAUD, where organisational requirements permit;
+3. approved manual notes;
+4. no capture where recording or transcription is not permitted.
+
+Microsoft 365 Copilot may support authorised organisational synthesis, search or administrative work where enabled, but Strategic OS does not depend on Copilot-generated interpretation.
+
+Where a raw Teams transcript is available and permitted for use, prefer the transcript itself as source evidence rather than relying on an AI-generated meeting summary.
+
+PLAUD should be treated as a complementary conversation-capture capability, not the mandatory source for every meeting.
+
+Useful PLAUD scenarios may include:
+
+- permitted Teams or online meetings where organisational transcription is unavailable;
+- permitted in-person stakeholder meetings;
+- permitted workshops;
+- permitted phone conversations;
+- personal reflections or voice notes; and
+- other conversations that would otherwise lose strategically useful context.
+
+External capture tools such as PLAUD remain subject to organisational approval, consent, privacy, security, information-management and records requirements.
+
+A capture tool must never be used to bypass a restriction on recording or transcription.
+
+#### Source-independent conversation intake
+
+Strategic OS agents should operate on approved conversational evidence regardless of which permitted source produced it.
+
+Typical sources may include:
+
+- Teams transcript;
+- PLAUD transcript;
+- approved meeting notes;
+- approved workshop notes; or
+- personal reflection.
+
+The downstream reasoning workflow should remain consistent across sources.
+
+Suggested flow:
+
+    Conversation
+        ↓
+    Approved transcript or notes
+        ↓
+    Strategic OS conversation extraction
+        ↓
+    Human review
+        ↓
+    Approve / edit / discard
+        ↓
+    Relevant Strategic OS destination
+
+The capture source does not determine the Strategic OS destination.
+
+#### Conversation extraction
+
+Where a transcript or sufficiently detailed conversation record is available, the relevant Strategic OS agent should extract only decision-relevant and reusable signals.
+
+Use this seven-part structure:
+
+1. **Decision**  
+   What decision was made, clarified, deferred, challenged or revealed as necessary?
+
+2. **Evidence**  
+   What was explicitly stated, agreed or demonstrated?
+
+3. **Stakeholder signal**  
+   What became clearer about priorities, concerns, expectations, decision criteria, alignment, tension or support needs?
+
+4. **Unresolved**  
+   What remains uncertain, contested, unvalidated, dependent on further evidence or awaiting a decision?
+
+5. **Strategic opportunity**  
+   Is there an opportunity to improve a strategic decision, stakeholder alignment, evidence use, service design or organisational capability?
+
+6. **Next action**  
+   What is the smallest useful next action?
+
+7. **Strategic signal**  
+   What is the minimum reusable insight worth carrying forward?
+
+The extraction must:
+
+- distinguish evidence from interpretation;
+- preserve uncertainty;
+- avoid inventing agreement, intent, decisions or commitments;
+- flag possible transcription errors or missing context;
+- identify claims requiring validation against a system of record;
+- minimise sensitive or identifiable detail; and
+- remain a draft until human reviewed.
+
+If no meaningful strategic signal exists, discard the output.
+
+#### Tool roles
+
+Where approved and configured, the preferred roles are:
+
+**Teams or approved organisational systems**
+
+Provide authorised source transcripts and remain organisational systems of record.
+
+**PLAUD**
+
+Provides supplementary conversation capture and transcription where permitted.
+
+PLAUD does not become the Strategic OS knowledge repository.
+
+**Slack**
+
+Acts as the primary Strategic OS interaction and review surface.
+
+Slack may be used to:
+
+- submit an approved transcript or reference;
+- trigger conversation analysis;
+- review the extracted strategic signal;
+- approve, edit or discard the result; and
+- request follow-up from the relevant agent.
+
+Slack conversation history should not be treated as durable Strategic OS knowledge merely because analysis occurred there.
+
+**Make.com**
+
+Provides workflow orchestration where appropriate.
+
+Typical responsibilities may include:
+
+- receiving an approved conversation input;
+- routing metadata and permitted transcript content to the relevant agent;
+- returning structured outputs to Slack;
+- routing approved outputs toward the correct workflow; and
+- reducing repetitive manual administration.
+
+Make.com should move and coordinate information rather than provide strategic judgement.
+
+**Relevance AI**
+
+Provides agent reasoning, structured interpretation and memory where appropriate.
+
+A conversation-analysis agent may use the seven-part extraction structure to convert approved source material into decision-relevant signals.
+
+Relevance AI must not be treated as an organisational system of record.
+
+**GitHub / Strategic OS**
+
+Stores only approved durable abstraction.
+
+Raw organisational transcripts, recordings and sensitive source material must not be stored in the Strategic OS repository.
+
+#### Human review gate
+
+Conversation-derived outputs require human review before durable retention.
+
+The reviewer should decide:
+
+- Is the evidence represented accurately?
+- Is interpretation separated from what was explicitly stated?
+- Is the decision signal real rather than inferred?
+- Are stakeholder signals proportionate to the evidence?
+- Is sensitive material sufficiently removed or abstracted?
+- Does the output contain reusable strategic value?
+- Does it belong in Strategic OS at all?
+- Which existing output type or folder is appropriate?
+
+The result should be:
+
+- approve;
+- edit; or
+- discard.
+
+Automatic transcript-to-GitHub storage is not permitted.
+
+#### Routing approved strategic signals
+
+After review, route only the minimum useful abstraction.
+
+Typical routing includes:
+
+- decision or trade-off → `03_decision_briefs/`
+- strategic possibility → `02_strategic_opportunities/`
+- reusable learning → `05_lessons_learned/`
+- stakeholder pattern → `06_stakeholder_patterns/`
+- project-specific context → `08_projects/`
+- career evidence → `01_career/`
+- useful but not yet classified → `00_inbox/`
+- no enduring value → discard
+
+Do not create a new output type when an existing Strategic OS structure is adequate.
+
+#### Cost-aware capture rule
+
+Do not pay to recreate a transcript that already exists in an approved organisational system.
+
+For an online meeting:
+
+    Is an approved organisational transcript available?
+        ↓
+      Yes → use that transcript
+        ↓
+       No
+        ↓
+    Is external capture permitted?
+        ↓
+      Yes → use approved PLAUD capture or another approved source
+        ↓
+       No
+        ↓
+    use approved manual notes or do not capture
+
+This keeps PLAUD focused on the conversations where it adds unique value rather than duplicating existing organisational capabilities.
+
+#### Retention boundary
+
+Raw conversation material may pass through approved processing environments where permitted, but it does not become durable Strategic OS knowledge.
+
+The retention boundary is:
+
+    Raw transcript or recording
+        ↓
+    temporary approved processing
+        ↓
+    strategic extraction
+        ↓
+    human review
+        ↓
+    approved abstraction only
+        ↓
+    Strategic OS
+
+Strategic OS stores meaning, not meeting archives.
 
 ## 2. Triage
 
@@ -417,23 +654,49 @@ Do not copy raw governed data into Strategic OS.
 ### Teams Meeting To Organisational Actions And Strategic Signal
 
 Teams meeting
-→ approved Teams / Copilot recap where enabled
-→ decisions, actions and unresolved questions reviewed
+→ use approved raw Teams transcript where available
+→ otherwise use an approved capture source where permitted
+→ conversation extraction
+→ decisions, evidence, stakeholder signals, unresolved questions and opportunities reviewed
 → organisational tasks stay in approved task or collaboration systems
 → reusable strategic learning abstracted where useful
 → human review
 → Strategic OS only if safe and reusable
 
+Do not depend on Copilot-generated interpretation when the approved raw transcript is available.
+
 ### Approved Portable Capture To Strategic Signal
 
-Approved in-person recording
-→ approved capture tool
-→ transcript / summary
+Approved in-person, phone or online recording
+→ approved capture tool such as PLAUD where permitted
+→ transcript
+→ conversation extraction
 → consent, privacy and governance review
 → raw source remains outside Strategic OS
 → reusable strategic signal abstracted
 → human review
 → Strategic OS only if appropriate
+
+### Conversation Intake Through Agent Workflow
+
+Approved Teams transcript / PLAUD transcript / approved meeting notes
+→ Slack intake or approved workflow trigger
+→ Make.com orchestration where configured
+→ Relevance AI or relevant Strategic OS agent
+→ seven-part conversation extraction
+→ Slack review surface
+→ approve / edit / discard
+→ approved abstraction routed to existing Strategic OS output type
+→ GitHub-backed Markdown only when durable retention is justified
+
+Tool responsibilities:
+
+- source system captures or stores the authorised evidence
+- Make.com moves and coordinates information
+- Relevance AI or the relevant agent interprets the information
+- Slack provides the human interaction and review surface
+- the human reviewer decides what is retained
+- Strategic OS stores only the approved reusable abstraction
 
 ## Low-Management Workflow Rule
 
