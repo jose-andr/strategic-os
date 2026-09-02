@@ -225,9 +225,10 @@ Questions:
 - Can the team reuse the prompt, template, artefact or workflow?
 - Has the work reduced dependency on me as the only interpreter?
 
-## Monthly reflection format
+## Quarterly reflection format
 
 Date:  
+Quarter: Q1 / Q2 / Q3 / Q4  
 Relevant business or development goal:  
 ICARE value demonstrated:  
 Day-to-day work improvement:  
@@ -252,7 +253,6 @@ Use this table during quarterly review.
 | Respect |  |  |
 | Excellence |  |  |
 | Day-to-day work better |  |  |
-
 ## End-of-year narrative
 
 By the end of FY2026/27, these organisation-wide goals should help show not only what I delivered, but how I delivered it.
