@@ -564,7 +564,7 @@ Use this section only as a lightweight tracker.
 
 | Run | Work item | Primary capability tested | Status | Key learning |
 |---|---|---|---|---|
-| 01 |  |  | Not started |  |
+| 01 | Customer Accounts and Information Services Lead proposal | Sensemaking, strategic opportunity assessment, stakeholder alignment and career evidence | In progress | Pending validation |
 | 02 |  |  | Not started |  |
 | 03 |  |  | Not started |  |
 
@@ -576,8 +576,64 @@ Allowed status values:
 - Needs adjustment
 - Paused
 
----
+## Run 01 — Customer Accounts and Information Services Lead
 
+### Validation question
+
+Can Strategic OS turn a real organisational opportunity into clearer decision support, stakeholder alignment and reusable strategic evidence without duplicating organisational source material?
+
+### Source context
+
+The proposal is to evolve the existing Project Officer Customer Focus role from Class/Band 5 to Class/Band 6, with the working title **Customer Accounts and Information Services Lead**.
+
+The proposed role would lead an enduring internal service capability covering:
+
+- customer account quality;
+- service information quality;
+- customer information architecture;
+- continuous improvement;
+- governance and controls; and
+- connected-interactions readiness.
+
+The proposal also includes leadership of the Information Officer and Customer Data Officer.
+
+Strategic OS should retain only reusable interpretation, decision logic, stakeholder patterns, opportunity assessment and career evidence generated from this work.
+
+The organisational proposal itself remains in its organisational system of record.
+
+### Capabilities being tested
+
+- [ ] Sensemaking Agent identifies the real strategic decision
+- [ ] Evidence, assumptions and recommendations are separated
+- [ ] Strategic opportunity value is assessed
+- [ ] Stakeholder implications are identified
+- [ ] Career evidence implications are identified
+- [ ] A decision-support output is produced
+- [ ] Human review is completed
+- [ ] Reusable learning is captured
+- [ ] No raw organisational source material is retained unnecessarily
+
+### Run 01 completion condition
+
+Run 01 is complete when Strategic OS has:
+
+- produced a decision-relevant output that makes the organisational choice clearer;
+- identified the main stakeholder implications;
+- assessed the strategic opportunity value;
+- identified any useful career evidence; and
+- determined what, if anything, should be retained as reusable strategic knowledge.
+
+### Current status
+
+Status:
+
+> In progress
+
+Next action:
+
+> Use the Sensemaking Agent to frame the decision and produce the first decision-support artefact.
+
+---
 # Current priority
 
 The current priority is active use.
