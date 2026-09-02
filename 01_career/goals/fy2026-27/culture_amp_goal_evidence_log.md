@@ -327,24 +327,16 @@ Career proof point:
 
 Next action:  
 
-## Monthly evidence summary
+## Quarterly evidence summary
 
-Use this table during monthly review.
+Use this table during quarterly review.
 
-| Month | Strongest evidence | Goal supported | Career proof point | Next action |
+| Quarter | Strongest evidence | Goal supported | Career proof point | Next action |
 |---|---|---|---|---|
-| July |  |  |  |  |
-| August |  |  |  |  |
-| September |  |  |  |  |
-| October |  |  |  |  |
-| November |  |  |  |  |
-| December |  |  |  |  |
-| January |  |  |  |  |
-| February |  |  |  |  |
-| March |  |  |  |  |
-| April |  |  |  |  |
-| May |  |  |  |  |
-| June |  |  |  |  |
+| Q1 |  |  |  |  |
+| Q2 |  |  |  |  |
+| Q3 |  |  |  |  |
+| Q4 |  |  |  |  |
 
 ## Quarterly Culture Amp update builder
 
@@ -422,9 +414,7 @@ Risks or blockers:
 
 Final outcome:  
 
-Next-year opportunity:  
-
-## End-of-year career narrative builder
+Next-year opportunity:  ## End-of-year career narrative builder
 
 Use this section to prepare the EOFY performance and career story.
 
