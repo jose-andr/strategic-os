@@ -392,7 +392,7 @@ The goals should be managed as a connected portfolio rather than separate tasks.
 
 ### Weekly
 
-Use for activity steering.
+Use for light activity steering.
 
 Questions:
 
@@ -402,31 +402,23 @@ Questions:
 - What needs to be captured as evidence?
 - Who needs to be brought along?
 
-### Monthly
-
-Use for goal review.
-
-Questions:
-
-- What progress did I make against each goal?
-- What evidence did I create?
-- What reusable pattern emerged?
-- What stakeholder alignment improved?
-- What team enablement occurred?
-- What should I stop, refine, socialise or scale?
-
 ### Quarterly
 
-Use for Culture Amp updates and career evidence.
+Use for Culture Amp updates, evidence review and career steering.
 
 Questions:
 
-- What are the strongest proof points this quarter?
-- Which goal is under-supported?
+- What progress did I make against each goal this quarter?
+- What are the strongest proof points?
+- Which goal is under-supported or at risk?
+- Which decisions became clearer?
 - Which stakeholder relationships need attention?
-- Which artefacts are becoming reusable?
+- Which artefacts, prompts, tools or patterns are becoming reusable?
+- What stakeholder alignment improved?
+- What team enablement occurred?
 - What progress can be described clearly to my manager?
 - What should be captured for end-of-year performance narrative?
+- What should I stop, refine, socialise or scale next quarter?
 
 ### EOFY
 
@@ -441,7 +433,6 @@ Questions:
 - Which goals created visible organisational value?
 - What did I learn about AI-agentic strategic design?
 - What does this prove about my next career step?
-
 ## Portfolio KPI view
 
 | Area | FY target | Evidence |
