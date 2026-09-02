@@ -566,7 +566,7 @@ Use this section only as a lightweight tracker.
 |---|---|---|---|---|
 | 01 | Customer Accounts and Information Services Lead proposal + Channel Strategy Y2 prioritisation | Sensemaking Agent | Validated | Agent consistently improves decision clarity; monitor artefact-first next actions but no prompt change is justified |
 | 02 | Customer Accounts and Information Services Lead stakeholder alignment + Channel Strategy Y2 stakeholder sequencing | Stakeholder Journey Agent | Validated | Agent differentiates decision-makers, co-designers, consultees and implementation participants and improves engagement sequencing |
-| 03 |  |  | Not started |  |
+| 03 | Customer Accounts and Information Services Lead + Channel Strategy Y2 opportunity assessment + next-action validation | Career Architect | Validated | Agent distinguishes organisational value from career value, maintains evidence discipline, and now prefers real-world validation over unnecessary artefact creation |
 
 Allowed status values:
 
@@ -787,19 +787,165 @@ Next action:
 
 ---
 
+## Run 03 — Career Architect validation
+
+### Validation question
+
+Can the Career Architect distinguish genuinely valuable strategic opportunities from title, visibility or workload opportunities while maintaining disciplined evidence and recommending the smallest useful next move?
+
+### Test 01 — Customer Accounts and Information Services Lead
+
+Result:
+
+> Pass with observation
+
+The agent correctly:
+
+- [x] prioritised organisational value over personal advancement;
+- [x] separated strategic value from career value;
+- [x] separated potential, emerging and achieved evidence;
+- [x] preserved uncertainty around classification, reporting and authority;
+- [x] identified authority versus accountability as a central risk;
+- [x] made capacity and opportunity cost explicit;
+- [x] tied reputation value to useful strategic contribution;
+- [x] recommended shaping the capability before pursuing the role mechanism;
+- [x] preserved human review.
+
+Observation:
+
+The agent recommended producing a one-page capability case when a real sponsor-validation conversation could potentially reduce uncertainty faster.
+
+### Test 02 — Channel Strategy Y2 strategic work opportunity
+
+Result:
+
+> Pass with repeated observation
+
+The agent correctly:
+
+- [x] assessed leverage and impact rather than title;
+- [x] distinguished an important project from a valuable career opportunity;
+- [x] identified conditions that would make the work high leverage;
+- [x] identified warning signs of low-value coordination;
+- [x] separated potential evidence from achieved impact;
+- [x] made opportunity cost and delivery burden explicit;
+- [x] tied reputation value to better strategic decisions;
+- [x] recommended conditional pursuit based on real use and adoption.
+
+Repeated observation:
+
+The agent again recommended a new one-page artefact as the primary next action.
+
+Because artefact-first behaviour occurred in two materially different tests, a small prompt adjustment was justified.
+
+### Behavioural adjustment
+
+The Career Architect contract was refined so that, where appropriate, next actions prefer:
+
+1. real decision or project action;
+2. stakeholder or sponsor conversation;
+3. evidence-gathering action;
+4. targeted experiment or validation;
+5. artefact creation.
+
+Artefacts should be recommended only when they genuinely enable a decision, stakeholder conversation, required organisational process, evidence capture or safer next action.
+
+### Test 03 — Next-action discipline
+
+Work item:
+
+> Decide whether to keep investing leadership effort in the Channel Strategy Y2 Connected Interactions Framework when sufficient framing already exists but sponsor commitment and practical use remain unvalidated.
+
+Result:
+
+> Clean pass
+
+The agent correctly:
+
+- [x] identified sponsor commitment and practical use as the decisive uncertainty;
+- [x] recognised that existing material was sufficient for discussion;
+- [x] explicitly rejected further artefact creation as the primary next step;
+- [x] recommended reusing existing material;
+- [x] preferred a real sponsor-validation action;
+- [x] linked continued investment to mandate, adoption and practical testing;
+- [x] preserved evidence discipline;
+- [x] preserved human review.
+
+Validated next action:
+
+> Book a short decision-oriented conversation with the relevant Customer Focus and Strategy leader to test support for a bounded cross-functional priority, a small co-design group and one or two real journey tests.
+
+### Career Architect result
+
+Status:
+
+> **Validated**
+
+Rationale:
+
+> Across role-based and non-role strategic opportunities, the Career Architect consistently separated organisational value from career value, maintained disciplined evidence boundaries, exposed meaningful trade-offs and identified whether an opportunity offered genuine strategic leverage.
+
+The focused third test confirmed that the behavioural adjustment corrected repeated artefact-first next-action behaviour.
+
+### Reusable operational learning
+
+> A strategic career opportunity is high-value when organisational value, decision influence, authority, capacity and evidence potential move together.
+
+And:
+
+> When an opportunity is already sufficiently framed, test mandate, adoption or impact before creating more documentation.
+
+### Monitoring note
+
+Continue to observe whether the agent:
+
+- overweights visibility or role seniority;
+- treats potential evidence as achieved evidence;
+- recommends opportunities with accountability but insufficient authority;
+- defaults back to artefact creation when direct validation would be more useful.
+
+No further prompt change is currently justified.
+
+### Run 03 completion condition
+
+- [x] Career Architect implemented in Relevance AI
+- [x] Role-based strategic opportunity tested
+- [x] Non-role strategic opportunity tested
+- [x] Organisational value separated from career value
+- [x] Potential, emerging and achieved evidence separated
+- [x] Trade-offs and opportunity costs assessed
+- [x] Repeated behavioural issue identified
+- [x] Small prompt adjustment made
+- [x] Focused regression test completed
+- [x] Adjustment validated
+- [x] Human review completed
+- [x] Final result recorded
+
+### Current status
+
+Status:
+
+> **Validated**
+
+Next action:
+
+> Move to the next unvalidated priority agent.
+
+---
+
 ## Current agent validation status
 
 | Agent | Status |
 |---|---|
 | Sensemaking Agent | Validated |
 | Stakeholder Journey Agent | Validated |
-| Career Architect | Not tested |
+| Career Architect | Validated |
 | Shipping Coach | Not tested |
 | Chief of Staff | Not tested |
 
 Next priority:
 
-> **Career Architect**
+> **Shipping Coach**
 # Current priority
 
 The current priority is active use.
