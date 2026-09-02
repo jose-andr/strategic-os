@@ -102,17 +102,18 @@ Activities include:
 
 ## Strategic steering questions
 
-Use these during monthly review:
+Use these during quarterly review:
 
-1. Which information foundation is most important this month: Information Architecture, Customer Account Management or Knowledge-Centred Service?
-2. What customer or employee problem does it help solve?
-3. What decision or alignment is needed?
-4. What needs to become a repeatable standard, pattern or roadmap item?
-5. Where are the dependencies with Channel Strategy Year 2, CRM, Service Account, knowledge, data governance or service owners?
-6. What risks, assumptions or caveats need to be made visible?
-7. What should be captured as reusable Strategic OS learning?
-8. What should be captured as career evidence?
-
+1. Which information foundation progressed this quarter: Information Architecture, Customer Account Management or Knowledge-Centred Service?
+2. What customer or employee problem did the work help solve?
+3. What decision or alignment was needed?
+4. What became, or should become, a repeatable standard, pattern or roadmap item?
+5. Where were the dependencies with Channel Strategy Year 2, CRM, Service Account, knowledge, data governance or service owners?
+6. What risks, assumptions or caveats needed to be made visible?
+7. What stakeholder alignment improved?
+8. What should be captured as reusable Strategic OS learning?
+9. What should be captured as career evidence?
+10. What needs to be prioritised next quarter?
 ## Decision-support lens
 
 For each major artefact or activity, clarify:
