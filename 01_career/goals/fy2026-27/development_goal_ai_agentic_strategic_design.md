@@ -119,9 +119,11 @@ Support Rebecca, as Customer Data Officer, to use the Service Account dashboard 
 - whether Rebecca became more confident and independent
 - what this demonstrates about team enablement
 
-## Monthly steering questions
+## Quarterly steering questions
 
-1. What did I use AI to augment this month?
+Use these during quarterly review:
+
+1. What did I use AI to augment this quarter?
 2. Did it improve decision clarity, stakeholder alignment or artefact quality?
 3. Did it reveal a blind spot I may have missed?
 4. Did it help me avoid an unproductive rabbit hole?
@@ -129,8 +131,8 @@ Support Rebecca, as Customer Data Officer, to use the Service Account dashboard 
 6. Did any output become repeatable?
 7. Did any team member adopt, support or use the work?
 8. What evidence should be captured for Culture Amp or career development?
-9. What should I stop, refine, socialise or scale next month?
-
+9. What should I stop, refine, socialise or scale next quarter?
+10. What should be discussed with my manager at the next check-in?
 ## Evidence capture format
 
 Date:  
