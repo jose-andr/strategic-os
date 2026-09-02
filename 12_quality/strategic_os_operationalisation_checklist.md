@@ -564,8 +564,8 @@ Use this section only as a lightweight tracker.
 
 | Run | Work item | Primary capability tested | Status | Key learning |
 |---|---|---|---|---|
-| 01 | Customer Accounts and Information Services Lead proposal + Channel Strategy Y2 prioritisation | Sensemaking Agent | Validated | Agent consistently improves decision clarity; artefact-first next actions should be monitored but are not yet a repeated failure |
-| 02 |  |  | Not started |  |
+| 01 | Customer Accounts and Information Services Lead proposal + Channel Strategy Y2 prioritisation | Sensemaking Agent | Validated | Agent consistently improves decision clarity; monitor artefact-first next actions but no prompt change is justified |
+| 02 | Customer Accounts and Information Services Lead stakeholder alignment + Channel Strategy Y2 stakeholder sequencing | Stakeholder Journey Agent | Validated | Agent differentiates decision-makers, co-designers, consultees and implementation participants and improves engagement sequencing |
 | 03 |  |  | Not started |  |
 
 Allowed status values:
@@ -577,136 +577,55 @@ Allowed status values:
 - Needs adjustment
 - Paused
 
+---
+
 ## Run 01 — Sensemaking Agent validation
 
 ### Validation question
 
 Can Strategic OS use the live Sensemaking Agent on real strategic work to produce clearer decision support than the original source material alone?
 
-### Runtime used
-
-The live runtime used for both tests was:
-
-    Webhook intake
-        ↓
-    privacy gate
-        ↓
-    Data Store
-        ↓
-    Relevance AI
-    Strategic OS — Sensemaking Agent
-        ↓
-    human-review-required
-        ↓
-    Slack
-        ↓
-    P approval
-        ↓
-    approved state
-
-Both tests used real strategic work rather than synthetic decision problems.
-
----
-
 ### Test 01 — Customer Accounts and Information Services Lead
 
-Work item:
+Result:
 
-> Customer Accounts and Information Services Lead opportunity
+> Pass with observation
 
-Primary decision question:
+Key evidence:
 
-> Should customer account quality and service information now be treated as an enduring CX capability with clearer ownership, and if so should the existing Project Officer role be evolved as the preferred organisational mechanism?
+- [x] Real decision clarified
+- [x] Capability decision separated from role mechanism
+- [x] Evidence separated from interpretation
+- [x] Assumptions surfaced
+- [x] Uncertainty preserved
+- [x] Options and trade-offs identified
+- [x] Recommendation proportionate
+- [x] Human review completed
+- [x] Output approved through live workflow
 
-#### What the agent did well
+Observation:
 
-- [x] Reframed the decision from role classification toward capability ownership
-- [x] Separated evidence from interpretation
-- [x] Preserved uncertainty around classification, reporting and stakeholder support
-- [x] Identified the underlying cross-cutting service-quality pattern
-- [x] Produced meaningful options
-- [x] Made trade-offs visible
-- [x] Recommended a proportionate path
-- [x] Calibrated confidence
-- [x] Preserved the human-review boundary
-- [x] Output was human-reviewed
-- [x] Output was approved through the live P workflow
-
-#### Test 01 weakness
-
-The agent recommended:
-
-> Create a short decision brief.
-
-This was judged less useful than the next real-world action:
-
-> Test the capability proposition with the relevant sponsor.
-
-#### Test 01 result
-
-> Core reasoning passed. Next-action behaviour required observation.
-
-#### Operational learning
-
-> Sensemaking should stop generating artefacts once the decision frame is sufficiently clear for the next real-world conversation.
-
----
+The agent recommended creating another decision brief when a stakeholder conversation was the more useful next action.
 
 ### Test 02 — Channel Strategy Y2 prioritisation
 
-Work item:
+Result:
 
-> Channel Strategy Y2 next-phase scope and prioritisation
+> Clean pass
 
-Primary decision question:
+Key evidence:
 
-> Should Channel Strategy Y2 prioritise a minimum viable Connected Interactions Framework and service information architecture in the next phase rather than expanding into a broader channel strategy or technology-led transformation programme?
+- [x] Real prioritisation decision clarified
+- [x] Four discovery streams synthesised into a common strategic pattern
+- [x] Evidence and assumptions separated
+- [x] Unsupported scope expansion resisted
+- [x] Meaningful options and trade-offs identified
+- [x] Focused MVP path recommended
+- [x] Real project action identified as the next step
+- [x] Human review completed
+- [x] Output approved through live workflow
 
-#### What the agent did well
-
-- [x] Clarified the real prioritisation decision
-- [x] Separated evidence, interpretation and constraints
-- [x] Synthesised the four discovery streams into a common strategic pattern
-- [x] Resisted unsupported scope expansion
-- [x] Produced meaningful options and trade-offs
-- [x] Recommended the focused MVP path
-- [x] Calibrated confidence
-- [x] Identified a real project decision as the next action
-- [x] Avoided unnecessary artefact production
-- [x] Preserved the human-review boundary
-- [x] Output was human-reviewed
-- [x] Output was approved through the live P workflow
-
-#### Test 02 result
-
-> Clean pass.
-
-#### Operational learning
-
-> The agent can distinguish between situations that need more analysis and situations where the next useful step is a real project decision.
-
----
-
-### Comparative assessment
-
-| Criterion | Test 01 | Test 02 | Overall |
-|---|---|---|---|
-| Decision clarified | Pass | Pass | Pass |
-| Evidence separated from interpretation | Pass | Pass | Pass |
-| Assumptions surfaced | Pass | Pass | Pass |
-| Uncertainty preserved | Pass | Pass | Pass |
-| Underlying pattern identified | Pass | Pass | Pass |
-| Options meaningful | Pass | Pass | Pass |
-| Trade-offs visible | Pass | Pass | Pass |
-| Recommendation proportionate | Pass | Pass | Pass |
-| Confidence calibrated | Pass | Pass | Pass |
-| Human review preserved | Pass | Pass | Pass |
-| Next action useful | Needs observation | Pass | Pass with monitoring |
-| Live approval workflow completed | Pass | Pass | Pass |
-
----
-
-### Sensemaking Agent validation result
+### Sensemaking Agent result
 
 Status:
 
@@ -714,71 +633,146 @@ Status:
 
 Rationale:
 
-> Across two materially different real strategic problems, the live Sensemaking Agent consistently improved decision clarity, separated evidence from assumptions, preserved uncertainty, surfaced meaningful options and trade-offs, and produced proportionate recommendations.
+> Across two materially different real strategic problems, the live Sensemaking Agent consistently improved decision clarity, preserved evidence and uncertainty discipline, and produced useful strategic recommendations.
 
-The artefact-first next action observed in Test 01 did not recur in Test 02.
+Monitoring note:
 
-That behaviour should therefore be monitored rather than treated as a confirmed prompt defect.
+> Continue to observe whether the agent occasionally defaults to producing an artefact when stakeholder or project action would be more useful.
 
-Do not change the Sensemaking Agent specification unless the same issue recurs in later real use.
-
----
-
-### Runtime evidence
-
-The live runtime has now demonstrated:
-
-- [x] real strategic input can enter the workflow;
-- [x] privacy confirmation gates normal processing;
-- [x] the live Relevance AI Sensemaking Agent is invoked;
-- [x] output is persisted in workflow state;
-- [x] output reaches Slack for human review;
-- [x] human review is explicit;
-- [x] P approval resolves the correct workflow;
-- [x] approved state persists correctly;
-- [x] Slack returns approval confirmation.
-
-The validated approval path is:
-
-    Slack
-        ↓
-    Text Parser
-        ↓
-    Data Store lookup
-        ↓
-    approval-state filter
-        ↓
-    Data Store update
-        ↓
-    Slack confirmation
+Do not change the prompt unless this behaviour recurs.
 
 ---
+
+## Run 02 — Stakeholder Journey Agent validation
+
+### Validation question
+
+Can the Stakeholder Journey Agent improve stakeholder decision clarity and engagement sequencing on real strategic work without inventing stakeholder positions, inferring motives or defaulting to broad consultation?
+
+### Test 01 — Customer Accounts and Information Services Lead
+
+Work item:
+
+> Stakeholder alignment required before formalising an emerging CX capability and proposed role mechanism.
+
+Result:
+
+> Pass with observation
+
+The agent correctly:
+
+- [x] separated influence, interest, impact and decision rights;
+- [x] distinguished evidence from assumptions;
+- [x] preserved unknown stakeholder positions as unknown;
+- [x] treated possible resistance as a signal to test rather than a motive;
+- [x] identified sponsor, advisory, affected and implementation stakeholder groups;
+- [x] sequenced sponsor alignment before broader engagement;
+- [x] recommended a specific first conversation;
+- [x] preserved the human-review boundary.
+
+Key engagement sequence:
+
+1. Customer Focus and Strategy leadership;
+2. CX branch leadership;
+3. workforce / classification advisers;
+4. adjacent capability owners;
+5. service owners and implementation stakeholders;
+6. return to decision-makers with a tested recommendation.
+
+Observation:
+
+The output listed the existing Project Officer role context as a stakeholder.
+
+That is better treated as organisational context or evidence rather than a stakeholder.
+
+This did not materially reduce the usefulness of the assessment.
+
+### Test 02 — Channel Strategy Y2
+
+Work item:
+
+> Align four discovery streams into a minimum viable Connected Interactions Framework without creating four disconnected outputs or over-consulting the organisation.
+
+Result:
+
+> Clean pass
+
+The agent correctly:
+
+- [x] differentiated decision-makers from contributors;
+- [x] differentiated co-design from targeted consultation;
+- [x] identified later implementation participants separately;
+- [x] separated formal decision rights from implementation influence;
+- [x] resisted broad early consultation;
+- [x] identified convergence across the four discovery streams as the key stakeholder challenge;
+- [x] differentiated common-framework shaping from component-specific shaping;
+- [x] sequenced sponsor alignment before synthesis work;
+- [x] recommended targeted assurance consultation rather than full-programme consultation;
+- [x] introduced priority journey validation at the appropriate point;
+- [x] ended with a specific sponsor alignment conversation.
+
+Key participation model:
+
+> Sponsors → core co-design group → targeted assurance partners → priority journey validators → broader implementation participants
+
+### Comparative assessment
+
+| Criterion | Test 01 | Test 02 | Overall |
+|---|---|---|---|
+| Real engagement need clarified | Pass | Pass | Pass |
+| Influence separated from interest and impact | Pass | Pass | Pass |
+| Decision rights treated carefully | Pass | Pass | Pass |
+| Evidence separated from assumptions | Pass | Pass | Pass |
+| Unknown positions preserved | Pass | Pass | Pass |
+| Motives not inferred | Pass | Pass | Pass |
+| Resistance treated as information | Pass | Pass | Pass |
+| Stakeholders differentiated by role | Pass | Pass | Pass |
+| Broad consultation resisted | Pass | Pass | Pass |
+| Engagement sequence realistic | Pass | Pass | Pass |
+| Specific next conversation identified | Pass | Pass | Pass |
+| Human review preserved | Pass | Pass | Pass |
+| Stakeholder list limited to actual actors/groups | Needs observation | Pass | Pass with monitoring |
+
+### Stakeholder Journey Agent result
+
+Status:
+
+> **Validated**
+
+Rationale:
+
+> Across two materially different stakeholder problems, the agent consistently improved engagement sequencing, differentiated participation levels, preserved uncertainty and avoided unsupported assumptions about stakeholder positions or motives.
+
+### Reusable operational learning
+
+> Validate strategic intent with sponsors first, use a small group to shape core logic, then involve targeted consultees and implementation stakeholders according to what they genuinely need to influence.
+
+A second reusable principle emerged:
+
+> Converge core logic with a small design group before broad organisational consultation.
 
 ### Monitoring note
 
-Continue to observe whether the Sensemaking Agent:
+Continue to observe whether the agent:
 
-- recommends new artefacts when stakeholder or project action would be more useful;
-- creates unnecessary documentation after the decision frame is already clear;
-- remains proportionate when evidence is weak;
-- preserves uncertainty in politically or organisationally sensitive decisions.
+- includes organisational context or roles as if they were stakeholders;
+- assigns decision rights without evidence;
+- overstates likely support or resistance;
+- recommends broad consultation where targeted engagement would be sufficient.
 
-Only repeated evidence should trigger a prompt or architecture change.
+Do not change the agent specification unless one of these behaviours recurs.
 
----
+### Run 02 completion condition
 
-### Run 01 completion condition
-
-- [x] Sensemaking Agent invoked through the live runtime
-- [x] Real work used
+- [x] Stakeholder Journey Agent implemented in Relevance AI
+- [x] Real stakeholder problem used
 - [x] Two materially different tests completed
 - [x] Outputs human-reviewed
-- [x] Outputs approved through live workflow
-- [x] Decision quality assessed
+- [x] Influence, interest, impact and decision rights assessed
+- [x] Unknown stakeholder positions preserved
+- [x] Engagement sequencing assessed
 - [x] Agent usefulness judged
-- [x] Runtime path validated
 - [x] Operational learning captured
-- [x] Prompt-change threshold considered
 - [x] Final result recorded
 
 ### Current status
@@ -789,9 +783,23 @@ Status:
 
 Next action:
 
-> Move to the next unvalidated priority agent rather than continuing to test Sensemaking without a specific reason.
+> Move to the next unvalidated priority agent rather than continuing to test Stakeholder Journey without a specific reason.
 
 ---
+
+## Current agent validation status
+
+| Agent | Status |
+|---|---|
+| Sensemaking Agent | Validated |
+| Stakeholder Journey Agent | Validated |
+| Career Architect | Not tested |
+| Shipping Coach | Not tested |
+| Chief of Staff | Not tested |
+
+Next priority:
+
+> **Career Architect**
 # Current priority
 
 The current priority is active use.
