@@ -562,9 +562,9 @@ Operational status:
 
 Use this section only as a lightweight tracker.
 
-| Run | Work item | Primary capability to test | Status | Key learning |
+| Run | Work item | Primary capability tested | Status | Key learning |
 |---|---|---|---|---|
-| 01 | Customer Accounts and Information Services Lead proposal | Sensemaking Agent | Prepared for testing | Test artefacts exist, but no agent has yet been operationally validated |
+| 01 | Customer Accounts and Information Services Lead proposal | Sensemaking Agent | Needs adjustment | Live agent materially improved decision clarity, but defaulted to another artefact instead of the next real-world conversation |
 | 02 |  |  | Not started |  |
 | 03 |  |  | Not started |  |
 
@@ -581,164 +581,175 @@ Allowed status values:
 
 ### Validation question
 
-Can Strategic OS use the Sensemaking Agent on a real organisational opportunity to produce clearer decision support than unstructured analysis alone?
+Can Strategic OS use the live Sensemaking Agent on a real organisational opportunity to produce clearer decision support than the original source material alone?
 
-### Current state
+### Test environment
 
-Run 01 is prepared but has not yet begun operational validation.
+Runtime used:
 
-Repository artefacts have been created to support testing, including:
+    Webhook intake
+        ↓
+    privacy gate
+        ↓
+    Data Store
+        ↓
+    Relevance AI
+    Strategic OS — Sensemaking Agent
+        ↓
+    human-review-required
+        ↓
+    Slack
 
-- a draft decision brief;
-- a stakeholder alignment assessment;
-- an opportunity review; and
-- a shipping decision.
+Test input:
 
-These artefacts are **test preparation only**.
+> Customer Accounts and Information Services Lead opportunity
 
-Their existence does not prove that the relevant Strategic OS agents:
+This was a real strategic work item rather than a synthetic decision problem.
 
-- can be invoked reliably;
-- follow their intended instructions;
-- produce differentiated value;
-- hand work off correctly;
-- improve decision quality;
-- work consistently across repeated use.
-
-No agent should be marked as tested or validated until it has actually been run against live work and its output reviewed.
-
----
-
-### Agent validation status
+### Agent test status
 
 #### Sensemaking Agent
 
-- [ ] Agent invoked using its actual Strategic OS instructions
-- [ ] Real work item supplied as input
-- [ ] Agent output captured
-- [ ] Output compared with Decision First expectations
-- [ ] Evidence, assumptions and interpretation separated correctly
-- [ ] Decision or strategic question made clearer
-- [ ] Recommendation judged useful
-- [ ] Human review completed
-- [ ] Result recorded as Validated / Needs adjustment
+- [x] Agent invoked through the live Relevance AI runtime
+- [x] Real work item supplied as input
+- [x] Agent output returned to Slack
+- [x] Output reviewed against Decision First expectations
+- [x] Evidence and interpretation separated correctly
+- [x] Assumptions and uncertainty preserved
+- [x] Real strategic decision made clearer
+- [x] Practical options identified
+- [x] Trade-offs made visible
+- [x] Recommendation produced
+- [x] Confidence calibrated
+- [x] Human-review boundary preserved
+- [x] Agent usefulness assessed
+- [x] Improvement requirement identified
 
-Status:
+Current result:
 
-> Not tested
-
-#### Stakeholder Journey Agent
-
-- [ ] Agent invoked using its actual Strategic OS instructions
-- [ ] Real stakeholder challenge supplied
-- [ ] Output captured
-- [ ] Stakeholder positions handled safely
-- [ ] Engagement sequence judged useful
-- [ ] Human review completed
-- [ ] Result recorded as Validated / Needs adjustment
-
-Status:
-
-> Not tested
-
-#### Career Architect
-
-- [ ] Agent invoked using its actual Strategic OS instructions
-- [ ] Real strategic opportunity supplied
-- [ ] Output captured
-- [ ] Strategic and career value separated correctly
-- [ ] Potential evidence separated from achieved evidence
-- [ ] Human review completed
-- [ ] Result recorded as Validated / Needs adjustment
-
-Status:
-
-> Not tested
-
-#### Shipping Coach
-
-- [ ] Agent invoked using its actual Strategic OS instructions
-- [ ] Real active work supplied
-- [ ] Output captured
-- [ ] Ship / Socialise / Refine / Stop decision judged useful
-- [ ] Unnecessary refinement identified where relevant
-- [ ] Human review completed
-- [ ] Result recorded as Validated / Needs adjustment
-
-Status:
-
-> Not tested
-
-#### Chief of Staff
-
-- [ ] Agent invoked using its actual Strategic OS instructions
-- [ ] Real priorities or operating context supplied
-- [ ] Output captured
-- [ ] Decision-required items surfaced correctly
-- [ ] Follow-ups surfaced correctly
-- [ ] Focus protection judged useful
-- [ ] Autonomy boundaries respected
-- [ ] Human review completed
-- [ ] Result recorded as Validated / Needs adjustment
-
-Status:
-
-> Not tested
+> **Needs adjustment — reasoning validated, next-action behaviour requires refinement**
 
 ---
 
-### Run 01 test scope
+### What the agent did well
 
-The first operational test will use:
+The live agent reframed the original decision from:
 
-> Customer Accounts and Information Services Lead proposal
+> Should the existing Project Officer role be evolved from Class/Band 5 to Class/Band 6?
 
-Primary agent:
+toward the more strategic question:
 
-> Sensemaking Agent
+> Should customer account quality and service information now be treated as an enduring CX capability with clearer ownership?
 
-The test should use the actual agent specification and prompts already defined in Strategic OS.
+It then separated the second-order organisational question:
 
-Do not create a substitute prompt for the test unless the existing agent specification proves unusable.
+> If the capability is valid, is evolving the existing Project Officer role the best mechanism?
+
+This materially improved decision clarity.
+
+The agent also correctly distinguished:
+
+- evidence;
+- interpretation;
+- uncertainty;
+- organisational assumptions;
+- options;
+- trade-offs.
+
+It explicitly preserved uncertainty around:
+
+- stakeholder support;
+- decision rights;
+- reporting arrangements;
+- Class/Band 6 classification;
+- whether the existing Project Officer role is the best organisational base.
 
 ---
 
-### Run 01 test procedure
+### Options produced by the agent
 
-1. Open the current Sensemaking Agent specification in the repository.
-2. Confirm the intended input, operating instructions and expected output.
-3. Supply the Customer Accounts and Information Services Lead opportunity as the live input.
-4. Run the agent.
-5. Capture the output.
-6. Compare the output against the relevant Strategic OS decision-support standard.
-7. Review whether the agent:
-   - framed the real decision;
-   - separated evidence from assumptions;
-   - surfaced material uncertainty;
-   - identified meaningful options or trade-offs;
-   - produced useful decision support;
-   - avoided unnecessary documentation.
-8. Record the result.
-9. Only then mark the Sensemaking Agent as Validated or Needs adjustment.
+The live agent identified three meaningful options:
+
+1. formalise immediately as an enduring CX capability using the existing Project Officer role as the base;
+2. agree the capability need first and defer the organisational mechanism pending validation;
+3. continue informal coordination across existing roles.
+
+The agent recommended:
+
+> **Option 2 — agree the capability first, but defer the role / mechanism decision pending validation.**
+
+This was judged proportionate to the available evidence.
 
 ---
 
-### Test evidence to record
+### Decision-quality assessment
 
-For each agent test, capture:
+| Test criterion | Result | Assessment |
+|---|---|---|
+| Real decision clarified | Pass | Capability decision separated from role mechanism |
+| Evidence separated from interpretation | Pass | Explicitly labelled |
+| Assumptions surfaced | Pass | Important organisational assumptions remained unvalidated |
+| Uncertainty preserved | Pass | Classification, reporting and stakeholder support were not overclaimed |
+| Underlying pattern identified | Pass | Cross-cutting service-quality / ownership problem identified |
+| Options meaningful | Pass | Three materially different paths |
+| Trade-offs visible | Pass | Structural speed, accountability and validation trade-offs surfaced |
+| Recommendation useful | Pass | Option 2 proportionate to evidence |
+| Confidence calibrated | Pass | Different confidence levels applied to capability and mechanism |
+| Next action appropriate | Needs adjustment | Agent recommended another artefact rather than stakeholder validation |
+| Human review preserved | Pass | Output remained advisory |
 
-- agent tested;
-- test input;
-- expected behaviour;
-- actual behaviour;
-- what worked;
-- what failed;
-- whether output improved the decision;
-- whether the agent duplicated another capability;
-- whether prompt or architecture changes are required;
-- validation result.
+---
 
-Do not treat an artefact created manually in advance as evidence that the agent passed.
+### Adjustment required
+
+The agent proposed:
+
+> Create a short decision brief.
+
+This was not the smallest useful next action.
+
+The decision frame was already sufficiently clear for stakeholder validation.
+
+A stronger next action would have been:
+
+> Test the capability proposition with the relevant sponsor.
+
+Suggested sponsor question:
+
+> Do customer accounts and service information now represent an enduring CX capability that needs clearer ownership?
+
+The agent therefore passed the core Sensemaking test but exposed a shipping-discipline issue.
+
+---
+
+### Operational learning
+
+> Sensemaking should stop generating artefacts once the decision frame is sufficiently clear for the next real-world conversation.
+
+This is a live-use finding rather than an architecture assumption.
+
+Do not immediately change the Sensemaking Agent specification based on one test.
+
+Track whether the same behaviour appears again.
+
+If repeated, make the smallest prompt or behavioural-contract adjustment required.
+
+---
+
+### Runtime evidence
+
+The live runtime successfully:
+
+- received the real work item;
+- enforced the privacy gate;
+- invoked the Relevance AI Sensemaking Agent;
+- persisted workflow state;
+- returned the output to Slack;
+- marked the output as requiring human review.
+
+The separate `P` approval runtime has also been validated end to end with synthetic workflow evidence.
+
+Run 01 therefore tests **agent reasoning quality**, not whether the runtime infrastructure can move state.
 
 ---
 
@@ -746,25 +757,29 @@ Do not treat an artefact created manually in advance as evidence that the agent 
 
 Run 01 is complete when:
 
-- [ ] Sensemaking Agent has actually been invoked
-- [ ] Output has been reviewed
-- [ ] Decision quality has been assessed
-- [ ] Agent usefulness has been judged
-- [ ] Any prompt or workflow issue has been recorded
-- [ ] Result is marked Validated or Needs adjustment
-- [ ] Reusable operational learning has been captured
+- [x] Sensemaking Agent has actually been invoked
+- [x] Real work has been used
+- [x] Output has been reviewed
+- [x] Decision quality has been assessed
+- [x] Agent usefulness has been judged
+- [x] Prompt or workflow issue has been identified
+- [x] Reusable operational learning has been captured
+- [ ] Adjustment has been tested on another real Sensemaking run or shown not to recur
+- [ ] Final result is marked Validated or remains Needs adjustment
 
 ### Current status
 
 Status:
 
-> **Prepared for testing**
+> **Needs adjustment**
+
+Reason:
+
+> Core Sensemaking behaviour passed, but the agent defaulted to producing another decision artefact after the decision frame was already sufficient for stakeholder validation.
 
 Next action:
 
-> Run the Sensemaking Agent using its actual repository instructions against the Customer Accounts and Information Services Lead opportunity.
-
-Do not create additional Run 01 analysis artefacts before this test.
+> Do not change the agent after one occurrence. Run a second real Sensemaking test and observe whether the same artefact-first behaviour repeats.
 
 ---
 # Current priority
