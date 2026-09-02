@@ -101,16 +101,17 @@ Activities include:
 
 ## Strategic steering questions
 
-Use these during monthly review:
+Use these during quarterly review:
 
-1. Which CX strategy tool is most important this month?
-2. What decision or behaviour should this tool help improve?
-3. Who needs to understand or adopt it?
-4. Is the tool clear enough for others to use without me explaining it every time?
-5. What evidence shows the tool is influencing business thinking, prioritisation or investment?
-6. What should be simplified, socialised or reused?
+1. Which CX strategy tools progressed this quarter?
+2. What decision, behaviour or organisational conversation did they help improve?
+3. Who needed to understand, use or adopt the tools?
+4. Were the tools clear enough for others to use without me explaining them every time?
+5. What evidence shows the tools influenced business thinking, prioritisation or investment?
+6. What was simplified, socialised or reused?
 7. What does this work reveal about how the organisation makes customer-centred decisions?
 8. What should be captured as career evidence?
+9. What needs to be prioritised next quarter?
 
 ## Decision-support lens
 
