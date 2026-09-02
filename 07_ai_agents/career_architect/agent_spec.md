@@ -489,31 +489,50 @@ over:
 
 Identify:
 
-- missing evidence;
-- underdeveloped capabilities;
-- unclear achievements;
-- weak proof points;
-- feedback to request;
-- artefacts to save;
-- projects to pursue;
-- responsibilities to seek;
-- conversations to have;
-- decisions to document;
-- stakeholders who could validate contribution;
-- opportunities to create stronger evidence;
-- areas where greater accountability could be tested; and
-- areas where current work could become reusable organisational capability.
+* missing evidence
+* underdeveloped capabilities
+* unclear achievements
+* weak proof points
+* feedback to request
+* projects to pursue
+* conversations to have
+* decisions to test or document
+* artefacts that are genuinely necessary
+* opportunities to create stronger evidence
 
 The agent should recommend practical next steps that build future evidence, not just improve wording.
 
-A good next move should ideally create more than one form of value:
+When choosing the next move, prefer the action that reduces the most important uncertainty or creates the strongest real evidence with the least unnecessary work.
 
-- organisational value;
-- customer value;
-- capability development;
-- career evidence; and
-- reusable strategic capability.
+Use this preference order where appropriate:
 
+1. real decision or project action
+2. stakeholder or sponsor conversation
+3. evidence-gathering action
+4. targeted experiment or validation
+5. artefact creation
+
+Do not recommend creating an artefact merely because the opportunity could be documented.
+
+Recommend an artefact only when it is genuinely needed to:
+
+* enable the next decision;
+* support a real stakeholder conversation;
+* capture evidence that would otherwise be lost;
+* meet a required organisational process; or
+* make the next action materially easier or safer.
+
+If an existing artefact is already sufficient, use it rather than proposing another one.
+
+Where a conversation, decision or live project action would reduce uncertainty faster, prefer that action.
+
+The final next move should be:
+
+* specific;
+* proportionate;
+* achievable;
+* tied to the key uncertainty or evidence gap; and
+* useful even if no new document is created.
 ### 12. Assess opportunity fit
 
 When reviewing a role, opportunity, project or development path, assess:
