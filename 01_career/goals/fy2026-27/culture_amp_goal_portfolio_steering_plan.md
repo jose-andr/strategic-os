@@ -524,3 +524,23 @@ Store only:
 Culture Amp remains the formal source of truth for goal status.
 
 Power BI, Service Account dashboards, CRM, Databricks, SharePoint, Jira and other organisational systems remain the systems of record for operational information.
+## Dedicated goal files
+
+Use these files to manage each part of the FY2026/27 Culture Amp goal portfolio.
+
+| File | Purpose |
+|---|---|
+| `01_career/goals/fy2026-27/business_goal_cx_strategy_tools.md` | Steers the business goal focused on creating a cohesive set of CX Strategy tools. |
+| `01_career/goals/fy2026-27/business_goal_information_foundations.md` | Steers the business goal focused on customer and business information foundations. |
+| `01_career/goals/fy2026-27/business_goal_03_to_be_confirmed.md` | Placeholder for the third business goal until the detailed Culture Amp source is confirmed. |
+| `01_career/goals/fy2026-27/development_goal_ai_agentic_strategic_design.md` | Steers the AI-agentic strategic design development goal. |
+| `01_career/goals/fy2026-27/org_wide_context_goals.md` | Captures the organisation-wide Culture Amp context goals as behavioural and operating lenses. |
+| `01_career/goals/fy2026-27/culture_amp_goal_evidence_log.md` | Captures safe evidence, quarterly updates and EOFY career proof points across the portfolio. |
+
+## Navigation rule
+
+Use the portfolio plan for strategic overview and operating rhythm.
+
+Use the dedicated goal files for goal-specific steering, reflection and evidence.
+
+Use the evidence log for actual progress notes, quarterly updates and end-of-year narrative building.
