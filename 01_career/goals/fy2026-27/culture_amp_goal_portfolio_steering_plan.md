@@ -16,13 +16,13 @@ Culture Amp remains the formal system of record for goals, progress status, owne
 
 Strategic OS is used to interpret these goals strategically and turn them into:
 
-- weekly and monthly steering prompts;
-- quarterly evidence capture;
-- decision and stakeholder-alignment logic;
-- career proof points;
-- reusable strategic design patterns;
-- team enablement opportunities;
-- end-of-year performance narrative.
+- weekly and monthly steering prompts
+- quarterly evidence capture
+- decision and stakeholder-alignment logic
+- career proof points
+- reusable strategic design patterns
+- team enablement opportunities
+- end-of-year performance narrative
 
 ## Portfolio summary
 
@@ -41,14 +41,14 @@ Use the Culture Amp goals as a year-long steering system for my current role.
 
 The goal portfolio should help me direct effort toward work that:
 
-- improves decision clarity;
-- builds reusable CX strategy capability;
-- strengthens customer and business information foundations;
-- supports connected customer experiences;
-- improves stakeholder alignment;
-- enables team members to adopt and support the work;
-- creates visible career evidence;
-- demonstrates responsible AI-enabled strategic design practice.
+- improves decision clarity
+- builds reusable CX strategy capability
+- strengthens customer and business information foundations
+- supports connected customer experiences
+- improves stakeholder alignment
+- enables team members to adopt and support the work
+- creates visible career evidence
+- demonstrates responsible AI-enabled strategic design practice
 
 ## Desired reputation link
 
@@ -136,13 +136,13 @@ The strategic opportunity is to make CX strategy tools easier to understand, eas
 
 Use this goal to demonstrate capability in:
 
-- strategic synthesis;
-- customer-centred decision-making;
-- organisational storytelling;
-- roadmap facilitation;
-- stakeholder alignment;
-- reusable tool creation;
-- strategy-to-delivery translation.
+- strategic synthesis
+- customer-centred decision-making
+- organisational storytelling
+- roadmap facilitation
+- stakeholder alignment
+- reusable tool creation
+- strategy-to-delivery translation
 
 ### Steering questions
 
@@ -207,14 +207,14 @@ The strategic opportunity is to connect information architecture, account manage
 
 Use this goal to demonstrate capability in:
 
-- systems thinking;
-- service information architecture;
-- customer account quality;
-- knowledge management discovery;
-- governance translation;
-- cross-functional alignment;
-- customer and employee experience improvement;
-- service foundation design.
+- systems thinking
+- service information architecture
+- customer account quality
+- knowledge management discovery
+- governance translation
+- cross-functional alignment
+- customer and employee experience improvement
+- service foundation design
 
 ### Steering questions
 
@@ -311,28 +311,28 @@ This goal is the capability engine for the rest of the portfolio.
 
 It should help me improve how I:
 
-- frame complex CX problems;
-- identify decisions and alignment needs;
-- synthesise evidence;
-- spot blind spots;
-- avoid rabbit holes;
-- communicate the logic of the work;
-- bring people along the journey;
-- enable others to adopt and support the work;
-- capture reusable strategic knowledge.
+- frame complex CX problems
+- identify decisions and alignment needs
+- synthesise evidence
+- spot blind spots
+- avoid rabbit holes
+- communicate the logic of the work
+- bring people along the journey
+- enable others to adopt and support the work
+- capture reusable strategic knowledge
 
 ### Strategic contribution
 
 Use this goal to demonstrate capability in:
 
-- responsible AI-enabled work;
-- strategic design practice development;
-- stakeholder journey design;
-- repeatable method creation;
-- team enablement;
-- dashboard interpretation support;
-- reusable prompt and artefact design;
-- career-long capability development.
+- responsible AI-enabled work
+- strategic design practice development
+- stakeholder journey design
+- repeatable method creation
+- team enablement
+- dashboard interpretation support
+- reusable prompt and artefact design
+- career-long capability development
 
 ### Steering questions
 
@@ -368,23 +368,159 @@ This goal should show that I can use AI responsibly to augment strategic CX work
 
 The goals should be managed as a connected portfolio rather than separate tasks.
 
-```text
-CX Strategy Tools
-        ↓
-Creates the strategic language, roadmap and customer-centred decision tools
+    CX Strategy Tools
+            ↓
+    Creates the strategic language, roadmap and customer-centred decision tools
 
-Information Foundations
-        ↓
-Creates the service, data, information and knowledge foundations needed for connected experiences
+    Information Foundations
+            ↓
+    Creates the service, data, information and knowledge foundations needed for connected experiences
 
-AI-Agentic Strategic Design Practice
-        ↓
-Improves how I frame, synthesise, communicate, repeat and enable the work
+    AI-Agentic Strategic Design Practice
+            ↓
+    Improves how I frame, synthesise, communicate, repeat and enable the work
 
-ICARE values
-        ↓
-Provide the behavioural standard for how the work is done
+    ICARE values
+            ↓
+    Provide the behavioural standard for how the work is done
 
-Make day-to-day work better
-        ↓
-Provides the operating-improvement lens for how the work should improve collaboration and customer outcomes
+    Make day-to-day work better
+            ↓
+    Provides the operating-improvement lens for how the work should improve collaboration and customer outcomes
+
+## Strategic operating rhythm
+
+### Weekly
+
+Use for activity steering.
+
+Questions:
+
+- Which goal does this week’s work support?
+- What decision, artefact or stakeholder alignment is needed?
+- Is there a blind spot, rabbit hole or assumption to check?
+- What needs to be captured as evidence?
+- Who needs to be brought along?
+
+### Monthly
+
+Use for goal review.
+
+Questions:
+
+- What progress did I make against each goal?
+- What evidence did I create?
+- What reusable pattern emerged?
+- What stakeholder alignment improved?
+- What team enablement occurred?
+- What should I stop, refine, socialise or scale?
+
+### Quarterly
+
+Use for Culture Amp updates and career evidence.
+
+Questions:
+
+- What are the strongest proof points this quarter?
+- Which goal is under-supported?
+- Which stakeholder relationships need attention?
+- Which artefacts are becoming reusable?
+- What progress can be described clearly to my manager?
+- What should be captured for end-of-year performance narrative?
+
+### EOFY
+
+Use for performance and career narrative.
+
+Questions:
+
+- What changed because of my work?
+- Which decisions were clearer?
+- Which tools or patterns became reusable?
+- Which team members were enabled?
+- Which goals created visible organisational value?
+- What did I learn about AI-agentic strategic design?
+- What does this prove about my next career step?
+
+## Portfolio KPI view
+
+| Area | FY target | Evidence |
+|---|---:|---|
+| CX Strategy tools | Cohesive tools developed, embedded or refined | Tools, roadmap outputs, stakeholder feedback, decisions influenced |
+| Information foundations | IA, account management and KCS work progressed | Frameworks, discovery outputs, roadmap, standards, decisions |
+| AI-assisted patterns | At least 3 repeatable patterns created and tested | Prompts, templates, working patterns, examples |
+| Live AI-assisted applications | At least 3 live work applications | Safe summaries of work supported |
+| Team enablement | At least 1 team member enabled to independently use or support part of the work | Rebecca Service Account reporting example, other adoption evidence |
+| Team Goal 6 contribution | At least 1 AI-enabled learning or prototyping activity | Session outline, design jam, prompt library or reflection |
+| Career evidence | Quarterly evidence captured | Strategic OS notes, proof points, reflections |
+| Values alignment | ICARE examples captured | Behavioural evidence and reflection |
+| Day-to-day improvement | Examples of reduced friction or improved collaboration | Process improvements, clearer artefacts, stakeholder feedback |
+
+## Evidence capture format
+
+Use this format when capturing goal evidence.
+
+Date:  
+Goal supported:  
+Work area:  
+What happened:  
+Decision or alignment need:  
+Evidence used:  
+Assumptions or caveats:  
+AI-agentic support used:  
+Blind spot identified:  
+Rabbit hole avoided:  
+Human judgement applied:  
+Stakeholders brought along:  
+Team enablement outcome:  
+Reusable artefact or pattern:  
+Culture Amp update value:  
+Career proof point:  
+Next action:  
+
+## Monthly goal dashboard
+
+Use this simple dashboard during monthly review.
+
+| Goal | Status | Evidence this month | Next steering action |
+|---|---|---|---|
+| CX Strategy tools | Not started / On track / At risk / Complete |  |  |
+| Information foundations | Not started / On track / At risk / Complete |  |  |
+| Business goal 3 | Not started / On track / At risk / Complete |  |  |
+| AI-agentic development goal | Not started / On track / At risk / Complete |  |  |
+| ICARE values context | Evidence captured / No evidence yet |  |  |
+| Day-to-day work better context | Evidence captured / No evidence yet |  |  |
+
+## Related Strategic OS areas
+
+- `01_career/`
+- `02_strategic_opportunities/`
+- `03_decision_briefs/`
+- `04_frameworks/`
+- `05_lessons_learned/`
+- `06_stakeholder_patterns/`
+- `07_ai_agents/`
+- `08_projects/`
+- `10_templates/`
+- `11_analytics/`
+
+## Privacy and source-of-truth note
+
+Do not store raw organisational data, customer records, dashboard extracts, credentials, sensitive operational details or unredacted screenshots in Strategic OS.
+
+Store only:
+
+- summaries
+- caveats
+- source rules
+- metric definitions
+- interpretation
+- reusable prompts
+- decision logic
+- stakeholder patterns
+- lessons learned
+- career evidence
+
+Culture Amp remains the formal source of truth for goal status.
+
+Power BI, Service Account dashboards, CRM, Databricks, SharePoint, Jira and other organisational systems remain the systems of record for operational information.
