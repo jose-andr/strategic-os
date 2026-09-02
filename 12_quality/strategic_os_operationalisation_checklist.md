@@ -1059,6 +1059,130 @@ Next action:
 
 ---
 
+## Run 05 — Chief of Staff validation
+
+### Validation question
+
+Can the Chief of Staff reduce operational drag by selectively prioritising live strategic work, separating decisions from tasks, reusing existing specialist outputs, protecting focus and avoiding unnecessary agent or runtime activity?
+
+### Test 01 — Mixed Strategic OS operating context
+
+Work item:
+
+> Prioritise between two live strategic opportunities, runtime backlog work, repository maintenance and possible agent/runtime expansion.
+
+Result:
+
+> Pass with observations
+
+The agent correctly:
+
+- [x] identified sponsor validation as the primary operating bottleneck;
+- [x] reduced a long mixed backlog to a small set of priorities;
+- [x] separated decisions from tasks;
+- [x] separated waiting-on-evidence from waiting-on-stakeholder-alignment;
+- [x] explicitly deprioritised runtime expansion, dashboards, documentation and further artefact polishing;
+- [x] protected the one-contained-task constraint;
+- [x] treated Strategic OS runtime backlog as supporting work rather than the current strategic priority;
+- [x] preserved human judgement;
+- [x] avoided recommending broad platform expansion.
+
+Observations:
+
+1. The agent included Chief of Staff validation itself as an operating priority.
+
+   This was too meta. Strategic OS administration should not compete with live strategic outcomes unless a system issue is materially blocking work.
+
+2. The agent suggested routing the selected sponsor conversation back through the Stakeholder Journey Agent.
+
+   Existing stakeholder sequencing had already been validated, so this risked duplicating specialist work.
+
+3. The final next action asked the user to choose between two opportunities rather than making a proportionate recommendation where the evidence allowed one.
+
+No prompt change was made after one test.
+
+### Test 02 — Sponsor-priority selection
+
+Work item:
+
+> Choose which of two already-validated strategic opportunities should receive the next sponsor conversation under a one-task-at-a-time constraint.
+
+Result:
+
+> Clean pass
+
+The agent correctly:
+
+- [x] recommended **Customer Accounts and Information Services Lead proposition first**;
+- [x] based the recommendation on decision readiness, clarity of ask, near-term decision movement, reversibility and dependency reduction;
+- [x] did not choose based on visibility, documentation volume or project size;
+- [x] reused existing specialist conclusions rather than re-running analysis;
+- [x] explicitly recommended **no specialist routing**;
+- [x] deferred Channel Strategy Y2 rather than advancing both tracks;
+- [x] deferred runtime expansion, dashboards, more documentation and additional artefact refinement;
+- [x] protected focus on one contained task;
+- [x] ended with a real sponsor action rather than more internal work;
+- [x] preserved human review and organisational decision authority.
+
+Validated next action:
+
+> Send or schedule the Customer Accounts sponsor conversation with the single question: “Do you believe this emerging CX capability needs formal ownership?”
+
+### Chief of Staff result
+
+Status:
+
+> **Validated**
+
+Rationale:
+
+> Across two operating contexts, the Chief of Staff demonstrated selective prioritisation, decision/task separation, dependency visibility, focus protection, selective specialist routing and practical next-action discipline.
+
+The second test confirmed that the Chief of Staff can make a proportionate priority recommendation from already-validated evidence without creating unnecessary meta-work or duplicate analysis.
+
+### Reusable operational learning
+
+> The Chief of Staff should reduce strategic drag by deciding what deserves attention next, reusing existing specialist work and refusing additional analysis when the bottleneck is human decision movement.
+
+And:
+
+> Strategic OS administration should not become a priority unless it is materially blocking real strategic work.
+
+### Monitoring note
+
+Continue to observe whether the agent:
+
+- turns Strategic OS maintenance into a priority alongside live strategic work;
+- routes to a specialist when an existing validated output already answers the question;
+- presents choices without recommending a priority where evidence supports one;
+- over-expands the priority list;
+- treats activity or urgency as equivalent to strategic importance.
+
+No prompt change is currently justified.
+
+### Run 05 completion condition
+
+- [x] Chief of Staff implemented in Relevance AI
+- [x] Mixed operating context tested
+- [x] Priority reduction tested
+- [x] Decisions separated from tasks
+- [x] Dependencies surfaced
+- [x] Focus protection tested
+- [x] Existing specialist outputs reused
+- [x] Unnecessary routing identified
+- [x] Priority recommendation tested
+- [x] No-specialist-routing behaviour tested
+- [x] Human review preserved
+- [x] Final result recorded
+
+### Current status
+
+Status:
+
+> **Validated**
+
+---
+
 ## Current agent validation status
 
 | Agent | Status |
@@ -1067,11 +1191,35 @@ Next action:
 | Stakeholder Journey Agent | Validated |
 | Career Architect | Validated |
 | Shipping Coach | Validated |
-| Chief of Staff | Not tested |
+| Chief of Staff | Validated |
 
-Next priority:
+### Agent-validation phase result
 
-> **Chief of Staff**
+Status:
+
+> **Complete**
+
+All five priority Strategic OS agents have now been implemented and validated through materially different real-work tests.
+
+Validation evidence now covers:
+
+- ambiguity reduction and decision framing;
+- stakeholder sequencing and alignment;
+- strategic opportunity and career-value assessment;
+- shipping versus refinement discipline;
+- prioritisation, orchestration and focus protection.
+
+The current evidence does **not** justify automatically wiring every specialist agent into Make.
+
+Existing runtime integration should expand only when repeated real use shows that direct Relevance AI execution is creating material operational drag or blocking decision movement.
+
+### Operational principle confirmed
+
+> Validate strategic behaviour through real work before expanding automation.
+
+And:
+
+> Human decision movement is now a stronger test of Strategic OS value than further agent completeness.
 # Current priority
 
 The current priority is active use.
