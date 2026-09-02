@@ -933,6 +933,132 @@ Next action:
 
 ---
 
+## Run 04 — Shipping Coach validation
+
+### Validation question
+
+Can the Shipping Coach distinguish useful progress from premature movement or unnecessary refinement, while protecting evidence quality, trust and decision clarity?
+
+### Test 01 — Customer Accounts and Information Services Lead socialisation
+
+Work item:
+
+> Decide whether a well-developed capability proposition should continue being refined or move into leadership validation.
+
+Result:
+
+> Pass with observation
+
+The agent correctly:
+
+- [x] selected **Socialise** rather than Ship, Refine or Stop;
+- [x] recognised that the proposition was already good enough for leadership discussion;
+- [x] separated genuine blockers from optional polish;
+- [x] treated classification, reporting and authority uncertainty as matters to validate rather than prerequisites for conversation;
+- [x] made the opportunity cost of waiting visible;
+- [x] identified Customer Focus and Strategy leadership as the appropriate first audience;
+- [x] provided a precise validation question;
+- [x] protected the distinction between capability need and role mechanism;
+- [x] preserved human review.
+
+Observation:
+
+The agent concluded that the existing work was ready to socialise but then recommended preparing a new one-page leadership artefact as the next action.
+
+A smaller action may have been to schedule the leadership conversation and reuse the existing material.
+
+This is a monitoring observation only.
+
+### Test 02 — Executive CX performance slide
+
+Work item:
+
+> Decide whether an attractive executive slide combining Service Account, portal, self-service, support-demand and Account Quality Index metrics was safe to socialise.
+
+Result:
+
+> Clean pass
+
+The agent correctly:
+
+- [x] selected **Refine**;
+- [x] identified evidence logic rather than visual design as the blocker;
+- [x] separated adoption, workflow activity, completed self-service, support demand and data-quality diagnostics;
+- [x] rejected unsupported comparison and causal implications;
+- [x] protected the distinction between online application activity and completed self-service transactions;
+- [x] protected the distinction between ASK/support demand and Salesforce application workflows;
+- [x] treated Account Quality Index as diagnostic rather than customer growth;
+- [x] made executive trust and decision quality central to the recommendation;
+- [x] recognised that delay had a cost but that misleading evidence created greater risk;
+- [x] bounded refinement tightly;
+- [x] rejected unnecessary visual redesign, additional metrics and broad new research;
+- [x] provided a specific stopping condition;
+- [x] preserved human review.
+
+Validated refinement boundary:
+
+> Refinement should stop when an executive can read the slide without drawing conclusions the evidence cannot support.
+
+### Shipping Coach result
+
+Status:
+
+> **Validated**
+
+Rationale:
+
+> Across two materially different real problems, the Shipping Coach correctly distinguished work that was ready for stakeholder validation from work that required a bounded material correction before progress.
+
+The agent demonstrated that shipping discipline is not equivalent to moving everything forward. It protected decision quality when evidence was unsafe while resisting unnecessary refinement when the remaining uncertainty depended on stakeholder judgement.
+
+### Reusable operational learning
+
+> Move work when the remaining uncertainty depends on stakeholder judgement; refine when the remaining uncertainty materially affects evidence safety, trust or decision quality.
+
+And:
+
+> Refinement should stop when the work is safe and useful for its next intended decision, not when every possible improvement has been made.
+
+### Monitoring note
+
+Continue to observe whether the agent:
+
+- recommends creating another artefact after already judging existing material sufficient for socialisation;
+- mistakes visual polish for a material blocker;
+- moves evidence-unsafe work forward because it appears directionally plausible;
+- uses urgency as a reason to lower quality or governance standards.
+
+The artefact-first behaviour occurred once and did not recur in Test 02.
+
+No prompt change is currently justified.
+
+### Run 04 completion condition
+
+- [x] Shipping Coach implemented in Relevance AI
+- [x] Mature strategic proposition tested
+- [x] Evidence-sensitive executive artefact tested
+- [x] Socialise behaviour tested
+- [x] Refine behaviour tested
+- [x] Genuine blockers separated from optional refinement
+- [x] Risk of waiting assessed
+- [x] Evidence safety protected
+- [x] Refinement boundary tested
+- [x] Human review completed
+- [x] Operational learning captured
+- [x] Final result recorded
+
+### Current status
+
+Status:
+
+> **Validated**
+
+Next action:
+
+> Move to the final unvalidated priority agent.
+
+---
+
 ## Current agent validation status
 
 | Agent | Status |
@@ -940,12 +1066,12 @@ Next action:
 | Sensemaking Agent | Validated |
 | Stakeholder Journey Agent | Validated |
 | Career Architect | Validated |
-| Shipping Coach | Not tested |
+| Shipping Coach | Validated |
 | Chief of Staff | Not tested |
 
 Next priority:
 
-> **Shipping Coach**
+> **Chief of Staff**
 # Current priority
 
 The current priority is active use.
