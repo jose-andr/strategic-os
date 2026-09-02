@@ -562,15 +562,16 @@ Operational status:
 
 Use this section only as a lightweight tracker.
 
-| Run | Work item | Primary capability tested | Status | Key learning |
+| Run | Work item | Primary capability to test | Status | Key learning |
 |---|---|---|---|---|
-| 01 | Customer Accounts and Information Services Lead proposal | Sensemaking, stakeholder alignment, strategic opportunity assessment and shipping discipline | In progress | The proposition is ready to socialise; further internal refinement is lower value than obtaining real sponsor evidence |
+| 01 | Customer Accounts and Information Services Lead proposal | Sensemaking Agent | Prepared for testing | Test artefacts exist, but no agent has yet been operationally validated |
 | 02 |  |  | Not started |  |
 | 03 |  |  | Not started |  |
 
 Allowed status values:
 
 - Not started
+- Prepared for testing
 - In progress
 - Validated
 - Needs adjustment
@@ -580,206 +581,190 @@ Allowed status values:
 
 ### Validation question
 
-Can Strategic OS turn a real organisational opportunity into clearer decision support, stakeholder alignment and reusable strategic evidence without duplicating organisational source material?
+Can Strategic OS use the Sensemaking Agent on a real organisational opportunity to produce clearer decision support than unstructured analysis alone?
 
 ### Current state
 
-The run has completed the internal strategic-analysis cycle.
+Run 01 is prepared but has not yet begun operational validation.
 
-Strategic OS has now been used to:
+Repository artefacts have been created to support testing, including:
 
-- frame the real decision;
-- distinguish the capability need from the role mechanism;
-- identify evidence, assumptions and trade-offs;
-- assess stakeholder alignment needs;
-- assess strategic and career opportunity value;
-- determine whether the proposition should ship, socialise, refine or stop.
+- a draft decision brief;
+- a stakeholder alignment assessment;
+- an opportunity review; and
+- a shipping decision.
 
-The current Shipping Coach decision is:
+These artefacts are **test preparation only**.
 
-> **SOCIALISE**
+Their existence does not prove that the relevant Strategic OS agents:
 
-The next unit of progress is stakeholder evidence, not another internal artefact.
+- can be invoked reliably;
+- follow their intended instructions;
+- produce differentiated value;
+- hand work off correctly;
+- improve decision quality;
+- work consistently across repeated use.
+
+No agent should be marked as tested or validated until it has actually been run against live work and its output reviewed.
 
 ---
 
-### Capabilities tested
+### Agent validation status
 
 #### Sensemaking Agent
 
-- [x] Used on a real complex or ambiguous problem
-- [x] Identified the underlying strategic decision
-- [x] Separated evidence, assumptions and interpretation
-- [x] Produced options, trade-offs and a recommendation
-- [x] Identified human-review requirements
+- [ ] Agent invoked using its actual Strategic OS instructions
+- [ ] Real work item supplied as input
+- [ ] Agent output captured
+- [ ] Output compared with Decision First expectations
+- [ ] Evidence, assumptions and interpretation separated correctly
+- [ ] Decision or strategic question made clearer
+- [ ] Recommendation judged useful
+- [ ] Human review completed
+- [ ] Result recorded as Validated / Needs adjustment
 
-Key learning:
+Status:
 
-> The real decision is not primarily whether an existing role should move from Class/Band 5 to Class/Band 6. The real decision is whether customer accounts and service information have become an enduring CX capability that now requires formal ownership.
+> Not tested
 
 #### Stakeholder Journey Agent
 
-- [x] Stakeholder groups identified
-- [x] Influence and impact separated
-- [x] Unknown stakeholder positions preserved as unknown
-- [x] Potential concerns treated as hypotheses
-- [x] Engagement sequence proposed
-- [x] First sponsor conversation identified
+- [ ] Agent invoked using its actual Strategic OS instructions
+- [ ] Real stakeholder challenge supplied
+- [ ] Output captured
+- [ ] Stakeholder positions handled safely
+- [ ] Engagement sequence judged useful
+- [ ] Human review completed
+- [ ] Result recorded as Validated / Needs adjustment
 
-Key learning:
+Status:
 
-> Socialise the capability before socialising the organisational solution.
+> Not tested
 
 #### Career Architect
 
-- [x] Strategic value assessed
-- [x] Organisational value assessed
-- [x] Customer value assessed
-- [x] Career value assessed
-- [x] Capability-evidence opportunities identified
-- [x] Potential evidence separated from achieved evidence
-- [x] Opportunity state assessed
+- [ ] Agent invoked using its actual Strategic OS instructions
+- [ ] Real strategic opportunity supplied
+- [ ] Output captured
+- [ ] Strategic and career value separated correctly
+- [ ] Potential evidence separated from achieved evidence
+- [ ] Human review completed
+- [ ] Result recorded as Validated / Needs adjustment
 
-Current opportunity recommendation:
+Status:
 
-> **Socialise first, then shape further toward pursuit.**
-
-Key learning:
-
-> Career value is a consequence of successfully shaping and leading the capability, not the justification for creating it.
+> Not tested
 
 #### Shipping Coach
 
-- [x] Shipping threshold assessed
-- [x] Ship / Socialise / Refine / Stop decision made
-- [x] Blockers separated from non-blockers
-- [x] Unnecessary refinement identified
-- [x] Minimum socialisable proposition defined
-- [x] Minimum next action defined
+- [ ] Agent invoked using its actual Strategic OS instructions
+- [ ] Real active work supplied
+- [ ] Output captured
+- [ ] Ship / Socialise / Refine / Stop decision judged useful
+- [ ] Unnecessary refinement identified where relevant
+- [ ] Human review completed
+- [ ] Result recorded as Validated / Needs adjustment
 
-Shipping decision:
+Status:
 
-> **SOCIALISE**
+> Not tested
 
-Key learning:
+#### Chief of Staff
 
-> Once the decision, proposition, evidence, uncertainty and first stakeholder ask are clear enough for a useful conversation, continued internal refinement becomes lower value than obtaining real stakeholder evidence.
+- [ ] Agent invoked using its actual Strategic OS instructions
+- [ ] Real priorities or operating context supplied
+- [ ] Output captured
+- [ ] Decision-required items surfaced correctly
+- [ ] Follow-ups surfaced correctly
+- [ ] Focus protection judged useful
+- [ ] Autonomy boundaries respected
+- [ ] Human review completed
+- [ ] Result recorded as Validated / Needs adjustment
 
----
+Status:
 
-### Decision-support output
-
-- [x] Decision-support brief produced
-- [x] Main evidence identified
-- [x] Assumptions made explicit
-- [x] Options and trade-offs identified
-- [x] Recommendation produced
-- [x] Risks and dependencies identified
-- [x] Human-review boundary preserved
-
-Current recommendation:
-
-> Progress the capability proposition through sponsor socialisation before seeking any formal role or classification decision.
+> Not tested
 
 ---
 
-### Strategic opportunity assessment
+### Run 01 test scope
 
-- [x] Alignment with Strategic OS North Star assessed
-- [x] Organisational value assessed
-- [x] Customer value assessed
-- [x] Systems value assessed
-- [x] Reputation value assessed
-- [x] Career value assessed
-- [x] Risks and opportunity costs assessed
+The first operational test will use:
 
-Current opportunity state:
+> Customer Accounts and Information Services Lead proposal
 
-> **Shaping → ready to move into Socialising if sponsor engagement begins**
+Primary agent:
 
----
+> Sensemaking Agent
 
-### Stakeholder alignment status
+The test should use the actual agent specification and prompts already defined in Strategic OS.
 
-- [x] First stakeholder group identified
-- [x] Engagement objective defined
-- [x] Suggested framing prepared
-- [x] Formal and informal influence pathways considered
-- [ ] Sponsor conversation completed
-- [ ] Capability need validated
-- [ ] Stakeholder positions updated from evidence
-- [ ] Organisational decision pathway confirmed
+Do not create a substitute prompt for the test unless the existing agent specification proves unusable.
 
 ---
 
-### Current sponsor question
+### Run 01 test procedure
 
-Use the capability question rather than the role-classification question:
-
-> Do you think customer accounts and service information have now become an enduring CX capability that needs clearer ownership, and is this worth shaping further?
-
-Do not lead with:
-
-- role classification;
-- reporting changes;
-- proposed direct reports;
-- final operating-model detail.
-
-Those should follow only if the capability need receives support.
+1. Open the current Sensemaking Agent specification in the repository.
+2. Confirm the intended input, operating instructions and expected output.
+3. Supply the Customer Accounts and Information Services Lead opportunity as the live input.
+4. Run the agent.
+5. Capture the output.
+6. Compare the output against the relevant Strategic OS decision-support standard.
+7. Review whether the agent:
+   - framed the real decision;
+   - separated evidence from assumptions;
+   - surfaced material uncertainty;
+   - identified meaningful options or trade-offs;
+   - produced useful decision support;
+   - avoided unnecessary documentation.
+8. Record the result.
+9. Only then mark the Sensemaking Agent as Validated or Needs adjustment.
 
 ---
 
-### Evidence still required
+### Test evidence to record
 
-Run 01 now requires real-world evidence.
+For each agent test, capture:
 
-Capture only the following after sponsor engagement:
+- agent tested;
+- test input;
+- expected behaviour;
+- actual behaviour;
+- what worked;
+- what failed;
+- whether output improved the decision;
+- whether the agent duplicated another capability;
+- whether prompt or architecture changes are required;
+- validation result.
 
-- decision or signal received;
-- key rationale;
-- material challenge;
-- new evidence;
-- new assumption;
-- requested follow-up;
-- change to opportunity status.
-
-Do not store:
-
-- detailed meeting transcripts;
-- inferred motives;
-- unnecessary personal commentary;
-- sensitive organisational material.
+Do not treat an artefact created manually in advance as evidence that the agent passed.
 
 ---
 
 ### Run 01 completion condition
 
-Run 01 is complete when Strategic OS has:
+Run 01 is complete when:
 
-- [x] produced a decision-relevant output;
-- [x] identified the main stakeholder implications;
-- [x] assessed strategic opportunity value;
-- [x] identified potential career evidence;
-- [x] determined the minimum viable next action;
-- [ ] received real sponsor evidence;
-- [ ] updated the decision or opportunity state from that evidence;
-- [ ] identified any reusable learning worth retaining;
-- [ ] completed human review;
-- [ ] determined whether the run is Validated, Needs adjustment or Paused.
-
----
+- [ ] Sensemaking Agent has actually been invoked
+- [ ] Output has been reviewed
+- [ ] Decision quality has been assessed
+- [ ] Agent usefulness has been judged
+- [ ] Any prompt or workflow issue has been recorded
+- [ ] Result is marked Validated or Needs adjustment
+- [ ] Reusable operational learning has been captured
 
 ### Current status
 
 Status:
 
-> **In progress — awaiting sponsor evidence**
+> **Prepared for testing**
 
 Next action:
 
-> Have one focused sponsor conversation about whether the capability need is real and worth formalising.
+> Run the Sensemaking Agent using its actual repository instructions against the Customer Accounts and Information Services Lead opportunity.
 
-Do not create another pre-engagement Strategic OS artefact unless the conversation itself requires one.
+Do not create additional Run 01 analysis artefacts before this test.
 
 ---
 # Current priority
