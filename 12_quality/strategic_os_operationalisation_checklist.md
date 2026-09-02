@@ -564,7 +564,7 @@ Use this section only as a lightweight tracker.
 
 | Run | Work item | Primary capability tested | Status | Key learning |
 |---|---|---|---|---|
-| 01 | Customer Accounts and Information Services Lead proposal | Sensemaking, strategic opportunity assessment, stakeholder alignment and career evidence | In progress | Pending validation |
+| 01 | Customer Accounts and Information Services Lead proposal | Sensemaking, stakeholder alignment, strategic opportunity assessment and shipping discipline | In progress | The proposition is ready to socialise; further internal refinement is lower value than obtaining real sponsor evidence |
 | 02 |  |  | Not started |  |
 | 03 |  |  | Not started |  |
 
@@ -582,56 +582,204 @@ Allowed status values:
 
 Can Strategic OS turn a real organisational opportunity into clearer decision support, stakeholder alignment and reusable strategic evidence without duplicating organisational source material?
 
-### Source context
+### Current state
 
-The proposal is to evolve the existing Project Officer Customer Focus role from Class/Band 5 to Class/Band 6, with the working title **Customer Accounts and Information Services Lead**.
+The run has completed the internal strategic-analysis cycle.
 
-The proposed role would lead an enduring internal service capability covering:
+Strategic OS has now been used to:
 
-- customer account quality;
-- service information quality;
-- customer information architecture;
-- continuous improvement;
-- governance and controls; and
-- connected-interactions readiness.
+- frame the real decision;
+- distinguish the capability need from the role mechanism;
+- identify evidence, assumptions and trade-offs;
+- assess stakeholder alignment needs;
+- assess strategic and career opportunity value;
+- determine whether the proposition should ship, socialise, refine or stop.
 
-The proposal also includes leadership of the Information Officer and Customer Data Officer.
+The current Shipping Coach decision is:
 
-Strategic OS should retain only reusable interpretation, decision logic, stakeholder patterns, opportunity assessment and career evidence generated from this work.
+> **SOCIALISE**
 
-The organisational proposal itself remains in its organisational system of record.
+The next unit of progress is stakeholder evidence, not another internal artefact.
 
-### Capabilities being tested
+---
 
-- [ ] Sensemaking Agent identifies the real strategic decision
-- [ ] Evidence, assumptions and recommendations are separated
-- [ ] Strategic opportunity value is assessed
-- [ ] Stakeholder implications are identified
-- [ ] Career evidence implications are identified
-- [ ] A decision-support output is produced
-- [ ] Human review is completed
-- [ ] Reusable learning is captured
-- [ ] No raw organisational source material is retained unnecessarily
+### Capabilities tested
+
+#### Sensemaking Agent
+
+- [x] Used on a real complex or ambiguous problem
+- [x] Identified the underlying strategic decision
+- [x] Separated evidence, assumptions and interpretation
+- [x] Produced options, trade-offs and a recommendation
+- [x] Identified human-review requirements
+
+Key learning:
+
+> The real decision is not primarily whether an existing role should move from Class/Band 5 to Class/Band 6. The real decision is whether customer accounts and service information have become an enduring CX capability that now requires formal ownership.
+
+#### Stakeholder Journey Agent
+
+- [x] Stakeholder groups identified
+- [x] Influence and impact separated
+- [x] Unknown stakeholder positions preserved as unknown
+- [x] Potential concerns treated as hypotheses
+- [x] Engagement sequence proposed
+- [x] First sponsor conversation identified
+
+Key learning:
+
+> Socialise the capability before socialising the organisational solution.
+
+#### Career Architect
+
+- [x] Strategic value assessed
+- [x] Organisational value assessed
+- [x] Customer value assessed
+- [x] Career value assessed
+- [x] Capability-evidence opportunities identified
+- [x] Potential evidence separated from achieved evidence
+- [x] Opportunity state assessed
+
+Current opportunity recommendation:
+
+> **Socialise first, then shape further toward pursuit.**
+
+Key learning:
+
+> Career value is a consequence of successfully shaping and leading the capability, not the justification for creating it.
+
+#### Shipping Coach
+
+- [x] Shipping threshold assessed
+- [x] Ship / Socialise / Refine / Stop decision made
+- [x] Blockers separated from non-blockers
+- [x] Unnecessary refinement identified
+- [x] Minimum socialisable proposition defined
+- [x] Minimum next action defined
+
+Shipping decision:
+
+> **SOCIALISE**
+
+Key learning:
+
+> Once the decision, proposition, evidence, uncertainty and first stakeholder ask are clear enough for a useful conversation, continued internal refinement becomes lower value than obtaining real stakeholder evidence.
+
+---
+
+### Decision-support output
+
+- [x] Decision-support brief produced
+- [x] Main evidence identified
+- [x] Assumptions made explicit
+- [x] Options and trade-offs identified
+- [x] Recommendation produced
+- [x] Risks and dependencies identified
+- [x] Human-review boundary preserved
+
+Current recommendation:
+
+> Progress the capability proposition through sponsor socialisation before seeking any formal role or classification decision.
+
+---
+
+### Strategic opportunity assessment
+
+- [x] Alignment with Strategic OS North Star assessed
+- [x] Organisational value assessed
+- [x] Customer value assessed
+- [x] Systems value assessed
+- [x] Reputation value assessed
+- [x] Career value assessed
+- [x] Risks and opportunity costs assessed
+
+Current opportunity state:
+
+> **Shaping → ready to move into Socialising if sponsor engagement begins**
+
+---
+
+### Stakeholder alignment status
+
+- [x] First stakeholder group identified
+- [x] Engagement objective defined
+- [x] Suggested framing prepared
+- [x] Formal and informal influence pathways considered
+- [ ] Sponsor conversation completed
+- [ ] Capability need validated
+- [ ] Stakeholder positions updated from evidence
+- [ ] Organisational decision pathway confirmed
+
+---
+
+### Current sponsor question
+
+Use the capability question rather than the role-classification question:
+
+> Do you think customer accounts and service information have now become an enduring CX capability that needs clearer ownership, and is this worth shaping further?
+
+Do not lead with:
+
+- role classification;
+- reporting changes;
+- proposed direct reports;
+- final operating-model detail.
+
+Those should follow only if the capability need receives support.
+
+---
+
+### Evidence still required
+
+Run 01 now requires real-world evidence.
+
+Capture only the following after sponsor engagement:
+
+- decision or signal received;
+- key rationale;
+- material challenge;
+- new evidence;
+- new assumption;
+- requested follow-up;
+- change to opportunity status.
+
+Do not store:
+
+- detailed meeting transcripts;
+- inferred motives;
+- unnecessary personal commentary;
+- sensitive organisational material.
+
+---
 
 ### Run 01 completion condition
 
 Run 01 is complete when Strategic OS has:
 
-- produced a decision-relevant output that makes the organisational choice clearer;
-- identified the main stakeholder implications;
-- assessed the strategic opportunity value;
-- identified any useful career evidence; and
-- determined what, if anything, should be retained as reusable strategic knowledge.
+- [x] produced a decision-relevant output;
+- [x] identified the main stakeholder implications;
+- [x] assessed strategic opportunity value;
+- [x] identified potential career evidence;
+- [x] determined the minimum viable next action;
+- [ ] received real sponsor evidence;
+- [ ] updated the decision or opportunity state from that evidence;
+- [ ] identified any reusable learning worth retaining;
+- [ ] completed human review;
+- [ ] determined whether the run is Validated, Needs adjustment or Paused.
+
+---
 
 ### Current status
 
 Status:
 
-> In progress
+> **In progress — awaiting sponsor evidence**
 
 Next action:
 
-> Use the Sensemaking Agent to frame the decision and produce the first decision-support artefact.
+> Have one focused sponsor conversation about whether the capability need is real and worth formalising.
+
+Do not create another pre-engagement Strategic OS artefact unless the conversation itself requires one.
 
 ---
 # Current priority
