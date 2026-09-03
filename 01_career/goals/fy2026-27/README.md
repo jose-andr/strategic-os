@@ -23,7 +23,10 @@ Strategic OS is used to steer activity, capture safe evidence, develop reusable 
 | `development_goal_ai_agentic_strategic_design.md` | Dedicated steering file for the AI-agentic strategic design development goal. |
 | `org_wide_context_goals.md` | Organisation-wide Culture Amp goals translated into behavioural and operating lenses. |
 | `culture_amp_goal_evidence_log.md` | Evidence log for quarterly updates, EOFY reflection and career proof points. |
-
+| `quarterly_reviews/q1_goal_review.md` | Q1 review file for July to September progress, evidence and Q2 steering. |
+| `quarterly_reviews/q2_goal_review.md` | Q2 review file for October to December progress, evidence and Q3 steering. |
+| `quarterly_reviews/q3_goal_review.md` | Q3 review file for January to March progress, evidence and Q4 steering. |
+| `quarterly_reviews/q4_eofy_goal_review.md` | Q4 and EOFY review file for final evidence, Culture Amp updates and career narrative. |
 ## Portfolio structure
 
 The FY2026/27 goal portfolio includes:
