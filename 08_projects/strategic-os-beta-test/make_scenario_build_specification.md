@@ -16,9 +16,35 @@ The scenario covers intake through the first Sensemaking Agent human-review chec
 
 ## Build principle
 
-Build the smallest reliable scenario first.
+The minimum specialist runtime pattern has now been validated end to end.
 
-Do not add the Stakeholder Journey Agent, Shipping Coach, automated GitHub commits or advanced reporting until this scenario passes its minimum test cases.
+Validated specialist runtimes:
+
+- Sensemaking Agent
+- Stakeholder Journey Agent
+- Career Architect
+- Shipping Coach
+- Chief of Staff Agent
+
+Each specialist uses the same proven orchestration pattern:
+
+`Webhook → privacy gate → shared Data Store → selected Relevance AI agent → Data Store → Slack human review → P approval listener`
+
+Implementation rules:
+
+- use one specialist scenario at a time;
+- reuse the shared `strategic_os_beta_workflows` Data Store;
+- keep Make responsible for orchestration rather than specialist reasoning;
+- keep Relevance AI responsible for agent reasoning;
+- keep Slack as the human-review surface;
+- require human approval before a workflow reaches `approved`;
+- preserve safe summaries and workflow state only;
+- do not store credentials, raw organisational data, customer records or sensitive operational extracts;
+- reuse the validated runtime before introducing new orchestration behaviour.
+
+Do not introduce multi-agent routing, automatic specialist sequencing, automated GitHub writes or additional review commands merely because the specialist runtimes are now available.
+
+Expand the runtime only when repeated real use exposes a genuine operational need.
 
 ## Scenario architecture
 
