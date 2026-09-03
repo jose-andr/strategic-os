@@ -2,25 +2,32 @@
 
 ## Purpose
 
-Track runtime corrections, hardening work and future adaptations identified while stabilising the Strategic OS Sensemaking workflow in Make, Relevance AI and Slack.
+Track runtime corrections, hardening work and future adaptations identified while operating the validated Strategic OS specialist workflows in Make, Relevance AI and Slack.
 
 This backlog is not the active implementation sequence.
 
+The validated specialist runtime set is:
+
+- Sensemaking Agent
+- Stakeholder Journey Agent
+- Career Architect
+- Shipping Coach
+- Chief of Staff Agent
+
 The active rule is:
 
-> Stabilise the current Sensemaking path before expanding the runtime.
+> Operate the validated specialist runtimes through real work before expanding orchestration.
 
 Do not pull items from this backlog merely because they are technically possible.
 
 Prioritise items only when:
 
-- they block the current runtime;
-- repeated use exposes a genuine problem;
+- they block a validated runtime;
+- repeated real use exposes a genuine problem;
 - they materially improve privacy, reliability or decision quality; or
 - the active implementation phase explicitly requires them.
 
----
-
+Multi-agent routing, automatic sequencing and additional review commands remain future adaptations rather than current requirements.
 # Current Runtime
 
 Active runtime pattern:
