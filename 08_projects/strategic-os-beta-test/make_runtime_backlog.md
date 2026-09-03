@@ -28,6 +28,7 @@ Prioritise items only when:
 - the active implementation phase explicitly requires them.
 
 Multi-agent routing, automatic sequencing and additional review commands remain future adaptations rather than current requirements.
+
 ## Current Runtime
 
 Five specialist Strategic OS runtimes are validated end to end in Make:
@@ -82,7 +83,7 @@ Not yet implemented:
 
 These remain backlog items until repeated use demonstrates a real need.
 
-Not yet validated:
+## Not Yet Validated
 
 - [ ] `L` rework route
 - [ ] `M` stop route
@@ -91,6 +92,17 @@ Not yet validated:
 - [ ] Slack notification failure handling
 - [ ] privacy rejection user feedback
 
-Current implementation rule:
+## Current Implementation Rule
 
-> Do not add `L` or `M` merely because `P` now works. Move next to real Sensemaking Agent validation against a real work item unless operational use exposes a more urgent runtime defect.
+> Operate the validated specialist runtimes through real work before expanding orchestration.
+
+Do not implement `L`, `M`, multi-agent routing, automatic sequencing or other runtime hardening merely because the five specialist paths are now operational.
+
+Prioritise the next runtime change only when:
+
+- repeated real use exposes a genuine operational problem;
+- a defect blocks a validated specialist path;
+- privacy, reliability or decision quality materially improves; or
+- a new orchestration pattern becomes necessary to support real work.
+
+The current priority is use, observation and evidence — not further runtime expansion.
