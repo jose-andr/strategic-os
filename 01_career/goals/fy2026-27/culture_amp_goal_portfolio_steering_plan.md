@@ -469,11 +469,11 @@ Culture Amp update value:
 Career proof point:  
 Next action:  
 
-## Monthly goal dashboard
+## Quarterly goal dashboard
 
-Use this simple dashboard during monthly review.
+Use this simple dashboard during quarterly review.
 
-| Goal | Status | Evidence this month | Next steering action |
+| Goal | Status | Evidence this quarter | Next steering action |
 |---|---|---|---|
 | CX Strategy tools | Not started / On track / At risk / Complete |  |  |
 | Information foundations | Not started / On track / At risk / Complete |  |  |
@@ -481,7 +481,6 @@ Use this simple dashboard during monthly review.
 | AI-agentic development goal | Not started / On track / At risk / Complete |  |  |
 | ICARE values context | Evidence captured / No evidence yet |  |  |
 | Day-to-day work better context | Evidence captured / No evidence yet |  |  |
-
 ## Related Strategic OS areas
 
 - `01_career/`
