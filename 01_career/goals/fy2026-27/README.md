@@ -98,3 +98,20 @@ Strategic OS should only store:
 - career evidence
 
 Do not store raw organisational data, customer records, dashboard extracts, sensitive operational details, credentials, access tokens, identifiable case examples or unredacted screenshots in Strategic OS.
+## Supporting tools
+
+Use these supporting Strategic OS tools to run the goal portfolio through the year.
+
+| File | Purpose |
+|---|---|
+| `10_templates/culture_amp_quarterly_goal_review_template.md` | Reusable template for quarterly Culture Amp goal reviews. |
+| `07_ai_agents/prompt_packs/culture_amp_goal_steering_prompt_pack.md` | AI-agentic prompt pack for quarterly reviews, evidence capture, stakeholder alignment, team enablement and EOFY career narrative. |
+
+## Recommended quarterly workflow
+
+1. Open the relevant quarterly review file.
+2. Use the quarterly review template if a fresh review structure is needed.
+3. Use the prompt pack to support synthesis, evidence capture or Culture Amp update drafting.
+4. Transfer the strongest evidence into `culture_amp_goal_evidence_log.md`.
+5. Update Culture Amp with a concise progress summary.
+6. Identify the next quarter’s steering priorities.
