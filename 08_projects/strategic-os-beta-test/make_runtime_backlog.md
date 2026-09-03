@@ -28,143 +28,59 @@ Prioritise items only when:
 - the active implementation phase explicitly requires them.
 
 Multi-agent routing, automatic sequencing and additional review commands remain future adaptations rather than current requirements.
-# Current Runtime
+## Current Runtime
 
-Active runtime pattern:
+Five specialist Strategic OS runtimes are validated end to end in Make:
 
-```text
-Webhook intake
-    ↓
-Privacy gate
-    ↓
-Data Store
-    ↓
-Relevance AI
-Strategic OS — Sensemaking Agent
-    ↓
-human-review-required
-    ↓
-Slack
-    ↓
-P approval listener
----
+- Sensemaking Agent
+- Stakeholder Journey Agent
+- Career Architect
+- Shipping Coach
+- Chief of Staff Agent
 
-# Validated Runtime Evidence
+Each specialist currently follows the same proven runtime pattern:
 
-## P approval path — validated
+`Webhook → privacy gate → shared Data Store → selected Relevance AI agent → post-agent Data Store update → Slack human review → P approval listener`
 
-Status:
+The shared runtime currently supports:
 
-> Validated — 2026-09-02
+- specialist-specific webhook intake;
+- `privacy_confirmed = true` gating;
+- persistence in the shared `strategic_os_beta_workflows` Data Store;
+- specialist execution in Relevance AI;
+- storage of the specialist output in `latest_output`;
+- transition from `processing` to `human-review-required`;
+- Slack-based human review;
+- strict approval command parsing using:
 
-The approval path has now passed end to end using a fresh synthetic Sensemaking workflow.
+  `^P\s+(?<workflow_id>[a-fA-F0-9]{32})$`
 
-Validated execution path:
+- lookup of the matching workflow record;
+- transition to approved state;
+- approval-state persistence;
+- Slack confirmation.
 
-    Slack 2
-        ↓
-    Text Parser 22
-        ↓
-    Data Store 7
-        ↓
-    Router 18
-        ↓
-    Data Store 19
-        ↓
-    Slack 21
-
-Validated command format:
-
-`P <32-character-workflow-id>`
-
-Example test workflow:
-
-`19adddad86754fdc9d669c0b6209c028`
-
-### Runtime evidence
-
-The Slack approval command successfully:
-
-- matched the Text Parser pattern;
-- extracted the correct workflow ID;
-- retrieved the correct Data Store record;
-- passed the `human-review-required` state prerequisite;
-- updated the same workflow record;
-- returned an approval confirmation to Slack.
-
-Persisted state was confirmed as:
+Expected approved state:
 
 - `previous_state = human-review-required`
 - `current_state = approved`
 - `decision_status = approved`
 - `human_action_required = false`
-- `completed_at` populated
-- `updated_at` populated
-
-The source workflow also retained:
-
+- `completed_at = now`
+- `updated_at = now`
 - `privacy_status = confirmed`
-- `privacy_confirmed = true`
 
-### Validation result
+The runtime remains intentionally specialist-by-specialist.
 
-> The `P` approval path is operationally validated.
+Not yet implemented:
 
-This is runtime evidence, not configuration-only evidence.
+- multi-agent routing;
+- automatic specialist sequencing;
+- automatic downstream hand-offs;
+- rework or stop commands;
+- automated repository writes.
 
----
-
-## Runtime defect — Slack approval instruction mismatch
-
-Status:
-
-> Resolved
-
-### Problem
-
-The Sensemaking Review scenario displayed the approval instruction as:
-
-`P <workflow-id> - Approve`
-
-The Slack Review Response parser intentionally accepted only:
-
-`P <workflow-id>`
-
-using:
-
-`^P\s+(?<workflow_id>[a-fA-F0-9]{32})$`
-
-A live test confirmed that the extra `- Approve` text prevented the workflow from progressing beyond the Text Parser.
-
-### Fix
-
-Update the Sensemaking Review Slack message so the displayed command is exactly:
-
-`P <workflow-id>`
-
-Do not append descriptive text after the workflow ID.
-
-### Reusable runtime lesson
-
-> Human-facing command instructions must exactly match the executable parser contract.
-
-Do not rely on users to infer which part of a displayed command should be copied.
-
----
-
-# Current Runtime State
-
-Validated:
-
-- [x] Sensemaking intake reaches Relevance AI
-- [x] Sensemaking output reaches Slack human review
-- [x] privacy confirmation gates normal processing
-- [x] Text Parser extracts the 32-character workflow ID
-- [x] Data Store lookup resolves the correct workflow
-- [x] approval route requires `human-review-required`
-- [x] `P` updates the workflow to `approved`
-- [x] approval state persists correctly
-- [x] Slack returns approval confirmation
+These remain backlog items until repeated use demonstrates a real need.
 
 Not yet validated:
 
