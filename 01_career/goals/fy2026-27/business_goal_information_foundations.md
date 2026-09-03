@@ -168,9 +168,10 @@ Capture safe evidence such as:
 
 Do not store raw organisational data, customer records, sensitive operational extracts, dashboard exports or unredacted working material in Strategic OS.
 
-## Monthly evidence capture format
+## Quarterly evidence capture format
 
 Date:  
+Quarter: Q1 / Q2 / Q3 / Q4  
 Work area:  
 Key result area supported:  
 What happened:  
@@ -183,9 +184,9 @@ Assumptions or caveats:
 Risk or dependency:  
 Recommendation or decision supported:  
 What became reusable:  
+Culture Amp update value:  
 Career proof point:  
 Next action:  
-
 ## Quarterly review rhythm
 
 ### Q1
