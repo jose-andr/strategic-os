@@ -2,376 +2,971 @@
 
 ## Purpose
 
-Map the Strategic OS beta workflow to the existing Strategic OS technology, agent and repository components.
+Map the validated Strategic OS specialist runtime to the existing technology, agent and repository components.
 
 This file is an implementation bridge.
 
-It does not introduce a new architecture or replace:
+It explains:
+
+- which component owns each part of the runtime;
+- where specialist reasoning occurs;
+- where workflow state is persisted;
+- where human review occurs;
+- what Strategic OS stores;
+- what remains deliberately outside the current runtime.
+
+It does not introduce a new architecture or define future multi-agent orchestration.
+
+Related implementation files:
 
 - `beta_test_plan.md`
 - `automation_and_slack_workflow.md`
+- `minimum_make_scenario.md`
+- `make_scenario_build_specification.md`
+- `make_scenario_test_script.md`
+- `make_runtime_backlog.md`
 - agent specifications under `07_ai_agents/`
-- reusable architecture rules under `04_frameworks/`
 
-## Implementation principle
+---
+
+# Status
+
+**Specialist runtime operationalisation:** Complete
+
+**Validated specialists:**
+
+1. Sensemaking Agent
+2. Stakeholder Journey Agent
+3. Career Architect
+4. Shipping Coach
+5. Chief of Staff Agent
+
+**Current phase:**
+
+> Use, observation and evidence.
+
+**Operating principle:**
+
+> Operate the validated specialist runtimes through real work before expanding orchestration.
+
+---
+
+# Implementation principle
 
 Use the existing Strategic OS stack:
 
-- Relevance AI executes the specialist agents.
-- Make.com coordinates workflow sequencing and integrations.
-- Slack provides human interaction, review and operational notifications.
-- GitHub stores approved, reusable and privacy-safe Strategic OS knowledge.
+- Relevance AI executes specialist reasoning.
+- Make coordinates runtime orchestration and state.
+- Slack provides the human-review surface.
+- the shared Make Data Store retains workflow state.
+- GitHub stores approved reusable Strategic OS logic and safe learning.
 - José retains final decision authority.
 
-Do not create an additional orchestration platform unless testing demonstrates a genuine limitation in this stack.
+Do not create an additional orchestration platform or multi-agent coordination layer unless repeated real use demonstrates a genuine limitation in the current specialist pattern.
 
-## Component map
+---
 
-| Beta capability | Strategic OS component | Responsibility |
+# Validated runtime
+
+Each specialist uses the same common runtime:
+
+`Webhook → privacy gate → shared Data Store → selected Relevance AI agent → post-agent Data Store update → Slack human review → P approval listener → approved state`
+
+The five specialist scenarios are independent.
+
+They are not currently connected through automatic routing or sequencing.
+
+A completed specialist does not trigger another specialist.
+
+---
+
+# Component map
+
+| Beta capability | Strategic OS component | Responsibility | Status |
+|---|---|---|---|
+| Specialist intake | Make custom webhook | Receive the common specialist intake | Validated |
+| Privacy gate | Make filter | Require `privacy_confirmed = true` before specialist execution | Validated |
+| Workflow orchestration | Make | Coordinate system handoffs and state transitions | Validated |
+| Workflow state | `strategic_os_beta_workflows` | Persist safe runtime context, specialist output and approval state | Validated |
+| Sensemaking | Relevance AI Sensemaking Agent | Clarify decisions, evidence, assumptions, options and recommendations | Validated |
+| Stakeholder analysis | Relevance AI Stakeholder Journey Agent | Clarify stakeholder roles, influence, uncertainty and engagement sequence | Validated |
+| Career assessment | Relevance AI Career Architect | Assess strategic value, career value, evidence maturity and next validation step | Validated |
+| Shipping assessment | Relevance AI Shipping Coach | Distinguish blockers from refinement and recommend Ship / Socialise / Refine / Stop | Validated |
+| Operating coordination | Relevance AI Chief of Staff Agent | Prioritise, separate decisions from tasks, surface dependencies and protect focus | Validated |
+| Human review | Slack + José | Present output and require explicit human approval | Validated |
+| Approval parsing | Make shared approval listener | Parse strict `P <workflow_id>` command | Validated |
+| Approved-state persistence | Make + shared Data Store | Record explicit human approval | Validated |
+| Approval confirmation | Slack | Confirm successful approved-state persistence | Validated |
+| Durable Strategic OS knowledge | GitHub | Store reusable, privacy-safe interpretation, design logic and lessons | Established |
+| Organisational source records | Organisational systems of record | Retain authoritative source data and operational records | External boundary |
+
+---
+
+# System responsibilities
+
+## Strategic OS repository
+
+Strategic OS is authoritative for:
+
+- agent contracts;
+- runtime definitions;
+- workflow patterns;
+- operating rules;
+- quality criteria;
+- reusable prompts;
+- reusable decision logic;
+- validation status;
+- reusable operational learning.
+
+Strategic OS should store only safe, durable knowledge.
+
+It should not become an execution log or duplicate organisational systems of record.
+
+---
+
+## Make
+
+Make is the runtime orchestration layer.
+
+Make is responsible for:
+
+- specialist-specific webhook intake;
+- privacy gating;
+- workflow ID handling;
+- shared workflow-state persistence;
+- specialist invocation;
+- specialist output persistence;
+- Slack review delivery;
+- strict approval parsing;
+- workflow lookup;
+- approved-state persistence;
+- approval confirmation.
+
+Make should remain thin.
+
+Make should not:
+
+- reproduce specialist reasoning;
+- make consequential strategic decisions;
+- automatically choose another specialist;
+- automatically sequence specialists;
+- infer approval from silence;
+- infer approval from unrelated Slack messages;
+- publish externally without a separate approved process;
+- write automatically to GitHub;
+- become a second repository of organisational source data.
+
+---
+
+## Relevance AI
+
+Relevance AI is the specialist reasoning layer.
+
+It is responsible for:
+
+- applying the selected Strategic OS agent contract;
+- analysing the supplied safe context;
+- producing the specialist output;
+- preserving uncertainty and evidence discipline defined by the contract;
+- returning a reviewable answer to Make.
+
+Relevance AI does not own workflow state.
+
+It does not determine human approval.
+
+---
+
+## Slack
+
+Slack is the current human-review surface.
+
+Slack is responsible for:
+
+- presenting specialist output;
+- making the workflow ID visible;
+- identifying the specialist;
+- making the human-review requirement explicit;
+- receiving the supported approval command;
+- confirming successful approval.
+
+Slack is not the durable source of truth for:
+
+- Strategic OS agent contracts;
+- reusable decision logic;
+- workflow definitions;
+- final workflow state;
+- organisational source records.
+
+---
+
+## Shared Make Data Store
+
+Use:
+
+`strategic_os_beta_workflows`
+
+The shared Data Store is responsible for persisted runtime state.
+
+Do not create separate Data Stores for individual specialists.
+
+Primary lookup key:
+
+`workflow_id`
+
+The workflow ID remains stable through the specialist runtime.
+
+---
+
+## GitHub
+
+GitHub is the durable Strategic OS knowledge layer.
+
+GitHub may store:
+
+- agent specifications;
+- safe workflow definitions;
+- runtime design patterns;
+- test scripts;
+- operationalisation status;
+- reusable prompts;
+- metric definitions;
+- caveats;
+- de-identified lessons;
+- reusable decision logic;
+- safe strategic artefacts where appropriate.
+
+GitHub must not store:
+
+- credentials;
+- tokens;
+- webhook URLs;
+- raw Slack exports;
+- raw organisational datasets;
+- customer information;
+- sensitive stakeholder commentary;
+- confidential attachments;
+- raw agent logs containing sensitive inputs;
+- unredacted sensitive screenshots;
+- uncontrolled source-system extracts.
+
+---
+
+# Organisational systems of record
+
+Strategic OS does not replace organisational systems.
+
+Depending on the work, authoritative records may remain in:
+
+- Databricks;
+- Power BI;
+- SharePoint;
+- OneDrive;
+- Teams;
+- email;
+- calendar;
+- Jira;
+- Confluence;
+- Miro;
+- CRM platforms;
+- approved operational repositories.
+
+Strategic OS should store:
+
+- summaries;
+- caveats;
+- source rules;
+- interpretation;
+- decision logic;
+- reusable patterns;
+- lessons learned.
+
+Prefer source references over duplicated source material.
+
+---
+
+# Common intake mapping
+
+The validated common specialist webhook contract is:
+
+    name
+    workflow_name
+    decision_question
+    opportunity_summary
+    evidence
+    known_assumptions
+    constraints
+    requested_output
+    requested_outcome
+    submitted_by
+    slack_destination
+    privacy_confirmed
+
+`name` remains part of the current schema because it is present in the webhook structure detected by Make.
+
+Do not replace `evidence` with the earlier `known_evidence` field.
+
+Do not redesign the common intake contract unless repeated operational use exposes a genuine need.
+
+---
+
+# Intake responsibility map
+
+| Intake field | Purpose |
+|---|---|
+| `name` | Human-readable intake identifier |
+| `workflow_name` | Specialist workflow identifier |
+| `decision_question` | Decision or problem the specialist should support |
+| `opportunity_summary` | Safe contextual summary |
+| `evidence` | Relevant safe evidence |
+| `known_assumptions` | Assumptions that remain unvalidated |
+| `constraints` | Material limitations or boundaries |
+| `requested_output` | Type of specialist response required |
+| `requested_outcome` | Intended decision-support outcome |
+| `submitted_by` | Safe initiator reference |
+| `slack_destination` | Approved review destination |
+| `privacy_confirmed` | Mandatory privacy confirmation |
+
+---
+
+# Privacy mapping
+
+The runtime requires:
+
+`privacy_confirmed = true`
+
+before invoking Relevance AI.
+
+The current privacy control is a gate.
+
+Detailed privacy-rejection feedback is not yet implemented.
+
+The runtime should not intentionally process or retain:
+
+- raw customer information;
+- raw organisational extracts;
+- credentials;
+- access tokens;
+- secrets;
+- identifiable case material;
+- sensitive operational material.
+
+Use safe summaries and de-identified evidence.
+
+---
+
+# Shared workflow data model
+
+Maintain the common Data Store fields in this logical order:
+
+    workflow_name
+    active_agent
+
+    decision_question
+    opportunity_summary
+    evidence
+    known_assumptions
+    constraints
+    requested_output
+    requested_outcome
+
+    submitted_by
+    slack_destination
+    privacy_confirmed
+    privacy_status
+
+    previous_state
+    current_state
+    decision_status
+    human_action_required
+
+    review_code
+    review_sequence
+    latest_output
+    last_error_summary
+
+    retry_count
+    rework_count
+    output_version
+
+    created_at
+    updated_at
+    completed_at
+
+The presence of a field does not prove that every associated behaviour is implemented.
+
+Examples:
+
+- `retry_count` does not mean automated retry handling is operational;
+- `rework_count` does not mean a rework command is operational.
+
+---
+
+# Validated workflow-state mapping
+
+The minimum common path is:
+
+    intake
+      ↓
+    privacy gate
+      ↓
+    processing
+      ↓
+    human-review-required
+      ↓
+    approved
+
+| State | Primary component | Meaning |
 |---|---|---|
-| Workflow intake | Slack and Make.com | Receive the beta request, assign a workflow ID and start the workflow |
-| Workflow orchestration | Make.com | Control sequencing, routing, state transitions, retries and notifications |
-| Sensemaking | Relevance AI Sensemaking Agent | Clarify the opportunity, decision, evidence, assumptions, options and trade-offs |
-| Stakeholder analysis | Relevance AI Stakeholder Journey Agent | Assess stakeholder interests, resistance, desired movement and engagement sequence |
-| Shipping review | Relevance AI Shipping Coach | Recommend Ship, Socialise, Refine or Stop and identify the smallest useful next action |
-| Human review | Slack and José | Approve, correct, request rework, pause, redirect, resume or stop |
-| Workflow state | Make.com data store or approved equivalent | Maintain the current workflow state and required control metadata |
-| Operational notification | Slack | Surface meaningful progress, review requirements, failures and decisions |
-| Temporary agent handoff | Make.com scenario data | Pass only the minimum approved context required by the next agent |
-| Durable output | GitHub | Store approved, reusable and privacy-safe project outputs |
-| Delivery evidence | Beta project files | Record safe summaries of test results, caveats, failures and lessons |
-| Quality assessment | Strategic OS QA model and beta measures | Assess coordination, reliability, output usability, effort and human control |
+| `processing` | Make + Relevance AI | Selected specialist is being executed |
+| `human-review-required` | Make + Slack + human | Specialist output is persisted and awaiting explicit review |
+| `approved` | Make + shared Data Store | Human approval has been successfully persisted |
 
-## Agent mapping
+Do not document the earlier specialist-specific states as current runtime behaviour.
 
-### Sensemaking Agent
+Examples no longer used as the common state model include:
+
+- `sensemaking-running`
+- `sensemaking-review`
+- `stakeholder-analysis-running`
+- `stakeholder-review`
+- `shipping-review`
+- `artefact-preparation`
+
+Do not describe `paused`, `rework`, `stopped` or similar states as implemented until they are deliberately built and validated.
+
+---
+
+# Specialist mapping
+
+## Sensemaking Agent
 
 Repository source:
 
 `07_ai_agents/sensemaking_agent/`
 
-Beta role:
+Runtime values:
 
-- interpret the intake;
-- identify the decision to be supported;
-- distinguish evidence, assumptions and interpretation;
+    workflow_name = sensemaking
+    active_agent = sensemaking-agent
+
+Role:
+
+- clarify the decision or strategic question;
+- distinguish evidence from assumptions and interpretation;
 - frame options and trade-offs;
-- produce a structured handoff for human review.
+- identify caveats;
+- produce a recommendation where appropriate;
+- identify the useful next action.
 
-Expected beta output:
+Runtime status:
 
-- decision framing;
-- evidence and assumption summary;
-- options;
-- preliminary recommendation;
-- unresolved questions;
-- stakeholder-analysis handoff.
+> Validated end to end.
 
-Human control:
+---
 
-José reviews the output before it is passed to the Stakeholder Journey Agent.
+## Stakeholder Journey Agent
 
-### Stakeholder Journey Agent
+Runtime values:
 
-Repository source:
+    workflow_name = stakeholder-journey
+    active_agent = stakeholder-journey-agent
 
-`07_ai_agents/stakeholder_agent/`
+Role:
 
-Beta role:
+- assess stakeholder influence, interest and impact;
+- treat decision rights carefully;
+- preserve unknown stakeholder positions;
+- avoid inventing motives;
+- sequence engagement;
+- identify the next stakeholder action.
 
-- identify stakeholder interests and concerns;
-- anticipate resistance or misunderstanding;
-- define the desired stakeholder movement;
-- recommend engagement sequence and messaging;
-- identify stakeholder risks that affect the decision.
+Runtime status:
 
-Expected beta output:
+> Validated end to end.
 
-- stakeholder map;
-- alignment assessment;
-- engagement sequence;
-- message implications;
-- unresolved stakeholder risks;
-- shipping-review handoff.
+Implementation learning:
 
-Human control:
+> Selecting the correct Relevance AI agent is not sufficient. Inherited specialist wrapper text, Data Store mappings and Slack labels must also be checked when cloning scenarios.
 
-José reviews the output before artefact preparation or shipping assessment.
+---
 
-### Shipping Coach
+## Career Architect
 
-Repository source:
+Runtime values:
 
-`07_ai_agents/shipping_coach/`
+    workflow_name = career-architect
+    active_agent = career-architect-agent
 
-Beta role:
+Validated Relevance AI Agent ID:
 
-- assess whether the work is useful enough to progress;
-- identify remaining gaps that materially affect the decision;
-- challenge unnecessary refinement;
-- recommend Ship, Socialise, Refine or Stop;
-- define the next action.
+`24e39803-109a-423b-a7d9-02c22acdc5f8`
 
-Expected beta output:
+Role:
 
-- readiness assessment;
-- material gaps;
-- recommendation;
-- minimum next action;
-- required human decision.
+- separate strategic value from career value;
+- assess evidence maturity;
+- distinguish potential, emerging and achieved evidence;
+- preserve uncertainty;
+- avoid inventing sponsorship or impact;
+- identify the most useful validation action.
 
-Human control:
+Runtime status:
 
-José makes the final Ship, Socialise, Refine or Stop decision.
+> Validated end to end.
 
-## Orchestrator mapping
+Reusable learning:
 
-### Make.com
+> When an opportunity is sufficiently framed, test mandate, adoption or impact before creating more documentation.
 
-Make.com is the beta orchestrator.
+---
 
-It should:
+## Shipping Coach
 
-- receive the approved intake;
-- generate or accept a workflow ID;
-- create the initial workflow record;
-- invoke agents in the approved sequence;
-- pass structured handoff data;
-- update workflow state;
-- send Slack notifications;
-- pause at human review points;
-- process approved human responses;
-- retry eligible technical failures;
-- surface unsuccessful retries;
-- stop the workflow when directed; and
-- record the final operational outcome.
+Runtime values:
 
-Make.com should not:
+    workflow_name = shipping-coach
+    active_agent = shipping-coach-agent
 
-- make consequential strategic decisions;
-- publish stakeholder-facing material without approval;
-- store sensitive organisational source material;
-- silently continue after a failed human-control checkpoint;
-- infer approval from inactivity; or
-- overwrite an approved artefact without a visible revision event.
+Validated Relevance AI Agent ID:
 
-## Slack mapping
+`f34c1e33-ce57-4d8b-bc2b-a4fe24f5ed24`
 
-Slack is the human-control and operational-visibility layer.
+Role:
 
-Slack should support:
+- distinguish genuine blockers from optional refinement;
+- compare the risk of moving with the risk of waiting;
+- use Ship / Socialise / Refine / Stop;
+- bound refinement;
+- identify the smallest useful action;
+- define a clear done condition.
 
-- workflow-start confirmation;
-- agent-output-ready notifications;
-- concise output summaries;
-- links to reviewable outputs;
-- approval and correction instructions;
-- rework requests;
-- pause and stop controls;
-- warnings and failure alerts;
-- retry outcomes;
-- final completion summaries.
+Runtime status:
 
-Each actionable notification should include:
+> Validated end to end.
 
-- workflow ID;
-- current state;
-- responsible component or agent;
-- what occurred;
-- what José needs to decide or do;
-- available actions;
-- consequence of no response;
-- link to the relevant output where available.
+---
 
-Slack is not the durable source of truth for:
+## Chief of Staff Agent
 
-- final strategic artefacts;
-- important decision rationale;
-- reusable lessons;
-- agent specifications; or
-- approved operating rules.
+Runtime values:
 
-## GitHub mapping
+    workflow_name = chief-of-staff
+    active_agent = chief-of-staff-agent
 
-GitHub is the durable Strategic OS knowledge layer.
+Validated Relevance AI Agent ID:
 
-For this beta, GitHub may store:
+`cea451dc-641c-4d3e-9e18-c1d0fb1dc57c`
 
-- approved decision briefs;
-- approved stakeholder assessments;
-- approved workshop or engagement artefacts;
-- safe workflow definitions;
-- test plans;
-- synthetic test records;
-- de-identified failure summaries;
-- metric definitions;
-- caveats;
-- decision logic;
-- reusable lessons.
+Role:
 
-GitHub must not store:
+- create a useful operating view;
+- prioritise selectively;
+- separate decisions from tasks;
+- surface dependencies;
+- protect focus;
+- handle goal alignment cautiously;
+- recommend specialist use selectively;
+- identify one bounded next action.
 
-- credentials or webhook URLs;
-- raw Slack exports;
-- raw organisational records;
-- customer information;
-- sensitive stakeholder commentary;
-- confidential attachments;
-- raw agent execution logs containing sensitive inputs;
-- unredacted screenshots;
-- uncontrolled source-system extracts.
+Runtime status:
 
-## Minimum workflow data model
+> Validated end to end.
 
-The orchestrator should maintain the following minimum fields:
+The Chief of Staff Agent may recommend another specialist.
 
-| Field | Purpose |
+It does not automatically invoke that specialist.
+
+---
+
+# Specialist selection
+
+Specialist selection remains human-led.
+
+| Decision-support need | Specialist |
 |---|---|
-| `workflow_id` | Unique identifier for the beta run |
-| `workflow_name` | Human-readable workflow name |
-| `current_state` | Current approved workflow state |
-| `previous_state` | Previous workflow state |
-| `active_agent` | Agent or component currently responsible |
-| `input_reference` | Safe reference to the approved intake |
-| `output_reference` | Reference to the latest reviewable output |
-| `human_action_required` | Whether José must act |
-| `available_actions` | Valid actions at the current checkpoint |
-| `decision_status` | Pending, approved, corrected, rework, paused, stopped or completed |
-| `retry_count` | Number of retries for the current failed step |
-| `last_error_summary` | Safe operational description of the latest failure |
-| `created_at` | Workflow start timestamp |
-| `updated_at` | Latest meaningful update timestamp |
-| `completed_at` | Workflow completion timestamp |
-| `privacy_status` | Confirmation that stored context is safe for the intended component |
+| Clarify an ambiguous strategic problem | Sensemaking Agent |
+| Clarify stakeholder alignment and engagement sequencing | Stakeholder Journey Agent |
+| Assess strategic and career opportunity value | Career Architect |
+| Determine whether work should move, refine or stop | Shipping Coach |
+| Establish operating priorities and next actions | Chief of Staff Agent |
 
-Do not store raw sensitive input in the workflow record.
+This table is decision guidance.
 
-## State-to-component mapping
+It is not an automated routing specification.
 
-| Workflow state | Primary component | Required action |
+---
+
+# Relevance AI invocation mapping
+
+Each scenario passes the common safe intake to the selected specialist.
+
+A thin wrapper may use:
+
+    Use the following Strategic OS intake.
+
+    Work / decision:
+    {{decision_question}}
+
+    Context:
+    {{opportunity_summary}}
+
+    Evidence:
+    {{evidence}}
+
+    Known assumptions:
+    {{known_assumptions}}
+
+    Constraints:
+    {{constraints}}
+
+    Requested output:
+    {{requested_output}}
+
+    Requested outcome:
+    {{requested_outcome}}
+
+    Apply the selected Strategic OS agent contract.
+    Human review is required.
+
+Specialist-specific wording may be used where needed.
+
+Make must use live mapping tokens.
+
+When cloning a runtime:
+
+1. select the correct Relevance AI specialist;
+2. replace inherited wrapper text;
+3. check `workflow_name`;
+4. check `active_agent`;
+5. check Data Store mappings;
+6. check Slack labels.
+
+---
+
+# Post-agent mapping
+
+After successful specialist execution:
+
+    latest_output = <Relevance AI answer>
+    previous_state = processing
+    current_state = human-review-required
+    human_action_required = true
+    updated_at = now
+
+The specialist output remains advisory.
+
+No downstream organisational action occurs automatically.
+
+---
+
+# Slack review mapping
+
+The validated review message pattern is:
+
+    Strategic OS — <Specialist> review
+
+    Workflow ID:
+    <workflow_id>
+
+    Agent:
+    <Specialist Agent>
+
+    Output:
+    <Relevance AI answer>
+
+    Human review required.
+
+    Approve:
+    P <workflow_id>
+
+Slack should make the human action obvious.
+
+The current minimum runtime does not require:
+
+- workflow-start notifications;
+- agent-handoff notifications;
+- rework controls;
+- pause controls;
+- stop controls;
+- automatic reminder sequences;
+- retry notifications;
+- final multi-agent summaries.
+
+Add additional notifications only when repeated use demonstrates value.
+
+---
+
+# Approval mapping
+
+Supported command:
+
+`P <workflow_id>`
+
+Strict regex:
+
+    ^P\s+(?<workflow_id>[a-fA-F0-9]{32})$
+
+Approval sequence:
+
+1. receive Slack response;
+2. match strict approval command;
+3. extract workflow ID;
+4. retrieve matching Data Store record;
+5. confirm workflow is awaiting human review;
+6. persist approved state;
+7. send Slack confirmation.
+
+Do not use the obsolete:
+
+`APPROVE <workflow_id>`
+
+format.
+
+Do not expose unimplemented commands.
+
+---
+
+# Approved-state mapping
+
+Expected approved state:
+
+    previous_state = human-review-required
+    current_state = approved
+    decision_status = approved
+    human_action_required = false
+    completed_at = now
+    updated_at = now
+    privacy_status = confirmed
+
+No specialist runs automatically after this transition.
+
+---
+
+# Human-control mapping
+
+José retains final decision authority.
+
+The specialist may:
+
+- analyse;
+- synthesise;
+- interpret;
+- structure;
+- prioritise;
+- recommend;
+- identify uncertainty;
+- recommend another specialist.
+
+The specialist may not autonomously:
+
+- approve its own work;
+- contact stakeholders;
+- alter organisational systems;
+- create external commitments;
+- publish artefacts;
+- invoke another specialist through the current runtime;
+- write to GitHub.
+
+The current validated human-control event is explicit approval through:
+
+`P <workflow_id>`
+
+---
+
+# Defensive controls
+
+## Invalid workflow ID
+
+Previously validated behaviour:
+
+- invalid workflow ID does not update an unrelated record;
+- no successful approval occurs;
+- no approval confirmation is sent.
+
+Explicit invalid-ID feedback remains a future hardening item.
+
+## Duplicate approval
+
+Previously validated behaviour:
+
+- approved records are not approved again;
+- `completed_at` is not rewritten;
+- duplicate approval confirmation is not generated.
+
+Retest these controls if approval handling changes.
+
+---
+
+# Agent handoff position
+
+The current runtime does not implement automatic agent-to-agent handoffs.
+
+If one specialist indicates another specialist would be useful:
+
+1. the human reviews the recommendation;
+2. the human decides whether another specialist is needed;
+3. a separate specialist runtime is started deliberately;
+4. only the minimum safe context needed for that specialist should be supplied.
+
+This manual boundary is intentional.
+
+It preserves:
+
+- decision authority;
+- context control;
+- privacy;
+- specialist-role clarity;
+- observability.
+
+Do not create a formal automatic handoff contract until repeated use demonstrates a need.
+
+---
+
+# Failure and retry position
+
+Advanced automated recovery is not part of the validated minimum runtime.
+
+Known future hardening areas include:
+
+- Relevance AI failure handling;
+- Slack delivery failure handling;
+- retry rules;
+- retry limits;
+- output validation;
+- sensitive-content safeguards;
+- explicit privacy-rejection feedback;
+- authorised-responder validation.
+
+These are not currently described as implemented capabilities.
+
+When a runtime problem occurs:
+
+> Correct the smallest relevant failure and retest the affected path.
+
+Do not automatically expand the entire orchestration model.
+
+---
+
+# Runtime evidence
+
+Use the following evidence hierarchy when validating operation:
+
+1. final Data Store record;
+2. Make execution history;
+3. Slack review or confirmation;
+4. safe manual observation.
+
+Repository evidence should contain only safe summaries and references.
+
+Do not copy raw logs or sensitive execution payloads into Strategic OS.
+
+---
+
+# Current validation status
+
+| Component | Status | Current evidence threshold |
 |---|---|---|
-| `not-started` | Human / Slack | Prepare and approve intake |
-| `intake-received` | Make.com | Validate required fields and initialise workflow |
-| `sensemaking-running` | Relevance AI | Execute Sensemaking Agent |
-| `sensemaking-review` | Slack / Human | Review, approve, correct or request rework |
-| `stakeholder-analysis-running` | Relevance AI | Execute Stakeholder Journey Agent |
-| `stakeholder-review` | Slack / Human | Review, approve, correct or request rework |
-| `artefact-preparation` | Make.com and approved agent | Assemble approved material into the required artefact |
-| `shipping-review` | Relevance AI | Execute Shipping Coach |
-| `human-decision-required` | Slack / Human | Select Ship, Socialise, Refine or Stop |
-| `paused` | Make.com | Preserve state and await explicit resume or stop action |
-| `failed` | Make.com / Slack | Record failure, apply retry rule and alert José |
-| `completed` | Make.com / GitHub / Slack | Record outcome, store approved output and notify José |
-| `stopped` | Make.com / Slack | Preserve the stop reason and end further execution |
+| Sensemaking Agent | Validated | Repeated real use |
+| Stakeholder Journey Agent | Validated | Repeated real use |
+| Career Architect | Validated | Repeated real use |
+| Shipping Coach | Validated | Repeated real use |
+| Chief of Staff Agent | Validated | Repeated real use |
+| Common webhook structure | Validated | Monitor sufficiency |
+| Privacy gate | Validated | Monitor boundary |
+| Shared Data Store | Validated | Monitor reliability |
+| Specialist output persistence | Validated | Monitor reliability |
+| Slack review | Validated | Monitor usefulness and overhead |
+| Strict P approval parsing | Validated | Monitor reliability |
+| Approved-state persistence | Validated | Monitor reliability |
+| Automatic multi-agent routing | Not implemented | Evidence required before build |
+| Automatic specialist sequencing | Not implemented | Evidence required before build |
+| Automatic GitHub writes | Not implemented | Evidence required before build |
+| Advanced failure recovery | Not implemented | Harden when justified |
 
-## Handoff contract
+---
 
-Each agent handoff should contain only:
+# Known but not implemented
 
-- workflow ID;
-- decision or task being supported;
-- approved context summary;
-- relevant evidence summary;
-- visible assumptions;
-- current caveats;
-- unresolved questions;
-- required output;
-- human-review status;
-- safe references to prior outputs.
+The following remain outside the validated runtime:
 
-The handoff should not contain:
+- `L` rework command;
+- `M` stop command;
+- approve with correction;
+- pause and resume;
+- automated output correction;
+- automatic specialist handoffs;
+- multi-agent router;
+- automatic specialist sequencing;
+- privacy rejection feedback;
+- authorised-responder validation;
+- advanced Relevance AI error recovery;
+- Slack notification failure recovery;
+- automatic retry handling;
+- retry-limit handling;
+- sensitive-content safeguards beyond the current privacy gate;
+- workflow ID cleanup;
+- automatic Jira actions;
+- automatic Confluence actions;
+- automatic GitHub writes;
+- automatic external publication.
 
-- unnecessary conversation history;
-- raw organisational datasets;
-- customer-level information;
-- credentials;
-- private Slack content unrelated to the decision;
-- hidden instructions from earlier agents;
-- unreviewed claims presented as facts.
+These should not be implemented merely to complete a conceptual architecture.
 
-## Failure and retry allocation
+---
 
-### Retry automatically
+# Expansion rule
 
-Make.com may automatically retry:
+Before adding a new runtime capability:
 
-- temporary API timeouts;
-- rate-limit responses where retry is permitted;
-- temporary network failures;
-- recoverable integration errors;
-- transient Slack delivery failures.
+1. identify a repeated operational problem;
+2. confirm that the current specialist runtime cannot handle it cleanly;
+3. define the smallest useful additional behaviour;
+4. preserve human decision authority;
+5. preserve privacy boundaries;
+6. validate the change end to end;
+7. record only the reusable implementation learning.
 
-### Require human review
+No change is a valid outcome when the current runtime remains sufficient.
 
-Pause and notify José when:
+---
 
-- an agent output is empty or structurally invalid;
-- two agents materially contradict each other;
-- required context is missing;
-- an output appears to overstate evidence;
-- sensitive information may have entered the workflow;
-- the workflow reaches its retry limit;
-- a state transition cannot be confirmed;
-- an approval response is ambiguous;
-- an artefact may be used externally;
-- the correct next step requires judgement.
+# Current implementation decision
 
-### Do not retry automatically
+The original proposed beta architecture assumed coordinated sequencing between multiple specialist agents.
 
-Do not automatically retry:
+Operational validation produced a simpler and more useful pattern:
 
-- explicit human rejection;
-- stop commands;
-- privacy or security violations;
-- unauthorised publication attempts;
-- strategically consequential decisions;
-- failures caused by an invalid or unsafe request.
+> independent specialist runtimes + shared workflow state + explicit human review.
 
-## Minimum beta implementation
+Therefore:
 
-The first executable beta does not need every proposed feature.
+- keep the five specialist runtimes independent;
+- keep Make thin;
+- keep Relevance AI responsible for reasoning;
+- keep Slack focused on meaningful human review;
+- reuse the shared Data Store;
+- retain explicit `P <workflow_id>` approval;
+- observe real use before adding orchestration.
 
-The minimum implementation is:
+---
 
-1. Slack intake or manually approved intake trigger.
-2. Make.com workflow record with a unique workflow ID.
-3. Sensemaking Agent execution.
-4. Slack review checkpoint.
-5. Stakeholder Journey Agent execution.
-6. Slack review checkpoint.
-7. Shipping Coach execution.
-8. Slack decision checkpoint.
-9. Final outcome notification.
-10. Safe recording of the approved artefact and beta result.
+# Next evidence threshold
 
-The first version may use manual links or manual GitHub storage where full automation would add more risk than learning value.
+The specialist-runtime architecture is no longer the main uncertainty.
 
-## Current validation status
+The next questions are:
 
-| Component | Status | Validation needed |
-|---|---|---|
-| Relevance AI agent execution | Confirmed Strategic OS component | Confirm each beta agent is deployed and callable |
-| Make.com orchestration | Confirmed Strategic OS component | Confirm scenario access, trigger method and state-storage option |
-| Slack interaction | Confirmed Strategic OS component | Confirm approved workspace, destination and integration method |
-| GitHub durable storage | Confirmed Strategic OS component | Confirm whether the first beta uses manual or automated commits |
-| Sensemaking Agent | Repository-defined | Confirm deployed agent matches the current specification |
-| Stakeholder Journey Agent | Repository-defined | Confirm deployed agent matches the current specification |
-| Shipping Coach | Repository-defined | Confirm deployed agent matches the current specification |
-| Human approval controls | Required | Confirm how Slack actions or replies are interpreted |
-| Failure logging | Required | Confirm where operational execution logs will be retained |
-| Retry behaviour | Defined conceptually | Configure and test in Make.com |
-| Workflow state storage | Required | Select and validate the approved Make.com-compatible store |
+- Do specialists improve real decisions consistently?
+- Is specialist selection straightforward?
+- Does the common intake contract remain sufficient?
+- Does Slack review remain lightweight?
+- Does workflow-state persistence remain reliable?
+- Does manual specialist selection create material friction?
+- Do repeated failures expose a specific hardening need?
+- Is any new orchestration genuinely necessary?
 
-## Implementation decision
+Current priority:
 
-Proceed with the current Strategic OS stack.
+> Use, observation and evidence.
 
-Do not create more conceptual architecture before testing:
-
-- one synthetic workflow;
-- one failure-and-retry path;
-- one pause-and-resume path;
-- one human correction path; and
-- one complete end-to-end beta run.
-
-The next implementation task is to define the minimum executable Make.com scenario from intake trigger through the first Sensemaking Agent review checkpoint.
+Real work should determine the next architecture change.
