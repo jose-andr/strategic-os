@@ -2,312 +2,811 @@
 
 ## Purpose
 
-Define the minimum executable Make.com scenario for the first Strategic OS beta workflow.
+Define the minimum validated Make runtime for a Strategic OS specialist agent.
 
-This scenario tests:
+This file describes the smallest executable orchestration pattern proven across the five priority specialist runtimes:
 
-- intake validation;
-- workflow-state creation;
-- Sensemaking Agent execution;
-- structured output validation;
-- Slack notification;
-- human review;
-- pause and resume behaviour;
-- failure visibility; and
-- safe context handling.
+1. Sensemaking Agent
+2. Stakeholder Journey Agent
+3. Career Architect
+4. Shipping Coach
+5. Chief of Staff Agent
 
-The scenario ends when José approves, corrects, requests rework, pauses or stops the Sensemaking Agent output.
+The minimum runtime is:
 
-It does not yet invoke the Stakeholder Journey Agent or Shipping Coach.
+`Webhook → privacy gate → shared Data Store → selected Relevance AI agent → post-agent Data Store update → Slack human review → P approval listener → approved state`
 
-## Scope
+This is the current baseline for specialist operation.
 
-### Included
+It is not a multi-agent orchestration design.
 
-- manual or Slack-triggered intake;
-- workflow ID creation;
-- minimum intake validation;
-- workflow-state storage;
-- Relevance AI Sensemaking Agent call;
-- output-format validation;
-- Slack review notification;
-- human response capture;
-- approved state transitions;
-- retry handling for transient technical failures;
-- safe operational logging.
+Current operating rule:
 
-### Excluded
+> Operate the validated specialist runtimes through real work before expanding orchestration.
 
-- stakeholder analysis;
-- artefact preparation;
-- Shipping Coach review;
-- stakeholder-facing publication;
-- automated GitHub commits;
-- multi-workflow prioritisation;
-- advanced reporting;
+---
+
+## Status
+
+**Minimum runtime:** Validated
+
+**Validated specialist set:** Five priority specialists
+
+**Current phase:** Use, observation and evidence
+
+The minimum scenario should remain stable unless repeated real use exposes a genuine operational problem.
+
+---
+
+# Scope
+
+## Included
+
+The validated minimum runtime includes:
+
+- specialist-specific webhook intake;
+- common intake structure;
+- `privacy_confirmed = true` gate;
+- shared workflow-state storage;
+- specialist execution in Relevance AI;
+- specialist output persistence;
+- Slack human-review notification;
+- strict approval parsing;
+- workflow lookup;
+- approved-state persistence;
+- Slack approval confirmation;
+- safe runtime context handling.
+
+## Excluded
+
+The minimum runtime does not currently include:
+
+- multi-agent routing;
+- automatic specialist sequencing;
+- automatic downstream-agent invocation;
+- `L` rework command;
+- `M` stop command;
+- pause and resume;
+- approve-with-correction;
+- automated output validation;
+- automated correction retries;
+- advanced technical retry handling;
+- privacy-rejection feedback;
+- authorised-responder validation;
+- automatic GitHub writes;
+- automatic publication;
 - broad exception automation.
 
-## Scenario outcome
+These exclusions are deliberate.
 
-The scenario is successful when:
+Do not add them merely because they are technically possible.
 
-1. an approved intake starts the workflow;
-2. Make.com creates a valid workflow record;
-3. the Sensemaking Agent returns a usable structured output;
-4. José receives a clear Slack review request;
-5. José can approve, correct, request rework, pause or stop;
-6. the workflow state changes correctly; and
-7. failures are visible rather than silent.
+---
 
-## Required components
+# Scenario outcome
+
+A specialist scenario is successful when:
+
+1. a privacy-safe intake reaches the intended specialist webhook;
+2. the privacy gate passes;
+3. a workflow record is persisted in the shared Data Store;
+4. the correct Relevance AI specialist is invoked;
+5. the specialist output is stored in `latest_output`;
+6. the workflow enters `human-review-required`;
+7. Slack presents the output for human review;
+8. the reviewer sends `P <workflow_id>`;
+9. the correct workflow record is retrieved;
+10. the approved state is persisted; and
+11. Slack confirms successful approval.
+
+No specialist output becomes an approved decision without human action.
+
+---
+
+# Required components
 
 | Component | Role |
 |---|---|
-| Make.com | Orchestration, routing, state management and retries |
-| Relevance AI | Sensemaking Agent execution |
-| Slack | Review notification and human response |
-| Approved state store | Temporary workflow-state storage |
-| GitHub | Durable storage for approved reusable outputs, initially manual if required |
+| Make | Orchestration, state management and system handoffs |
+| Relevance AI | Specialist reasoning |
+| Slack | Human-review surface |
+| `strategic_os_beta_workflows` | Shared workflow-state Data Store |
+| Strategic OS repository | Agent contracts, workflow definitions, reusable operating logic and validation records |
 
-## Scenario trigger
+Make should remain orchestration-only.
 
-Use one of the following trigger methods.
+Relevance AI should remain responsible for specialist reasoning.
 
-### Preferred first implementation
+Strategic OS does not become the system of record for organisational source data.
 
-Manual Make.com webhook triggered from an approved intake form or controlled request.
+---
 
-This reduces integration complexity while testing the orchestration logic.
+# Scenario model
 
-### Optional later implementation
+Use one independent Make scenario per specialist.
 
-Slack shortcut, command or structured message that sends the approved intake to Make.com.
+Each scenario reuses the same common runtime pattern but defines its own:
 
-Do not begin with free-text monitoring of a Slack channel.
+- webhook;
+- `workflow_name`;
+- `active_agent`;
+- selected Relevance AI agent;
+- specialist wrapper;
+- Slack specialist label.
 
-## Minimum intake schema
+Do not create separate Data Stores for each specialist.
 
-The trigger payload must include:
+Do not introduce a router between specialists until repeated real work demonstrates a genuine need.
 
-| Field | Required | Purpose |
-|---|---|---|
-| `workflow_name` | Yes | Human-readable name for the beta run |
-| `decision_question` | Yes | Decision the workflow is supporting |
-| `opportunity_summary` | Yes | Safe summary of the opportunity |
-| `known_evidence` | No | Evidence already available |
-| `known_assumptions` | No | Assumptions already identified |
-| `constraints` | No | Known limits, dependencies or exclusions |
-| `requested_output` | Yes | Expected Sensemaking Agent output |
-| `submitted_by` | Yes | Approved human initiator |
-| `slack_destination` | Yes | Approved channel or direct-message destination |
-| `privacy_confirmed` | Yes | Confirmation that the payload is safe to process |
+---
 
-The trigger must reject the request when:
+# Specialist scenarios
 
-- `decision_question` is missing;
-- `opportunity_summary` is missing;
-- `requested_output` is missing;
-- `slack_destination` is missing;
-- `privacy_confirmed` is not `true`; or
-- credentials, customer information or sensitive raw data are detected.
+## Sensemaking Agent
 
-## Minimum workflow states
+Scenario:
 
-This scenario uses:
+`Strategic OS Beta — Sensemaking Review`
 
-- `not-started`
-- `intake-received`
-- `sensemaking-running`
-- `sensemaking-review`
-- `paused`
-- `failed`
-- `stopped`
+Runtime values:
 
-The broader beta workflow states remain defined in:
+    workflow_name = sensemaking
+    active_agent = sensemaking-agent
 
-`automation_and_slack_workflow.md`
+Status:
 
-## Scenario sequence
+> Validated end to end.
 
-### Module 1 — Receive intake
+---
+
+## Stakeholder Journey Agent
+
+Scenario:
+
+`Strategic OS Beta — Stakeholder Journey Review`
+
+Runtime values:
+
+    workflow_name = stakeholder-journey
+    active_agent = stakeholder-journey-agent
+
+Status:
+
+> Validated end to end.
+
+---
+
+## Career Architect
+
+Scenario:
+
+`Strategic OS Beta — Career Architect Review`
+
+Webhook:
+
+`Strategic OS Beta — Career Architect Intake`
+
+Runtime values:
+
+    workflow_name = career-architect
+    active_agent = career-architect-agent
+
+Status:
+
+> Validated end to end.
+
+---
+
+## Shipping Coach
+
+Scenario:
+
+`Strategic OS Beta — Shipping Coach Review`
+
+Webhook:
+
+`Strategic OS Beta — Shipping Coach Intake`
+
+Runtime values:
+
+    workflow_name = shipping-coach
+    active_agent = shipping-coach-agent
+
+Status:
+
+> Validated end to end.
+
+---
+
+## Chief of Staff Agent
+
+Scenario:
+
+`Strategic OS Beta — Chief of Staff Review`
+
+Webhook:
+
+`Strategic OS Beta — Chief of Staff Intake`
+
+Runtime values:
+
+    workflow_name = chief-of-staff
+    active_agent = chief-of-staff-agent
+
+Status:
+
+> Validated end to end.
+
+---
+
+# Common intake contract
+
+Each specialist webhook uses the same intake structure:
+
+    name
+    workflow_name
+    decision_question
+    opportunity_summary
+    evidence
+    known_assumptions
+    constraints
+    requested_output
+    requested_outcome
+    submitted_by
+    slack_destination
+    privacy_confirmed
+
+`name` remains in the schema because it is part of the webhook structure currently detected by Make.
+
+Do not rename `evidence` to `known_evidence`.
+
+Do not redesign the common intake structure unless repeated operational use identifies a material limitation.
+
+---
+
+# Safe example intake
+
+Use synthetic or safely summarised information during technical testing.
+
+Example:
+
+    {
+      "name": "Synthetic specialist runtime test",
+      "workflow_name": "sensemaking",
+      "decision_question": "What is the most useful next strategic decision?",
+      "opportunity_summary": "Synthetic context for runtime validation.",
+      "evidence": "Safe synthetic evidence.",
+      "known_assumptions": "Known assumptions that remain unvalidated.",
+      "constraints": "Use safe information only. Human review is required.",
+      "requested_output": "A structured specialist recommendation.",
+      "requested_outcome": "Identify the most useful next action.",
+      "submitted_by": "approved-initiator",
+      "slack_destination": "approved-destination",
+      "privacy_confirmed": true
+    }
+
+Do not use:
+
+- customer information;
+- raw organisational extracts;
+- credentials;
+- tokens;
+- secrets;
+- sensitive operational data;
+- identifiable case material.
+
+---
+
+# Minimum workflow states
+
+The validated minimum specialist path is:
+
+    intake
+      ↓
+    privacy gate
+      ↓
+    processing
+      ↓
+    human-review-required
+      ↓
+    approved
+
+Operational state values used by the common path are:
+
+- `processing`
+- `human-review-required`
+- `approved`
+
+Do not use specialist-specific workflow states such as:
+
+- `sensemaking-running`;
+- `sensemaking-review`.
+
+Do not document `paused`, `stopped`, `rework` or similar states as implemented runtime behaviour until they are built and validated.
+
+---
+
+# Shared Data Store
+
+Use:
+
+`strategic_os_beta_workflows`
+
+Primary lookup key:
+
+`workflow_id`
+
+The workflow ID remains unchanged through the scenario.
+
+Do not redesign workflow ID generation unless operational evidence demonstrates a problem.
+
+---
+
+# Shared Data Store field order
+
+Maintain the common fields in this logical order:
+
+    workflow_name
+    active_agent
+
+    decision_question
+    opportunity_summary
+    evidence
+    known_assumptions
+    constraints
+    requested_output
+    requested_outcome
+
+    submitted_by
+    slack_destination
+    privacy_confirmed
+    privacy_status
+
+    previous_state
+    current_state
+    decision_status
+    human_action_required
+
+    review_code
+    review_sequence
+    latest_output
+    last_error_summary
+
+    retry_count
+    rework_count
+    output_version
+
+    created_at
+    updated_at
+    completed_at
+
+Some fields support future or diagnostic use but do not imply that every possible behaviour has been implemented.
+
+For example, the presence of `rework_count` does not mean a rework command is currently operational.
+
+---
+
+# Scenario sequence
+
+## Module 1 — Receive specialist intake
 
 Component:
 
-Make.com webhook or approved manual trigger.
+Make custom webhook.
+
+Use a specialist-specific webhook.
 
 Actions:
 
-- receive the structured intake;
-- record the received timestamp;
-- preserve only the approved fields;
-- reject unsupported attachments or raw source data.
+- receive the common intake;
+- preserve the intended safe fields;
+- expose them as live Make mapping values;
+- continue to the privacy gate.
 
-Output:
+Do not rely on copied text representations of Make mapping tokens.
 
-Validated raw trigger payload.
+---
 
-### Module 2 — Validate intake
-
-Component:
-
-Make.com filters and validation logic.
-
-Checks:
-
-- required fields are present;
-- `privacy_confirmed` equals `true`;
-- the decision question is understandable;
-- the requested output is defined;
-- the Slack destination is approved;
-- no blocked information type is present.
-
-On success:
-
-Continue to workflow creation.
-
-On failure:
-
-- do not invoke the agent;
-- send a concise Slack error message;
-- record the validation reason;
-- stop the scenario.
-
-### Module 3 — Create workflow record
+## Module 2 — Apply privacy gate
 
 Component:
 
-Approved Make.com-compatible state store.
+Make filter.
 
-Create:
+Required condition:
 
-- `workflow_id`;
-- `workflow_name`;
-- `current_state`;
-- `previous_state`;
-- `active_agent`;
-- `decision_status`;
-- `retry_count`;
-- timestamps;
-- safe intake reference;
+`privacy_confirmed = true`
+
+If true:
+
+> Continue.
+
+If false:
+
+> Do not invoke the specialist.
+
+Detailed privacy-rejection feedback is not part of the current validated minimum runtime.
+
+Do not document it as implemented.
+
+---
+
+## Module 3 — Create or initialise workflow record
+
+Component:
+
+`strategic_os_beta_workflows`
+
+Persist the safe workflow context, including:
+
+- workflow ID;
+- workflow name;
+- active agent;
+- decision question;
+- opportunity summary;
+- evidence;
+- known assumptions;
+- constraints;
+- requested output;
+- requested outcome;
+- submitted by;
 - Slack destination;
-- privacy status.
+- privacy values;
+- workflow-state values;
+- timestamps.
 
-Initial values:
+The selected specialist scenario supplies the correct:
 
-| Field | Value |
-|---|---|
-| `current_state` | `intake-received` |
-| `previous_state` | `not-started` |
-| `active_agent` | `sensemaking-agent` |
-| `decision_status` | `pending` |
-| `retry_count` | `0` |
-| `human_action_required` | `false` |
+- `workflow_name`;
+- `active_agent`.
 
-### Module 4 — Notify workflow start
+---
+
+## Module 4 — Set processing state
+
+Before or as specialist execution begins, persist:
+
+    current_state = processing
+
+Ensure:
+
+- the workflow ID remains unchanged;
+- the correct specialist remains mapped;
+- the safe intake remains available for the specialist call.
+
+---
+
+## Module 5 — Invoke Relevance AI specialist
+
+Component:
+
+Relevance AI.
+
+Send the safe intake to the selected Strategic OS specialist.
+
+The common wrapper pattern is:
+
+    Use the following Strategic OS intake.
+
+    Work / decision:
+    {{decision_question}}
+
+    Context:
+    {{opportunity_summary}}
+
+    Evidence:
+    {{evidence}}
+
+    Known assumptions:
+    {{known_assumptions}}
+
+    Constraints:
+    {{constraints}}
+
+    Requested output:
+    {{requested_output}}
+
+    Requested outcome:
+    {{requested_outcome}}
+
+    Apply the selected Strategic OS agent contract.
+    Human review is required.
+
+The specialist contract remains authoritative for reasoning behaviour.
+
+Do not reproduce that reasoning as Make transformation or router logic.
+
+---
+
+# Specialist cloning control
+
+Selecting the correct Relevance AI agent is necessary but not sufficient.
+
+When cloning a scenario, check:
+
+1. scenario name;
+2. specialist webhook;
+3. `workflow_name`;
+4. `active_agent`;
+5. selected Relevance AI agent;
+6. specialist wrapper text;
+7. Data Store specialist mappings;
+8. Slack specialist label;
+9. live Make tokens.
+
+A validated implementation issue showed that a correctly selected agent can still receive inherited wrapper text from another specialist.
+
+Always inspect both.
+
+---
+
+## Module 6 — Persist specialist output
+
+After successful specialist execution, write:
+
+    latest_output = <Relevance AI answer>
+    previous_state = processing
+    current_state = human-review-required
+    human_action_required = true
+    updated_at = now
+
+The specialist output is not an approved decision at this point.
+
+It is awaiting human review.
+
+---
+
+## Module 7 — Send Slack review
 
 Component:
 
 Slack.
 
-Message must include:
+Use this pattern:
 
-- workflow ID;
-- workflow name;
-- decision question;
-- current state;
-- next automated action;
-- notice that human review will be required after Sensemaking Agent completion.
+    Strategic OS — <Specialist> review
 
-Suggested message:
+    Workflow ID:
+    <workflow_id>
 
-> Workflow `{workflow_id}` has started.
->
-> Decision: {decision_question}
->
-> State: `intake-received`
->
-> The Sensemaking Agent will now prepare a structured decision framing. You will be notified when review is required.
+    Agent:
+    <Specialist Agent>
 
-If Slack delivery fails:
+    Output:
+    <Relevance AI answer>
 
-- retry according to the transient-failure rule;
-- do not stop agent execution solely because the start notification failed;
-- record the notification failure.
+    Human review required.
 
-### Module 5 — Update state to Sensemaking running
+    Approve:
+    P <workflow_id>
 
-Component:
+The message should make the human-review boundary obvious.
 
-State store.
+Do not advertise commands that are not implemented.
 
-Update:
+---
 
-| Field | Value |
-|---|---|
-| `previous_state` | `intake-received` |
-| `current_state` | `sensemaking-running` |
-| `active_agent` | `sensemaking-agent` |
-| `updated_at` | Current timestamp |
+# Approval listener
 
-### Module 6 — Prepare agent handoff
+Use the existing shared approval listener.
 
-Component:
+Supported command:
 
-Make.com transformation module.
+`P <workflow_id>`
 
-Pass only:
+Strict parser:
 
-- workflow ID;
-- decision question;
-- opportunity summary;
-- known evidence;
-- known assumptions;
-- constraints;
-- requested output;
-- privacy-safe source references;
-- explicit instruction to distinguish evidence, assumptions, interpretation, recommendation and action.
+    ^P\s+(?<workflow_id>[a-fA-F0-9]{32})$
 
-Do not pass:
+The parser extracts the workflow ID only when the supported approval format is used.
 
-- full Slack history;
-- unrelated project context;
-- credentials;
-- raw organisational extracts;
-- customer information;
-- hidden workflow metadata;
-- previous failed outputs unless clearly labelled for rework.
+Do not revert to:
 
-## Sensemaking Agent request contract
+`APPROVE <workflow_id>`
 
-The agent request should ask for:
+Do not expose additional commands until they have been deliberately implemented and tested.
 
-1. decision to be supported;
-2. opportunity framing;
-3. known evidence;
-4. assumptions;
-5. interpretation;
-6. options;
-7. trade-offs;
-8. preliminary recommendation;
-9. unresolved questions;
-10. stakeholder-analysis handoff.
+---
 
-The agent must not make the final decision.
+## Approval sequence
 
-## Sensemaking Agent response contract
+The listener:
 
-The response should use this structure:
+1. receives the Slack response;
+2. applies the strict approval regex;
+3. extracts `workflow_id`;
+4. retrieves the matching `strategic_os_beta_workflows` record;
+5. confirms the workflow is awaiting human review;
+6. persists the approved state;
+7. sends Slack confirmation.
 
-```text
-Decision:
-Opportunity:
-Evidence:
-Assumptions:
-Interpretation:
-Options:
-Trade-offs:
-Preliminary recommendation:
-Unresolved questions:
-Stakeholder-analysis handoff:
-Confidence:
-Caveats:
+---
+
+# Expected approved state
+
+After a successful approval:
+
+    previous_state = human-review-required
+    current_state = approved
+    decision_status = approved
+    human_action_required = false
+    completed_at = now
+    updated_at = now
+    privacy_status = confirmed
+
+The Data Store record is the authoritative runtime-state record.
+
+Slack is the human-facing confirmation surface.
+
+---
+
+# Human-review principle
+
+The specialist may:
+
+- analyse;
+- synthesise;
+- structure;
+- prioritise;
+- recommend;
+- surface uncertainty;
+- identify next actions.
+
+The specialist does not make the final human decision.
+
+The approved state means:
+
+> A human explicitly accepted the specialist output through the validated review path.
+
+It does not mean the specialist has authority to execute downstream organisational actions.
+
+---
+
+# Minimum validation checks
+
+A specialist runtime is operational only when all of the following pass:
+
+- [ ] correct specialist webhook receives the intake;
+- [ ] common intake fields map correctly;
+- [ ] `privacy_confirmed = true` is enforced;
+- [ ] correct `workflow_name` is persisted;
+- [ ] correct `active_agent` is persisted;
+- [ ] correct Relevance AI specialist is selected;
+- [ ] inherited wrapper text has been removed;
+- [ ] specialist output is returned;
+- [ ] specialist output is stored in `latest_output`;
+- [ ] state becomes `human-review-required`;
+- [ ] Slack presents the correct specialist output;
+- [ ] `P <workflow_id>` is parsed correctly;
+- [ ] correct workflow record is retrieved;
+- [ ] approved state is persisted;
+- [ ] Slack approval confirmation is delivered;
+- [ ] no additional specialist is triggered automatically.
+
+All five priority specialist runtimes have passed this minimum path.
+
+---
+
+# Defensive behaviour
+
+The existing runtime has also demonstrated useful containment around approval handling.
+
+## Invalid workflow ID
+
+An invalid workflow ID should not result in an unrelated Data Store update or successful approval confirmation.
+
+Do not redesign this path unless the listener changes or operational evidence identifies a weakness.
+
+## Duplicate approval
+
+An already approved workflow should not be treated as a new pending approval.
+
+The approval listener should preserve the completed workflow state rather than silently rewriting it.
+
+Retest this control if the approval-state filter changes.
+
+---
+
+# Runtime evidence
+
+For technical validation, use the following evidence hierarchy:
+
+1. final Data Store record;
+2. Make execution history;
+3. Slack review or confirmation;
+4. safe manual observation.
+
+Do not place secrets, webhook URLs or raw sensitive execution data in Strategic OS.
+
+Record only:
+
+- safe workflow references;
+- field names;
+- expected state;
+- observed state;
+- pass / fail result;
+- safe implementation learning.
+
+---
+
+# Current implementation decisions
+
+The following decisions are confirmed:
+
+- reuse the proven specialist runtime;
+- use one specialist scenario at a time;
+- use one shared Data Store;
+- keep Make thin;
+- keep Relevance AI responsible for reasoning;
+- keep Slack as the human-review surface;
+- reuse the strict `P` approval listener;
+- do not redesign workflow ID generation;
+- do not build multi-agent routing yet;
+- do not introduce automatic specialist sequencing yet;
+- do not introduce automatic GitHub writes;
+- expand only when repeated real use exposes a genuine need.
+
+---
+
+# Known but not implemented
+
+The following items are not part of the minimum validated scenario:
+
+- `L` rework command;
+- `M` stop command;
+- correction workflow;
+- pause / resume;
+- privacy rejection feedback;
+- authorised responder validation;
+- Relevance AI failure recovery;
+- Slack notification failure recovery;
+- automated output validation;
+- automated correction retries;
+- sensitive-content safeguards beyond the current privacy gate;
+- workflow ID cleanup;
+- multi-agent router;
+- automatic multi-agent sequencing;
+- automatic GitHub writes.
+
+Their absence does not invalidate the current specialist runtime.
+
+They remain candidates for future hardening only when justified by evidence.
+
+---
+
+# Expansion rule
+
+Do not increase runtime complexity simply because the current specialist pattern works.
+
+Before expanding it:
+
+1. observe repeated real use;
+2. identify a recurring problem;
+3. confirm that the current specialist path cannot handle it cleanly;
+4. define the smallest useful change;
+5. preserve the privacy boundary;
+6. preserve human decision authority;
+7. validate the change end to end;
+8. update Strategic OS after validation.
+
+---
+
+# Current release state
+
+The minimum specialist runtime is validated across:
+
+- Sensemaking Agent;
+- Stakeholder Journey Agent;
+- Career Architect;
+- Shipping Coach;
+- Chief of Staff Agent.
+
+Specialist runtime implementation is complete.
+
+The next phase is:
+
+> Use, observation and evidence.
+
+Technical capability should not drive the next architecture decision.
+
+Real work should.
