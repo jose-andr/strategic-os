@@ -2,902 +2,904 @@
 
 ## Purpose
 
-Validate the minimum executable Strategic OS beta workflow before extending it to additional human-response routes, downstream agents or automated publication.
+Provide the reusable test script for validating Strategic OS specialist runtimes implemented through Make.
 
-This script distinguishes:
+The script reflects the runtime pattern proven across all five priority specialists:
 
-- controls that are implemented and validated;
-- controls that are implemented but not yet validated;
-- planned controls that are not yet implemented; and
-- release-gate conditions that remain open.
+1. Sensemaking Agent
+2. Stakeholder Journey Agent
+3. Career Architect
+4. Shipping Coach
+5. Chief of Staff Agent
 
-## Test boundary
+This file tests the operational runtime boundary.
 
-The current beta includes these Make.com scenarios:
+It does not define future multi-agent orchestration.
 
-- `Strategic OS Beta — Sensemaking Review`
-- `Strategic OS Beta — Slack Review Response`
+Current operating principle:
 
-Current implemented flow:
+> Operate the validated specialist runtimes through real work before expanding orchestration.
 
-```text
-Webhook intake
-→ workflow record creation
-→ intake context preservation
-→ sensemaking-running
-→ Relevance Sensemaking Agent
-→ human-review-required
-→ Slack review message
-→ APPROVE response detection
-→ workflow record lookup
-→ state validation
-→ workflow record approval
-→ privacy-safe Slack approval confirmation
-```
-
-The current human-response boundary supports only:
-
-```text
-APPROVE [workflow ID]
-```
-
-Do not treat the following as implemented in this test cycle:
-
-- `CORRECT`;
-- `REWORK`;
-- `PAUSE`;
-- `RESUME`;
-- `STOP`;
-- authorised-responder validation;
-- explicit invalid-ID feedback;
-- duplicate-attempt logging;
-- automated GitHub commits;
-- downstream `ready-for-use`;
-- Stakeholder Journey Agent execution; or
-- Shipping Coach execution.
-
-## Test principle
-
-A test passes only when:
-
-- the expected state transition occurs;
-- the final Data Store record confirms the authoritative state;
-- the expected Slack message is visible where applicable;
-- no unsupported or invalid action changes a workflow;
-- failure behaviour is contained and understandable;
-- the workflow record remains traceable;
-- no sensitive information is stored; and
-- the result is supported by privacy-safe evidence.
-
-A technically completed Make.com run is not sufficient if the workflow state, notification or human-control behaviour is unclear.
-
-## Evidence hierarchy
-
-Use the following evidence hierarchy:
-
-1. The final Make.com Data Store record is authoritative for workflow state and field preservation.
-2. Make.com execution history demonstrates module routing and error-handler behaviour.
-3. Slack demonstrates that a human-facing message was delivered or that a supported command was received.
-4. Slack output alone does not prove the authoritative workflow state.
-
-Do not paste raw logs, webhook URLs, credentials, access tokens, sensitive identifiers or customer information into this file.
-
-## Test environment
-
-Record the environment before each validation session.
-
-| Field | Value |
-|---|---|
-| Test date | |
-| Tester | José Andrade |
-| Make.com environment | Beta |
-| Intake scenario | `Strategic OS Beta — Sensemaking Review` |
-| Response scenario | `Strategic OS Beta — Slack Review Response` |
-| Scenario version | |
-| Relevance AI agent version | |
-| Slack workspace | |
-| Slack destination | Private beta channel |
-| Data Store name | `strategic_os_beta_workflows` |
-| Test data classification | Synthetic / Safe summary |
-| Production integrations disabled | Yes |
-| Automated GitHub commits disabled | Yes |
-
-## Safety pre-check
-
-Confirm before running any test:
-
-- synthetic or privacy-safe content is being used;
-- no customer personal information is present;
-- no credentials or secrets appear in the payload;
-- no webhook URL is recorded in evidence;
-- the Slack destination is the approved private beta channel;
-- the Relevance AI connection is approved;
-- the Make.com Data Store is accessible;
-- scenario logging does not expose authentication details;
-- automated GitHub commits are disabled;
-- no stakeholder-facing publication is possible;
-- the replacement intake webhook is active; and
-- the original exposed webhook has been deleted.
-
-Do not continue if any pre-check fails.
-
-# Standard test intake
-
-Use a synthetic intake containing the active workflow fields.
-
-```json
-{
-  "workflow_name": "Bitbucket knowledge pilot test",
-  "decision_question": "Should the proposal move into a contained stakeholder working session?",
-  "opportunity_summary": "Test whether an existing enterprise repository capability could support governed and reusable project knowledge without replacing existing systems of record.",
-  "evidence": [
-    "An enterprise repository capability already exists.",
-    "Project knowledge is distributed across several tools."
-  ],
-  "known_assumptions": [
-    "A contained pilot may be possible within existing governance."
-  ],
-  "constraints": [
-    "Do not move all documentation into Git.",
-    "Existing organisational platforms remain systems of record.",
-    "Use synthetic or safe summary information only."
-  ],
-  "requested_output": "A structured decision framing for human review.",
-  "requested_outcome": "A decision on whether to proceed to a contained working session.",
-  "submitted_by": "jose-andrade",
-  "slack_destination": "APPROVED_TEST_DESTINATION",
-  "privacy_confirmed": true
-}
-```
-
-Field names must match the active Make.com mapping. Do not silently substitute `known_evidence` for `evidence` unless the intake schema is deliberately changed and retested.
-
-# Workflow states
-
-## Implemented states
-
-```text
-not-started
-intake-received
-sensemaking-running
-human-review-required
-approved
-```
-
-## Current approval transition
-
-```text
-human-review-required
-→ approved
-```
-
-The response scenario must block approval from any other state.
-
-## Planned or inactive states
-
-The following states may appear in earlier design material but are not validated as active in the current minimum workflow:
-
-```text
-sensemaking-review
-paused
-stopped
-failed
-ready-for-use
-```
-
-Do not record these as operational until the matching route and evidence have been implemented and tested.
-
-# Evidence to capture
-
-For every executed test, record:
-
-- test ID;
-- workflow ID or safe reference;
-- execution date;
-- input variation;
-- expected state sequence;
-- observed state sequence;
-- agent result;
-- Slack result;
-- human action;
-- retry or rework count where relevant;
-- final Data Store state;
-- completion timestamp where relevant;
-- privacy result;
-- observed issue;
-- pass, fail, partial or not run;
-- corrective action; and
-- privacy-safe evidence references.
-
-# Test 01 — Intake context preservation
+---
 
 ## Status
 
-Passed.
+**Specialist runtime validation:** Complete
 
-## Objective
+**Validated specialist set:**
 
-Confirm that the minimum Sensemaking Review scenario preserves the complete intake context required by the Relevance Sensemaking Agent.
+- [x] Sensemaking Agent
+- [x] Stakeholder Journey Agent
+- [x] Career Architect
+- [x] Shipping Coach
+- [x] Chief of Staff Agent
 
-## Fields validated
+**Current phase:**
 
-```text
-decision_question
-opportunity_summary
-evidence
-known_assumptions
-constraints
-requested_output
-privacy_confirmed
-requested_outcome
-```
+> Use, observation and evidence.
 
-## Validation path
+This script remains the regression-test reference for maintaining or deliberately changing the validated specialist runtime.
 
-The fields were checked through:
+---
 
-```text
-webhook intake
-→ initial Data Store record
-→ sensemaking-running update
-→ Relevance Sensemaking Agent prompt
-→ human-review-required update
-→ final Data Store record
-```
+# 1. Test boundary
 
-## Result
+## Validated common runtime
 
-| Check | Outcome |
-|---|---|
-| All required fields submitted | Yes |
-| Fields preserved through both Data Store updates | Yes |
-| Fields available to the Sensemaking Agent | Yes |
-| `privacy_confirmed` retained as a Boolean | Yes |
-| `privacy_status` retained separately as text | Yes |
-| Final record contained expected context | Yes |
-| Result | Pass |
+Each specialist follows:
 
-## Evidence caveat
+`Webhook → privacy gate → shared Data Store → selected Relevance AI agent → post-agent Data Store update → Slack human review → P approval listener → approved state`
 
-Slack confirms receipt and review-message delivery but does not prove complete field preservation.
+The common runtime includes:
 
-The final Data Store record is the authoritative evidence for schema preservation.
+- specialist-specific webhook intake;
+- common intake schema;
+- `privacy_confirmed = true` privacy gate;
+- shared `strategic_os_beta_workflows` Data Store;
+- specialist reasoning in Relevance AI;
+- Make used for orchestration only;
+- specialist output persisted to `latest_output`;
+- transition from `processing` to `human-review-required`;
+- Slack human review;
+- strict `P <workflow_id>` parsing;
+- workflow record lookup;
+- approved-state persistence;
+- Slack approval confirmation.
 
-## Historical issue
+## Current human-review boundary
 
-An earlier configuration did not preserve `privacy_confirmed` correctly through the complete workflow.
+The supported approval command is:
 
-The mapping was corrected and validated using a fresh workflow record.
+`P <workflow_id>`
 
-The corrected result applies only to the fresh retest. It must not be inferred from an older record created before the mapping change.
+Strict parser:
 
-# Test 02 — Happy path approval
+    ^P\s+(?<workflow_id>[a-fA-F0-9]{32})$
 
-## Status
+Do not document other response commands as operational until they have been implemented and validated.
 
-Passed within the current minimum boundary.
+---
 
-## Objective
+# 2. System responsibilities
 
-Confirm that a valid intake reaches human review and can be approved using the supported Slack command.
+## Make
 
-## Steps
+Make is responsible for:
 
-1. Submit the standard test intake.
-2. Confirm that a workflow ID is created.
-3. Confirm that the record enters `intake-received`.
-4. Confirm that the workflow enters `sensemaking-running`.
-5. Confirm that the Sensemaking Agent returns a reviewable output.
-6. Confirm that the workflow enters `human-review-required`.
-7. Confirm that Slack displays the workflow ID and only the supported instruction.
-8. Submit `APPROVE [workflow ID]`.
-9. Confirm that the response scenario retrieves the correct Data Store record.
-10. Confirm that the existing state is `human-review-required`.
-11. Confirm that the record becomes `approved`.
-12. Confirm that `completed_at` is recorded.
-13. Confirm that one privacy-safe approval confirmation is delivered.
-14. Confirm that no downstream agent or publication step runs.
+- intake;
+- privacy gating;
+- workflow-state persistence;
+- invoking the selected specialist;
+- persisting specialist output;
+- sending Slack review messages;
+- parsing the supported approval command;
+- retrieving the workflow record;
+- persisting approval;
+- sending approval confirmation.
 
-## Expected result
+Make should remain thin.
 
-```text
-intake-received
-→ sensemaking-running
-→ human-review-required
-→ approved
-```
+Do not reproduce specialist reasoning in Make.
 
-## Recorded result
+## Relevance AI
 
-| Check | Outcome |
-|---|---|
-| Only supported response displayed | Yes |
-| Workflow ID displayed | Yes |
-| APPROVE command detected | Yes |
-| Previous state | `human-review-required` |
-| Updated state | `approved` |
-| `completed_at` recorded | Yes |
-| Approval confirmation delivered | Yes |
-| Further agent execution | No |
-| Result | Pass |
-| Corrective action | None |
+Relevance AI is responsible for specialist reasoning according to the selected Strategic OS agent contract.
 
-## Evidence rule
+## Slack
 
-The Slack confirmation demonstrates response delivery.
+Slack is the human-review surface.
 
-The final Data Store record is authoritative for `approved` and `completed_at`.
+Slack messages are useful human-facing evidence but are not authoritative for persisted workflow state.
 
-# Test 03 — Invalid workflow ID
+## Shared Data Store
 
-## Status
+`strategic_os_beta_workflows`
 
-Passed after corrective control.
+The final Data Store record is authoritative for workflow state.
 
-## Objective
+---
 
-Confirm that an invalid workflow ID cannot change a workflow record or disable the Slack response scenario.
+# 3. Test evidence hierarchy
 
-## Initial failure
+Use this evidence hierarchy when validating runtime behaviour:
 
-Before the defensive control was added:
+1. final Make Data Store record;
+2. Make execution history;
+3. Slack review or confirmation message;
+4. safe manual observations.
 
-```text
-invalid workflow ID
-→ Data Store lookup error
-→ unhandled scenario error
-→ response scenario automatically deactivated
-```
+The Data Store record is authoritative for:
 
-| Check | Initial outcome |
-|---|---|
-| Invalid command detected | Yes |
-| Data Store lookup result | Error |
-| Existing workflow record changed | No |
-| Approval confirmation delivered | No |
-| Scenario stopped safely | No |
-| Scenario automatically deactivated | Yes |
-| Result | Fail |
+- `workflow_name`;
+- `active_agent`;
+- preserved intake fields;
+- workflow state;
+- decision status;
+- approval status;
+- completion time;
+- privacy status.
 
-## Risk identified
+Slack confirms human-facing delivery.
 
-One malformed approval command could disable the response route for later valid reviews.
+A Slack message alone does not prove that state was persisted successfully.
 
-## Corrective control
+---
 
-A `Skip` error handler was added to:
+# 4. Privacy and evidence rules
 
-```text
-Data Store — Get a record
-```
+Use only synthetic or privacy-safe content for technical validation.
 
-Current behaviour:
+Do not place the following in this file or other repository evidence:
 
-```text
-invalid workflow ID
-→ lookup error handled by Skip
-→ no Data Store update
-→ no approval confirmation
-→ scenario remains active
-```
+- webhook URLs;
+- credentials;
+- tokens;
+- secrets;
+- customer records;
+- identifiable case details;
+- raw organisational data;
+- sensitive operational extracts;
+- unrestricted execution logs;
+- screenshots containing sensitive configuration.
 
-## Retest result
+Evidence should use:
 
-| Check | Outcome |
-|---|---|
-| Scenario remained active | Yes |
-| Lookup error handled by Skip | Yes |
-| Existing workflow record changed | No |
-| Approval confirmation delivered | No |
-| Unhandled scenario error | No |
-| Valid approval still worked after retest | Yes |
-| Result | Pass |
-| Corrective action | None |
+- safe workflow references;
+- safe execution references;
+- safe summaries;
+- pass / fail observations;
+- field names;
+- expected and observed state transitions.
 
-## Current caveat
+Do not record credential values even partially.
 
-The invalid command is safely contained, but the user does not receive an explicit privacy-safe error message.
+---
 
-This remains a paused usability improvement.
+# 5. Common webhook intake contract
 
-# Test 04 — Duplicate approval
+The validated specialist intake structure is:
 
-## Status
+    name
+    workflow_name
+    decision_question
+    opportunity_summary
+    evidence
+    known_assumptions
+    constraints
+    requested_output
+    requested_outcome
+    submitted_by
+    slack_destination
+    privacy_confirmed
 
-Passed after corrective control.
+`name` remains part of the current webhook structure detected by Make.
 
-## Objective
+Do not redesign the common intake contract unless repeated operational use identifies a genuine need.
 
-Confirm that a repeated APPROVE command cannot update a workflow that is already `approved`.
+---
 
-## Initial failure
+# 6. Standard safe test intake
 
-Before state validation was added:
+Use a synthetic intake based on this pattern:
 
-```text
-approved record retrieved
-→ record updated again
-→ completion timestamp refreshed or overwritten
-→ second approval confirmation delivered
-```
+    {
+      "name": "Synthetic Strategic OS runtime test",
+      "workflow_name": "<specialist-workflow>",
+      "decision_question": "What is the most useful next strategic decision?",
+      "opportunity_summary": "Synthetic context for testing the specialist runtime.",
+      "evidence": "Safe synthetic evidence.",
+      "known_assumptions": "Known assumptions that remain unvalidated.",
+      "constraints": "Use synthetic data only. Human review is required.",
+      "requested_output": "A reviewable specialist recommendation.",
+      "requested_outcome": "Confirm the runtime produces useful decision support.",
+      "submitted_by": "approved-initiator",
+      "slack_destination": "approved-test-destination",
+      "privacy_confirmed": true
+    }
 
-| Check | Initial outcome |
-|---|---|
-| Duplicate approval detected | Yes |
-| Existing state | `approved` |
-| Record updated again | Yes |
-| Second confirmation delivered | Yes |
-| Scenario remained active | Yes |
-| Result | Fail |
+Field names must match the active Make mapping.
 
-## Risk identified
+Use live Make mapping tokens.
 
-Repeated approval commands could:
+Do not use copied black or plain-text placeholders where live mapping tokens are required.
 
-- create misleading audit history;
-- overwrite completion timestamps;
-- make repeated approvals appear meaningful; and
-- reduce confidence in workflow state.
+---
 
-## Corrective control
+# 7. Shared Data Store structure
 
-The route now requires:
+Use:
 
-```text
-Slack text starts with APPROVE
-AND
-Slack channel equals the configured beta channel
-AND
-Data Store current_state equals human-review-required
-```
+`strategic_os_beta_workflows`
 
-The state filter is positioned after the Data Store lookup because `current_state` is not available before the record is retrieved.
+Primary lookup key:
 
-Recommended filter label:
+`workflow_id`
 
-```text
-Valid APPROVE for pending review
-```
+Maintain the shared fields in this logical order:
 
-## Regression-test result
+    workflow_name
+    active_agent
 
-| Check | Outcome |
-|---|---|
-| Duplicate approval blocked | Yes |
-| Already-approved record updated again | No |
-| Second confirmation delivered | No |
-| Fresh pending workflow approved | Yes |
-| Fresh record updated to `approved` | Yes |
-| Valid Slack confirmation delivered | Yes |
-| Scenario remained active | Yes |
-| Result | Pass |
-| Corrective action | None |
+    decision_question
+    opportunity_summary
+    evidence
+    known_assumptions
+    constraints
+    requested_output
+    requested_outcome
 
-## Current caveat
+    submitted_by
+    slack_destination
+    privacy_confirmed
+    privacy_status
 
-Duplicate attempts are silently blocked and are not separately logged as a business event.
+    previous_state
+    current_state
+    decision_status
+    human_action_required
 
-This remains a paused auditability improvement.
+    review_code
+    review_sequence
+    latest_output
+    last_error_summary
 
-# Test 05 — Original webhook retirement
+    retry_count
+    rework_count
+    output_version
 
-## Status
+    created_at
+    updated_at
+    completed_at
 
-Passed.
+Do not create separate agent-specific Data Stores.
 
-## Objective
+---
 
-Confirm that the original exposed webhook no longer accepts intake and the replacement webhook remains the only active beta intake route.
+# 8. Validated state model
 
-## Recorded result
+The minimum validated path is:
 
-| Check | Outcome |
-|---|---|
-| Original webhook deleted | Yes |
-| Synthetic request accepted by original webhook | No |
-| Replacement webhook remains active | Yes |
-| Result | Pass |
-| Corrective action | None |
+    intake
+      ↓
+    privacy gate
+      ↓
+    processing
+      ↓
+    human-review-required
+      ↓
+    approved
 
-## Evidence rule
+The validated approval transition is:
 
-Do not record either webhook URL in this file, Slack or repository history.
+    human-review-required
+    → approved
 
-# Test 06 — Slack review-message boundary
+Do not treat earlier exploratory states as current runtime requirements unless they are deliberately implemented and retested.
 
-## Status
+---
 
-Passed.
+# 9. Expected approved state
 
-## Objective
+After successful approval, verify:
 
-Confirm that the human-facing Slack review message advertises only the response route that is implemented.
+    previous_state = human-review-required
+    current_state = approved
+    decision_status = approved
+    human_action_required = false
+    completed_at = now
+    updated_at = now
+    privacy_status = confirmed
 
-## Expected message instruction
+No additional specialist should execute automatically after approval.
 
-```text
-Reply with:
-APPROVE [workflow ID]
-```
+---
 
-## Recorded result
+# 10. Specialist runtime configuration
 
-| Check | Outcome |
-|---|---|
-| `APPROVE` displayed | Yes |
-| Inactive response options removed | Yes |
-| Workflow ID displayed | Yes |
-| Internal schema names hidden from human-facing output | Yes |
-| Result | Pass |
+## Sensemaking Agent
 
-# Test 07 — Missing decision question
+Scenario:
 
-## Status
+`Strategic OS Beta — Sensemaking Review`
 
-Not run.
+Runtime values:
 
-## Objective
+    workflow_name = sensemaking
+    active_agent = sensemaking-agent
 
-Confirm that incomplete intake is rejected before agent execution.
+Status:
 
-## Input variation
+> Validated end to end.
 
-Remove:
+This runtime established the original specialist pattern.
 
-```text
-decision_question
-```
+---
 
-## Expected behaviour
+## Stakeholder Journey Agent
 
-- validation fails;
-- the Sensemaking Agent is not invoked;
-- no review message is sent;
-- the workflow stops safely;
-- a safe failure summary is available;
-- no silent continuation occurs.
+Scenario:
 
-## Implementation dependency
+`Strategic OS Beta — Stakeholder Journey Review`
 
-This test must not be marked passed until an explicit intake-validation route is confirmed in the active scenario.
+Runtime values:
 
-# Test 08 — Privacy not confirmed
+    workflow_name = stakeholder-journey
+    active_agent = stakeholder-journey-agent
 
-## Status
+Status:
 
-Not run.
+> Validated end to end.
 
-## Objective
+Implementation learning:
 
-Confirm that the workflow does not process an intake when human privacy confirmation is false.
+- replace the selected Relevance AI agent when cloning;
+- replace inherited specialist wrapper text;
+- check Data Store labels;
+- check Slack labels;
+- use live Make mapping tokens.
 
-## Input variation
+---
 
-```text
-privacy_confirmed = false
-```
+## Career Architect
 
-## Expected behaviour
+Scenario:
 
-- workflow stops before agent execution;
-- privacy failure is visible;
-- no unsafe payload is copied into Slack or repository content;
-- only the approved minimum is retained;
-- corrective action is clear.
+`Strategic OS Beta — Career Architect Review`
 
-## Implementation dependency
+Webhook:
 
-The active scenario must include an explicit Boolean validation rule before this test can pass.
+`Strategic OS Beta — Career Architect Intake`
 
-# Test 09 — Missing required agent section
+Runtime values:
 
-## Status
+    workflow_name = career-architect
+    active_agent = career-architect-agent
 
-Not run.
+Validated Relevance AI Agent ID:
 
-## Objective
+`24e39803-109a-423b-a7d9-02c22acdc5f8`
 
-Confirm that invalid Sensemaking output does not reach human review.
+Status:
 
-## Test setup
+> Validated end to end.
 
-Use a synthetic or mock response that omits one required output section.
+---
 
-## Expected behaviour
+## Shipping Coach
 
-- output validation detects the missing section;
-- no invalid output reaches Slack review;
-- any correction attempt is bounded;
-- retry count is visible;
-- no unlimited loop occurs.
+Scenario:
 
-## Implementation dependency
+`Strategic OS Beta — Shipping Coach Review`
 
-Advanced output validation and correction routing are not yet confirmed in the current minimum scenario.
+Webhook:
 
-# Test 10 — Repeated invalid agent output
+`Strategic OS Beta — Shipping Coach Intake`
 
-## Status
+Runtime values:
 
-Not run.
+    workflow_name = shipping-coach
+    active_agent = shipping-coach-agent
 
-## Objective
+Validated Relevance AI Agent ID:
 
-Confirm that repeated invalid agent output stops safely after the configured limit.
+`f34c1e33-ce57-4d8b-bc2b-a4fe24f5ed24`
 
-## Expected behaviour
+Status:
 
-- no unlimited correction loop;
-- failure is visible;
-- the error summary is safe;
-- automatic execution stops;
-- José retains the decision to retry or stop.
+> Validated end to end.
 
-# Test 11 — Temporary Relevance AI failure
+---
 
-## Status
+## Chief of Staff Agent
 
-Not run.
+Scenario:
 
-## Objective
+`Strategic OS Beta — Chief of Staff Review`
 
-Confirm that a temporary Relevance AI failure follows a bounded retry rule without creating a duplicate workflow.
+Webhook:
 
-## Expected behaviour
+`Strategic OS Beta — Chief of Staff Intake`
 
-- error handling is visible;
-- retry count is recorded;
-- workflow ID remains unchanged;
-- no duplicate record is created;
-- successful recovery returns to the normal path.
+Runtime values:
 
-# Test 12 — Retry limit reached
+    workflow_name = chief-of-staff
+    active_agent = chief-of-staff-agent
 
-## Status
+Validated Relevance AI Agent ID:
 
-Not run.
+`cea451dc-641c-4d3e-9e18-c1d0fb1dc57c`
 
-## Objective
+Status:
 
-Confirm that repeated technical failure stops safely at the configured limit.
+> Validated end to end.
 
-## Expected behaviour
+---
 
-- retry limit is enforced;
-- failure is visible;
-- automatic execution stops;
-- no hidden retries continue;
-- José receives a clear next action through an approved monitoring route.
+# 11. Standard specialist regression test
 
-# Test 13 — Unauthorised responder
+Run this test when:
 
-## Status
+- creating a new specialist scenario;
+- changing shared Data Store mappings;
+- changing the webhook schema;
+- changing approval parsing;
+- modifying Slack review messages;
+- changing state-transition logic;
+- modifying the Relevance AI invocation;
+- investigating a runtime regression.
 
-Not implemented / Not run.
+Do not rerun the complete test suite after documentation-only changes.
 
-## Objective
+---
 
-Confirm that a Slack action from an unauthorised responder cannot change workflow state.
+## TEST-01 — Intake received
 
-## Expected behaviour
+### Objective
 
-- workflow state remains unchanged;
-- no approval is recorded;
-- the attempted action is logged safely;
-- no agent executes.
+Confirm that the specialist webhook receives the expected safe intake.
 
-## Current caveat
+### Check
 
-The response route currently validates command text, channel and workflow state.
+- [ ] specialist webhook receives the request;
+- [ ] expected common fields are available;
+- [ ] `privacy_confirmed` is Boolean;
+- [ ] no sensitive data is present;
+- [ ] correct specialist scenario receives the request.
 
-Authorised-responder validation remains paused and is required before wider beta use.
+### Pass condition
 
-# Test 14 — Invalid or mismatched workflow reference
+> The expected specialist receives the safe common intake without schema loss.
 
-## Status
+---
 
-Partially covered.
+## TEST-02 — Privacy gate
 
-## Objective
+### Objective
 
-Confirm that an invalid workflow reference cannot update another workflow.
+Confirm that specialist execution requires:
 
-## Validated boundary
+`privacy_confirmed = true`
 
-An invalid workflow ID:
+### Check
 
-- causes no record update;
-- sends no approval confirmation;
-- is handled by the `Skip` error handler; and
-- leaves the scenario active.
+- [ ] true value passes the gate;
+- [ ] gate occurs before specialist reasoning;
+- [ ] privacy status is preserved correctly;
+- [ ] no alternative route silently bypasses the gate.
 
-## Not yet validated
+### Pass condition
 
-A deliberate two-workflow mismatch test has not been separately recorded.
+> Specialist execution occurs only through the confirmed privacy path.
 
-## Result
+### Caveat
 
-Partial.
+Detailed privacy-rejection feedback remains outside the validated runtime.
 
-# Test 15 — Unsupported state transition
+Do not describe it as implemented.
 
-## Status
+---
 
-Passed for duplicate approval; other states not run.
+## TEST-03 — Correct specialist mapping
 
-## Objective
+### Objective
 
-Confirm that approval is allowed only from `human-review-required`.
+Confirm that the intended specialist is invoked.
 
-## Validated boundary
+### Check
 
-A repeated APPROVE command for an `approved` workflow is blocked.
+- [ ] correct `workflow_name`;
+- [ ] correct `active_agent`;
+- [ ] correct Relevance AI agent;
+- [ ] correct specialist wrapper;
+- [ ] no inherited specialist labels;
+- [ ] no inherited specialist instructions.
 
-## Expected route rule
+### Pass condition
 
-```text
-current_state = human-review-required
-```
+> The intended specialist contract is invoked without contamination from the scenario used as the cloning source.
 
-## Not yet validated
+---
 
-Other unsupported or terminal states have not been separately tested because they are not active in the minimum workflow.
+## TEST-04 — Workflow record persisted
 
-## Result
+### Objective
 
-Partial.
+Confirm that the shared Data Store contains the expected safe workflow context.
 
-# Test 16 — Slack review notification failure
+### Check
 
-## Status
+- [ ] workflow record exists;
+- [ ] workflow ID exists;
+- [ ] correct `workflow_name`;
+- [ ] correct `active_agent`;
+- [ ] decision question preserved;
+- [ ] opportunity summary preserved;
+- [ ] evidence preserved;
+- [ ] assumptions preserved;
+- [ ] constraints preserved;
+- [ ] requested output preserved;
+- [ ] requested outcome preserved;
+- [ ] privacy fields preserved.
 
-Not run.
+### Pass condition
 
-## Objective
+> The shared Data Store contains the correct safe specialist context.
 
-Confirm that a failed review notification does not create an invisible pending decision.
+---
 
-## Expected behaviour
+## TEST-05 — Processing state
 
-- `human-review-required` is preserved;
-- the workflow does not approve automatically;
-- the output remains available;
-- notification failure is visible through approved operational monitoring;
-- retries are bounded where configured.
+### Objective
 
-# Test 17 — Sensitive-content safeguard
+Confirm the workflow enters the active specialist-processing state.
 
-## Status
+### Expected state
 
-Not run.
+    current_state = processing
 
-## Objective
+### Check
 
-Confirm that obviously unsafe synthetic input is blocked or escalated without repeating the unsafe value.
+- [ ] state is persisted before or during specialist execution according to the active scenario mapping;
+- [ ] active specialist remains identifiable;
+- [ ] workflow ID remains unchanged.
 
-## Test input
+### Pass condition
 
-Use a synthetic placeholder only.
+> The workflow is traceable while specialist reasoning is running.
 
-```text
-TEST-CREDENTIAL-PLACEHOLDER
-```
+---
 
-## Expected behaviour
+## TEST-06 — Specialist output
 
-- unsafe input does not reach the agent when configured as blocking;
-- the placeholder is not repeated in Slack;
-- logs contain only a safe summary;
-- the workflow stops or requires human intervention;
-- no real credential or customer information is used.
+### Objective
 
-# Planned human-response tests
+Confirm that Relevance AI returns the intended specialist output.
 
-The following tests are retained as future test requirements but are not part of the current executable boundary.
+### Check
 
-## Approve with correction
+- [ ] specialist executes successfully;
+- [ ] response reflects the correct specialist contract;
+- [ ] response is available to Make;
+- [ ] response is not automatically treated as an approved decision;
+- [ ] human review remains required.
 
-Status: Not implemented.
+### Pass condition
 
-Required future behaviour:
+> A reviewable specialist output is returned without bypassing human judgement.
 
-- original and corrected outputs remain distinguishable;
-- correction text is preserved;
-- output version increments;
-- approval is explicit;
-- no silent overwrite occurs.
+---
 
-## Request rework
+## TEST-07 — Output persistence and review state
 
-Status: Not implemented.
+### Objective
 
-Required future behaviour:
+Confirm that specialist output is persisted and the workflow moves into human review.
 
-- one bounded human-directed rework cycle;
-- prior output remains traceable;
-- human instruction is not treated as evidence unless labelled;
-- revised output returns to review.
+### Expected mapping
 
-## Repeated rework request
+    latest_output = <Relevance AI answer>
+    previous_state = processing
+    current_state = human-review-required
+    human_action_required = true
 
-Status: Not implemented.
+### Check
 
-Required future behaviour:
+- [ ] output stored in `latest_output`;
+- [ ] previous state correct;
+- [ ] current state correct;
+- [ ] human action required;
+- [ ] updated timestamp populated.
 
-- no unlimited rework loop;
-- second automatic rework is blocked;
-- control returns to José;
-- the reason is visible.
+### Pass condition
 
-## Pause and resume
+> Specialist output is persisted and explicitly awaits human review.
 
-Status: Not implemented.
+---
 
-Required future behaviour:
+## TEST-08 — Slack review message
 
-- state and output are preserved;
-- no agent executes while paused;
-- resume restores the review checkpoint;
-- existing output remains available.
+### Objective
 
-## Stop
+Confirm that Slack presents the correct specialist review request.
 
-Status: Not implemented.
+### Expected pattern
 
-Required future behaviour:
+    Strategic OS — <Specialist> review
 
-- stop is terminal;
-- reason and completion time are recorded;
-- later actions cannot change the workflow;
-- no further agent executes.
+    Workflow ID:
+    <workflow_id>
 
-# Test result template
+    Agent:
+    <Specialist Agent>
 
-Copy this section for each future execution.
+    Output:
+    <Relevance AI answer>
+
+    Human review required.
+
+    Approve:
+    P <workflow_id>
+
+### Check
+
+- [ ] correct specialist label;
+- [ ] correct workflow ID;
+- [ ] correct specialist output;
+- [ ] human-review requirement visible;
+- [ ] only the implemented approval instruction is presented;
+- [ ] no internal credential or sensitive information displayed.
+
+### Pass condition
+
+> Slack provides a clear and safe human-review checkpoint.
+
+---
+
+## TEST-09 — Strict approval parsing
+
+### Objective
+
+Confirm that the approval listener recognises only the supported command structure.
+
+Use:
+
+`P <workflow_id>`
+
+Regex:
+
+    ^P\s+(?<workflow_id>[a-fA-F0-9]{32})$
+
+### Check
+
+- [ ] valid command matches;
+- [ ] workflow ID extracted correctly;
+- [ ] unrelated Slack text does not match;
+- [ ] malformed command does not trigger approval;
+- [ ] obsolete `APPROVE <workflow_id>` wording is not required by the current runtime.
+
+### Pass condition
+
+> Only the strict current approval format reaches workflow lookup.
+
+---
+
+## TEST-10 — Workflow lookup
+
+### Objective
+
+Confirm that the extracted workflow ID retrieves the intended shared Data Store record.
+
+### Check
+
+- [ ] matching workflow retrieved;
+- [ ] active workflow state available;
+- [ ] specialist context preserved;
+- [ ] no unrelated record updated.
+
+### Pass condition
+
+> Approval operates on the intended workflow record.
+
+---
+
+## TEST-11 — Approval-state guard
+
+### Objective
+
+Confirm that approval is applied only to a workflow awaiting human review.
+
+Required state:
+
+    current_state = human-review-required
+
+### Check
+
+- [ ] pending workflow can proceed;
+- [ ] already approved workflow is not updated again;
+- [ ] completion timestamp is not refreshed by duplicate approval;
+- [ ] duplicate confirmation is not generated.
+
+### Pass condition
+
+> Approval cannot silently rewrite an already completed workflow.
+
+---
+
+## TEST-12 — Approved-state persistence
+
+### Objective
+
+Confirm successful human approval is persisted correctly.
+
+Expected state:
+
+    previous_state = human-review-required
+    current_state = approved
+    decision_status = approved
+    human_action_required = false
+    completed_at = now
+    updated_at = now
+    privacy_status = confirmed
+
+### Check
+
+- [ ] all expected fields updated;
+- [ ] workflow ID unchanged;
+- [ ] specialist output preserved;
+- [ ] no downstream specialist triggered.
+
+### Pass condition
+
+> The Data Store authoritatively records explicit human approval.
+
+---
+
+## TEST-13 — Slack approval confirmation
+
+### Objective
+
+Confirm that the reviewer receives acknowledgement of successful approval.
+
+### Check
+
+- [ ] confirmation delivered;
+- [ ] correct workflow reference;
+- [ ] no sensitive data exposed;
+- [ ] confirmation follows successful Data Store update.
+
+### Pass condition
+
+> Human-facing confirmation is consistent with the persisted approved state.
+
+---
+
+# 12. Defensive controls retained from initial runtime validation
+
+The original Sensemaking runtime exposed several useful controls that remain relevant to the shared specialist pattern.
+
+## Invalid workflow ID
+
+Previously validated behaviour:
+
+    invalid workflow ID
+    → Data Store lookup error
+    → Skip error handler
+    → no Data Store update
+    → no approval confirmation
+    → scenario remains active
+
+Status:
+
+> Validated in the original runtime boundary.
+
+Retest this control if the approval-listener lookup or error-handler design changes.
+
+Explicit invalid-ID user feedback remains paused.
+
+---
+
+## Duplicate approval
+
+Previously validated behaviour:
+
+- an approved record is not updated again;
+- `completed_at` is not overwritten;
+- no second approval confirmation is delivered;
+- fresh pending workflows remain approvable.
+
+Status:
+
+> Validated in the original runtime boundary.
+
+Retest if approval-state filtering changes.
+
+---
+
+## Original exposed webhook retirement
+
+An earlier exposed intake webhook was deleted and excluded from repository evidence.
+
+Status:
+
+> Historical corrective control completed.
+
+Do not store current webhook URLs in Strategic OS.
+
+---
+
+# 13. Specialist cloning regression checklist
+
+When cloning a validated specialist runtime:
+
+- [ ] clone a known working specialist scenario;
+- [ ] rename the scenario;
+- [ ] use the intended specialist-specific webhook;
+- [ ] confirm common intake fields;
+- [ ] set correct `workflow_name`;
+- [ ] set correct `active_agent`;
+- [ ] select correct Relevance AI agent;
+- [ ] replace inherited wrapper text;
+- [ ] inspect every Data Store mapping;
+- [ ] inspect every Slack label;
+- [ ] use live Make tokens;
+- [ ] test privacy gate;
+- [ ] test specialist execution;
+- [ ] confirm `latest_output`;
+- [ ] confirm `human-review-required`;
+- [ ] send `P <workflow_id>`;
+- [ ] confirm approved-state persistence;
+- [ ] confirm Slack approval acknowledgement.
+
+A specialist is not operational merely because the correct Relevance AI agent is selected.
+
+The complete runtime path must pass.
+
+---
+
+# 14. Test result template
+
+Use this lightweight record when a regression test or runtime change requires evidence.
 
 ## Test result
 
 **Test ID:**  
 `TEST-XX`
 
-**Test name:**  
-[Add name]
+**Specialist:**  
+[Add specialist]
+
+**Scenario:**  
+[Add scenario name]
 
 **Execution date:**  
-[Add date and time]
+[Add date]
 
 **Workflow reference:**  
 [Add privacy-safe workflow reference]
 
-**Scenario version:**  
-[Add version]
-
-**Input variation:**  
-[Describe only the variation from the standard test intake]
+**Change being validated:**  
+[Describe the runtime change or reason for retesting]
 
 **Expected state sequence:**  
-[Add expected states]
+
+    processing
+    → human-review-required
+    → approved
 
 **Observed state sequence:**  
-[Add observed states]
+[Add observed sequence]
 
-**Agent result:**  
-[Valid / Invalid / Not invoked / Technical failure]
+**Specialist result:**  
+[Pass / Fail / Not invoked]
 
-**Slack result:**  
-[Delivered / Failed / Retried / Not applicable]
+**Slack review:**  
+[Delivered / Failed / Not applicable]
 
 **Human action:**  
-[APPROVE / Not applicable]
-
-**Retry count:**  
-[Add count or `Not applicable`]
+[P approval / Not applicable]
 
 **Final Data Store state:**  
 [Add state]
-
-**Completion timestamp recorded:**  
-[Yes / No / Not applicable]
 
 **Privacy result:**  
 [Pass / Fail]
@@ -906,206 +908,196 @@ Copy this section for each future execution.
 [Safe summary only]
 
 **Result:**  
-[Pass / Fail / Partial / Not run]
+[Pass / Fail / Partial]
 
 **Corrective action:**  
 [Add action or `None`]
 
 **Evidence references:**  
-[Add safe references to Make.com execution, Slack message or Data Store record]
+[Privacy-safe references only]
 
-# Test summary
+---
 
-| Test ID | Test name | Status | Result | Material issue | Retest required |
-|---|---|---|---|---|---|
-| TEST-01 | Intake context preservation | Completed | Pass | None | No |
-| TEST-02 | Happy path approval | Completed | Pass | None | No |
-| TEST-03 | Invalid workflow ID | Completed after correction | Pass | Initial error deactivated scenario | No |
-| TEST-04 | Duplicate approval | Completed after correction | Pass | Initial duplicate update | No |
-| TEST-05 | Original webhook retirement | Completed | Pass | None | No |
-| TEST-06 | Slack review-message boundary | Completed | Pass | None | No |
-| TEST-07 | Missing decision question | Not run | — | Validation route not confirmed | Yes |
-| TEST-08 | Privacy not confirmed | Not run | — | Blocking rule not validated | Yes |
-| TEST-09 | Missing required agent section | Not run | — | Output validation not confirmed | Yes |
-| TEST-10 | Repeated invalid agent output | Not run | — | Retry limit not confirmed | Yes |
-| TEST-11 | Temporary Relevance AI failure | Not run | — | Retry behaviour not confirmed | Yes |
-| TEST-12 | Retry limit reached | Not run | — | Failure route not confirmed | Yes |
-| TEST-13 | Unauthorised responder | Not implemented | — | Responder identity not validated | Yes |
-| TEST-14 | Invalid or mismatched workflow reference | Partial | Partial | Two-record mismatch not separately tested | Yes |
-| TEST-15 | Unsupported state transition | Partial | Partial | Only approved-state duplicate tested | Yes |
-| TEST-16 | Slack review notification failure | Not run | — | Failure visibility not confirmed | Yes |
-| TEST-17 | Sensitive-content safeguard | Not run | — | Blocking safeguard not confirmed | Yes |
+# 15. Validated specialist summary
 
-# Current control summary
+| Specialist | Intake | Specialist execution | Human review | P approval | Approved state | Status |
+|---|---|---|---|---|---|---|
+| Sensemaking Agent | Passed | Passed | Passed | Passed | Passed | Validated |
+| Stakeholder Journey Agent | Passed | Passed | Passed | Passed | Passed | Validated |
+| Career Architect | Passed | Passed | Passed | Passed | Passed | Validated |
+| Shipping Coach | Passed | Passed | Passed | Passed | Passed | Validated |
+| Chief of Staff Agent | Passed | Passed | Passed | Passed | Passed | Validated |
 
-| Control | Status | Evidence basis |
-|---|---|---|
-| Complete intake context preserved | Passed | Final Data Store record |
-| `privacy_confirmed` preserved as Boolean | Passed | Final Data Store record |
-| Valid pending workflow can be approved | Passed | Data Store state and Slack confirmation |
-| `completed_at` recorded on approval | Passed | Final Data Store record |
-| Invalid workflow ID changes no record | Passed | Data Store inspection |
-| Invalid workflow ID leaves scenario active | Passed | Make.com execution status |
-| Already-approved workflow cannot be approved again | Passed | No second update or confirmation |
-| Fresh pending workflow still passes after controls | Passed | Regression test |
-| Original exposed webhook retired | Passed | Deletion and rejection test |
-| Only implemented Slack response advertised | Passed | Slack review message |
-| Authorised-responder validation | Not implemented | Paused |
-| Explicit invalid-ID feedback | Not implemented | Paused |
-| Duplicate-attempt logging | Not implemented | Paused |
-| Advanced output validation | Not confirmed | Future test |
-| Retry and broader failure handling | Not confirmed | Future test |
-| Automated GitHub publication | Disabled | Outside boundary |
-| Downstream agent execution | Disabled | Outside boundary |
+Behavioural validation:
 
-# Security and privacy status
+> Complete
 
-## Completed
+Specialist runtime implementation:
 
-- replacement webhook created;
-- replacement webhook used successfully;
-- original exposed webhook deleted;
-- webhook URLs excluded from repository content;
-- approver identity removed from Slack confirmation;
-- synthetic evidence used;
-- `privacy_confirmed` preserved as a Boolean;
-- `privacy_status` retained separately as text;
-- invalid workflow IDs handled without record changes;
-- duplicate approval blocked;
-- internal schema names excluded from human-facing Slack output;
-- automated GitHub commits disabled; and
-- production use excluded.
+> Complete
 
-## Current credential status
+---
 
-There is no recorded evidence that the Relevance AI credential was exposed.
+# 16. Current implemented controls
 
-Credential rotation is therefore not required based on the current evidence.
+| Control | Status |
+|---|---|
+| Specialist-specific webhook intake | Validated |
+| Common intake schema | Validated |
+| `privacy_confirmed = true` gate | Validated |
+| Shared Data Store | Validated |
+| Correct specialist invocation | Validated |
+| Specialist output persistence | Validated |
+| `processing → human-review-required` transition | Validated |
+| Slack human review | Validated |
+| Strict `P <workflow_id>` parsing | Validated |
+| Workflow lookup | Validated |
+| Approval-state persistence | Validated |
+| Slack approval confirmation | Validated |
+| Invalid workflow ID containment | Previously validated |
+| Duplicate approval prevention | Previously validated |
+| Automatic downstream agent execution | Not implemented |
+| Automatic GitHub writes | Not implemented |
 
-The remaining control is to confirm that:
+---
 
-- the current Relevance AI connection works;
-- no credential value appears in Make.com execution logs;
-- no credential value appears in Slack;
-- no credential value is stored in the Data Store; and
-- no credential value appears in repository evidence.
+# 17. Known but not implemented
 
-Do not record the credential value, partial token or screenshots containing it.
+Do not mark the following as test failures merely because they are absent.
 
-## Still to confirm
+They are outside the validated minimum runtime:
 
-- the rotated intake scenario is saved and Active;
-- the current Relevance AI connection works without credential leakage;
-- authorised-responder validation before wider beta use;
-- explicit intake rejection when privacy confirmation is false;
-- bounded retry and failure handling; and
-- sensitive-content blocking behaviour.
+- `L` rework command;
+- `M` stop command;
+- approve with correction;
+- pause and resume;
+- privacy rejection feedback;
+- authorised-responder validation;
+- explicit invalid-ID feedback;
+- duplicate-attempt business logging;
+- advanced output validation;
+- automated correction retries;
+- Relevance AI failure recovery;
+- retry-limit handling;
+- Slack notification failure recovery;
+- sensitive-content safeguards beyond the current privacy gate;
+- workflow ID cleanup;
+- multi-agent router;
+- automatic specialist sequencing;
+- automatic GitHub writes.
 
-# Release gate
+These are backlog items or future signals.
 
-## Minimum APPROVE-route gate
+They should be implemented only when repeated real use demonstrates a need.
 
-The contained APPROVE route is considered validated only when:
+---
 
-- intake context preservation passes;
-- valid approval passes;
-- `completed_at` is recorded;
-- invalid workflow IDs cannot change records or disable the scenario;
-- duplicate approvals cannot update completed records;
-- the original exposed webhook is deleted;
-- only the supported Slack instruction is displayed;
-- synthetic test content is used;
-- no sensitive evidence is retained; and
-- regression testing confirms that a fresh pending workflow can still be approved.
+# 18. Runtime hardening rule
 
-This contained gate has passed within the tested boundary.
+Do not turn every unimplemented safeguard into an immediate build requirement.
 
-## Wider beta gate
+A hardening item should move into active implementation when one or more of the following is true:
 
-Do not extend the workflow to wider beta use until:
+- repeated real use exposes the weakness;
+- the operating boundary expands;
+- more users gain access;
+- the workflow moves into an organisational environment;
+- the consequence of failure materially increases;
+- an existing control proves unreliable;
+- privacy, security or governance requires the change.
 
-- authorised-responder validation is implemented and tested;
-- missing-decision-question handling is tested;
-- `privacy_confirmed = false` is blocked and tested;
-- output-validation behaviour is tested;
-- retry and retry-limit behaviour are tested;
-- Slack review-notification failure is visible and recoverable;
-- sensitive-content safeguard behaviour is tested;
-- the rotated intake scenario is confirmed saved and Active;
-- the current Relevance AI connection is confirmed operational;
-- no credential values appear in logs, Slack, Data Store records or repository evidence;
-- no silent failure remains;
-- no unauthorised state change is possible; and
-- all material defects have an owner and disposition.
+Use the smallest adequate control.
 
-## Downstream integration gate
+Retest only the affected runtime behaviour plus the core approval regression path.
 
-Do not progress to Stakeholder Journey Agent integration, Shipping Coach execution, `ready-for-use` or automated GitHub publication until the wider beta gate passes and José explicitly authorises the next step.
+---
 
-# Release decision
+# 19. Wider-use review triggers
 
-Record one outcome:
+Reassess the current runtime boundary before:
 
-- `Proceed with contained APPROVE beta`
-- `Proceed with contained corrections`
-- `Retest required`
-- `Stop`
-## Authorised-responder control
+- adding other Slack workspace members;
+- moving to a shared organisational Slack environment;
+- allowing broader beta access;
+- processing higher-risk information;
+- allowing agents to trigger other agents automatically;
+- automating external publication;
+- automating repository writes;
+- granting agents action authority beyond decision support.
 
-**Status:**  
-Not required for the contained beta
+These are review triggers, not current requirements.
 
-**Decision:**  
-The Slack workspace is personal and no other users have access. The existing controls are sufficient for the current boundary:
+---
 
-- command must start with `APPROVE`;
-- command must come from the configured beta channel;
-- workflow record must exist; and
-- `current_state` must equal `human-review-required`.
+# 20. Regression gate
 
-**Risk acceptance:**  
-The risk of another Slack user approving a workflow is accepted as negligible within the current personal-workspace boundary.
+A specialist runtime remains operational when:
 
-**Review trigger:**  
-Implement authorised-user validation before:
+- [ ] safe intake is received;
+- [ ] privacy confirmation is required;
+- [ ] correct specialist runs;
+- [ ] shared workflow record remains traceable;
+- [ ] specialist output is persisted;
+- [ ] workflow enters `human-review-required`;
+- [ ] Slack review reaches the human;
+- [ ] strict `P <workflow_id>` approval is recognised;
+- [ ] the intended workflow is retrieved;
+- [ ] approval is allowed only from the review state;
+- [ ] approved state is persisted;
+- [ ] Slack confirmation is delivered;
+- [ ] no automatic downstream specialist runs;
+- [ ] no sensitive evidence is retained.
 
-- adding another Slack workspace member;
-- moving the scenario to an organisational workspace;
-- allowing shared beta access; or
-- expanding the workflow beyond personal testing.
-## Current decision record
+If a runtime change breaks one of these controls:
 
-**Outcome:**  
-`Proceed with contained APPROVE beta`
+> Fix the smallest relevant runtime element and rerun the affected regression tests.
 
-**Decision owner:**  
-José Andrade
+Do not redesign the wider architecture by default.
 
-**Date:**  
-[Add date]
+---
 
-**Evidence:**  
-Privacy-safe Make.com execution references, Slack message references and final Data Store records.
+# 21. Current release decision
 
-**Material caveats:**  
+**Outcome:**
 
-- Only the APPROVE route is implemented.
-- Authorised-responder validation is not implemented.
-- Invalid workflow IDs are silently contained.
-- Duplicate attempts are silently blocked.
-- Advanced validation, retries and wider failure handling remain untested.
-- Downstream automation remains disabled.
-- Relevance AI credential exposure has not been identified.
+> Five priority specialist runtimes validated for contained use.
 
-**Required corrections:**  
+**Operating decision:**
 
-- Confirm the rotated intake scenario is saved and Active.
-- Confirm the current Relevance AI connection works without exposing credential values.
-- Implement and test authorised-responder validation before wider beta use.
+> Operate the validated specialist runtimes through real work before expanding orchestration.
 
-**Next authorised step:**  
-Continue contained beta testing only. Do not add downstream automation or additional response routes without a separate decision.
-- Implement and test authorised-responder validation before wider beta use.
+**Current priority:**
 
-**Next authorised step:**  
-Continue contained beta testing only. Do not add downstream automation or additional response routes without a separate decision.
+> Use, observation and evidence.
+
+Do not progress automatically to:
+
+- a multi-agent router;
+- specialist chaining;
+- autonomous workflow sequencing;
+- automatic publication;
+- automatic GitHub writes.
+
+Those capabilities require separate evidence and a separate decision.
+
+---
+
+# 22. Next evidence threshold
+
+Technical validation is no longer the main constraint.
+
+The next question is whether the validated runtime produces durable value through repeated real work.
+
+Observe:
+
+- whether the right specialist is easy to select;
+- whether the common intake contract remains sufficient;
+- whether Slack review remains lightweight;
+- whether approval-state persistence remains reliable;
+- whether specialist outputs improve real decisions;
+- whether any failure pattern recurs;
+- whether manual orchestration creates meaningful friction.
+
+Only repeated evidence should trigger runtime expansion.
+
+> A working specialist runtime is infrastructure. Its value is proven by the decisions it improves.
