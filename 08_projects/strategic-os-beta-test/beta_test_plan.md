@@ -2,474 +2,952 @@
 
 ## Status
 
-Draft for beta launch
+**Specialist runtime implementation:** Complete
+
+**Current phase:** Operational validation through real use
 
 ## Purpose
 
-Evaluate whether the Strategic OS agentic team can reliably support a real strategic workstream from initial ambiguity through sensemaking, stakeholder preparation, artefact production, review and next-action coordination.
+Evaluate whether the validated Strategic OS specialist runtimes improve real strategic work reliably enough to justify continued use and any future runtime expansion.
 
-The beta is primarily testing:
+The beta is no longer testing whether the specialist runtime can technically execute.
 
-- agent role clarity;
-- coordination between agents;
-- quality of agent handoffs;
-- workflow automation;
-- Slack communication and notifications;
-- human oversight and intervention;
-- output quality;
-- recovery from errors or incomplete information; and
-- creation of reusable strategic knowledge.
+That has been proven across:
 
-The selected Bitbucket documentation opportunity is the strategic test subject.
+1. Sensemaking Agent
+2. Stakeholder Journey Agent
+3. Career Architect
+4. Shipping Coach
+5. Chief of Staff Agent
 
-Its strategic relevance makes the test realistic, but approval or adoption of the proposal does not determine whether the beta succeeds.
+The next evidence threshold is:
 
-## Primary beta question
+> Use, observation and evidence.
 
-> Can the Strategic OS agentic team reliably coordinate analysis, artefact creation, automation and Slack communication while supporting a real strategic decision?
+The beta should now test whether the specialist runtimes:
 
-## Secondary beta question
+- improve decision clarity;
+- support appropriate stakeholder action;
+- reduce unnecessary refinement;
+- improve prioritisation;
+- surface useful strategic or career opportunities;
+- preserve evidence and uncertainty;
+- maintain clear human control;
+- remain privacy-safe;
+- create reusable learning;
+- operate with low management overhead.
 
-> Does the agentic workflow improve the clarity, quality and efficiency of the work compared with completing the same activity manually?
+Do not expand orchestration merely because the specialist paths now work.
 
-## Test subject
+---
 
-The beta will use the following opportunity:
+# Primary beta question
 
-> Explore whether City of Melbourne's established Bitbucket capability could support reusable, governed and machine-readable sources for internal project artefacts and customer-facing knowledge across multiple teams and channels.
+> Do the validated Strategic OS specialist runtimes materially improve real strategic decisions and actions while remaining lightweight, human-governed and privacy-safe?
 
-The subject may involve:
+## Secondary beta questions
 
-- project and design documentation;
-- customer information architecture;
-- customer-friendly service semantics;
-- customer segmentation profiles;
-- Channel Strategy patterns;
-- multi-channel publishing;
-- cross-team governance workflows;
-- reusable design elements; and
-- trusted source material for emerging agents.
+> Is manual specialist selection sufficient for current use?
 
-These are test inputs and outputs.
+> Does the common intake structure provide enough context without creating unnecessary preparation overhead?
 
-They are not the primary beta success criteria.
+> Does Slack human review remain proportionate to the value created?
 
-## Beta boundary
+> Does repeated real work expose a genuine need for runtime hardening or orchestration expansion?
 
-The beta will test the agentic workflow using one contained strategic workstream.
+---
 
-It will not:
+# Current operating principle
 
-- test every Strategic OS agent;
-- automate every possible workflow;
-- establish a production operating model;
+> Operate the validated specialist runtimes through real work before expanding orchestration.
+
+The beta should not attempt to prove that more automation is required.
+
+No change is a valid beta result.
+
+---
+
+# Beta boundary
+
+The beta should use real strategic work where appropriate.
+
+It should not:
+
+- create multi-agent routing;
+- automatically sequence specialists;
+- automatically invoke a second specialist;
+- build workflow complexity merely for testing;
+- automate GitHub writes;
 - replace organisational systems of record;
-- migrate existing documentation libraries;
-- store raw customer or organisational data;
-- assess Bitbucket as an enterprise platform implementation; or
-- treat stakeholder approval as the sole indicator of success.
+- retain raw organisational data;
+- retain customer records;
+- retain credentials or tokens;
+- retain identifiable case material;
+- treat stakeholder endorsement as the sole measure of success;
+- treat repository activity as the primary evidence of value.
 
-## Agents in scope
+Strategic OS should retain only safe, reusable interpretation and design logic.
 
-The initial beta should use only the agents required for the test subject.
+---
 
-Expected roles include:
+# Validated technical baseline
 
-### Sensemaking Agent
+Each specialist has already passed the common end-to-end runtime:
 
-Responsible for:
+`Webhook → privacy gate → shared Data Store → selected Relevance AI agent → post-agent Data Store update → Slack human review → P approval listener → approved state`
 
-- clarifying the opportunity;
-- separating evidence from assumptions;
-- identifying the decision required;
-- framing options and trade-offs; and
-- preparing structured inputs for later agents.
+Validated common controls include:
 
-### Stakeholder Journey Agent
+- specialist-specific webhook intake;
+- common intake structure;
+- `privacy_confirmed = true` gate;
+- shared `strategic_os_beta_workflows` Data Store;
+- specialist reasoning in Relevance AI;
+- Make used for orchestration only;
+- output persistence to `latest_output`;
+- transition from `processing` to `human-review-required`;
+- Slack review;
+- strict `P <workflow_id>` parsing;
+- workflow lookup;
+- approved-state persistence;
+- Slack approval confirmation.
 
-Responsible for:
+The beta should not repeatedly retest this full technical baseline unless:
 
-- identifying stakeholder interests and concerns;
-- tailoring engagement approaches;
-- anticipating resistance;
-- defining desired stakeholder movement; and
-- preparing stakeholder-ready communication.
+- a runtime component changes;
+- a regression is suspected;
+- operational use exposes a failure.
 
-### Shipping Coach
+---
 
-Responsible for:
+# Agents in scope
 
-- assessing whether outputs are ready to use;
-- identifying minimum remaining work;
-- preventing unnecessary refinement;
-- recommending whether to ship, socialise, refine or stop; and
-- preparing the next action.
+All five priority specialists are operational.
 
-### Orchestration layer
+They should be selected according to the real decision-support need.
 
-Responsible for:
+## Sensemaking Agent
 
-- selecting the appropriate agent;
-- passing relevant context;
-- maintaining workflow state;
-- triggering automation;
-- notifying José through Slack;
-- requesting approval at defined points; and
-- recording outcomes and failures.
+Use when the primary need is to:
 
-## Workflow under test
+- clarify an ambiguous decision;
+- separate evidence from assumptions;
+- identify the underlying strategic question;
+- frame options and trade-offs;
+- surface caveats;
+- produce a recommendation or decision frame.
 
-The initial workflow is:
+## Stakeholder Journey Agent
 
-    Strategic opportunity captured
-                |
-                v
-    Sensemaking Agent analyses the opportunity
-                |
-                v
-    José receives Slack summary and review request
-                |
-                v
-    Stakeholder Journey Agent prepares alignment approach
-                |
-                v
-    José receives Slack action notification
-                |
-                v
-    Decision brief and working-session artefacts are prepared
-                |
-                v
-    Shipping Coach evaluates readiness
-                |
-                v
-    José approves, redirects, pauses or rejects
-                |
-                v
-    Final status, decisions and lessons are recorded
+Use when the primary need is to:
 
-## Human-in-the-loop gates
+- identify relevant stakeholders;
+- assess influence, interest and impact;
+- clarify decision rights cautiously;
+- preserve unknown stakeholder positions;
+- sequence engagement;
+- identify the next stakeholder action.
+
+## Career Architect
+
+Use when the primary need is to:
+
+- assess strategic value;
+- assess career value;
+- distinguish potential, emerging and achieved evidence;
+- test whether impact or sponsorship is real;
+- identify the next useful validation action.
+
+Reusable operating principle:
+
+> When an opportunity is sufficiently framed, test mandate, adoption or impact before creating more documentation.
+
+## Shipping Coach
+
+Use when the primary need is to:
+
+- distinguish blockers from optional refinement;
+- assess the risk of moving versus waiting;
+- decide Ship / Socialise / Refine / Stop;
+- bound remaining refinement;
+- identify the smallest useful action;
+- define a clear done condition.
+
+## Chief of Staff Agent
+
+Use when the primary need is to:
+
+- create an operating view;
+- prioritise selectively;
+- separate decisions from tasks;
+- surface dependencies;
+- protect focus;
+- identify one bounded next action;
+- determine whether specialist support may be useful.
+
+The Chief of Staff Agent may recommend another specialist.
+
+The runtime does not automatically invoke that specialist.
+
+---
+
+# Specialist selection model
+
+Specialist selection remains human-led.
+
+| Need | Specialist |
+|---|---|
+| Clarify an ambiguous strategic decision | Sensemaking Agent |
+| Improve stakeholder sequencing or alignment | Stakeholder Journey Agent |
+| Assess strategic and career opportunity value | Career Architect |
+| Determine whether work should move or refine | Shipping Coach |
+| Establish priorities and next actions | Chief of Staff Agent |
+
+This is guidance.
+
+It is not an automated routing specification.
+
+---
+
+# Real-work test model
+
+The beta should use a series of contained real-work tests rather than one orchestrated multi-agent workflow.
+
+Each test should:
+
+1. identify a real decision-support need;
+2. select the most appropriate specialist;
+3. prepare a privacy-safe intake;
+4. run the specialist through the validated runtime;
+5. complete human review;
+6. assess the usefulness of the result;
+7. capture only durable learning;
+8. decide whether any change is justified.
+
+A second specialist may be used only when the real work independently requires it.
+
+Do not invoke another specialist merely to test handoffs.
+
+---
+
+# Test subject selection
+
+Choose work that is:
+
+- real;
+- strategically relevant;
+- bounded;
+- safe to summarise;
+- capable of producing an observable decision or action;
+- sufficiently different from previous tests to expose new learning.
+
+Good test subjects may include:
+
+- a strategic proposition;
+- a service-design decision;
+- stakeholder alignment;
+- an analytics-supported decision;
+- an active work item at risk of over-refinement;
+- a strategic or career opportunity;
+- weekly operating prioritisation.
+
+Avoid:
+
+- artificial tasks created only to exercise the agents;
+- work requiring unsafe source data;
+- problems with no meaningful decision or action;
+- large programmes that make attribution impossible.
+
+---
+
+# Human-in-the-loop boundary
 
 José retains final decision authority.
 
 Human review is required before:
 
+- specialist output is treated as accepted;
 - stakeholder-facing content is used;
-- recommendations are treated as agreed;
-- significant workflow changes are made;
-- sensitive or organisational material is retained;
-- the system proceeds after an error;
-- a final artefact is marked ready; or
-- the beta result is determined.
+- strategic recommendations become commitments;
+- organisational action is taken;
+- durable reusable knowledge is stored;
+- another specialist is deliberately invoked where consequential;
+- runtime changes are adopted.
 
-The system should make each intervention point clear through Slack.
+The current supported runtime approval command is:
 
-## Evaluation dimensions
+`P <workflow_id>`
 
-## 1. Agent performance
+Strict parser:
 
-Evaluate whether each agent:
+    ^P\s+(?<workflow_id>[a-fA-F0-9]{32})$
 
-- understood its assigned role;
-- stayed within scope;
-- used relevant prior outputs;
-- avoided unnecessary duplication;
-- identified uncertainty;
-- preserved important caveats;
-- produced a useful handoff;
-- requested human input only when necessary; and
-- improved decision clarity.
+The beta does not currently depend on:
 
-## 2. Agent coordination
+- `L` rework;
+- `M` stop;
+- pause;
+- resume;
+- automatic correction;
+- automatic specialist sequencing.
 
-Evaluate whether agents:
+---
 
-- used consistent definitions;
-- avoided contradictory recommendations;
-- preserved decisions and context;
-- built on previous outputs;
-- avoided repeating completed work;
-- handed off in a usable format; and
-- maintained a clear current state.
+# Evaluation dimensions
 
-## 3. Orchestration
+## 1. Decision contribution
 
-Evaluate whether the orchestration layer:
+Evaluate whether the specialist:
 
-- selected the right agent;
-- triggered work at the right time;
-- passed sufficient context;
-- prevented duplicate actions;
-- maintained workflow status;
-- detected failures;
-- supported retries or redirection; and
-- kept José informed.
+- clarified the real decision;
+- separated evidence from interpretation;
+- surfaced assumptions;
+- preserved important uncertainty;
+- clarified options or trade-offs;
+- improved the recommendation;
+- identified a useful next action.
 
-## 4. Automation
+Primary question:
 
-Evaluate:
+> Did the specialist materially improve the quality or clarity of the decision?
 
-- trigger reliability;
-- sequence accuracy;
-- data passed between steps;
-- missed actions;
-- duplicate actions;
-- error handling;
-- retry behaviour;
-- manual interventions;
-- status accuracy; and
-- auditability.
+---
 
-Automation should reduce coordination effort without hiding uncertainty or failure.
+## 2. Specialist fit
 
-## 5. Slack communication
+Evaluate whether:
 
-Evaluate whether Slack notifications:
+- the correct specialist was selected;
+- the specialist stayed within role;
+- the output matched the need;
+- another specialist would have been materially better;
+- role boundaries remained understandable.
 
-- reached José;
-- arrived at the appropriate time;
-- explained what occurred;
-- identified the responsible agent;
-- made the required action clear;
-- distinguished information from approval requests;
-- included enough context;
-- avoided unnecessary detail;
-- avoided duplication;
-- reported errors visibly; and
-- confirmed completed decisions or actions.
+Primary question:
 
-## 6. Human control
+> Was specialist selection simple and reliable enough without an automated router?
+
+---
+
+## 3. Context sufficiency
+
+Evaluate whether the common intake provided enough information.
+
+Check:
+
+- `decision_question`;
+- `opportunity_summary`;
+- `evidence`;
+- `known_assumptions`;
+- `constraints`;
+- `requested_output`;
+- `requested_outcome`.
+
+Primary question:
+
+> Could the specialist produce useful work without excessive context preparation or follow-up reconstruction?
+
+---
+
+## 4. Human control
 
 Evaluate whether José could:
 
-- understand the current workflow state;
-- identify which agent produced each output;
-- review assumptions and evidence;
-- approve or reject recommendations;
-- pause the workflow;
-- redirect an agent;
-- request rework;
-- recover from errors; and
-- retain final decision authority.
+- understand what the specialist produced;
+- distinguish recommendation from decision;
+- review evidence and assumptions;
+- approve deliberately;
+- reject or disregard the output outside the runtime where appropriate;
+- retain final authority.
+
+Primary question:
+
+> Did the runtime support judgement without obscuring who decides?
+
+---
+
+## 5. Slack review
+
+Evaluate whether the Slack review:
+
+- arrived when meaningful action was required;
+- identified the specialist;
+- displayed the workflow ID;
+- presented the specialist output clearly;
+- made the approval action obvious;
+- avoided unnecessary notification volume.
+
+Primary question:
+
+> Did Slack make human review easier rather than adding coordination overhead?
+
+---
+
+## 6. Runtime reliability
+
+During real use, observe:
+
+- webhook reliability;
+- privacy gate behaviour;
+- correct specialist selection within the intended scenario;
+- Data Store persistence;
+- output persistence;
+- Slack delivery;
+- approval parsing;
+- approved-state persistence.
+
+Do not rerun deep technical testing unless a problem appears.
+
+Primary question:
+
+> Did the already validated runtime remain reliable under normal use?
+
+---
 
 ## 7. Output quality
 
-Evaluate whether outputs were:
+Evaluate whether the output was:
 
 - decision-relevant;
 - evidence-aware;
 - caveated;
-- internally consistent;
-- stakeholder-appropriate;
-- reusable;
-- maintainable;
+- proportionate;
+- structurally clear;
+- stakeholder-appropriate where relevant;
+- reusable where appropriate;
 - privacy-safe;
-- structurally clear; and
-- usable with limited manual correction.
+- usable with little manual reconstruction.
 
-## 8. Strategic contribution
+Primary question:
 
-Evaluate whether the agentic team helped:
+> Was the output useful enough to affect real work?
 
-- clarify the opportunity;
-- distinguish the capability from the technology;
-- identify stakeholder-specific concerns;
-- define realistic options;
-- surface risks and dependencies;
-- improve the quality of the decision process; and
-- produce useful strategic artefacts.
+---
 
-Stakeholder endorsement of the Bitbucket proposal is not required for success.
+## 8. Shipping behaviour
 
-## Outcome independence
+Where relevant, assess whether Strategic OS:
 
-The following outcomes do not independently determine beta success:
+- reduced unnecessary refinement;
+- helped work move at the right time;
+- identified real blockers;
+- prevented premature shipping;
+- produced a clear done condition.
 
-- approval by the manager;
-- stakeholder enthusiasm for Git or Bitbucket;
-- adoption of the documentation model;
-- implementation of the pilot;
-- agreement on the preferred platform;
-- confirmation that the initial strategic hypothesis was correct; or
-- immediate organisational value.
+Primary question:
 
-The beta may still succeed if the proposal is rejected, narrowed or redirected, provided the system supported a clear, evidence-aware and well-communicated decision.
+> Did the system improve progress without lowering necessary quality?
 
-The beta may fail even if stakeholders approve the proposal, if the agentic workflow was unreliable, opaque or required excessive manual reconstruction.
+---
 
-## Success criteria
+## 9. Stakeholder contribution
 
-The beta is successful when the evidence shows that the system can:
+Where relevant, assess whether Strategic OS:
 
-- complete an end-to-end workflow;
-- maintain understandable agent roles;
-- coordinate work without material contradictions;
-- produce useful strategic outputs;
-- notify José through Slack at meaningful points;
-- make required actions and decisions clear;
-- retain human review before consequential use;
-- detect and communicate errors;
-- recover from failed or weak steps;
-- preserve evidence, assumptions and caveats;
-- avoid storing sensitive source material;
-- create reusable learning; and
-- deliver enough value to justify another controlled test.
+- identified the right decision-makers;
+- distinguished contributors from implementation participants;
+- avoided inventing support or resistance;
+- improved engagement order;
+- identified the next useful conversation.
 
-## Failure indicators
+Primary question:
 
-The beta should be considered weak or unsuccessful if:
+> Did the system improve stakeholder alignment or reduce unnecessary consultation?
 
-- agents repeatedly duplicate work;
-- agents contradict each other without surfacing the conflict;
-- important context is lost;
-- automation silently fails;
-- triggers occur in the wrong order;
-- Slack notifications are unclear, missing or excessive;
-- José cannot understand the workflow state;
+---
+
+## 10. Strategic opportunity contribution
+
+Where relevant, assess whether Strategic OS:
+
+- surfaced a strategic opportunity;
+- clarified its value;
+- identified evidence still required;
+- connected the opportunity to the desired reputation;
+- identified a useful next validation action.
+
+Primary question:
+
+> Did the system strengthen a real strategic opportunity?
+
+---
+
+## 11. Reuse
+
+Evaluate whether the work created any durable reusable knowledge.
+
+Examples:
+
+- decision logic;
+- stakeholder pattern;
+- analytical caveat;
+- service-design pattern;
+- operating principle;
+- validated prompt behaviour;
+- runtime learning.
+
+Primary question:
+
+> Did anything useful survive beyond the immediate task?
+
+Do not manufacture reusable artefacts where none are needed.
+
+---
+
+## 12. Management overhead
+
+Observe:
+
+- preparation effort;
+- manual copying;
+- context reconstruction;
+- Slack overhead;
+- specialist-selection effort;
+- runtime monitoring effort;
+- repository maintenance generated by the run.
+
+Primary question:
+
+> Does Strategic OS create more decision value than operating overhead?
+
+---
+
+# Evidence categories
+
+Use the following evidence labels where useful:
+
+- Observed
+- Reported
+- Validated
+- Partially validated
+- Assumption
+- Future signal
+- Rejected
+- Out of scope
+
+Do not promote a single observation into a framework requirement.
+
+---
+
+# Test result template
+
+## Operational test
+
+**Test ID:**  
+[Add identifier]
+
+**Date:**  
+[Add date]
+
+**Work item:**  
+[Safe summary]
+
+**Decision-support need:**  
+[Add need]
+
+**Selected specialist:**  
+[Add specialist]
+
+**Why this specialist:**  
+[Short rationale]
+
+**Decision question:**  
+[Add question]
+
+**Expected contribution:**  
+[What should improve]
+
+**Runtime result:**  
+[Pass / Partial / Fail]
+
+**Human review:**  
+[Completed / Not completed]
+
+**Decision contribution:**  
+[High / Medium / Low]
+
+**Output quality:**  
+[Accepted / Minor revision / Major revision / Rejected]
+
+**Specialist fit:**  
+[Strong / Adequate / Weak]
+
+**Context sufficiency:**  
+[Strong / Adequate / Weak]
+
+**Slack usefulness:**  
+[Useful / Neutral / Friction]
+
+**Management overhead:**  
+[Low / Moderate / High]
+
+**Reusable learning:**  
+[Safe durable learning or `None`]
+
+**Strategic opportunity signal:**  
+[Add signal or `None`]
+
+**Career evidence signal:**  
+[Add signal or `None`]
+
+**Observed friction:**  
+[Safe summary or `None`]
+
+**Change justified:**  
+[Yes / No]
+
+**Next action:**  
+[One bounded action]
+
+---
+
+# Test portfolio
+
+Do not require every specialist to be used an equal number of times.
+
+Use specialists according to real work.
+
+Aim for sufficient variety to judge sustained usefulness.
+
+## Sensemaking Agent
+
+- [ ] Additional real-work run completed
+- [ ] Second additional real-work run completed
+- [ ] Decision contribution assessed
+- [ ] Repeated behavioural friction assessed
+
+## Stakeholder Journey Agent
+
+- [ ] Additional real stakeholder run completed
+- [ ] Second additional real stakeholder run completed
+- [ ] Engagement sequencing contribution assessed
+- [ ] Repeated behavioural friction assessed
+
+## Career Architect
+
+- [ ] Real strategic / career opportunity run completed
+- [ ] Second materially different run completed
+- [ ] Evidence maturity handling assessed
+- [ ] Sponsor / impact discipline assessed
+
+## Shipping Coach
+
+- [ ] Real active-work run completed
+- [ ] Second materially different run completed
+- [ ] Shipping decision contribution assessed
+- [ ] Refinement behaviour assessed
+
+## Chief of Staff Agent
+
+- [ ] Real operating-priority run completed
+- [ ] Second materially different run completed
+- [ ] Focus protection assessed
+- [ ] Specialist-routing recommendations assessed
+
+---
+
+# Cross-specialist observation
+
+The beta should observe cross-specialist behaviour without automating it.
+
+Where one real work item genuinely requires more than one specialist, assess:
+
+- whether the second specialist was actually necessary;
+- whether the human could transfer enough safe context;
+- whether definitions remained consistent;
+- whether important context was lost;
+- whether outputs contradicted each other;
+- whether manual sequencing was burdensome;
+- whether an automated handoff would materially improve the result.
+
+Do not create an automated handoff because one case used two specialists.
+
+A future orchestration requirement should be based on repeated evidence.
+
+---
+
+# Runtime hardening observation
+
+Known but not implemented controls include:
+
+- `L` rework command;
+- `M` stop command;
+- privacy rejection feedback;
+- authorised responder validation;
+- Relevance AI failure handling;
+- Slack notification failure handling;
+- sensitive-content safeguards beyond the current privacy gate;
+- automated output validation;
+- workflow ID cleanup;
+- multi-agent routing;
+- automatic specialist sequencing;
+- automatic GitHub writes.
+
+During real work, note when the absence of one of these controls causes material friction or risk.
+
+Do not treat its absence alone as evidence that it must be implemented.
+
+---
+
+# Hardening trigger
+
+A runtime-hardening item should become active only when:
+
+- a failure recurs;
+- the operating environment broadens;
+- more users gain access;
+- information sensitivity increases;
+- the consequence of failure increases;
+- governance or privacy requires stronger control;
+- an existing control proves inadequate.
+
+When triggered:
+
+1. define the demonstrated problem;
+2. identify the smallest additional control;
+3. preserve human authority;
+4. validate the affected path;
+5. update Strategic OS after the control is proven.
+
+---
+
+# Orchestration expansion test
+
+Multi-agent orchestration remains paused.
+
+Before reconsidering automatic routing or sequencing, require evidence that:
+
+- real work repeatedly needs multiple specialists;
+- manual specialist selection creates material friction;
+- safe context handoff is repetitive and predictable;
+- specialist order is sufficiently stable to automate;
+- automatic sequencing would improve decision quality or reduce meaningful overhead;
+- human review points can remain explicit;
+- failure behaviour can remain bounded.
+
+If these conditions are not demonstrated:
+
+> Keep specialists independent.
+
+---
+
+# Success criteria
+
+The operational beta is successful when evidence shows that Strategic OS:
+
+- improves real decision clarity;
+- preserves evidence and uncertainty;
+- maintains clear specialist roles;
+- retains human decision authority;
+- operates reliably through the validated runtime;
+- uses Slack proportionately;
+- does not breach privacy boundaries;
+- creates some reusable strategic knowledge;
+- improves stakeholder action where relevant;
+- improves shipping behaviour where relevant;
+- surfaces or strengthens strategic opportunities where relevant;
+- does not create disproportionate management overhead.
+
+Success does not require new automation.
+
+---
+
+# Failure indicators
+
+The beta should be considered weak where repeated evidence shows that:
+
+- specialists add little decision value;
+- choosing the correct specialist is consistently difficult;
 - outputs require substantial reconstruction;
-- recommendations overstate weak evidence;
-- errors are hidden;
-- privacy boundaries are breached;
-- the workflow creates documentation without improving decisions; or
-- manual intervention is disproportionate to the value created.
+- important context is repeatedly lost;
+- outputs overstate weak evidence;
+- specialist roles overlap materially;
+- Slack adds more friction than value;
+- workflow state becomes unreliable;
+- privacy boundaries are difficult to maintain;
+- manual operation creates disproportionate overhead;
+- repository maintenance becomes the dominant activity;
+- Strategic OS produces documentation without improving decisions.
 
-## Measures
+One isolated weak run does not automatically require redesign.
+
+Look for recurrence.
+
+---
+
+# Measures
 
 | Dimension | Measure |
 |---|---|
-| Agent performance | Outputs accepted with no, minor or major revision |
-| Role clarity | Out-of-scope or duplicated agent actions |
-| Handoffs | Handoffs requiring manual context reconstruction |
-| Coordination | Contradictions, repeated work or lost decisions |
-| Automation | Successful triggers, failures, retries and interventions |
-| Slack | Useful, missed, duplicated and unnecessary notifications |
-| Human control | Successful approvals, pauses, redirects and rework requests |
-| Output quality | Clarity, usability, evidence quality and readiness |
-| Efficiency | Approximate effort compared with an unassisted workflow |
-| Recovery | Time and actions required to correct failed steps |
-| Reuse | Outputs and lessons suitable for future work |
-| Privacy | Information-boundary incidents or near misses |
-| Strategic contribution | Improvement in framing, options and stakeholder preparation |
+| Decision contribution | Decisions materially clarified or strengthened |
+| Specialist fit | Correct specialist selected without unnecessary routing complexity |
+| Output quality | Accepted with no, minor or major revision |
+| Context sufficiency | Manual reconstruction required |
+| Human control | Explicit review and clear decision authority |
+| Slack | Useful versus unnecessary review notifications |
+| Runtime reliability | Successful execution and approval persistence |
+| Stakeholder value | Engagement sequencing or alignment improved |
+| Shipping value | Delay or unnecessary refinement reduced |
+| Opportunity value | Strategic opportunities clarified or progressed |
+| Reuse | Durable knowledge reused later |
+| Efficiency | Decision value compared with operating effort |
+| Privacy | Boundary incidents or near misses |
+| Overhead | Preparation and maintenance burden |
 
-## Slack notification checkpoints
+---
 
-The beta should test notifications at these minimum points:
+# Beta evidence log
 
-### Workflow started
-
-Notify José that:
-
-- the test has started;
-- the subject has been recorded;
-- the current agent is identified; and
-- the next expected action is visible.
-
-### Agent output ready
-
-Notify José that:
-
-- an output is ready;
-- the producing agent is identified;
-- the output purpose is clear;
-- unresolved caveats are summarised; and
-- a review action is requested.
-
-### Approval required
-
-Notify José that:
-
-- a decision is required;
-- the available choices are explicit;
-- the consequences are summarised; and
-- the workflow will not proceed without human approval.
-
-### Workflow failure
-
-Notify José that:
-
-- a failure occurred;
-- the failed step is identified;
-- the impact is explained;
-- any retry is visible; and
-- the required human action is clear.
-
-### Workflow completed
-
-Notify José that:
-
-- the workflow is complete;
-- the final output or status is identified;
-- important decisions are summarised;
-- outstanding actions are visible; and
-- evaluation feedback is requested.
-
-## Beta evidence log
-
-Record each test event using:
+Use a lightweight evidence log only when the run produces useful learning.
 
 | Field | Record |
 |---|---|
-| Date and time | |
-| Workflow stage | |
-| Agent or automation | |
-| Trigger | |
-| Expected result | |
-| Actual result | |
-| Slack notification sent | Yes / No |
-| Notification useful | Yes / Partly / No |
-| Human action required | |
-| Human intervention | |
-| Output quality | Accepted / Minor revision / Major revision / Rejected |
-| Error or friction | |
-| Recovery action | |
-| Time or effort | |
-| Lesson | |
-| Follow-up change | |
+| Date | |
+| Work item | |
+| Specialist | |
+| Decision question | |
+| Expected contribution | |
+| Runtime result | |
+| Human review completed | |
+| Output quality | |
+| Decision contribution | |
+| Specialist fit | |
+| Slack usefulness | |
+| Management overhead | |
+| Reusable learning | |
+| Observed friction | |
+| Change justified | |
+| Next action | |
 
-## Beta result categories
+Do not create detailed logs where there is no learning worth retaining.
 
-### Continue
+---
 
-The agentic team, automation and Slack workflow performed reliably enough for another controlled test.
+# Beta result categories
 
-### Continue with contained improvements
+## Continue unchanged
 
-The system created clear value, but specific agents, handoffs, automations or notifications require correction.
+Use when:
 
-### Redesign a workflow component
+- the specialist adds value;
+- the runtime works reliably;
+- no material repeated friction is present.
 
-A material component was unreliable, although the wider agentic approach remains promising.
+This is a successful result.
 
-### Pause
+## Continue with contained improvement
 
-The system created insufficient value or required disproportionate manual intervention.
+Use when:
 
-### Stop
+- value is clear;
+- one repeated issue has been identified;
+- the issue can be solved through a small targeted change.
 
-The test exposed fundamental problems that make continued use inappropriate without a substantially different approach.
+## Harden one runtime control
 
-## Exit criteria
+Use when:
 
-The beta may be closed when:
+- a repeated reliability, privacy or governance issue exists;
+- the current boundary needs a specific additional safeguard.
 
-- one complete strategic workflow has run;
-- all planned agent handoffs have been tested;
-- Slack checkpoints have been exercised;
-- at least one human approval or redirect has occurred;
-- at least one failure or exception path has been tested or simulated;
-- outputs have been evaluated;
-- privacy boundaries have been reviewed;
-- lessons have been recorded;
-- the overall result category has been assigned; and
-- the next recommendation has been agreed.
+## Revisit specialist contract
 
-## Immediate next action
+Use when:
 
-Confirm the automation and Slack workflow to be tested, including:
+- repeated real use shows a specialist consistently behaves outside its intended role;
+- the issue is reasoning behaviour rather than orchestration.
 
-- triggers;
-- agent sequence;
-- Slack checkpoints;
-- approval actions;
-- failure notifications;
-- workflow-state storage; and
-- beta logging.
+## Reconsider orchestration
+
+Use only when repeated evidence demonstrates that independent specialists create material coordination friction.
+
+## Pause
+
+Use when:
+
+- the system creates insufficient value;
+- overhead is disproportionate;
+- a material unresolved risk exists.
+
+---
+
+# Operational acceptance relationship
+
+This beta contributes evidence toward:
+
+`12_quality/strategic_os_operationalisation_checklist.md`
+
+The beta does not independently declare Strategic OS operational.
+
+Operational acceptance also requires evidence of:
+
+- repeated real decisions supported;
+- sustained working cadence;
+- reusable knowledge;
+- strategic opportunity contribution;
+- safe analytics use where relevant;
+- low operating overhead;
+- North Star impact.
+
+---
+
+# Current completed evidence
+
+The following phases are complete:
+
+- [x] priority agent architecture established;
+- [x] behavioural validation of all five specialists;
+- [x] specialist runtime implementation;
+- [x] end-to-end runtime validation of all five specialists;
+- [x] shared privacy gate validated;
+- [x] shared Data Store pattern validated;
+- [x] Slack human-review pattern validated;
+- [x] strict `P <workflow_id>` approval validated;
+- [x] approved-state persistence validated.
+
+The following evidence remains active:
+
+- [ ] repeated real-world specialist use;
+- [ ] sustained operating value;
+- [ ] specialist selection sufficiency;
+- [ ] management-overhead assessment;
+- [ ] reusable knowledge reuse;
+- [ ] strategic opportunity contribution;
+- [ ] evidence for or against runtime hardening;
+- [ ] evidence for or against orchestration expansion.
+
+---
+
+# Current decision
+
+The original beta concept tested whether an agentic team could coordinate sequentially across a contained strategic workstream.
+
+Operationalisation produced a simpler validated architecture:
+
+> independent specialist runtimes + shared workflow state + explicit human review.
+
+Therefore the beta now tests the value of that architecture in real use.
+
+It does not test a hypothetical multi-agent team.
+
+---
+
+# Immediate next action
+
+Use the validated specialist runtimes on real work.
+
+For each meaningful run:
+
+1. select the specialist deliberately;
+2. use the validated common intake;
+3. complete human review;
+4. assess decision contribution;
+5. capture material friction only;
+6. retain reusable learning only;
+7. make no architecture change unless evidence justifies it.
+
+Current priority:
+
+> Use, observation and evidence.
+
+The next architecture decision should come from real work, not from the availability of additional automation.
