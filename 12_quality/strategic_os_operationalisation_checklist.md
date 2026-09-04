@@ -54,21 +54,24 @@ Overall status:
 - [x] Templates established
 - [x] Analytics architecture established
 - [x] Privacy and source-of-truth rules established
+- [x] Five priority specialist runtimes validated end to end
 - [ ] Core workflows validated through repeated real use
 - [ ] Operating cadence established as a working habit
-- [ ] Agent roles proven through live work
+- [ ] Agent roles proven through repeated live work
 - [ ] Reusable knowledge demonstrably reused
 - [ ] Strategic opportunities actively tracked
-- [ ] Chief of Staff operating model tested in practice
+- [ ] Chief of Staff operating model tested through sustained practice
 - [ ] Strategic OS operational acceptance criteria met
 
 Current phase:
 
-> Operational validation
+> **Specialist runtime operationalisation complete; operational validation through real use in progress.**
 
 Operating rule:
 
-> Use real work before creating new architecture.
+> Operate the validated specialist runtimes through real work before expanding orchestration.
+
+Do not build multi-agent routing, automatic specialist sequencing or additional runtime complexity merely because the specialist paths now work.
 
 ---
 
@@ -99,7 +102,7 @@ Prove that real work can move through Strategic OS from input to useful, reusabl
 
 ## Repeatability
 
-Complete at least three materially different end-to-end runs.
+Complete at least three materially different end-to-end real-work runs.
 
 - [ ] Operational validation run 1 completed
 - [ ] Operational validation run 2 completed
@@ -150,56 +153,164 @@ Definition of done:
 
 Goal:
 
-Prove that each priority agent has a useful role in the operating system.
+Prove that each priority agent has a useful and differentiated role in the operating system.
+
+## Runtime validation baseline
+
+All five priority specialists have now passed end-to-end runtime validation using the common Make pattern:
+
+`Webhook → privacy gate → shared Data Store → selected Relevance AI agent → post-agent Data Store update → Slack human review → P approval listener → approved state`
+
+Validated specialists:
+
+- [x] Sensemaking Agent
+- [x] Stakeholder Journey Agent
+- [x] Career Architect
+- [x] Shipping Coach
+- [x] Chief of Staff Agent
+
+This establishes that each specialist can be invoked, reviewed and approved through the operational runtime.
+
+It does not by itself establish that every specialist has been proven through repeated real-world use.
 
 ## Sensemaking Agent
 
-- [ ] Used on a real complex or ambiguous problem
-- [ ] Helped frame the underlying problem
-- [ ] Separated evidence, assumptions and interpretation
-- [ ] Produced a useful recommendation or decision frame
-- [ ] Output reviewed for usefulness
+Behavioural and runtime validation:
+
+- [x] Used on real complex or ambiguous problems
+- [x] Helped frame the underlying problem
+- [x] Separated evidence, assumptions and interpretation
+- [x] Produced useful recommendations or decision frames
+- [x] Output reviewed for usefulness
+- [x] Human approval path validated
+
+Status:
+
+> **Validated**
+
+Monitoring note:
+
+Continue to observe whether the agent occasionally defaults to producing another artefact when stakeholder or project action would be more useful.
+
+Do not change the contract unless this behaviour recurs.
 
 ## Stakeholder Journey Agent
 
-- [ ] Used on a real stakeholder challenge
-- [ ] Identified stakeholder needs, influence or alignment risks
-- [ ] Improved engagement sequencing or communication
-- [ ] Surfaced a stakeholder action that was used in practice
-- [ ] Output reviewed for usefulness
+Behavioural and runtime validation:
 
-## Shipping Coach
+- [x] Used on real stakeholder challenges
+- [x] Distinguished decision-makers, contributors and implementation participants
+- [x] Preserved unknown stakeholder positions as unknown
+- [x] Avoided inventing motives or support
+- [x] Improved engagement sequencing
+- [x] Surfaced useful stakeholder actions
+- [x] Output reviewed for usefulness
+- [x] Human approval path validated
 
-- [ ] Used on active work at risk of over-refinement or delay
-- [ ] Helped define what was sufficient to ship
-- [ ] Identified unnecessary refinement
-- [ ] Supported a real delivery or decision milestone
-- [ ] Output reviewed for usefulness
+Status:
+
+> **Validated**
+
+Monitoring note:
+
+Continue to observe whether the agent:
+
+- includes organisational context as if it were a stakeholder;
+- assigns decision rights without evidence;
+- overstates likely support or resistance;
+- recommends broad consultation where targeted engagement would be sufficient.
+
+Do not change the agent specification unless one of these behaviours recurs.
 
 ## Career Architect
 
-- [ ] Used on a real strategic or career opportunity
-- [ ] Connected current work to capability or reputation development
-- [ ] Identified useful career evidence
-- [ ] Identified an opportunity worth pursuing or monitoring
-- [ ] Output reviewed for usefulness
+Behavioural and runtime validation:
 
-## Chief of Staff
+- [x] Strategic value separated from career value
+- [x] Potential, emerging and achieved evidence separated
+- [x] Uncertainty preserved
+- [x] Sponsorship or impact not invented
+- [x] Real stakeholder validation preferred before unnecessary artefact creation
+- [x] One clear next action produced
+- [x] Human review required and completed
+- [x] Approval path validated
 
-- [ ] Daily briefing tested
-- [ ] Priority / attention check tested
-- [ ] Decision-required identification tested
-- [ ] Follow-up tracking tested
-- [ ] Focus-protection support tested
-- [ ] Escalation rules tested against a real situation
-- [ ] Autonomy boundaries proved safe and practical
+Status:
 
-Definition of done:
+> **Validated**
 
-- [ ] Each priority agent has been tested on real work
-- [ ] Each agent has a clearly differentiated role
-- [ ] No agent is retained solely because it exists in the architecture
-- [ ] Repeated overlap or confusion has been resolved
+Reusable operational learning:
+
+> When an opportunity is sufficiently framed, test mandate, adoption or impact before creating more documentation.
+
+Repeated real-world use remains the next evidence threshold.
+
+## Shipping Coach
+
+Behavioural and runtime validation:
+
+- [x] Blockers distinguished from optional refinement
+- [x] Risk of moving compared with risk of waiting
+- [x] Ship / Socialise / Refine / Stop logic applied
+- [x] Refinement kept bounded
+- [x] Smallest useful action identified
+- [x] Clear done condition defined
+- [x] Overbuilding resisted
+- [x] Human review required and completed
+- [x] Approval path validated
+
+Status:
+
+> **Validated**
+
+Repeated real-world use remains the next evidence threshold.
+
+## Chief of Staff Agent
+
+Behavioural and runtime validation:
+
+- [x] Operating view produced
+- [x] Selective prioritisation applied
+- [x] Decisions separated from tasks
+- [x] Dependencies surfaced
+- [x] Focus protection supported
+- [x] Goal alignment handled cautiously
+- [x] Specialist routing used selectively
+- [x] Unnecessary multi-agent invocation avoided
+- [x] Human decision points explicit
+- [x] One bounded next action produced
+- [x] Human review required and completed
+- [x] Approval path validated
+
+Status:
+
+> **Validated**
+
+The runtime is validated.
+
+Sustained Chief of Staff operating practices such as daily briefing, follow-up tracking and cadence support remain to be tested through repeated use before the operating model is considered proven.
+
+## Priority-agent validation result
+
+Behavioural validation phase:
+
+> **Complete**
+
+Specialist runtime implementation phase:
+
+> **Complete**
+
+Next evidence threshold:
+
+> **Repeated use in real work.**
+
+Definition of done for full operational proof:
+
+- [ ] Each priority agent has been used sufficiently in real work to judge sustained usefulness
+- [x] Each agent has a clearly differentiated role
+- [x] No agent is retained solely because it exists in the architecture
+- [ ] Repeated overlap or confusion has been assessed through ongoing use
+- [ ] Any changes are based on observed recurring friction rather than hypothetical needs
 
 ---
 
@@ -401,6 +512,9 @@ Check real workflows against these rules:
 - [ ] Power BI remains a reporting source where applicable
 - [ ] Email / Teams / calendar remain operational communication systems
 - [ ] Miro remains a visual collaboration environment where applicable
+- [ ] Make remains an orchestration environment
+- [ ] Relevance AI remains the specialist reasoning runtime
+- [ ] Slack remains a human-review surface where used
 - [ ] Strategic OS stores reusable interpretation, decision logic and lessons
 - [ ] Links or source references are preferred to duplicated source material
 - [ ] Sensitive operational material is not copied into Strategic OS
@@ -418,9 +532,13 @@ Goal:
 
 Determine the minimum useful level of day-to-day coordination.
 
+The Chief of Staff specialist runtime is validated.
+
+This section tests whether its operating model becomes useful as a sustained working practice.
+
 ## Manual / assisted operation
 
-- [ ] Daily briefing format proven useful
+- [ ] Daily briefing format proven useful through repeated use
 - [ ] Weekly operating review format proven useful
 - [ ] Decision-required items surfaced reliably
 - [ ] Follow-ups surfaced reliably
@@ -430,7 +548,7 @@ Determine the minimum useful level of day-to-day coordination.
 
 ## Integration assessment
 
-Do not automate before the manual workflow proves useful.
+Do not automate additional coordination merely because the Chief of Staff runtime now works.
 
 Assess only after repeated use:
 
@@ -444,8 +562,8 @@ Assess only after repeated use:
 
 Definition of done:
 
-- [ ] Chief of Staff support works usefully before automation
-- [ ] Any automation is driven by demonstrated recurring need
+- [ ] Chief of Staff support works usefully through sustained real use
+- [ ] Any additional automation is driven by demonstrated recurring need
 - [ ] Operational coordination remains human-governed
 
 ---
@@ -522,11 +640,13 @@ Not:
 
 Strategic OS can be considered operational when all of the following are true.
 
+Validated specialist runtimes are an enabling milestone, not operational acceptance on their own.
+
 ## Core operation
 
 - [ ] At least three real work items have completed the intake-to-output loop
 - [ ] At least three real decisions have been supported
-- [ ] Priority agents have been tested through real work
+- [ ] Priority agents have been tested sufficiently through real work
 - [ ] The operating cadence has been used for a sustained period
 - [ ] Durable outputs are stored consistently
 
@@ -558,15 +678,21 @@ Operational status:
 
 ---
 
-# Active operational validation runs
+# Specialist validation runs
 
-Use this section only as a lightweight tracker.
+Use this section as a lightweight record of completed specialist validation.
 
-| Run | Work item | Primary capability tested | Status | Key learning |
+These runs establish behavioural and runtime readiness.
+
+They do not substitute for repeated operational use.
+
+| Run | Work item / validation focus | Primary capability tested | Status | Key learning |
 |---|---|---|---|---|
 | 01 | Customer Accounts and Information Services Lead proposal + Channel Strategy Y2 prioritisation | Sensemaking Agent | Validated | Agent consistently improves decision clarity; monitor artefact-first next actions but no prompt change is justified |
 | 02 | Customer Accounts and Information Services Lead stakeholder alignment + Channel Strategy Y2 stakeholder sequencing | Stakeholder Journey Agent | Validated | Agent differentiates decision-makers, co-designers, consultees and implementation participants and improves engagement sequencing |
-| 03 | Customer Accounts and Information Services Lead + Channel Strategy Y2 opportunity assessment + next-action validation | Career Architect | Validated | Agent distinguishes organisational value from career value, maintains evidence discipline, and now prefers real-world validation over unnecessary artefact creation |
+| 03 | Strategic / career opportunity assessment | Career Architect | Validated | Test mandate, adoption or impact before creating more documentation when an opportunity is already sufficiently framed |
+| 04 | Active-work shipping and refinement decision | Shipping Coach | Validated | Bound refinement, distinguish blockers from optional work and identify the smallest useful action |
+| 05 | Operating-view and prioritisation test | Chief of Staff Agent | Validated | Protect focus, separate decisions from tasks and route selectively rather than invoking specialists unnecessarily |
 
 Allowed status values:
 
@@ -781,451 +907,124 @@ Status:
 
 > **Validated**
 
-Next action:
-
-> Move to the next unvalidated priority agent rather than continuing to test Stakeholder Journey without a specific reason.
-
 ---
 
 ## Run 03 — Career Architect validation
 
-### Validation question
+### Validation focus
 
-Can the Career Architect distinguish genuinely valuable strategic opportunities from title, visibility or workload opportunities while maintaining disciplined evidence and recommending the smallest useful next move?
-
-### Test 01 — Customer Accounts and Information Services Lead
+Test whether the Career Architect can assess a strategic or career opportunity without overstating evidence, inventing sponsorship or encouraging unnecessary artefact production.
 
 Result:
-
-> Pass with observation
-
-The agent correctly:
-
-- [x] prioritised organisational value over personal advancement;
-- [x] separated strategic value from career value;
-- [x] separated potential, emerging and achieved evidence;
-- [x] preserved uncertainty around classification, reporting and authority;
-- [x] identified authority versus accountability as a central risk;
-- [x] made capacity and opportunity cost explicit;
-- [x] tied reputation value to useful strategic contribution;
-- [x] recommended shaping the capability before pursuing the role mechanism;
-- [x] preserved human review.
-
-Observation:
-
-The agent recommended producing a one-page capability case when a real sponsor-validation conversation could potentially reduce uncertainty faster.
-
-### Test 02 — Channel Strategy Y2 strategic work opportunity
-
-Result:
-
-> Pass with repeated observation
-
-The agent correctly:
-
-- [x] assessed leverage and impact rather than title;
-- [x] distinguished an important project from a valuable career opportunity;
-- [x] identified conditions that would make the work high leverage;
-- [x] identified warning signs of low-value coordination;
-- [x] separated potential evidence from achieved impact;
-- [x] made opportunity cost and delivery burden explicit;
-- [x] tied reputation value to better strategic decisions;
-- [x] recommended conditional pursuit based on real use and adoption.
-
-Repeated observation:
-
-The agent again recommended a new one-page artefact as the primary next action.
-
-Because artefact-first behaviour occurred in two materially different tests, a small prompt adjustment was justified.
-
-### Behavioural adjustment
-
-The Career Architect contract was refined so that, where appropriate, next actions prefer:
-
-1. real decision or project action;
-2. stakeholder or sponsor conversation;
-3. evidence-gathering action;
-4. targeted experiment or validation;
-5. artefact creation.
-
-Artefacts should be recommended only when they genuinely enable a decision, stakeholder conversation, required organisational process, evidence capture or safer next action.
-
-### Test 03 — Next-action discipline
-
-Work item:
-
-> Decide whether to keep investing leadership effort in the Channel Strategy Y2 Connected Interactions Framework when sufficient framing already exists but sponsor commitment and practical use remain unvalidated.
-
-Result:
-
-> Clean pass
-
-The agent correctly:
-
-- [x] identified sponsor commitment and practical use as the decisive uncertainty;
-- [x] recognised that existing material was sufficient for discussion;
-- [x] explicitly rejected further artefact creation as the primary next step;
-- [x] recommended reusing existing material;
-- [x] preferred a real sponsor-validation action;
-- [x] linked continued investment to mandate, adoption and practical testing;
-- [x] preserved evidence discipline;
-- [x] preserved human review.
-
-Validated next action:
-
-> Book a short decision-oriented conversation with the relevant Customer Focus and Strategy leader to test support for a bounded cross-functional priority, a small co-design group and one or two real journey tests.
-
-### Career Architect result
-
-Status:
 
 > **Validated**
 
-Rationale:
+Behaviour confirmed:
 
-> Across role-based and non-role strategic opportunities, the Career Architect consistently separated organisational value from career value, maintained disciplined evidence boundaries, exposed meaningful trade-offs and identified whether an opportunity offered genuine strategic leverage.
+- [x] strategic value separated from career value;
+- [x] potential, emerging and achieved evidence separated;
+- [x] uncertainty preserved;
+- [x] sponsorship and impact not invented;
+- [x] real stakeholder validation preferred where appropriate;
+- [x] one clear next action produced;
+- [x] human review preserved;
+- [x] approved-state persistence validated.
 
-The focused third test confirmed that the behavioural adjustment corrected repeated artefact-first next-action behaviour.
+Reusable operational learning:
 
-### Reusable operational learning
+> When an opportunity is sufficiently framed, test mandate, adoption or impact before creating more documentation.
 
-> A strategic career opportunity is high-value when organisational value, decision influence, authority, capacity and evidence potential move together.
+Next evidence threshold:
 
-And:
-
-> When an opportunity is already sufficiently framed, test mandate, adoption or impact before creating more documentation.
-
-### Monitoring note
-
-Continue to observe whether the agent:
-
-- overweights visibility or role seniority;
-- treats potential evidence as achieved evidence;
-- recommends opportunities with accountability but insufficient authority;
-- defaults back to artefact creation when direct validation would be more useful.
-
-No further prompt change is currently justified.
-
-### Run 03 completion condition
-
-- [x] Career Architect implemented in Relevance AI
-- [x] Role-based strategic opportunity tested
-- [x] Non-role strategic opportunity tested
-- [x] Organisational value separated from career value
-- [x] Potential, emerging and achieved evidence separated
-- [x] Trade-offs and opportunity costs assessed
-- [x] Repeated behavioural issue identified
-- [x] Small prompt adjustment made
-- [x] Focused regression test completed
-- [x] Adjustment validated
-- [x] Human review completed
-- [x] Final result recorded
-
-### Current status
-
-Status:
-
-> **Validated**
-
-Next action:
-
-> Move to the next unvalidated priority agent.
+> Observe the specialist through repeated real career and strategic-opportunity work rather than adding more runtime capability.
 
 ---
 
 ## Run 04 — Shipping Coach validation
 
-### Validation question
+### Validation focus
 
-Can the Shipping Coach distinguish useful progress from premature movement or unnecessary refinement, while protecting evidence quality, trust and decision clarity?
-
-### Test 01 — Customer Accounts and Information Services Lead socialisation
-
-Work item:
-
-> Decide whether a well-developed capability proposition should continue being refined or move into leadership validation.
+Test whether the Shipping Coach can distinguish genuine blockers from optional refinement and help active work progress without lowering necessary quality.
 
 Result:
 
-> Pass with observation
-
-The agent correctly:
-
-- [x] selected **Socialise** rather than Ship, Refine or Stop;
-- [x] recognised that the proposition was already good enough for leadership discussion;
-- [x] separated genuine blockers from optional polish;
-- [x] treated classification, reporting and authority uncertainty as matters to validate rather than prerequisites for conversation;
-- [x] made the opportunity cost of waiting visible;
-- [x] identified Customer Focus and Strategy leadership as the appropriate first audience;
-- [x] provided a precise validation question;
-- [x] protected the distinction between capability need and role mechanism;
-- [x] preserved human review.
-
-Observation:
-
-The agent concluded that the existing work was ready to socialise but then recommended preparing a new one-page leadership artefact as the next action.
-
-A smaller action may have been to schedule the leadership conversation and reuse the existing material.
-
-This is a monitoring observation only.
-
-### Test 02 — Executive CX performance slide
-
-Work item:
-
-> Decide whether an attractive executive slide combining Service Account, portal, self-service, support-demand and Account Quality Index metrics was safe to socialise.
-
-Result:
-
-> Clean pass
-
-The agent correctly:
-
-- [x] selected **Refine**;
-- [x] identified evidence logic rather than visual design as the blocker;
-- [x] separated adoption, workflow activity, completed self-service, support demand and data-quality diagnostics;
-- [x] rejected unsupported comparison and causal implications;
-- [x] protected the distinction between online application activity and completed self-service transactions;
-- [x] protected the distinction between ASK/support demand and Salesforce application workflows;
-- [x] treated Account Quality Index as diagnostic rather than customer growth;
-- [x] made executive trust and decision quality central to the recommendation;
-- [x] recognised that delay had a cost but that misleading evidence created greater risk;
-- [x] bounded refinement tightly;
-- [x] rejected unnecessary visual redesign, additional metrics and broad new research;
-- [x] provided a specific stopping condition;
-- [x] preserved human review.
-
-Validated refinement boundary:
-
-> Refinement should stop when an executive can read the slide without drawing conclusions the evidence cannot support.
-
-### Shipping Coach result
-
-Status:
-
 > **Validated**
 
-Rationale:
+Behaviour confirmed:
 
-> Across two materially different real problems, the Shipping Coach correctly distinguished work that was ready for stakeholder validation from work that required a bounded material correction before progress.
+- [x] blockers distinguished from optional refinement;
+- [x] risk of moving compared with risk of waiting;
+- [x] Ship / Socialise / Refine / Stop logic used;
+- [x] refinement bounded;
+- [x] smallest useful action identified;
+- [x] clear done condition defined;
+- [x] overbuilding resisted;
+- [x] human review preserved;
+- [x] approved-state persistence validated.
 
-The agent demonstrated that shipping discipline is not equivalent to moving everything forward. It protected decision quality when evidence was unsafe while resisting unnecessary refinement when the remaining uncertainty depended on stakeholder judgement.
+Next evidence threshold:
 
-### Reusable operational learning
-
-> Move work when the remaining uncertainty depends on stakeholder judgement; refine when the remaining uncertainty materially affects evidence safety, trust or decision quality.
-
-And:
-
-> Refinement should stop when the work is safe and useful for its next intended decision, not when every possible improvement has been made.
-
-### Monitoring note
-
-Continue to observe whether the agent:
-
-- recommends creating another artefact after already judging existing material sufficient for socialisation;
-- mistakes visual polish for a material blocker;
-- moves evidence-unsafe work forward because it appears directionally plausible;
-- uses urgency as a reason to lower quality or governance standards.
-
-The artefact-first behaviour occurred once and did not recur in Test 02.
-
-No prompt change is currently justified.
-
-### Run 04 completion condition
-
-- [x] Shipping Coach implemented in Relevance AI
-- [x] Mature strategic proposition tested
-- [x] Evidence-sensitive executive artefact tested
-- [x] Socialise behaviour tested
-- [x] Refine behaviour tested
-- [x] Genuine blockers separated from optional refinement
-- [x] Risk of waiting assessed
-- [x] Evidence safety protected
-- [x] Refinement boundary tested
-- [x] Human review completed
-- [x] Operational learning captured
-- [x] Final result recorded
-
-### Current status
-
-Status:
-
-> **Validated**
-
-Next action:
-
-> Move to the final unvalidated priority agent.
+> Use the specialist on real work at risk of delay or over-refinement and observe whether the guidance improves actual shipping behaviour.
 
 ---
 
-## Run 05 — Chief of Staff validation
+## Run 05 — Chief of Staff Agent validation
 
-### Validation question
+### Validation focus
 
-Can the Chief of Staff reduce operational drag by selectively prioritising live strategic work, separating decisions from tasks, reusing existing specialist outputs, protecting focus and avoiding unnecessary agent or runtime activity?
-
-### Test 01 — Mixed Strategic OS operating context
-
-Work item:
-
-> Prioritise between two live strategic opportunities, runtime backlog work, repository maintenance and possible agent/runtime expansion.
+Test whether the Chief of Staff Agent can create a useful operating view, protect focus and identify bounded next actions without turning coordination into unnecessary multi-agent orchestration.
 
 Result:
 
-> Pass with observations
-
-The agent correctly:
-
-- [x] identified sponsor validation as the primary operating bottleneck;
-- [x] reduced a long mixed backlog to a small set of priorities;
-- [x] separated decisions from tasks;
-- [x] separated waiting-on-evidence from waiting-on-stakeholder-alignment;
-- [x] explicitly deprioritised runtime expansion, dashboards, documentation and further artefact polishing;
-- [x] protected the one-contained-task constraint;
-- [x] treated Strategic OS runtime backlog as supporting work rather than the current strategic priority;
-- [x] preserved human judgement;
-- [x] avoided recommending broad platform expansion.
-
-Observations:
-
-1. The agent included Chief of Staff validation itself as an operating priority.
-
-   This was too meta. Strategic OS administration should not compete with live strategic outcomes unless a system issue is materially blocking work.
-
-2. The agent suggested routing the selected sponsor conversation back through the Stakeholder Journey Agent.
-
-   Existing stakeholder sequencing had already been validated, so this risked duplicating specialist work.
-
-3. The final next action asked the user to choose between two opportunities rather than making a proportionate recommendation where the evidence allowed one.
-
-No prompt change was made after one test.
-
-### Test 02 — Sponsor-priority selection
-
-Work item:
-
-> Choose which of two already-validated strategic opportunities should receive the next sponsor conversation under a one-task-at-a-time constraint.
-
-Result:
-
-> Clean pass
-
-The agent correctly:
-
-- [x] recommended **Customer Accounts and Information Services Lead proposition first**;
-- [x] based the recommendation on decision readiness, clarity of ask, near-term decision movement, reversibility and dependency reduction;
-- [x] did not choose based on visibility, documentation volume or project size;
-- [x] reused existing specialist conclusions rather than re-running analysis;
-- [x] explicitly recommended **no specialist routing**;
-- [x] deferred Channel Strategy Y2 rather than advancing both tracks;
-- [x] deferred runtime expansion, dashboards, more documentation and additional artefact refinement;
-- [x] protected focus on one contained task;
-- [x] ended with a real sponsor action rather than more internal work;
-- [x] preserved human review and organisational decision authority.
-
-Validated next action:
-
-> Send or schedule the Customer Accounts sponsor conversation with the single question: “Do you believe this emerging CX capability needs formal ownership?”
-
-### Chief of Staff result
-
-Status:
-
 > **Validated**
 
-Rationale:
+Behaviour confirmed:
 
-> Across two operating contexts, the Chief of Staff demonstrated selective prioritisation, decision/task separation, dependency visibility, focus protection, selective specialist routing and practical next-action discipline.
+- [x] operating view produced;
+- [x] selective prioritisation applied;
+- [x] decisions separated from tasks;
+- [x] dependencies surfaced;
+- [x] focus protected;
+- [x] goal alignment handled cautiously;
+- [x] specialist routing used selectively;
+- [x] unnecessary multi-agent invocation avoided;
+- [x] human decision points explicit;
+- [x] one bounded next action produced;
+- [x] human review preserved;
+- [x] approved-state persistence validated.
 
-The second test confirmed that the Chief of Staff can make a proportionate priority recommendation from already-validated evidence without creating unnecessary meta-work or duplicate analysis.
+Next evidence threshold:
 
-### Reusable operational learning
-
-> The Chief of Staff should reduce strategic drag by deciding what deserves attention next, reusing existing specialist work and refusing additional analysis when the bottleneck is human decision movement.
-
-And:
-
-> Strategic OS administration should not become a priority unless it is materially blocking real strategic work.
-
-### Monitoring note
-
-Continue to observe whether the agent:
-
-- turns Strategic OS maintenance into a priority alongside live strategic work;
-- routes to a specialist when an existing validated output already answers the question;
-- presents choices without recommending a priority where evidence supports one;
-- over-expands the priority list;
-- treats activity or urgency as equivalent to strategic importance.
-
-No prompt change is currently justified.
-
-### Run 05 completion condition
-
-- [x] Chief of Staff implemented in Relevance AI
-- [x] Mixed operating context tested
-- [x] Priority reduction tested
-- [x] Decisions separated from tasks
-- [x] Dependencies surfaced
-- [x] Focus protection tested
-- [x] Existing specialist outputs reused
-- [x] Unnecessary routing identified
-- [x] Priority recommendation tested
-- [x] No-specialist-routing behaviour tested
-- [x] Human review preserved
-- [x] Final result recorded
-
-### Current status
-
-Status:
-
-> **Validated**
+> Test the operating model through sustained real use before automating additional briefing, follow-up or coordination behaviour.
 
 ---
 
 ## Current agent validation status
 
-| Agent | Status |
-|---|---|
-| Sensemaking Agent | Validated |
-| Stakeholder Journey Agent | Validated |
-| Career Architect | Validated |
-| Shipping Coach | Validated |
-| Chief of Staff | Validated |
+| Agent | Behavioural validation | Runtime validation | Repeated real-use proof |
+|---|---|---|---|
+| Sensemaking Agent | Validated | Validated | In progress |
+| Stakeholder Journey Agent | Validated | Validated | In progress |
+| Career Architect | Validated | Validated | In progress |
+| Shipping Coach | Validated | Validated | In progress |
+| Chief of Staff Agent | Validated | Validated | In progress |
 
-### Agent-validation phase result
-
-Status:
+Behavioural validation phase:
 
 > **Complete**
 
-All five priority Strategic OS agents have now been implemented and validated through materially different real-work tests.
+Specialist runtime implementation phase:
 
-Validation evidence now covers:
+> **Complete**
 
-- ambiguity reduction and decision framing;
-- stakeholder sequencing and alignment;
-- strategic opportunity and career-value assessment;
-- shipping versus refinement discipline;
-- prioritisation, orchestration and focus protection.
+Current operating priority:
 
-The current evidence does **not** justify automatically wiring every specialist agent into Make.
+> **Use, observation and evidence.**
 
-Existing runtime integration should expand only when repeated real use shows that direct Relevance AI execution is creating material operational drag or blocking decision movement.
+Do not expand Strategic OS because another orchestration capability might be useful.
 
-### Operational principle confirmed
+Use the validated specialists on real work, observe what helps, record what fails, and make the smallest useful improvement.
 
-> Validate strategic behaviour through real work before expanding automation.
-
-And:
-
-> Human decision movement is now a stronger test of Strategic OS value than further agent completeness.
-# Current priority
-
-The current priority is active use.
-
-Do not expand Strategic OS because a capability might be useful.
-
-Use the system on real work, observe what helps, record what fails, and make the smallest useful improvement.
+Do not build multi-agent routing or automatic specialist sequencing without repeated evidence of a genuine need.
 
 > Operational Strategic OS = useful decisions + stakeholder alignment + reusable knowledge + strategic opportunity, with low management overhead.
