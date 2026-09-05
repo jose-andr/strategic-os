@@ -649,3 +649,114 @@ Agent knowledge management is working when:
 The long-term standard is:
 
 > Strategic OS agents should become better colleagues through governed learning, while José retains control over what the system permanently knows.
+# Actionable automation opportunity — GitHub to Relevance AI knowledge deployment
+
+## Opportunity
+
+Automate deployment of approved Strategic OS knowledge from GitHub into the Relevance AI shared context layer.
+
+Current manual pattern:
+
+`GitHub approved update → human updates Relevance AI runtime mirror`
+
+Future automated pattern:
+
+`GitHub approved update`
+→ `automation detects eligible knowledge change`
+→ `validates schema and status`
+→ `updates matching Relevance AI knowledge record`
+→ `records sync result`
+→ `agents retrieve current approved context`
+
+## Intended outcome
+
+Reduce manual maintenance while preserving:
+
+- GitHub as the authoritative source;
+- human approval before durable knowledge becomes active;
+- source-path traceability;
+- privacy boundaries;
+- review status;
+- rollback;
+- controlled knowledge taxonomy.
+
+## Automation boundary
+
+Automation may synchronise only knowledge that is already:
+
+- approved in GitHub;
+- safe for agent use;
+- mapped to the shared-context schema;
+- associated with a stable `context_id`;
+- traceable to an authoritative `source_path`.
+
+Automation must not:
+
+- decide autonomously what should become durable knowledge;
+- promote unreviewed Slack or agent outputs;
+- copy raw organisational source material;
+- overwrite GitHub from Relevance AI;
+- create uncontrolled categories;
+- silently resolve conflicting knowledge.
+
+## Candidate implementation
+
+Preferred direction:
+
+`GitHub → Make → Relevance AI`
+
+Possible trigger:
+
+- approved context file or manifest changes in GitHub.
+
+Possible automation actions:
+
+1. detect changed approved knowledge;
+2. parse eligible context records;
+3. validate required fields;
+4. compare `context_id` with the Relevance AI runtime mirror;
+5. create or update the matching knowledge row;
+6. retire or supersede records only when explicitly declared in GitHub;
+7. log success or failure;
+8. notify Slack when synchronisation requires attention.
+
+## Minimum schema
+
+Each deployable knowledge record should preserve:
+
+- `context_id`
+- `category`
+- `title`
+- `summary`
+- `source_path`
+- `status`
+- `last_reviewed`
+
+GitHub remains authoritative for every field.
+
+## Activation criteria
+
+Do not automate this immediately.
+
+Activate when:
+
+- the shared-context schema has been proven through real use;
+- more than one agent is actively using the shared knowledge layer;
+- manual synchronisation becomes repeated maintenance work;
+- retrieval quality is stable enough that automated updates will not amplify poor context;
+- the Relevance AI update mechanism is sufficiently reliable;
+- rollback can be performed safely.
+
+## Definition of done
+
+> An approved Strategic OS knowledge change can be committed in GitHub and reliably reflected in the Relevance AI shared context without José manually re-entering the same information.
+
+## Backlog status
+
+`Actionable future automation`
+
+Priority:
+
+`After shared-context retrieval is validated with Sensemaking and extended successfully to the five specialist agents.`
+
+Do not allow this automation to block current operationalisation work.
