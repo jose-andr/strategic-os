@@ -760,3 +760,92 @@ Priority:
 `After shared-context retrieval is validated with Sensemaking and extended successfully to the five specialist agents.`
 
 Do not allow this automation to block current operationalisation work.
+# Actionable improvement — optimise knowledge ingestion
+
+## Problem
+
+The current shared-context ingestion process is functional but manual and error-prone.
+
+Today, José must:
+
+1. identify the correct GitHub source;
+2. manually create a concise context summary;
+3. manually choose the category;
+4. manually enter the `source_path`;
+5. manually add or import the record into Relevance AI;
+6. manually confirm that the runtime mirror matches the approved GitHub source.
+
+This creates avoidable friction and increases the risk of:
+
+- inconsistent summaries;
+- incorrect source paths;
+- duplicated records;
+- stale context;
+- taxonomy drift;
+- manual re-entry;
+- uncertainty about which GitHub file is authoritative.
+
+## Desired improvement
+
+Move toward a guided ingestion pattern:
+
+`approved GitHub knowledge`
+→ `structured context record`
+→ `validation`
+→ `Relevance AI import / sync`
+
+The ingestion experience should make it easy to answer:
+
+- What is the authoritative source?
+- Is this knowledge approved?
+- Which category does it belong to?
+- Does a matching `context_id` already exist?
+- Is the summary concise and safe?
+- Is this an update, new record, supersession or retirement?
+
+## Near-term optimisation
+
+Before full automation, create a simple ingestion artefact or process that can generate upload-ready records from approved GitHub sources.
+
+Minimum outputs:
+
+- `context_id`
+- `category`
+- `title`
+- `summary`
+- `source_path`
+- `status`
+- `last_reviewed`
+
+Preferred interaction:
+
+> José identifies an approved GitHub source or project area, and Strategic OS prepares the Relevance-ready context record automatically for review.
+
+José should not need to manually type each field.
+
+## Future automation
+
+This improvement should converge with the GitHub-to-Relevance deployment opportunity.
+
+Target future flow:
+
+`GitHub approved change`
+→ `eligible context detected`
+→ `record generated`
+→ `human review where required`
+→ `Relevance AI updated`
+→ `sync result visible in Slack`
+
+## Quality rule
+
+> Context ingestion should be more reliable than manual copy-paste.
+
+If the ingestion process routinely requires José to reconstruct paths, categories or summaries by hand, treat that as operational friction worth reducing.
+
+## Backlog status
+
+`Actionable near-term improvement`
+
+Priority:
+
+`After shared-context retrieval quality is proven with Sensemaking, before scaling manual ingestion across many project records.`
