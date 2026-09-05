@@ -131,6 +131,26 @@ Publication must not occur merely because a draft exists in Slack.
 
 Explicit approval is required.
 
+### Slack polling behaviour
+
+`Strategic OS — LinkedIn Publish Approval` polls the private Slack review channel every 5 minutes.
+
+The polling trigger processes channel messages sequentially. Historical draft-review messages, publication confirmations and older approvals may therefore be encountered before a newly submitted approval.
+
+Non-approval messages are safely rejected by the approval parser because they do not exactly match:
+
+`P <Strategic OS Post ID>`
+
+When enabling or re-enabling the polling scenario after testing, configuration changes or an extended inactive period:
+
+1. reset the Slack trigger starting point to `From now on`;
+2. save the scenario;
+3. submit the new approval message after the reset.
+
+This prevents the scenario from draining stale Slack history before processing the current approval.
+
+Do not add additional routing or queue-management automation unless repeated normal use shows this operating rule is insufficient.
+
 ## Publication state guard
 
 Before publishing, all of the following must be true:
