@@ -1028,3 +1028,298 @@ Use the validated specialists on real work, observe what helps, record what fail
 Do not build multi-agent routing or automatic specialist sequencing without repeated evidence of a genuine need.
 
 > Operational Strategic OS = useful decisions + stakeholder alignment + reusable knowledge + strategic opportunity, with low management overhead.
+# Future capability roadmap — Slack-first agentic team
+
+## Purpose
+
+Define the intended evolution of Strategic OS from manually selected specialist workflows toward a coordinated agentic team that can increasingly interpret natural-language intent and determine the appropriate support path.
+
+This is a future capability roadmap.
+
+It does not override the current operating rule:
+
+> Operate validated specialist runtimes through real work before expanding orchestration.
+
+Do not implement later-stage capabilities merely because they are technically possible.
+
+Progress only when repeated real use shows that the next stage will reduce friction or improve decision quality.
+
+## Bluesky outcome
+
+The long-term interaction should be simple:
+
+> José posts a natural-language thought, problem, opportunity or request in Slack, and the Strategic OS agentic team is sufficiently context-aware to determine what needs to happen next.
+
+The intended experience is:
+
+`José → Slack → Strategic OS agentic team → appropriate reasoning / coordination → Slack → José`
+
+José should not need to:
+
+- know which agent owns the problem;
+- understand Make scenarios;
+- open Relevance AI;
+- construct structured payloads;
+- manually coordinate several specialists;
+- understand agent sequencing;
+- move outputs between specialist tools.
+
+The system should progressively handle that complexity while keeping important human decisions explicit.
+
+## Capability evolution
+
+### Stage 1 — Single Slack control surface
+
+Status:
+
+`Next implementation priority`
+
+Goal:
+
+Allow José to initiate any validated specialist runtime from Slack without opening Make or Relevance AI.
+
+Operating pattern:
+
+`José → Slack → explicit specialist selection → Make → selected Relevance AI specialist → Slack → José`
+
+Capabilities:
+
+- [ ] one accessible Slack control surface;
+- [ ] intentional selection of Sensemaking Agent;
+- [ ] intentional selection of Stakeholder Journey Agent;
+- [ ] intentional selection of Career Architect;
+- [ ] intentional selection of Shipping Coach;
+- [ ] intentional selection of Chief of Staff Agent;
+- [ ] natural-language context accepted from Slack;
+- [ ] backend webhook schemas hidden from José;
+- [ ] specialist output returned to Slack;
+- [ ] human review remains in Slack.
+
+Constraint:
+
+Do not introduce automatic specialist selection to complete this stage.
+
+Definition of done:
+
+> José can operate all five validated specialists from Slack without touching Make or Relevance AI during normal use.
+
+---
+
+### Stage 2 — Assisted specialist routing
+
+Status:
+
+`Future — activate only after Stage 1 real-use evidence`
+
+Goal:
+
+Reduce the need for José to know which specialist is appropriate while preserving human control.
+
+Operating pattern:
+
+`José → Slack → Strategic OS suggests specialist → José confirms → specialist runtime`
+
+Example:
+
+José posts:
+
+> I think this role should become a Class 6 lead role, but I am not sure whether the case is strong enough.
+
+Strategic OS responds:
+
+> Recommended specialist: Sensemaking Agent  
+> Reason: this is primarily an ambiguous strategic decision requiring evidence, assumptions and decision framing.
+
+José confirms or selects another specialist.
+
+Capabilities:
+
+- [ ] infer likely specialist from natural-language intent;
+- [ ] explain the routing recommendation briefly;
+- [ ] allow José to confirm or override;
+- [ ] preserve explicit human specialist choice;
+- [ ] record routing errors or recurring ambiguity;
+- [ ] use observed routing mistakes to improve the routing model.
+
+Evidence threshold before activation:
+
+- repeated manual specialist selection creates noticeable friction;
+- specialist roles are sufficiently differentiated through real use;
+- routing recommendations can be evaluated safely;
+- incorrect routing can be corrected without material consequence.
+
+Definition of done:
+
+> Strategic OS can usually recommend the right specialist, while José retains the routing decision.
+
+---
+
+### Stage 3 — Automatic specialist routing
+
+Status:
+
+`Future — evidence gated`
+
+Goal:
+
+Allow well-understood, low-risk requests to route directly to the appropriate specialist.
+
+Operating pattern:
+
+`José → Slack → intent classification → specialist runtime → Slack`
+
+Human confirmation remains available where confidence is low or the request is consequential.
+
+Capabilities:
+
+- [ ] confidence-aware specialist selection;
+- [ ] automatic routing for clear specialist matches;
+- [ ] ask for clarification when intent is ambiguous;
+- [ ] human override;
+- [ ] routing trace visible when useful;
+- [ ] low-confidence requests do not silently route;
+- [ ] privacy and state rules preserved.
+
+Activation criteria:
+
+- assisted routing has demonstrated high practical accuracy;
+- manual confirmation is becoming repetitive rather than valuable;
+- failure modes are understood;
+- human override is reliable;
+- automation reduces management overhead without reducing decision quality.
+
+Definition of done:
+
+> Routine requests can reach the right specialist without requiring José to select the agent manually.
+
+---
+
+### Stage 4 — Controlled multi-agent coordination
+
+Status:
+
+`Future — evidence gated`
+
+Goal:
+
+Allow Strategic OS to use more than one specialist when a real work item genuinely requires different forms of reasoning.
+
+Example:
+
+A strategic proposal may require:
+
+`Sensemaking → Stakeholder Journey → Shipping Coach`
+
+but only when each contribution materially improves the outcome.
+
+Capabilities:
+
+- [ ] determine whether one specialist is sufficient;
+- [ ] invoke additional specialists only when necessary;
+- [ ] define sequencing rules;
+- [ ] prevent duplicated analysis;
+- [ ] preserve shared workflow context;
+- [ ] define stop conditions;
+- [ ] reconcile specialist outputs;
+- [ ] expose consequential disagreements;
+- [ ] preserve human checkpoints;
+- [ ] avoid orchestration for its own sake.
+
+Operating rule:
+
+> Prefer one capable specialist over an unnecessary agent chain.
+
+Activation criteria:
+
+- repeated real work shows that José is manually passing the same item between specialists;
+- handoffs create recurring friction;
+- multi-specialist value is observable;
+- agent responsibilities remain differentiated;
+- sequencing can be defined without excessive complexity.
+
+Definition of done:
+
+> Strategic OS can coordinate a small number of specialists when doing so materially improves the decision or action.
+
+---
+
+### Stage 5 — Agentic team coordination
+
+Status:
+
+`Bluesky`
+
+Goal:
+
+Strategic OS interprets a natural-language post, determines the required work, coordinates the appropriate specialists and returns a coherent decision-support outcome.
+
+Operating pattern:
+
+`José posts intent`
+`→ Strategic OS interprets need`
+`→ determines whether action, clarification or specialist reasoning is required`
+`→ invokes the minimum useful specialist set`
+`→ coordinates outputs`
+`→ presents one coherent response`
+`→ José decides`
+
+The agentic team should be capable of deciding:
+
+- whether the request requires strategic attention at all;
+- whether one specialist is sufficient;
+- which specialist or specialists are relevant;
+- whether clarification is required;
+- whether evidence is missing;
+- whether stakeholder thinking is needed;
+- whether work is ready to ship;
+- whether an opportunity should be surfaced;
+- whether durable reusable learning should be retained.
+
+The team should not:
+
+- create work merely because an agent is available;
+- invoke every specialist by default;
+- hide material uncertainty;
+- make consequential human decisions automatically;
+- persist sensitive organisational material;
+- become a parallel organisational system of record.
+
+Definition of done:
+
+> José can post a natural-language thought into Slack and Strategic OS reliably determines the smallest useful combination of reasoning, coordination and human decision support needed to move it forward.
+
+---
+
+## Human-control principle across all stages
+
+Increasing autonomy must not remove meaningful human control.
+
+As capability matures:
+
+- low-value mechanical choices may become automated;
+- ambiguous interpretation should remain visible;
+- consequential actions should retain appropriate human checkpoints;
+- agent disagreement should be surfaced rather than silently resolved;
+- confidence should determine whether the system acts, recommends or asks.
+
+The target is not maximum automation.
+
+The target is:
+
+> Minimum management overhead with better strategic decisions.
+
+---
+
+## Evidence rule
+
+Do not progress between stages because the next stage is attractive.
+
+Progress when repeated use demonstrates:
+
+1. a recurring human-friction problem;
+2. a clear capability that would reduce that friction;
+3. acceptable failure modes;
+4. preserved human control;
+5. measurable improvement in decision clarity, speed, alignment or reuse.
+
+Treat future orchestration as an earned capability, not a default architecture requirement.
