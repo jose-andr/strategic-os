@@ -18,21 +18,56 @@ No LinkedIn post should be published automatically from a draft-generation or sp
 
 ## Runtime status
 
-Status: Validated end to end
+Status: **Operationally validated**
+
+The runtime has been validated through both synthetic testing and real project-derived thought-leadership publishing.
 
 Validated path:
 
-Custom webhook
-→ privacy gate
-→ Strategic OS Post ID generation
-→ LinkedIn Data Store
-→ Slack human review
-→ explicit `P <post-id>` approval
-→ Data Store lookup
-→ workflow-state guard
-→ LinkedIn publish
-→ Data Store state update
-→ Slack publication confirmation
+`Custom webhook → privacy gate → Strategic OS Post ID → LinkedIn Data Store → Slack human review → explicit P <post-id> approval → Slack polling → approval parser → Data Store lookup → workflow-state guard → LinkedIn publish → Data Store update → Slack publication confirmation`
+
+### Real-use validation
+
+Date:
+
+`05SEP26`
+
+Source:
+
+A safe, generalised thought-leadership post derived from Channel Strategy Y2 work on connected customer interactions.
+
+Confirmed:
+
+- [x] real project-derived content entered through the draft webhook;
+- [x] privacy confirmation passed;
+- [x] Strategic OS Post ID generated;
+- [x] draft persisted before review;
+- [x] Slack human review completed;
+- [x] explicit human approval required;
+- [x] approval Post ID matched the draft Post ID;
+- [x] persisted workflow state checked before publication;
+- [x] LinkedIn publication completed successfully;
+- [x] external LinkedIn publication URN returned;
+- [x] Slack publication confirmation used the same Strategic OS Post ID;
+- [x] no automatic specialist orchestration was required.
+
+Operational learning:
+
+> When enabling or re-enabling the polling approval scenario after testing, reset the Slack trigger starting point to `From now on` before submitting a new approval.
+
+This prevents historical channel messages from being processed before the current approval.
+
+The historical-message behaviour was safely contained by the exact-match approval parser and did not create an uncontrolled publication path.
+
+### Current evidence threshold
+
+The publishing architecture is sufficiently validated.
+
+Do not add more orchestration or hardening merely to improve the test environment.
+
+The next evidence should come from normal thought-leadership use.
+
+Only change the runtime when repeated real use exposes a genuine problem.
 
 ## Runtime components
 
@@ -135,7 +170,9 @@ Explicit approval is required.
 
 `Strategic OS — LinkedIn Publish Approval` polls the private Slack review channel every 5 minutes.
 
-The polling trigger processes channel messages sequentially. Historical draft-review messages, publication confirmations and older approvals may therefore be encountered before a newly submitted approval.
+The polling trigger processes channel messages sequentially.
+
+Historical draft-review messages, publication confirmations and older approvals may therefore be encountered before a newly submitted approval.
 
 Non-approval messages are safely rejected by the approval parser because they do not exactly match:
 
@@ -243,7 +280,7 @@ Use only safe, generalised and portable material suitable for public thought lea
 
 ## Current operating rule
 
-> Operate the validated runtime through real publishing before adding more automation.
+> Operate the validated runtime through normal publishing before adding more automation.
 
 Do not add without demonstrated need:
 
@@ -256,6 +293,14 @@ Do not add without demonstrated need:
 - complex failure handlers;
 - manufactured LinkedIn URLs;
 - additional orchestration layers.
+
+The next useful evidence should come from normal use, especially whether the workflow improves:
+
+- publication discipline;
+- quality of human review;
+- confidence in privacy boundaries;
+- consistency of thought-leadership output;
+- useful strategic visibility.
 
 ## Systems of record
 
